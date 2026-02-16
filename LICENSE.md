@@ -1,5 +1,6 @@
 MIT License
 
+Copyright (c) 2025-2026 Cameron Pak
 Copyright (c) 2025 Ronan Berder
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
