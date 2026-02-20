@@ -26,32 +26,32 @@
           <div class="p-4">
             <div class="grid max-w-xl items-start gap-4">
               <!-- Icon + title + description -->
-              <div class="alert">
+              <bc-alert>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                 <h2>Success! Your changes have been saved</h2>
                 <section>This is an alert with icon, title and description.</section>
-              </div>
+              </bc-alert>
 
               <!-- Icon + description, no title -->
-              <div class="alert">
+              <bc-alert>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/><path d="m9 10 2 2 4-4"/></svg>
                 <section>This is an alert with icon, description and no title.</section>
-              </div>
+              </bc-alert>
 
               <!-- Description only -->
-              <div class="alert">
+              <bc-alert>
                 <section>This one has a description only. No title. No icon.</section>
-              </div>
+              </bc-alert>
 
               <!-- Destructive alert -->
-              <div class="alert-destructive">
+              <bc-alert variant="destructive">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                 <h2>Something went wrong!</h2>
                 <section>Your session has expired. Please log in again.</section>
-              </div>
+              </bc-alert>
 
               <!-- Destructive with list -->
-              <div class="alert-destructive">
+              <bc-alert variant="destructive">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                 <h2>Something went wrong!</h2>
                 <section>
@@ -62,14 +62,14 @@
                     <li>Verify billing address</li>
                   </ul>
                 </section>
-              </div>
+              </bc-alert>
 
               <!-- Custom colored alert -->
-              <div class="alert border-amber-50 bg-amber-50 text-amber-900 dark:border-amber-950 dark:bg-amber-950 dark:text-amber-100">
+              <bc-alert class="border-amber-50 bg-amber-50 text-amber-900 dark:border-amber-950 dark:bg-amber-950 dark:text-amber-100">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                 <h2>Plot Twist: This Alert is Actually Amber!</h2>
                 <section>This one has custom colors for light and dark mode.</section>
-              </div>
+              </bc-alert>
             </div>
           </div>
         </section>
@@ -82,16 +82,16 @@
             <h2 class="text-sm font-medium">Alert Dialog</h2>
           </header>
           <div class="p-4">
-            <button type="button" class="btn-outline" onclick="document.getElementById('alert-dialog-demo').showModal()">Open dialog</button>
-            <dialog id="alert-dialog-demo" class="dialog" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-desc">
+            <button type="button" data-variant="outline" onclick="document.getElementById('alert-dialog-demo').showModal()">Open dialog</button>
+            <dialog id="alert-dialog-demo" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-desc">
               <div>
                 <header>
                   <h2 id="alert-dialog-title">Are you absolutely sure?</h2>
                   <p id="alert-dialog-desc">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
                 </header>
                 <footer>
-                  <button class="btn-outline" onclick="document.getElementById('alert-dialog-demo').close()">Cancel</button>
-                  <button class="btn" onclick="document.getElementById('alert-dialog-demo').close()">Continue</button>
+                  <button data-variant="outline" onclick="document.getElementById('alert-dialog-demo').close()">Cancel</button>
+                  <button onclick="document.getElementById('alert-dialog-demo').close()">Continue</button>
                 </footer>
               </div>
             </dialog>
@@ -135,27 +135,27 @@
           <div class="p-4">
             <div class="flex flex-col gap-2">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="badge">Primary</span>
-                <span class="badge-secondary">Secondary</span>
-                <span class="badge-outline">Outline</span>
-                <span class="badge-destructive">Destructive</span>
-                <span class="badge-outline">
+                <bc-badge>Primary</bc-badge>
+                <bc-badge variant="secondary">Secondary</bc-badge>
+                <bc-badge variant="outline">Outline</bc-badge>
+                <bc-badge variant="destructive">Destructive</bc-badge>
+                <bc-badge variant="outline">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                   Badge
-                </span>
-                <span class="badge-destructive">
+                </bc-badge>
+                <bc-badge variant="destructive">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                   Alert
-                </span>
-                <span class="badge rounded-full min-w-5 px-1">8</span>
-                <span class="badge-destructive rounded-full min-w-5 px-1">99</span>
-                <span class="badge-outline rounded-full min-w-5 px-1 font-mono tabular-nums">20+</span>
+                </bc-badge>
+                <bc-badge class="rounded-full min-w-5 px-1">8</bc-badge>
+                <bc-badge variant="destructive" class="rounded-full min-w-5 px-1">99</bc-badge>
+                <bc-badge variant="outline" class="rounded-full min-w-5 px-1 font-mono tabular-nums">20+</bc-badge>
               </div>
               <div class="flex flex-wrap items-center gap-2">
-                <a href="#" class="badge">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                <a href="#" class="badge-secondary">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                <a href="#" class="badge-destructive">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                <a href="#" class="badge-outline">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                <a href="#"><bc-badge>Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></bc-badge></a>
+                <a href="#"><bc-badge variant="secondary">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></bc-badge></a>
+                <a href="#"><bc-badge variant="destructive">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></bc-badge></a>
+                <a href="#"><bc-badge variant="outline">Link <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></bc-badge></a>
               </div>
             </div>
           </div>
@@ -175,7 +175,7 @@
               </li>
               <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6"/></svg></li>
               <li class="inline-flex items-center gap-1.5">
-                <div id="breadcrumb-menu" class="dropdown-menu">
+                <bc-dropdown id="breadcrumb-menu">
                   <button type="button" id="breadcrumb-menu-trigger" aria-haspopup="menu" aria-controls="breadcrumb-menu-popover" aria-expanded="false" class="flex items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
                   </button>
@@ -186,7 +186,7 @@
                       <div role="menuitem">GitHub</div>
                     </div>
                   </div>
-                </div>
+                </bc-dropdown>
               </li>
               <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6"/></svg></li>
               <li class="inline-flex items-center gap-1.5">
@@ -211,63 +211,63 @@
             <div class="flex flex-col gap-6">
               <!-- Default size -->
               <div class="flex flex-wrap items-center gap-2">
-                <button class="btn">Primary</button>
-                <button class="btn-outline">Outline</button>
-                <button class="btn-ghost">Ghost</button>
-                <button class="btn-destructive">Danger</button>
-                <button class="btn-secondary">Secondary</button>
-                <button class="btn-link">Link</button>
-                <button class="btn-outline">
+                <button>Primary</button>
+                <button data-variant="outline">Outline</button>
+                <button data-variant="ghost">Ghost</button>
+                <button data-variant="destructive">Danger</button>
+                <button data-variant="secondary">Secondary</button>
+                <button data-variant="link">Link</button>
+                <button data-variant="outline">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                   Send
                 </button>
-                <button class="btn-ghost">
+                <button data-variant="ghost">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   Learn more
                 </button>
-                <button class="btn" disabled>
+                <button disabled>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   Loading
                 </button>
               </div>
               <!-- Small size -->
               <div class="flex flex-wrap items-center gap-2">
-                <button class="btn-sm">Primary</button>
-                <button class="btn-sm-outline">Outline</button>
-                <button class="btn-sm-ghost">Ghost</button>
-                <button class="btn-sm-destructive">Danger</button>
-                <button class="btn-sm-secondary">Secondary</button>
-                <button class="btn-sm-link">Link</button>
-                <button class="btn-sm-outline">
+                <button data-size="sm">Primary</button>
+                <button data-variant="outline" data-size="sm">Outline</button>
+                <button data-variant="ghost" data-size="sm">Ghost</button>
+                <button data-variant="destructive" data-size="sm">Danger</button>
+                <button data-variant="secondary" data-size="sm">Secondary</button>
+                <button data-variant="link" data-size="sm">Link</button>
+                <button data-variant="outline" data-size="sm">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                   Send
                 </button>
-                <button class="btn-sm-ghost">
+                <button data-variant="ghost" data-size="sm">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   Learn more
                 </button>
-                <button class="btn-sm" disabled>
+                <button data-size="sm" disabled>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   Loading
                 </button>
               </div>
               <!-- Large size -->
               <div class="flex flex-wrap items-center gap-2">
-                <button class="btn-lg">Primary</button>
-                <button class="btn-lg-outline">Outline</button>
-                <button class="btn-lg-ghost">Ghost</button>
-                <button class="btn-lg-destructive">Danger</button>
-                <button class="btn-lg-secondary">Secondary</button>
-                <button class="btn-lg-link">Link</button>
-                <button class="btn-lg-outline">
+                <button data-size="lg">Primary</button>
+                <button data-variant="outline" data-size="lg">Outline</button>
+                <button data-variant="ghost" data-size="lg">Ghost</button>
+                <button data-variant="destructive" data-size="lg">Danger</button>
+                <button data-variant="secondary" data-size="lg">Secondary</button>
+                <button data-variant="link" data-size="lg">Link</button>
+                <button data-variant="outline" data-size="lg">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                   Send
                 </button>
-                <button class="btn-lg-ghost">
+                <button data-variant="ghost" data-size="lg">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   Learn more
                 </button>
-                <button class="btn-lg" disabled>
+                <button data-size="lg" disabled>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   Loading
                 </button>
@@ -286,73 +286,73 @@
           <div class="p-4">
             <div class="grid gap-4 max-w-xl">
               <!-- Login card -->
-              <div class="card">
+              <bc-card>
                 <header>
                   <h2>Login to your account</h2>
                   <p>Enter your details below to login to your account</p>
                 </header>
                 <section>
                   <div class="grid gap-4">
-                    <div class="field">
+                    <bc-field>
                       <label>Email</label>
                       <input type="email" placeholder="m@example.com">
-                    </div>
-                    <div class="field">
+                    </bc-field>
+                    <bc-field>
                       <label>Password</label>
                       <input type="password">
-                    </div>
+                    </bc-field>
                   </div>
                 </section>
                 <footer>
-                  <button class="btn w-full">Login</button>
+                  <button class="w-full">Login</button>
                 </footer>
-              </div>
+              </bc-card>
 
               <!-- Content only -->
-              <div class="card">
+              <bc-card>
                 <section>Content Only</section>
-              </div>
+              </bc-card>
 
               <!-- Header only -->
-              <div class="card">
+              <bc-card>
                 <header>
                   <h2>Header Only</h2>
                   <p>This is a card with a header and a description.</p>
                 </header>
-              </div>
+              </bc-card>
 
               <!-- Header + content -->
-              <div class="card">
+              <bc-card>
                 <header>
                   <h2>Header and Content</h2>
                   <p>This is a card with a header and a content.</p>
                 </header>
                 <section>Content only.</section>
-              </div>
+              </bc-card>
 
               <!-- Footer only -->
-              <div class="card">
+              <bc-card>
                 <footer>Footer Only</footer>
-              </div>
+              </bc-card>
 
               <!-- Header + footer -->
-              <div class="card">
+              <bc-card>
                 <header>
                   <h2>Header + Footer</h2>
                   <p>This is a card with a header and a footer.</p>
                 </header>
                 <footer>Footer</footer>
-              </div>
+              </bc-card>
 
               <!-- Header + content + footer -->
-              <div class="card">
+              <bc-card>
                 <header>
                   <h2>Header + Content + Footer</h2>
                   <p>This is a card with a header, content and footer.</p>
                 </header>
                 <section>Content</section>
                 <footer>Footer</footer>
-              </div>
+              </bc-card>
             </div>
           </div>
         </section>
@@ -367,37 +367,37 @@
           <div class="p-4">
             <div class="grid max-w-xl gap-6">
               <!-- Simple checkbox -->
-              <div class="field" data-orientation="horizontal">
+              <bc-field orientation="horizontal">
                 <input type="checkbox" id="terms1">
                 <label for="terms1">Accept terms and conditions</label>
-              </div>
+              </bc-field>
 
               <!-- Checkbox with description -->
-              <div class="field" data-orientation="horizontal">
+              <bc-field orientation="horizontal">
                 <input type="checkbox" id="terms2">
                 <section>
                   <label for="terms2">Accept terms and conditions</label>
                   <p>By clicking this checkbox, you agree to the terms and conditions.</p>
                 </section>
-              </div>
+              </bc-field>
 
               <!-- Checkbox disabled -->
-              <div class="field" data-orientation="horizontal">
+              <bc-field orientation="horizontal">
                 <input type="checkbox" id="notifications1" disabled>
                 <section>
                   <label for="notifications1">Enable notifications</label>
                   <p>You can enable or disable notifications at any time.</p>
                 </section>
-              </div>
+              </bc-field>
 
               <!-- Switch -->
-              <div class="field" data-orientation="horizontal">
+              <bc-field orientation="horizontal">
                 <input type="checkbox" role="switch" id="switch1">
                 <section>
                   <label for="switch1">Enable notifications</label>
                   <p>You can enable or disable notifications at any time.</p>
                 </section>
-              </div>
+              </bc-field>
             </div>
           </div>
         </section>
@@ -412,8 +412,8 @@
           <div class="p-4">
             <div class="flex flex-wrap gap-2">
               <!-- Edit Profile dialog -->
-              <button type="button" class="btn-outline" onclick="document.getElementById('dialog-edit-profile').showModal()">Edit Profile</button>
-              <dialog id="dialog-edit-profile" class="dialog" aria-labelledby="dialog-edit-title" onclick="if(event.target===this)this.close()">
+              <button type="button" data-variant="outline" onclick="document.getElementById('dialog-edit-profile').showModal()">Edit Profile</button>
+              <dialog id="dialog-edit-profile" aria-labelledby="dialog-edit-title" onclick="if(event.target===this)this.close()">
                 <div>
                   <header>
                     <h2 id="dialog-edit-title">Edit profile</h2>
@@ -421,18 +421,18 @@
                   </header>
                   <section>
                     <div class="grid gap-4">
-                      <div class="field">
+                      <bc-field>
                         <label>Name</label>
                         <input type="text" value="Ronan Berder">
-                      </div>
-                      <div class="field">
+                      </bc-field>
+                      <bc-field>
                         <label>Username</label>
                         <input type="text" value="@hunvreus">
-                      </div>
+                      </bc-field>
                     </div>
                   </section>
                   <footer>
-                    <button class="btn" onclick="document.getElementById('dialog-edit-profile').close()">Save changes</button>
+                    <button onclick="document.getElementById('dialog-edit-profile').close()">Save changes</button>
                   </footer>
                   <form method="dialog"><button class="cursor-pointer" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -441,8 +441,8 @@
               </dialog>
 
               <!-- Scrollable Content dialog -->
-              <button type="button" class="btn-outline" onclick="document.getElementById('dialog-scrollable').showModal()">Scrollable Content</button>
-              <dialog id="dialog-scrollable" class="dialog" aria-labelledby="dialog-scroll-title" onclick="if(event.target===this)this.close()">
+              <button type="button" data-variant="outline" onclick="document.getElementById('dialog-scrollable').showModal()">Scrollable Content</button>
+              <dialog id="dialog-scrollable" aria-labelledby="dialog-scroll-title" onclick="if(event.target===this)this.close()">
                 <div>
                   <header>
                     <h2 id="dialog-scroll-title">Scrollable Content</h2>
@@ -457,7 +457,7 @@
                     </div>
                   </section>
                   <footer>
-                    <button class="btn-outline" onclick="document.getElementById('dialog-scrollable').close()">Close</button>
+                    <button data-variant="outline" onclick="document.getElementById('dialog-scrollable').close()">Close</button>
                   </footer>
                   <form method="dialog"><button class="cursor-pointer" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -478,28 +478,28 @@
           <div class="p-4">
             <div class="flex flex-wrap gap-4">
               <!-- Basic dropdown -->
-              <div id="demo-dropdown" class="dropdown-menu">
-                <button type="button" class="btn-outline" aria-haspopup="menu" aria-controls="demo-dropdown-popover" aria-expanded="false">Open</button>
+              <bc-dropdown id="demo-dropdown">
+                <button type="button" data-variant="outline" aria-haspopup="menu" aria-controls="demo-dropdown-popover" aria-expanded="false">Open</button>
                 <div id="demo-dropdown-popover" data-popover aria-hidden="true">
                   <div role="menu">
                     <div role="heading">My Account</div>
-                    <div role="menuitem">Profile <span class="kbd ml-auto">⇧⌘P</span></div>
-                    <div role="menuitem">Billing <span class="kbd ml-auto">⌘B</span></div>
-                    <div role="menuitem">Settings <span class="kbd ml-auto">⌘S</span></div>
-                    <div role="menuitem">Keyboard shortcuts <span class="kbd ml-auto">⌘K</span></div>
+                    <div role="menuitem">Profile <kbd class="ml-auto">⇧⌘P</kbd></div>
+                    <div role="menuitem">Billing <kbd class="ml-auto">⌘B</kbd></div>
+                    <div role="menuitem">Settings <kbd class="ml-auto">⌘S</kbd></div>
+                    <div role="menuitem">Keyboard shortcuts <kbd class="ml-auto">⌘K</kbd></div>
                     <hr role="separator">
                     <div role="menuitem">GitHub</div>
                     <div role="menuitem">Support</div>
                     <div role="menuitem">API</div>
                     <hr role="separator">
-                    <div role="menuitem">Logout <span class="kbd ml-auto">⇧⌘Q</span></div>
+                    <div role="menuitem">Logout <kbd class="ml-auto">⇧⌘Q</kbd></div>
                   </div>
                 </div>
-              </div>
+              </bc-dropdown>
 
               <!-- Context menu style -->
-              <div id="demo-dropdown-context" class="dropdown-menu">
-                <button type="button" class="btn-outline" aria-haspopup="menu" aria-controls="demo-dropdown-context-popover" aria-expanded="false">
+              <bc-dropdown id="demo-dropdown-context">
+                <button type="button" data-variant="outline" aria-haspopup="menu" aria-controls="demo-dropdown-context-popover" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 </button>
                 <div id="demo-dropdown-context-popover" data-popover data-align="end" aria-hidden="true">
@@ -510,7 +510,7 @@
                     <div role="menuitem" class="text-destructive">Delete</div>
                   </div>
                 </div>
-              </div>
+              </bc-dropdown>
             </div>
           </div>
         </section>
@@ -524,15 +524,15 @@
           </header>
           <div class="p-4">
             <form class="grid max-w-xl gap-6" onsubmit="event.preventDefault()">
-              <div class="field">
+              <bc-field>
                 <label>Username</label>
                 <input type="text" placeholder="Enter your username">
                 <p>This is your public display name.</p>
-              </div>
+              </bc-field>
 
-              <div class="field">
+              <bc-field>
                 <label>Email</label>
-                <div class="select" id="form-email-select">
+                <bc-select id="form-email-select">
                   <button type="button" aria-haspopup="listbox" aria-expanded="false">
                     <span class="text-muted-foreground">Select email</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 opacity-50"><path d="m6 9 6 6 6-6"/></svg>
@@ -545,28 +545,28 @@
                       <div role="option" data-value="m@support.com">m@support.com</div>
                     </div>
                   </div>
-                </div>
+                </bc-select>
                 <p>You can manage email addresses in your email settings.</p>
-              </div>
+              </bc-field>
 
-              <div class="field">
+              <bc-field>
                 <label>Bio</label>
                 <textarea placeholder="Tell us about yourself" rows="3"></textarea>
                 <p>You can @mention other users and organizations.</p>
-              </div>
+              </bc-field>
 
-              <div class="field">
+              <bc-field>
                 <h3>Email Notifications</h3>
-                <div class="field" data-orientation="horizontal">
+                <bc-field orientation="horizontal">
                   <input type="checkbox" role="switch" id="marketing-emails" checked>
                   <section>
                     <label for="marketing-emails">Marketing emails</label>
                     <p>Receive emails about new products, features, and more.</p>
                   </section>
-                </div>
-              </div>
+                </bc-field>
+              </bc-field>
 
-              <button type="submit" class="btn w-fit">Submit</button>
+              <button type="submit" class="w-fit">Submit</button>
             </form>
           </div>
         </section>
@@ -580,22 +580,22 @@
           </header>
           <div class="p-4">
             <div class="grid max-w-xl gap-4">
-              <div class="field" data-orientation="horizontal">
+              <bc-field orientation="horizontal">
                 <input type="checkbox" id="label-terms">
                 <label for="label-terms">Accept terms and conditions</label>
-              </div>
-              <div class="field">
+              </bc-field>
+              <bc-field>
                 <label for="label-username">Username</label>
                 <input type="text" id="label-username" placeholder="@hunvreus">
-              </div>
-              <div class="field">
+              </bc-field>
+              <bc-field>
                 <label>Disabled</label>
                 <input type="text" disabled placeholder="Disabled input">
-              </div>
-              <div class="field">
+              </bc-field>
+              <bc-field>
                 <label for="label-message">Message</label>
                 <textarea id="label-message" placeholder="Type your message"></textarea>
-              </div>
+              </bc-field>
             </div>
           </div>
         </section>
@@ -609,14 +609,14 @@
           </header>
           <div class="p-4">
             <nav class="flex items-center gap-1">
-              <button class="btn-ghost">
+              <button data-variant="ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                 Previous
               </button>
-              <button class="btn-outline" aria-current="page">1</button>
-              <button class="btn-ghost">2</button>
-              <button class="btn-ghost">3</button>
-              <button class="btn-ghost">
+              <button data-variant="outline" aria-current="page">1</button>
+              <button data-variant="ghost">2</button>
+              <button data-variant="ghost">3</button>
+              <button data-variant="ghost">
                 Next
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
               </button>
@@ -632,8 +632,8 @@
             <h2 class="text-sm font-medium">Popover</h2>
           </header>
           <div class="p-4">
-            <div id="demo-popover" class="popover">
-              <button type="button" class="btn-outline" aria-expanded="false">Open popover</button>
+            <bc-popover id="demo-popover">
+              <button type="button" data-variant="outline" aria-expanded="false">Open popover</button>
               <div data-popover aria-hidden="true" class="w-80">
                 <div class="grid gap-4">
                   <div class="space-y-2">
@@ -641,26 +641,26 @@
                     <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
                   </div>
                   <div class="grid gap-2">
-                    <div class="field">
+                    <bc-field>
                       <label>Width</label>
                       <input type="text" value="100%">
-                    </div>
-                    <div class="field">
+                    </bc-field>
+                    <bc-field>
                       <label>Max. width</label>
                       <input type="text" value="300px">
-                    </div>
-                    <div class="field">
+                    </bc-field>
+                    <bc-field>
                       <label>Height</label>
                       <input type="text" value="25px">
-                    </div>
-                    <div class="field">
+                    </bc-field>
+                    <bc-field>
                       <label>Max. height</label>
                       <input type="text" value="none">
-                    </div>
+                    </bc-field>
                   </div>
                 </div>
               </div>
-            </div>
+            </bc-popover>
           </div>
         </section>
 
@@ -673,19 +673,19 @@
           </header>
           <div class="p-4">
             <div class="grid max-w-xl gap-6">
-              <fieldset class="fieldset">
-                <div class="field" data-orientation="horizontal">
+              <fieldset>
+                <bc-field orientation="horizontal">
                   <input type="radio" name="spacing" id="radio-default" value="default" checked>
                   <label for="radio-default">Default</label>
-                </div>
-                <div class="field" data-orientation="horizontal">
+                </bc-field>
+                <bc-field orientation="horizontal">
                   <input type="radio" name="spacing" id="radio-comfortable" value="comfortable">
                   <label for="radio-comfortable">Comfortable</label>
-                </div>
-                <div class="field" data-orientation="horizontal">
+                </bc-field>
+                <bc-field orientation="horizontal">
                   <input type="radio" name="spacing" id="radio-compact" value="compact">
                   <label for="radio-compact">Compact</label>
-                </div>
+                </bc-field>
               </fieldset>
             </div>
           </div>
@@ -701,7 +701,7 @@
           <div class="p-4">
             <div class="flex flex-wrap gap-4">
               <!-- Simple select -->
-              <div class="select" id="demo-select-fruit">
+              <bc-select id="demo-select-fruit">
                 <button type="button" aria-haspopup="listbox" aria-expanded="false">
                   <span class="text-muted-foreground">Select a fruit</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 opacity-50"><path d="m6 9 6 6 6-6"/></svg>
@@ -716,10 +716,10 @@
                     <div role="option" data-value="disabled" aria-disabled="true">Disabled</div>
                   </div>
                 </div>
-              </div>
+              </bc-select>
 
               <!-- Select with groups -->
-              <div class="select" id="demo-select-grouped">
+              <bc-select id="demo-select-grouped">
                 <button type="button" aria-haspopup="listbox" aria-expanded="false">
                   <span>Blueberry</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 opacity-50"><path d="m6 9 6 6 6-6"/></svg>
@@ -735,10 +735,10 @@
                     <div role="option" data-value="pineapple">Pineapple</div>
                   </div>
                 </div>
-              </div>
+              </bc-select>
 
               <!-- Disabled select -->
-              <div class="select" id="demo-select-disabled">
+              <bc-select id="demo-select-disabled">
                 <button type="button" aria-haspopup="listbox" aria-expanded="false" disabled>
                   <span class="text-muted-foreground">Disabled</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 opacity-50"><path d="m6 9 6 6 6-6"/></svg>
@@ -747,7 +747,7 @@
                 <div data-popover aria-hidden="true">
                   <div role="listbox"></div>
                 </div>
-              </div>
+              </bc-select>
             </div>
           </div>
         </section>
@@ -760,7 +760,7 @@
             <h2 class="text-sm font-medium">Table</h2>
           </header>
           <div class="p-4">
-            <table class="table">
+            <table>
               <thead>
                 <tr>
                   <th>Invoice</th>
@@ -831,58 +831,58 @@
             <h2 class="text-sm font-medium">Tabs</h2>
           </header>
           <div class="p-4">
-            <div class="tabs max-w-md">
+            <bc-tabs class="max-w-md">
               <div role="tablist">
                 <button role="tab" id="tab-account" aria-selected="true" aria-controls="panel-account" tabindex="0">Account</button>
                 <button role="tab" id="tab-password" aria-selected="false" aria-controls="panel-password" tabindex="-1">Password</button>
               </div>
               <div role="tabpanel" id="panel-account" aria-labelledby="tab-account">
-                <div class="card">
+                <bc-card>
                   <header>
                     <h2>Account</h2>
                     <p>Make changes to your account here. Click save when you're done.</p>
                   </header>
                   <section>
                     <div class="grid gap-4">
-                      <div class="field">
+                      <bc-field>
                         <label>Name</label>
                         <input type="text" value="Ronan Berder">
-                      </div>
-                      <div class="field">
+                      </bc-field>
+                      <bc-field>
                         <label>Username</label>
                         <input type="text" value="@hunvreus">
-                      </div>
+                      </bc-field>
                     </div>
                   </section>
                   <footer>
-                    <button class="btn">Save changes</button>
+                    <button>Save changes</button>
                   </footer>
-                </div>
+                </bc-card>
               </div>
               <div role="tabpanel" id="panel-password" aria-labelledby="tab-password" hidden>
-                <div class="card">
+                <bc-card>
                   <header>
                     <h2>Password</h2>
                     <p>Change your password here. After saving, you'll be logged out.</p>
                   </header>
                   <section>
                     <div class="grid gap-4">
-                      <div class="field">
+                      <bc-field>
                         <label>Current password</label>
                         <input type="password">
-                      </div>
-                      <div class="field">
+                      </bc-field>
+                      <bc-field>
                         <label>New password</label>
                         <input type="password">
-                      </div>
+                      </bc-field>
                     </div>
                   </section>
                   <footer>
-                    <button class="btn">Save Password</button>
+                    <button>Save Password</button>
                   </footer>
-                </div>
+                </bc-card>
               </div>
-            </div>
+            </bc-tabs>
           </div>
         </section>
 
@@ -895,19 +895,19 @@
           </header>
           <div class="p-4">
             <div class="grid max-w-xl gap-6">
-              <div class="field">
+              <bc-field>
                 <label>Label</label>
                 <textarea placeholder="Type something..."></textarea>
-              </div>
-              <div class="field">
+              </bc-field>
+              <bc-field>
                 <label>With label and description</label>
                 <textarea placeholder="Type your message..."></textarea>
                 <p>Type your message and press enter to send.</p>
-              </div>
-              <div class="field">
+              </bc-field>
+              <bc-field>
                 <label>Disabled</label>
                 <textarea disabled placeholder="This textarea is disabled"></textarea>
-              </div>
+              </bc-field>
             </div>
           </div>
         </section>
@@ -921,10 +921,10 @@
           </header>
           <div class="p-4">
             <div class="flex flex-wrap gap-2">
-              <button class="btn" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'success', title: 'Success', description: 'Your changes have been saved.' } } }))">Success</button>
-              <button class="btn-destructive" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'error', title: 'Error', description: 'Something went wrong. Please try again.' } } }))">Error</button>
-              <button class="btn-outline" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'info', title: 'Info', description: 'Here is some useful information.' } } }))">Info</button>
-              <button class="btn-secondary" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'warning', title: 'Warning', description: 'Please check your input carefully.' } } }))">Warning</button>
+              <button onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'success', title: 'Success', description: 'Your changes have been saved.' } } }))">Success</button>
+              <button data-variant="destructive" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'error', title: 'Error', description: 'Something went wrong. Please try again.' } } }))">Error</button>
+              <button data-variant="outline" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'info', title: 'Info', description: 'Here is some useful information.' } } }))">Info</button>
+              <button data-variant="secondary" onclick="document.dispatchEvent(new CustomEvent('basecoat:toast', { detail: { config: { category: 'warning', title: 'Warning', description: 'Please check your input carefully.' } } }))">Warning</button>
             </div>
           </div>
         </section>
@@ -938,10 +938,10 @@
           </header>
           <div class="p-4">
             <div class="flex flex-wrap gap-4 justify-center py-8">
-              <button class="btn-outline" data-tooltip="This is a tooltip" data-side="top">Top</button>
-              <button class="btn-outline" data-tooltip="This is a tooltip" data-side="right">Right</button>
-              <button class="btn-outline" data-tooltip="This is a tooltip" data-side="bottom">Bottom</button>
-              <button class="btn-outline" data-tooltip="This is a tooltip" data-side="left">Left</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="top">Top</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="right">Right</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="bottom">Bottom</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="left">Left</button>
             </div>
           </div>
         </section>
@@ -950,14 +950,13 @@
     </div>
 
     <!-- Toaster container -->
-    <div id="toaster" class="toaster"></div>
+    <bc-toaster></bc-toaster>
 
     <!-- Component JS -->
-    <script type="module" src="./src/js/basecoat.js"></script>
-    <script type="module" src="./src/js/dropdown-menu.js"></script>
-    <script type="module" src="./src/js/popover.js"></script>
-    <script type="module" src="./src/js/select.js"></script>
-    <script type="module" src="./src/js/tabs.js"></script>
-    <script type="module" src="./src/js/toast.js"></script>
+    <script type="module" src="./src/js/bc-dropdown.js"></script>
+    <script type="module" src="./src/js/bc-popover.js"></script>
+    <script type="module" src="./src/js/bc-select.js"></script>
+    <script type="module" src="./src/js/bc-tabs.js"></script>
+    <script type="module" src="./src/js/bc-toaster.js"></script>
   </body>
 </html>
