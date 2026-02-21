@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basecoat – Kitchen Sink</title>
+    <link rel="stylesheet" href="./src/css/basecoat.cdn.css" />
+  </head>
+
+  <body class="min-h-screen bg-background text-foreground p-8">
+    <div class="mx-auto max-w-3xl">
+      <h1>Heading 1</h1>
+      <p class="text-muted-foreground">Here lies semantic CSS that lets you focus more on the content and less on the fancy styling.</p>
+
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+
+      <p>This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, and <a href="#">a link</a>.</p>
+
+      <p>Here's some <code>inline code</code> and a code block:</p>
+
+      <pre><code>console.log('Hello, World!');</code></pre>
+
+      <blockquote>This is a blockquote. It's styled automatically.</blockquote>
+
+      <hr />
+
+      <ul>
+        <li>Unordered list item 1</li>
+        <li>Unordered list item 2</li>
+        <li>Unordered list item 3</li>
+      </ul>
+
+      <ol>
+        <li>Ordered list item 1</li>
+        <li>Ordered list item 2</li>
+        <li>Ordered list item 3</li>
+      </ol>
+
+      <div class="grid gap-4">
+        <!-- ============================================================ -->
+        <!-- Alert -->
+        <!-- ============================================================ -->
+        <section id="alert" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Alert</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid max-w-xl items-start gap-4">
+              <!-- Icon + title + description -->
+              <div role="alert">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                <h2>Success! Your changes have been saved</h2>
+                <section>This is an alert with icon, title and description.</section>
+              </div>
+
+              <!-- Icon + description, no title -->
+              <div role="alert">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+                  <path d="m9 10 2 2 4-4" />
+                </svg>
+                <section>This is an alert with icon, description and no title.</section>
+              </div>
+
+              <!-- Description only -->
+              <div role="alert">
+                <section>This one has a description only. No title. No icon.</section>
+              </div>
+
+              <!-- Destructive alert -->
+              <div role="alert" data-variant="destructive">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" x2="12" y1="8" y2="12" />
+                  <line x1="12" x2="12.01" y1="16" y2="16" />
+                </svg>
+                <h2>Something went wrong!</h2>
+                <section>Your session has expired. Please log in again.</section>
+              </div>
+
+              <!-- Destructive with list -->
+              <div role="alert" data-variant="destructive">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" x2="12" y1="8" y2="12" />
+                  <line x1="12" x2="12.01" y1="16" y2="16" />
+                </svg>
+                <h2>Something went wrong!</h2>
+                <section>
+                  <p>Please verify your billing information and try again.</p>
+                  <ul>
+                    <li>Check your card details</li>
+                    <li>Ensure sufficient funds</li>
+                    <li>Verify billing address</li>
+                  </ul>
+                </section>
+              </div>
+
+              <!-- Custom colored alert -->
+              <div
+                role="alert"
+                class="border-amber-50 bg-amber-50 text-amber-900 dark:border-amber-950 dark:bg-amber-950 dark:text-amber-100"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                <h2>Plot Twist: This Alert is Actually Amber!</h2>
+                <section>This one has custom colors for light and dark mode.</section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Alert Dialog -->
+        <!-- ============================================================ -->
+        <section id="alert-dialog" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Alert Dialog</h2>
+          </header>
+          <div class="p-4">
+            <button type="button" data-variant="outline" onclick="document.getElementById('alert-dialog-demo').showModal()">
+              Open dialog
+            </button>
+            <dialog id="alert-dialog-demo" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-desc">
+              <div>
+                <header>
+                  <h2 id="alert-dialog-title">Are you absolutely sure?</h2>
+                  <p id="alert-dialog-desc">
+                    This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                  </p>
+                </header>
+                <footer>
+                  <button data-variant="outline" onclick="document.getElementById('alert-dialog-demo').close()">Cancel</button>
+                  <button data-variant="primary" onclick="document.getElementById('alert-dialog-demo').close()">Continue</button>
+                </footer>
+              </div>
+            </dialog>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Avatar -->
+        <!-- ============================================================ -->
+        <section id="avatar" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Avatar</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-row flex-wrap items-center gap-4">
+              <img class="size-8 shrink-0 object-cover rounded-full" alt="@hunvreus" src="https://github.com/hunvreus.png" />
+              <span class="size-8 shrink-0 bg-muted flex items-center justify-center rounded-full text-xs font-medium">CN</span>
+              <img class="size-12 shrink-0 object-cover rounded-full" alt="@hunvreus" src="https://github.com/hunvreus.png" />
+              <img class="size-8 shrink-0 object-cover rounded-lg" alt="@hunvreus" src="https://github.com/hunvreus.png" />
+              <div
+                class="flex -space-x-2 [&_img]:ring-background [&_img]:ring-2 [&_img]:grayscale [&_img]:size-8 [&_img]:shrink-0 [&_img]:object-cover [&_img]:rounded-full"
+              >
+                <img alt="@hunvreus" src="https://github.com/hunvreus.png" />
+                <img alt="@shadcn" src="https://github.com/shadcn.png" />
+                <img alt="@adamwathan" src="https://github.com/adamwathan.png" />
+              </div>
+              <div
+                class="flex -space-x-2 hover:space-x-1 [&_img]:ring-background [&_img]:size-12 [&_img]:shrink-0 [&_img]:object-cover [&_img]:rounded-full [&_img]:ring-2 [&_img]:grayscale [&_img]:transition-all [&_img]:ease-in-out [&_img]:duration-300"
+              >
+                <img alt="@hunvreus" src="https://github.com/hunvreus.png" />
+                <img alt="@shadcn" src="https://github.com/shadcn.png" />
+                <img alt="@adamwathan" src="https://github.com/adamwathan.png" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Badge -->
+        <!-- ============================================================ -->
+        <section id="badge" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Badge</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-col gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <bc-badge>Primary</bc-badge>
+                <bc-badge variant="secondary">Secondary</bc-badge>
+                <bc-badge variant="outline">Outline</bc-badge>
+                <bc-badge variant="destructive">Destructive</bc-badge>
+                <bc-badge variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Badge
+                </bc-badge>
+                <bc-badge variant="destructive">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" x2="12" y1="8" y2="12" />
+                    <line x1="12" x2="12.01" y1="16" y2="16" />
+                  </svg>
+                  Alert
+                </bc-badge>
+                <bc-badge class="rounded-full min-w-5 px-1">8</bc-badge>
+                <bc-badge variant="destructive" class="rounded-full min-w-5 px-1">99</bc-badge>
+                <bc-badge variant="outline" class="rounded-full min-w-5 px-1 font-mono tabular-nums">20+</bc-badge>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <a href="#"
+                  ><bc-badge
+                    >Link
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" /></svg></bc-badge
+                ></a>
+                <a href="#"
+                  ><bc-badge variant="secondary"
+                    >Link
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" /></svg></bc-badge
+                ></a>
+                <a href="#"
+                  ><bc-badge variant="destructive"
+                    >Link
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" /></svg></bc-badge
+                ></a>
+                <a href="#"
+                  ><bc-badge variant="outline"
+                    >Link
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" /></svg></bc-badge
+                ></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Breadcrumb -->
+        <!-- ============================================================ -->
+        <section id="breadcrumb" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Breadcrumb</h2>
+          </header>
+          <div class="p-4">
+            <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5">
+              <li class="inline-flex items-center gap-1.5">
+                <a href="#" class="hover:text-foreground transition-colors">Home</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-3.5"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </li>
+              <li class="inline-flex items-center gap-1.5">
+                <bc-dropdown id="breadcrumb-menu">
+                  <button
+                    data-variant="outline"
+                    type="button"
+                    id="breadcrumb-menu-trigger"
+                    aria-haspopup="menu"
+                    aria-controls="breadcrumb-menu-popover"
+                    aria-expanded="false"
+                    class="flex items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="1" />
+                      <circle cx="19" cy="12" r="1" />
+                      <circle cx="5" cy="12" r="1" />
+                    </svg>
+                  </button>
+                  <div id="breadcrumb-menu-popover" data-popover aria-hidden="true">
+                    <div role="menu" aria-labelledby="breadcrumb-menu-trigger">
+                      <div role="menuitem">Documentation</div>
+                      <div role="menuitem">Themes</div>
+                      <div role="menuitem">GitHub</div>
+                    </div>
+                  </div>
+                </bc-dropdown>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-3.5"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </li>
+              <li class="inline-flex items-center gap-1.5">
+                <a href="#" class="hover:text-foreground transition-colors">Components</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-3.5"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </li>
+              <li class="inline-flex items-center gap-1.5">
+                <span class="text-foreground font-normal">Breadcrumb</span>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Button -->
+        <!-- ============================================================ -->
+        <section id="button" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Button</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-col gap-6">
+              <!-- Default size -->
+              <div class="flex flex-wrap items-center gap-2">
+                <button data-variant="primary">Primary</button>
+                <button data-variant="outline">Outline</button>
+                <button data-variant="ghost">Ghost</button>
+                <button data-variant="destructive">Danger</button>
+                <button data-variant="secondary">Secondary</button>
+                <button data-variant="link">Link</button>
+                <button data-variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                  Send
+                </button>
+                <button data-variant="ghost">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                  Learn more
+                </button>
+                <button disabled>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="animate-spin"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                  Loading
+                </button>
+              </div>
+              <!-- Small size -->
+              <div class="flex flex-wrap items-center gap-2">
+                <button data-variant="primary" data-size="sm">Primary</button>
+                <button data-variant="outline" data-size="sm">Outline</button>
+                <button data-variant="ghost" data-size="sm">Ghost</button>
+                <button data-variant="destructive" data-size="sm">Danger</button>
+                <button data-variant="secondary" data-size="sm">Secondary</button>
+                <button data-variant="link" data-size="sm">Link</button>
+                <button data-variant="outline" data-size="sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                  Send
+                </button>
+                <button data-variant="ghost" data-size="sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                  Learn more
+                </button>
+                <button data-size="sm" disabled>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="animate-spin"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                  Loading
+                </button>
+              </div>
+              <!-- Large size -->
+              <div class="flex flex-wrap items-center gap-2">
+                <button data-variant="primary" data-size="lg">Primary</button>
+                <button data-variant="outline" data-size="lg">Outline</button>
+                <button data-variant="ghost" data-size="lg">Ghost</button>
+                <button data-variant="destructive" data-size="lg">Danger</button>
+                <button data-variant="secondary" data-size="lg">Secondary</button>
+                <button data-variant="link" data-size="lg">Link</button>
+                <button data-variant="outline" data-size="lg">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                  Send
+                </button>
+                <button data-variant="ghost" data-size="lg">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                  Learn more
+                </button>
+                <button data-size="lg" disabled>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="animate-spin"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                  Loading
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Card -->
+        <!-- ============================================================ -->
+        <section id="card" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Card</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid gap-4 max-w-xl">
+              <!-- Login card -->
+              <bc-card>
+                <header>
+                  <h2>Login to your account</h2>
+                  <p>Enter your details below to login to your account</p>
+                </header>
+                <section>
+                  <div class="grid gap-4">
+                    <bc-field>
+                      <label>Email</label>
+                      <input type="email" placeholder="m@example.com" />
+                    </bc-field>
+                    <bc-field>
+                      <label>Password</label>
+                      <input type="password" />
+                    </bc-field>
+                  </div>
+                </section>
+                <footer>
+                  <button data-variant="primary" class="w-full">Login</button>
+                </footer>
+              </bc-card>
+
+              <!-- Content only -->
+              <bc-card>
+                <section>Content Only</section>
+              </bc-card>
+
+              <!-- Header only -->
+              <bc-card>
+                <header>
+                  <h2>Header Only</h2>
+                  <p>This is a card with a header and a description.</p>
+                </header>
+              </bc-card>
+
+              <!-- Header + content -->
+              <bc-card>
+                <header>
+                  <h2>Header and Content</h2>
+                  <p>This is a card with a header and a content.</p>
+                </header>
+                <section>Content only.</section>
+              </bc-card>
+
+              <!-- Footer only -->
+              <bc-card>
+                <footer>Footer Only</footer>
+              </bc-card>
+
+              <!-- Header + footer -->
+              <bc-card>
+                <header>
+                  <h2>Header + Footer</h2>
+                  <p>This is a card with a header and a footer.</p>
+                </header>
+                <footer>Footer</footer>
+              </bc-card>
+
+              <!-- Header + content + footer -->
+              <bc-card>
+                <header>
+                  <h2>Header + Content + Footer</h2>
+                  <p>This is a card with a header, content and footer.</p>
+                </header>
+                <section>Content</section>
+                <footer>Footer</footer>
+              </bc-card>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Checkbox -->
+        <!-- ============================================================ -->
+        <section id="checkbox" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Checkbox</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid max-w-xl gap-6">
+              <!-- Simple checkbox -->
+              <bc-field orientation="horizontal">
+                <input type="checkbox" id="terms1" />
+                <label for="terms1">Accept terms and conditions</label>
+              </bc-field>
+
+              <!-- Checkbox with description -->
+              <bc-field orientation="horizontal">
+                <input type="checkbox" id="terms2" />
+                <section>
+                  <label for="terms2">Accept terms and conditions</label>
+                  <p>By clicking this checkbox, you agree to the terms and conditions.</p>
+                </section>
+              </bc-field>
+
+              <!-- Checkbox disabled -->
+              <bc-field orientation="horizontal">
+                <input type="checkbox" id="notifications1" disabled />
+                <section>
+                  <label for="notifications1">Enable notifications</label>
+                  <p>You can enable or disable notifications at any time.</p>
+                </section>
+              </bc-field>
+
+              <!-- Switch -->
+              <bc-field orientation="horizontal">
+                <input type="checkbox" role="switch" id="switch1" />
+                <section>
+                  <label for="switch1">Enable notifications</label>
+                  <p>You can enable or disable notifications at any time.</p>
+                </section>
+              </bc-field>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Dialog -->
+        <!-- ============================================================ -->
+        <section id="dialog" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Dialog</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-wrap gap-2">
+              <!-- Edit Profile dialog -->
+              <button type="button" data-variant="outline" onclick="document.getElementById('dialog-edit-profile').showModal()">
+                Edit Profile
+              </button>
+              <dialog id="dialog-edit-profile" aria-labelledby="dialog-edit-title" onclick="if (event.target === this) this.close()">
+                <div>
+                  <header>
+                    <h2 id="dialog-edit-title">Edit profile</h2>
+                    <p>Make changes to your profile here. Click save when you're done.</p>
+                  </header>
+                  <section>
+                    <div class="grid gap-4">
+                      <bc-field>
+                        <label>Name</label>
+                        <input type="text" value="Ronan Berder" />
+                      </bc-field>
+                      <bc-field>
+                        <label>Username</label>
+                        <input type="text" value="@hunvreus" />
+                      </bc-field>
+                    </div>
+                  </section>
+                  <footer>
+                    <button data-variant="primary" onclick="document.getElementById('dialog-edit-profile').close()">Save changes</button>
+                  </footer>
+                  <form method="dialog">
+                    <button class="cursor-pointer" aria-label="Close">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </dialog>
+
+              <!-- Scrollable Content dialog -->
+              <button type="button" data-variant="outline" onclick="document.getElementById('dialog-scrollable').showModal()">
+                Scrollable Content
+              </button>
+              <dialog id="dialog-scrollable" aria-labelledby="dialog-scroll-title" onclick="if (event.target === this) this.close()">
+                <div>
+                  <header>
+                    <h2 id="dialog-scroll-title">Scrollable Content</h2>
+                    <p>This dialog has content that overflows.</p>
+                  </header>
+                  <section class="overflow-y-auto max-h-64">
+                    <div class="space-y-4">
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </p>
+                      <p>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </p>
+                      <p>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                        eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                      </p>
+                      <p>
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+                        qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+                      </p>
+                    </div>
+                  </section>
+                  <footer>
+                    <button data-variant="outline" onclick="document.getElementById('dialog-scrollable').close()">Close</button>
+                  </footer>
+                  <form method="dialog">
+                    <button class="cursor-pointer" aria-label="Close">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Dropdown Menu -->
+        <!-- ============================================================ -->
+        <section id="dropdown-menu" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Dropdown Menu</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-wrap gap-4">
+              <!-- Basic dropdown -->
+              <bc-dropdown id="demo-dropdown">
+                <button
+                  type="button"
+                  data-variant="outline"
+                  aria-haspopup="menu"
+                  aria-controls="demo-dropdown-popover"
+                  aria-expanded="false"
+                >
+                  Open
+                </button>
+                <div id="demo-dropdown-popover" data-popover aria-hidden="true">
+                  <div role="menu">
+                    <div role="heading">My Account</div>
+                    <div role="menuitem">Profile <kbd class="ml-auto">⇧⌘P</kbd></div>
+                    <div role="menuitem">Billing <kbd class="ml-auto">⌘B</kbd></div>
+                    <div role="menuitem">Settings <kbd class="ml-auto">⌘S</kbd></div>
+                    <div role="menuitem">Keyboard shortcuts <kbd class="ml-auto">⌘K</kbd></div>
+                    <hr role="separator" />
+                    <div role="menuitem">GitHub</div>
+                    <div role="menuitem">Support</div>
+                    <div role="menuitem">API</div>
+                    <hr role="separator" />
+                    <div role="menuitem">Logout <kbd class="ml-auto">⇧⌘Q</kbd></div>
+                  </div>
+                </div>
+              </bc-dropdown>
+
+              <!-- Context menu style -->
+              <bc-dropdown id="demo-dropdown-context">
+                <button
+                  type="button"
+                  data-variant="outline"
+                  aria-haspopup="menu"
+                  aria-controls="demo-dropdown-context-popover"
+                  aria-expanded="false"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="12" cy="5" r="1" />
+                    <circle cx="12" cy="19" r="1" />
+                  </svg>
+                </button>
+                <div id="demo-dropdown-context-popover" data-popover data-align="end" aria-hidden="true">
+                  <div role="menu">
+                    <div role="menuitem">Edit</div>
+                    <div role="menuitem">Share</div>
+                    <hr role="separator" />
+                    <div role="menuitem" class="text-destructive">Delete</div>
+                  </div>
+                </div>
+              </bc-dropdown>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Form -->
+        <!-- ============================================================ -->
+        <section id="form" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Form</h2>
+          </header>
+          <div class="p-4">
+            <form class="grid max-w-xl gap-6" onsubmit="event.preventDefault()">
+              <bc-field>
+                <label>Username</label>
+                <input type="text" placeholder="Enter your username" />
+                <p>This is your public display name.</p>
+              </bc-field>
+
+              <select class="select w-[180px]">
+                <optgroup label="Fruits">
+                  <option>Apple</option>
+                  <option>Banana</option>
+                  <option>Blueberry</option>
+                  <option>Grapes</option>
+                  <option>Pineapple</option>
+                </optgroup>
+              </select>
+
+              <bc-field>
+                <label>Email</label>
+                <bc-select id="form-email-select">
+                  <button type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="text-muted-foreground">Select email</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-4 opacity-50"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                  <input type="hidden" name="email" value="m@example.com" />
+                  <div data-popover aria-hidden="true">
+                    <div role="listbox">
+                      <div role="option" data-value="m@example.com" aria-selected="true">m@example.com</div>
+                      <div role="option" data-value="m@google.com">m@google.com</div>
+                      <div role="option" data-value="m@support.com">m@support.com</div>
+                    </div>
+                  </div>
+                </bc-select>
+                <p>You can manage email addresses in your email settings.</p>
+              </bc-field>
+
+              <bc-field>
+                <label>Bio</label>
+                <textarea placeholder="Tell us about yourself" rows="3"></textarea>
+                <p>You can @mention other users and organizations.</p>
+              </bc-field>
+
+              <bc-field>
+                <h3>Email Notifications</h3>
+                <bc-field orientation="horizontal">
+                  <input type="checkbox" role="switch" id="marketing-emails" checked />
+                  <section>
+                    <label for="marketing-emails">Marketing emails</label>
+                    <p>Receive emails about new products, features, and more.</p>
+                  </section>
+                </bc-field>
+              </bc-field>
+
+              <button data-variant="primary" type="submit" class="w-fit">Submit</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Label -->
+        <!-- ============================================================ -->
+        <section id="label" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Label</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid max-w-xl gap-4">
+              <bc-field orientation="horizontal">
+                <input type="checkbox" id="label-terms" />
+                <label for="label-terms">Accept terms and conditions</label>
+              </bc-field>
+              <bc-field>
+                <label for="label-username">Username</label>
+                <input type="text" id="label-username" placeholder="@hunvreus" />
+              </bc-field>
+              <bc-field>
+                <label>Disabled</label>
+                <input type="text" disabled placeholder="Disabled input" />
+              </bc-field>
+              <bc-field>
+                <label for="label-message">Message</label>
+                <textarea id="label-message" placeholder="Type your message"></textarea>
+              </bc-field>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Pagination -->
+        <!-- ============================================================ -->
+        <section id="pagination" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Pagination</h2>
+          </header>
+          <div class="p-4">
+            <nav class="flex items-center gap-1">
+              <button data-variant="ghost">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+                Previous
+              </button>
+              <button data-variant="outline" aria-current="page">1</button>
+              <button data-variant="ghost">2</button>
+              <button data-variant="ghost">3</button>
+              <button data-variant="ghost">
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </nav>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Popover -->
+        <!-- ============================================================ -->
+        <section id="popover" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Popover</h2>
+          </header>
+          <div class="p-4">
+            <bc-popover id="demo-popover">
+              <button type="button" data-variant="outline" aria-expanded="false">Open popover</button>
+              <div data-popover aria-hidden="true" class="w-80">
+                <div class="grid gap-4">
+                  <div class="space-y-2">
+                    <h4 class="font-medium leading-none">Dimensions</h4>
+                    <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+                  </div>
+                  <div class="grid gap-2">
+                    <bc-field>
+                      <label>Width</label>
+                      <input type="text" value="100%" />
+                    </bc-field>
+                    <bc-field>
+                      <label>Max. width</label>
+                      <input type="text" value="300px" />
+                    </bc-field>
+                    <bc-field>
+                      <label>Height</label>
+                      <input type="text" value="25px" />
+                    </bc-field>
+                    <bc-field>
+                      <label>Max. height</label>
+                      <input type="text" value="none" />
+                    </bc-field>
+                  </div>
+                </div>
+              </div>
+            </bc-popover>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Radio Group -->
+        <!-- ============================================================ -->
+        <section id="radio-group" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Radio Group</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid max-w-xl gap-6">
+              <fieldset>
+                <bc-field orientation="horizontal">
+                  <input type="radio" name="spacing" id="radio-default" value="default" checked />
+                  <label for="radio-default">Default</label>
+                </bc-field>
+                <bc-field orientation="horizontal">
+                  <input type="radio" name="spacing" id="radio-comfortable" value="comfortable" />
+                  <label for="radio-comfortable">Comfortable</label>
+                </bc-field>
+                <bc-field orientation="horizontal">
+                  <input type="radio" name="spacing" id="radio-compact" value="compact" />
+                  <label for="radio-compact">Compact</label>
+                </bc-field>
+              </fieldset>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Select -->
+        <!-- ============================================================ -->
+        <section id="select" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Select</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-wrap gap-4">
+              <!-- Simple select -->
+              <bc-select id="demo-select-fruit">
+                <button type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="text-muted-foreground">Select a fruit</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-4 opacity-50"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <input type="hidden" name="fruit" value="" />
+                <div data-popover aria-hidden="true">
+                  <div role="listbox">
+                    <div role="option" data-value="apple">Apple</div>
+                    <div role="option" data-value="banana">Banana</div>
+                    <div role="option" data-value="blueberry">Blueberry</div>
+                    <div role="option" data-value="pineapple">Pineapple</div>
+                    <div role="option" data-value="disabled" aria-disabled="true">Disabled</div>
+                  </div>
+                </div>
+              </bc-select>
+
+              <!-- Select with groups -->
+              <bc-select id="demo-select-grouped">
+                <button type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span>Blueberry</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-4 opacity-50"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <input type="hidden" name="fruit-grouped" value="blueberry" />
+                <div data-popover aria-hidden="true">
+                  <div role="listbox">
+                    <div role="heading">Fruits</div>
+                    <div role="option" data-value="apple">Apple</div>
+                    <div role="option" data-value="banana">Banana</div>
+                    <div role="option" data-value="blueberry" aria-selected="true">Blueberry</div>
+                    <div role="option" data-value="grapes">Grapes</div>
+                    <div role="option" data-value="pineapple">Pineapple</div>
+                  </div>
+                </div>
+              </bc-select>
+
+              <!-- Disabled select -->
+              <bc-select id="demo-select-disabled">
+                <button type="button" aria-haspopup="listbox" aria-expanded="false" disabled>
+                  <span class="text-muted-foreground">Disabled</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-4 opacity-50"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <input type="hidden" name="disabled" value="" />
+                <div data-popover aria-hidden="true">
+                  <div role="listbox"></div>
+                </div>
+              </bc-select>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Table -->
+        <!-- ============================================================ -->
+        <section id="table" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Table</h2>
+          </header>
+          <div class="p-4">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice</th>
+                  <th>Status</th>
+                  <th>Method</th>
+                  <th class="text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-medium">INV001</td>
+                  <td>Paid</td>
+                  <td>Credit Card</td>
+                  <td class="text-right">$250.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV002</td>
+                  <td>Pending</td>
+                  <td>PayPal</td>
+                  <td class="text-right">$150.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV003</td>
+                  <td>Unpaid</td>
+                  <td>Bank Transfer</td>
+                  <td class="text-right">$350.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV004</td>
+                  <td>Paid</td>
+                  <td>Paypal</td>
+                  <td class="text-right">$450.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV005</td>
+                  <td>Paid</td>
+                  <td>Credit Card</td>
+                  <td class="text-right">$550.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV006</td>
+                  <td>Pending</td>
+                  <td>Bank Transfer</td>
+                  <td class="text-right">$200.00</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">INV007</td>
+                  <td>Unpaid</td>
+                  <td>Credit Card</td>
+                  <td class="text-right">$300.00</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="font-medium">Total</td>
+                  <td class="text-right font-medium">$2,500.00</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Tabs -->
+        <!-- ============================================================ -->
+        <section id="tabs" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Tabs</h2>
+          </header>
+          <div class="p-4">
+            <bc-tabs class="max-w-md">
+              <div role="tablist">
+                <button role="tab" id="tab-account" aria-selected="true" aria-controls="panel-account" tabindex="0">Account</button>
+                <button role="tab" id="tab-password" aria-selected="false" aria-controls="panel-password" tabindex="-1">Password</button>
+              </div>
+              <div role="tabpanel" id="panel-account" aria-labelledby="tab-account">
+                <bc-card>
+                  <header>
+                    <h2>Account</h2>
+                    <p>Make changes to your account here. Click save when you're done.</p>
+                  </header>
+                  <section>
+                    <div class="grid gap-4">
+                      <bc-field>
+                        <label>Name</label>
+                        <input type="text" value="Ronan Berder" />
+                      </bc-field>
+                      <bc-field>
+                        <label>Username</label>
+                        <input type="text" value="@hunvreus" />
+                      </bc-field>
+                    </div>
+                  </section>
+                  <footer>
+                    <button data-variant="primary">Save changes</button>
+                  </footer>
+                </bc-card>
+              </div>
+              <div role="tabpanel" id="panel-password" aria-labelledby="tab-password" hidden>
+                <bc-card>
+                  <header>
+                    <h2>Password</h2>
+                    <p>Change your password here. After saving, you'll be logged out.</p>
+                  </header>
+                  <section>
+                    <div class="grid gap-4">
+                      <bc-field>
+                        <label>Current password</label>
+                        <input type="password" />
+                      </bc-field>
+                      <bc-field>
+                        <label>New password</label>
+                        <input type="password" />
+                      </bc-field>
+                    </div>
+                  </section>
+                  <footer>
+                    <button data-variant="primary">Save Password</button>
+                  </footer>
+                </bc-card>
+              </div>
+            </bc-tabs>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Textarea -->
+        <!-- ============================================================ -->
+        <section id="textarea" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Textarea</h2>
+          </header>
+          <div class="p-4">
+            <div class="grid max-w-xl gap-6">
+              <bc-field>
+                <label>Label</label>
+                <textarea placeholder="Type something..."></textarea>
+              </bc-field>
+              <bc-field>
+                <label>With label and description</label>
+                <textarea placeholder="Type your message..."></textarea>
+                <p>Type your message and press enter to send.</p>
+              </bc-field>
+              <bc-field>
+                <label>Disabled</label>
+                <textarea disabled placeholder="This textarea is disabled"></textarea>
+              </bc-field>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Toast -->
+        <!-- ============================================================ -->
+        <section id="toast" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Toast</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-wrap gap-2">
+              <button
+                data-variant="primary"
+                onclick="
+                  document.dispatchEvent(
+                    new CustomEvent('basecoat:toast', {
+                      detail: { config: { category: 'success', title: 'Success', description: 'Your changes have been saved.' } },
+                    })
+                  )
+                "
+              >
+                Success
+              </button>
+              <button
+                data-variant="destructive"
+                onclick="
+                  document.dispatchEvent(
+                    new CustomEvent('basecoat:toast', {
+                      detail: { config: { category: 'error', title: 'Error', description: 'Something went wrong. Please try again.' } },
+                    })
+                  )
+                "
+              >
+                Error
+              </button>
+              <button
+                data-variant="outline"
+                onclick="
+                  document.dispatchEvent(
+                    new CustomEvent('basecoat:toast', {
+                      detail: { config: { category: 'info', title: 'Info', description: 'Here is some useful information.' } },
+                    })
+                  )
+                "
+              >
+                Info
+              </button>
+              <button
+                data-variant="secondary"
+                onclick="
+                  document.dispatchEvent(
+                    new CustomEvent('basecoat:toast', {
+                      detail: { config: { category: 'warning', title: 'Warning', description: 'Please check your input carefully.' } },
+                    })
+                  )
+                "
+              >
+                Warning
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- Tooltip -->
+        <!-- ============================================================ -->
+        <section id="tooltip" class="w-full rounded-lg border scroll-mt-14">
+          <header class="border-b px-4 py-3 flex items-center justify-between">
+            <h2 class="text-sm font-medium">Tooltip</h2>
+          </header>
+          <div class="p-4">
+            <div class="flex flex-wrap gap-4 justify-center py-8">
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="top">Top</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="right">Right</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="bottom">Bottom</button>
+              <button data-variant="outline" data-tooltip="This is a tooltip" data-side="left">Left</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Toaster container -->
+    <bc-toaster></bc-toaster>
+
+    <!-- Component JS -->
+    <script type="module" src="./src/js/bc-badge.js"></script>
+    <script type="module" src="./src/js/bc-button-group.js"></script>
+    <script type="module" src="./src/js/bc-card.js"></script>
+    <script type="module" src="./src/js/bc-dropdown.js"></script>
+    <script type="module" src="./src/js/bc-field.js"></script>
+    <script type="module" src="./src/js/bc-popover.js"></script>
+    <script type="module" src="./src/js/bc-select.js"></script>
+    <script type="module" src="./src/js/bc-tabs.js"></script>
+    <script type="module" src="./src/js/bc-toaster.js"></script>
+  </body>
+</html>
