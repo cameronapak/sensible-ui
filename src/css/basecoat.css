@@ -3,79 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@layer base {
-  /*h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance mt-8 first:mt-0;
-  }
-  h2 {
-    @apply scroll-m-20 pb-2 text-3xl font-semibold tracking-tight mt-10 first:mt-0;
-  }
-  h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight mt-8 first:mt-0;
-  }
-  h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-8 first:mt-0;
-  }
-  h5 {
-    @apply scroll-m-20 text-lg font-semibold tracking-tight mt-6 first:mt-0;
-  }
-  h6 {
-    @apply scroll-m-20 text-base font-semibold tracking-tight mt-6 first:mt-0;
-  }
-  p {
-    @apply leading-7 [&:not(:first-child)]:mt-6;
-  }
-  blockquote {
-    @apply mt-6 border-l-2 pl-6 italic;
-  }
-  ul {
-    @apply my-6 ml-6 list-disc [&>li]:mt-2;
-  }
-  ol {
-    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
-  }
-  code:not(pre code) {
-    @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-  }
-  pre {
-    @apply my-6 overflow-x-auto rounded-lg border bg-muted p-4;
-
-    code {
-      @apply bg-transparent p-0 text-sm font-mono;
-    }
-  }
-  hr {
-    @apply my-8 border-border;
-  }
-  a {
-    @apply text-primary underline underline-offset-4 hover:text-primary/80;
-  }
-  strong {
-    @apply font-semibold;
-  }
-  table {
-    @apply my-6 w-full overflow-y-auto;
-
-    thead tr {
-      @apply border-b;
-    }
-    th {
-      @apply px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
-    }
-    td {
-      @apply px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
-    }
-    tbody tr {
-      @apply border-b last:border-0;
-    }
-  }
-  small {
-    @apply text-sm leading-none font-medium;
-  }
-  img {
-    @apply my-6 rounded-md;
-  }*/
-
+/*@layer base {
   .scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
@@ -92,11 +20,11 @@
     }
   }
 
-  /* Button */
+  / * Button * /
   :not(form[method='dialog']) > :is(button:not([role]), input:is([type='submit'], [type='reset'], [type='button']), a.button) {
     @apply active:translate-y-0.5 transition-transform duration-150 ease-out inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer rounded-md;
 
-    /* Default size */
+    / * Default size * /
     &:not([data-size]) {
       @apply gap-2 h-9 px-4 py-2 has-[>svg]:px-3;
     }
@@ -110,14 +38,12 @@
       @apply size-9;
     }
 
-    /* Primary */
     &[data-variant='primary'] {
       @apply bg-primary text-primary-foreground shadow-xs hover:bg-primary/90;
       &[aria-pressed='true'] {
         @apply bg-primary/90;
       }
     }
-    /* Secondary */
     &[data-variant='secondary'] {
       @apply bg-secondary text-secondary-foreground shadow-xs;
       &:hover,
@@ -125,7 +51,6 @@
         @apply bg-secondary/80;
       }
     }
-    /* Outline */
     &:not([data-variant]),
     &[data-variant='outline'] {
       @apply border bg-background shadow-xs dark:bg-input/30 dark:border-input;
@@ -134,14 +59,12 @@
         @apply bg-accent text-accent-foreground dark:bg-accent/50;
       }
     }
-    /* Ghost */
     &[data-variant='ghost'] {
       &:hover,
       &[aria-pressed='true'] {
         @apply bg-accent text-accent-foreground dark:bg-accent/50;
       }
     }
-    /* Link */
     &[data-variant='link'] {
       @apply text-primary underline-offset-4;
       &:hover,
@@ -149,7 +72,6 @@
         @apply hover:underline;
       }
     }
-    /* Destructive */
     &[data-variant='destructive'] {
       @apply bg-destructive text-white shadow-xs focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
       &:hover,
@@ -159,26 +81,26 @@
     }
   }
 
-  /* Input */
+  / * Input * /
   input:not([type='checkbox'], [type='radio'], [type='range'], [type='hidden'], [type='file'], [type='color'], [role]) {
     @apply appearance-none file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
     @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
   }
 
-  /* File Input */
+  / * File Input * /
   input[type='file'] {
     @apply appearance-none file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
     @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
   }
 
-  /* Textarea */
+  / * Textarea * /
   textarea {
     @apply border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
   }
 
-  /* Select (native) */
+  / * Select (native) * /
   select {
     @apply appearance-none border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent pl-3 pr-9 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 h-9;
     @apply bg-[image:var(--chevron-down-icon-50)] bg-no-repeat bg-position-[center_right_0.75rem] bg-size-[1rem];
@@ -189,7 +111,7 @@
     }
   }
 
-  /* Label */
+  / * Label * /
   label {
     @apply flex items-center gap-2 text-sm leading-none font-medium select-none peer-disabled:pointer-events-none peer-disabled:opacity-50;
 
@@ -199,7 +121,7 @@
     }
   }
 
-  /* Checkbox */
+  / * Checkbox * /
   input[type='checkbox']:not([role='switch']) {
     @apply appearance-none border-input dark:bg-input/30 checked:bg-primary dark:checked:bg-primary checked:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4! shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50;
 
@@ -209,7 +131,7 @@
     }
   }
 
-  /* Radio */
+  / * Radio * /
   input[type='radio'] {
     @apply appearance-none border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4! shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 relative;
 
@@ -218,7 +140,7 @@
     }
   }
 
-  /* Switch */
+  / * Switch * /
   input[type='checkbox'][role='switch'] {
     @apply appearance-none focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-[1.15rem] w-8! shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50;
     @apply bg-input dark:bg-input/80 checked:bg-primary dark:checked:bg-primary;
@@ -227,7 +149,7 @@
     @apply dark:checked:before:bg-primary-foreground checked:before:ms-3.5;
   }
 
-  /* Range */
+  / * Range * /
   input[type='range'] {
     @apply appearance-none flex items-center p-0 outline-none;
     --slider-value: 20%;
@@ -273,7 +195,7 @@
     }
   }
 
-  /* Table */
+  / * Table * /
   table {
     @apply w-full caption-bottom text-sm;
     thead {
@@ -299,7 +221,7 @@
     }
   }
 
-  /* Dialog */
+  / * Dialog * /
   dialog {
     @apply inset-y-0 opacity-0 transition-all transition-discrete;
 
@@ -358,12 +280,12 @@
     }
   }
 
-  /* Kbd */
+  / * Kbd * /
   kbd {
     @apply bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium select-none [&_svg:not([class*='size-'])]:size-3;
   }
 
-  /* Collapsible */
+  / * Collapsible * /
   details {
     &::details-content {
       block-size: 0;
@@ -383,7 +305,7 @@
   }
 }
 
-/* Alert */
+/ * Alert * /
 @layer components {
   div[role='alert'],
   div[role='alert'][data-variant='destructive'] {
@@ -418,7 +340,7 @@
   }
 }
 
-/* Badge */
+/ * Badge * /
 @layer components {
   bc-badge {
     @apply inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden;
@@ -439,7 +361,7 @@
   }
 }
 
-/* Button Group */
+/ * Button Group * /
 @layer components {
   bc-button-group {
     @apply inline-flex w-fit items-stretch;
@@ -482,7 +404,7 @@
   }
 }
 
-/* Card */
+/ * Card * /
 @layer components {
   bc-card {
     @apply bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm;
@@ -506,7 +428,7 @@
   }
 }
 
-/* Command */
+/ * Command * /
 @layer components {
   dialog:has(bc-command) {
     @apply inset-y-0 opacity-0 transition-all transition-discrete;
@@ -615,7 +537,7 @@
   }
 }
 
-/* Dropdown Menu */
+/ * Dropdown Menu * /
 @layer components {
   bc-dropdown {
     @apply relative inline-flex;
@@ -654,7 +576,7 @@
   }
 }
 
-/* Field */
+/ * Field * /
 @layer components {
   fieldset {
     @apply flex flex-col gap-6;
@@ -702,7 +624,7 @@
   }
 }
 
-/* Popover */
+/ * Popover * /
 @layer components {
   [data-popover] {
     @apply absolute bg-popover text-popover-foreground overflow-x-hidden overflow-y-auto rounded-md border shadow-md z-50 visible opacity-100 scale-100 min-w-full w-max transition-all;
@@ -774,7 +696,7 @@
   }
 }
 
-/* Select (custom) */
+/ * Select (custom) * /
 @layer components {
   bc-select {
     @apply relative inline-flex;
@@ -839,7 +761,7 @@
   }
 }
 
-/* Sidebar */
+/ * Sidebar * /
 @layer components {
   bc-sidebar {
     &:not([data-initialized]) {
@@ -961,7 +883,7 @@
   }
 }
 
-/* Tabs */
+/ * Tabs * /
 @layer components {
   bc-tabs {
     @apply flex flex-col gap-2;
@@ -983,7 +905,7 @@
   }
 }
 
-/* Toasts */
+/ * Toasts * /
 @layer components {
   bc-toaster {
     @apply fixed bottom-0 p-4 pointer-events-none z-50 w-full sm:max-w-90 flex flex-col-reverse;
@@ -1041,7 +963,7 @@
   }
 }
 
-/* Tooltip */
+/ * Tooltip * /
 @layer components {
   [data-tooltip] {
     @apply relative;
@@ -1097,3 +1019,4 @@
     }
   }
 }
+*/
