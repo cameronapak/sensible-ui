@@ -129,6 +129,6 @@
   }
 
   body {
-    @apply bg-background text-foreground overscroll-none antialiased text-foreground text-base leading-7;
+    @apply bg-background text-foreground overscroll-none antialiased text-foreground text-base leading-normal;
   }
 }

@@ -79,4 +79,20 @@
   hr {
     @apply my-8;
   }
+
+  ul {
+    @apply list-disc ps-6 mb-4;
+
+    & li {
+      @apply mb-1;
+    }
+  }
+
+  ol {
+    @apply list-decimal ps-6 mb-4;
+
+    & li {
+      @apply mb-1;
+    }
+  }
 }
