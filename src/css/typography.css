@@ -23,7 +23,7 @@
   }
 
   h1 {
-    @apply text-3xl tracking-tight text-balance mt-10 mb-8;
+    @apply text-3xl tracking-tight text-balance mt-10 mb-6;
   }
 
   h2 {
