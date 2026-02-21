@@ -32,7 +32,7 @@
   "homepage": "https://github.com/hunvreus/basecoat#readme",
   "scripts": {
     "build": "node ./scripts/build.js",
-    "dev": "bun index.ts --watch"
+    "dev": "bun --watch run index.ts"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.3",
