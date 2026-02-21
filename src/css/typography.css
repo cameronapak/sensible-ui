@@ -1,4 +1,8 @@
 @layer base {
+  body {
+    @apply antialiased text-foreground text-base leading-normal;
+  }
+
   h1,
   h2,
   h3,
