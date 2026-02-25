@@ -8,6 +8,6 @@
   }
 
   body {
-    @apply bg-background overscroll-none;
+    @apply bg-background overscroll-none antialiased text-foreground text-base leading-normal;
   }
 }
