@@ -1,5 +1,5 @@
 {
-  "name": "basecoat",
+  "name": "Semantic UI",
   "version": "0.3.11",
   "description": "shadcn/ui for the rest of us",
   "author": "hunvreus",
@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/hunvreus/basecoat#readme",
   "scripts": {
-    "build": "node ./scripts/build.js",
     "dev": "bun --hot index.ts"
   },
   "devDependencies": {

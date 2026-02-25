@@ -1,4 +1,4 @@
-# Basecoat
+# Semantic UI
 
 A semantic CSS component library — style native HTML elements directly, no classes needed.
 

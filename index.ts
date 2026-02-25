@@ -7,4 +7,4 @@ const server = Bun.serve({
   development: true,
 })
 
-console.log(`Basecoat dev server running at ${server.url}`)
+console.log(`Semantic UI dev server running at ${server.url}`)
