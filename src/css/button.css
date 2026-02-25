@@ -20,7 +20,8 @@
       @apply size-9;
     }
 
-    &:not([data-variant]) {
+    &:not([data-variant]),
+    &[data-variant='primary'] {
       @apply bg-primary text-primary-foreground shadow-xs hover:not-disabled:bg-primary/90;
       &[aria-pressed='true'] {
         @apply bg-primary/90;
