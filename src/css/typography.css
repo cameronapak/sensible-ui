@@ -108,7 +108,7 @@
     }
 
     &:active {
-      @apply translate-y-[1px];
+      @apply translate-y-px;
     }
   }
 }
