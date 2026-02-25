@@ -20,7 +20,7 @@
       @apply size-9;
     }
 
-    &[data-variant='primary'] {
+    &:not([data-variant]) {
       @apply bg-primary text-primary-foreground shadow-xs hover:not-disabled:bg-primary/90;
       &[aria-pressed='true'] {
         @apply bg-primary/90;
@@ -36,7 +36,6 @@
       }
     }
 
-    &:not([data-variant]),
     &[data-variant='outline'] {
       @apply border bg-background shadow-xs dark:bg-input/30 dark:border-input;
       &:hover:not(:disabled),
