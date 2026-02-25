@@ -39,6 +39,51 @@
         <li>Ordered list item 2</li>
         <li>Ordered list item 3</li>
       </ol>
+
+      <h2>Buttons</h2>
+
+      <h3>Variants</h3>
+      <div class="flex flex-wrap gap-2">
+        <button>Outline (default)</button>
+        <button data-variant="primary">Primary</button>
+        <button data-variant="secondary">Secondary</button>
+        <button data-variant="outline">Outline</button>
+        <button data-variant="ghost">Ghost</button>
+        <button data-variant="link">Link</button>
+        <button data-variant="destructive">Destructive</button>
+      </div>
+
+      <h3>Sizes</h3>
+      <div class="flex flex-wrap items-center gap-2">
+        <button data-variant="primary" data-size="sm">Small</button>
+        <button data-variant="primary">Default</button>
+        <button data-variant="primary" data-size="lg">Large</button>
+        <button data-variant="primary" data-size="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+        </button>
+      </div>
+
+      <h3>States</h3>
+      <div class="flex flex-wrap gap-2">
+        <button data-variant="primary" disabled>Disabled</button>
+        <button data-variant="primary" aria-pressed="true">Pressed</button>
+      </div>
+
+      <h3>As Link</h3>
+      <div class="flex flex-wrap gap-2">
+        <a href="#" class="button" data-variant="primary">Link as Button</a>
+      </div>
     </div>
   </body>
 </html>

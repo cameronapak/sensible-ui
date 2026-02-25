@@ -96,7 +96,7 @@
     }
   }
 
-  a[href] {
+  a[href]:not(.button) {
     @apply inline-block text-foreground underline underline-offset-2 transition-all duration-100;
 
     &:hover {

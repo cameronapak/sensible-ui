@@ -2,5 +2,6 @@
 @import './base.css';
 @import './theme.css';
 @import './typography.css';
+@import './button.css';
 
 @custom-variant dark (&:is(.dark *));
