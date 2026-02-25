@@ -7,4 +7,4 @@ const server = Bun.serve({
   development: true,
 })
 
-console.log(`Semantic UI dev server running at ${server.url}`)
+console.log(`semantics/ui dev server running at ${server.url}`)

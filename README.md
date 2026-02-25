@@ -1,4 +1,4 @@
-# Semantic UI
+# semantics/ui
 
 A semantic CSS component library — style native HTML elements directly, no classes needed.
 
