@@ -3,6 +3,7 @@
 !.gitattributes
 
 node_modules/
+src/css/generated.css
 
 # Logs
 npm-debug.log*

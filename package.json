@@ -31,7 +31,9 @@
   },
   "homepage": "https://github.com/cameronapak/semantics-ui#readme",
   "scripts": {
-    "dev": "bun ./index.ts"
+    "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
+    "dev:server": "bun ./index.ts",
+    "dev:css": "tailwindcss -i ./src/css/index.css -o ./src/css/generated.css --watch"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.3",

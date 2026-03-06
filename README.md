@@ -19,6 +19,17 @@ A (work-in-progress) semantic CSS component library — style native HTML elemen
 - **Easy customization**: Override a handful of CSS variables to theme everything
 - **Free and open source**: MIT licensed
 
+## Development
+
+```bash
+bun install
+bun dev
+```
+
+### Known Issues
+
+- **CSS hot reload requires Tailwind CLI watcher.** Bun's dev server doesn't track transitive CSS `@import` dependencies for HMR ([oven-sh/bun#19734](https://github.com/oven-sh/bun/issues/19734)). Editing an imported CSS file (e.g. `button.css`) won't trigger a reload on its own. The `dev` script works around this by running `tailwindcss --watch` alongside the Bun server via `concurrently` — Tailwind CLI compiles all source CSS into `src/css/generated.css`, which Bun _does_ detect changes to.
+
 ## License
 
 [MIT](/LICENSE.md)
