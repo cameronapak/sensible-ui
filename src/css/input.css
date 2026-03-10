@@ -56,7 +56,7 @@
   }
 
   fieldset {
-    @apply flex flex-col gap-4 border rounded-lg p-4;
+    @apply flex flex-col gap-4 border rounded-lg pb-5 p-4;
 
     legend {
       @apply text-sm leading-none font-medium select-none text-muted-foreground;
@@ -68,6 +68,14 @@
       li {
         @apply list-none;
       }
+    }
+
+    & > *:last-child {
+      @apply mb-0!;
+    }
+
+    & > p:has(input) {
+      @apply mb-0!;
     }
   }
 

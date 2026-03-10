@@ -6,6 +6,7 @@
   figure {
     @apply w-fit;
 
+    .caption,
     figcaption {
       @apply text-center text-muted-foreground mt-3 text-sm;
     }
