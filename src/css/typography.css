@@ -60,7 +60,7 @@
     @apply mb-4;
   }
 
-  :not(pre) > code {
+  :not(pre) > :is(code, samp) {
     @apply font-mono text-sm py-0.5 px-1 bg-secondary rounded-sm;
   }
 
