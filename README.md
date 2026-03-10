@@ -36,3 +36,5 @@ bun dev
 ## License
 
 [MIT](/LICENSE.md)
+
+Calendar SVG comes from Lucide.dev
