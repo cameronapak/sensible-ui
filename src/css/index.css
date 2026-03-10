@@ -3,5 +3,6 @@
 @import './theme.css';
 @import './typography.css';
 @import './button.css';
+@import './card.css';
 
 @custom-variant dark (&:is(.dark *));

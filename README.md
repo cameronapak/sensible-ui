@@ -1,6 +1,9 @@
 # WIP: semantics/ui
 
-A (work-in-progress) semantic CSS component library — style native HTML elements directly, no little to no classes / attributes needed.
+A (work-in-progress) semantic-ish CSS component library in the likeness of Shadcn UI, without the front-end framework overhead. 
+
+- Styles native HTML elements by default, like typography elements, buttons, and links.
+- Want components like cards, accordions, etc.? Use classes.
 
 > [!NOTE]
 > This project is a fork of [Basecoat](https://github.com/hunvreus/basecoat) by [Ronan Berder (hunvreus)](https://github.com/hunvreus), originally a vanilla CSS/JS port of [shadcn/ui](https://ui.shadcn.com). This fork reimagines Basecoat as a semantic CSS library — styling native HTML elements directly instead of using utility classes.

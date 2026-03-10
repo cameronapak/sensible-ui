@@ -1,0 +1,29 @@
+@layer components {
+  .card {
+    @apply bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-4 shadow-sm;
+
+    &:has(> footer) {
+      @apply pt-4 pb-0;
+    }
+
+    > header {
+      @apply @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-4 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6;
+
+      :is(h2, h3, h4, h5, h6) {
+        @apply m-0! p-0! leading-none text-base! font-semibold;
+      }
+
+      :is(p, span) {
+        @apply m-0! p-0! text-muted-foreground text-sm;
+      }
+    }
+
+    > section {
+      @apply px-4;
+    }
+
+    > footer {
+      @apply bg-secondary grid grid-rows-2 gap-3 items-center px-4 pb-4 rounded-b-xl [.border-t]:pt-4;
+    }
+  }
+}
