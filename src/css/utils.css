@@ -1,0 +1,9 @@
+@layer utilities {
+  :root {
+    --container-width: 50rem;
+  }
+
+  .container {
+    @apply max-w-(--container-width) w-full mx-auto sm:p-6 max-sm:p-4;
+  }
+}

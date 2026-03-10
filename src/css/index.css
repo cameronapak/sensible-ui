@@ -4,5 +4,8 @@
 @import './typography.css';
 @import './button.css';
 @import './card.css';
+@import './input.css';
+@import './image.css';
+@import './utils.css';
 
 @custom-variant dark (&:is(.dark *));
