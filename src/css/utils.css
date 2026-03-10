@@ -1,6 +1,6 @@
 @layer utilities {
   :root {
-    --container-width: 50rem;
+    --container-width: 640px;
   }
 
   .page,
