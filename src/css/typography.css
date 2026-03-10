@@ -97,11 +97,7 @@
   }
 
   a[href]:not(.button) {
-    @apply inline-block text-foreground underline underline-offset-2 transition-all duration-100;
-
-    &:hover {
-      @apply text-muted-foreground;
-    }
+    @apply inline-block text-foreground underline underline-offset-4 transition-all duration-100;
 
     &:active {
       @apply translate-y-px;
@@ -110,5 +106,21 @@
 
   kbd {
     @apply bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium select-none [&_svg:not([class*='size-'])]:size-3;
+  }
+
+  s,
+  del {
+    @apply text-muted-foreground;
+  }
+
+  u,
+  ins,
+  abbr,
+  a[href] {
+    @apply underline-offset-4 decoration-primary/20;
+
+    &:is(a[href]):hover {
+      @apply text-primary decoration-primary;
+    }
   }
 }
