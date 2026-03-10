@@ -129,7 +129,7 @@
   }
 
   input[type='range'] {
-    @apply accent-primary;
+    @apply accent-primary w-full;
 
     &:hover,
     &:focus-visible {
