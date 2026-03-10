@@ -10,9 +10,6 @@ A (work-in-progress) semantic-ish CSS component library in the likeness of Shadc
 
 ![Banner](./banner.png)
 
-![Banner 2](./banner-2.png)
-
-
 ## Features
 
 - **Semantic HTML** (as much as possible): Native elements like `<button>`, `<input>`, `<dialog>` are styled automatically
