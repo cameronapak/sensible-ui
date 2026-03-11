@@ -4,6 +4,11 @@
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/css/generated.css"
+    }
+  },
   "keywords": [
     "components",
     "component library",
@@ -29,7 +34,7 @@
   "scripts": {
     "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
     "dev:server": "bun ./index.ts",
-    "dev:css": "tailwindcss -i ./src/css/index.css -o ./src/css/generated.css --watch",
+    "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.css --watch",
     "changeset": "changeset",
     "publish": "changeset publish"
   },
