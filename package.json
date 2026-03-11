@@ -5,7 +5,10 @@
   "author": "cameronapak",
   "type": "module",
   "exports": {
-    ".": "./dist/semantics-ui.css",
+    ".": [
+      "./dist/semantics-ui.css",
+      "./dist/semantics-ui.min.css"
+    ],
     "./css": "./dist/semantics-ui.css",
     "./badge": "./src/css/badge.css",
     "./base": "./src/css/base.css",
@@ -46,6 +49,7 @@
     "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
     "dev:server": "bun ./index.ts",
     "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.css --watch",
+    "build": "bun build ./dist/semantics-ui.css --outdir ./dist/semantics-ui.min.css --minify",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
