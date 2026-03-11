@@ -5,9 +5,20 @@
   "author": "cameronapak",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./src/css/generated.css"
-    }
+    ".": "./dist/semantics-ui.css",
+    "./css": "./dist/semantics-ui.css",
+    "./badge": "./src/css/badge.css",
+    "./base": "./src/css/base.css",
+    "./button": "./src/css/button.css",
+    "./card": "./src/css/card.css",
+    "./image": "./src/css/image.css",
+    "./index": "./src/css/index.css",
+    "./item": "./src/css/item.css",
+    "./spinner": "./src/css/spinner.css",
+    "./table": "./src/css/table.css",
+    "./theme": "./src/css/theme.css",
+    "./typography": "./src/css/typography.css",
+    "./utils": "./src/css/utils.css"
   },
   "keywords": [
     "components",
