@@ -23,7 +23,7 @@
     }
 
     > footer {
-      @apply bg-secondary grid grid-rows-2 gap-3 items-center px-4 pb-4 rounded-b-xl [.border-t]:pt-4;
+      @apply bg-secondary grid grid-rows-2 gap-3 items-center p-4 rounded-b-xl;
     }
   }
 }

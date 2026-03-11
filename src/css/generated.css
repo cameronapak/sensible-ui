@@ -243,9 +243,6 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .mt-8 {
-    margin-top: calc(var(--spacing) * 8);
-  }
   .ml-auto {
     margin-left: auto;
   }
@@ -1177,11 +1174,7 @@
       border-bottom-right-radius: var(--radius-xl);
       border-bottom-left-radius: var(--radius-xl);
       background-color: var(--color-secondary);
-      padding-inline: calc(var(--spacing) * 4);
-      padding-bottom: calc(var(--spacing) * 4);
-      &:is(.border-t) {
-        padding-top: calc(var(--spacing) * 4);
-      }
+      padding: calc(var(--spacing) * 4);
     }
   }
 }
@@ -2109,6 +2102,9 @@
     @media (width >= 40rem) {
       padding: calc(var(--spacing) * 6);
     }
+  }
+  .section {
+    margin-bottom: calc(var(--spacing) * 8);
   }
 }
 @property --tw-space-y-reverse {
