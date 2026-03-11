@@ -11,4 +11,20 @@
   .section {
     @apply mb-8;
   }
+
+  .y-stack {
+    @apply flex flex-col gap-3 h-auto;
+
+    & > :is(h1, h2, h3, h4, h5, h6, p) {
+      @apply m-0!;
+    }
+  }
+
+  .x-stack {
+    @apply flex items-center gap-3;
+
+    & > :is(h1, h2, h3, h4, h5, h6, p) {
+      @apply m-0!;
+    }
+  }
 }
