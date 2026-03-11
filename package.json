@@ -1,6 +1,6 @@
 {
   "name": "semantics-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
   "type": "module",
