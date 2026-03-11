@@ -8,7 +8,7 @@ A (work-in-progress) semantic-ish CSS component library in the likeness of Shadc
 Try Semantics UI Now!
 
 ```css
-@import 'https://cdn.jsdelivr.net/gh/cameronapak/semantics-ui@master/src/css/generated.css';
+@import 'https://cdn.jsdelivr.net/npm/semantics-ui@0.1.0/dist/semantics-ui.css';
 ```
 
 > [!NOTE]
