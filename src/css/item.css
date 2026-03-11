@@ -7,6 +7,10 @@
       @apply bounce;
     }
 
+    & > svg {
+      @apply text-muted-foreground;
+    }
+
     & > :is(div, section, article) {
       @apply flex flex-col justify-center gap-0;
 

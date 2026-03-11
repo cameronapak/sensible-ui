@@ -2355,6 +2355,9 @@
         }
       }
     }
+    & > svg {
+      color: var(--color-muted-foreground);
+    }
     & > :is(div, section, article) {
       display: flex;
       flex-direction: column;
