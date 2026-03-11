@@ -49,7 +49,7 @@
     "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
     "dev:server": "bun ./index.ts",
     "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.css --watch",
-    "build": "bun build ./dist/semantics-ui.css --outfile=./dist/semantics-ui.min.css --minify",
+    "build": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.min.css --minify",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
