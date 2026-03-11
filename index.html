@@ -86,68 +86,73 @@
       <a href="#" class="button" data-variant="primary">Link as Button</a>
 
       <h2>Form elements</h2>
-      <form class="section">
-        <div>
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
-        </div>
+      <form class="section card">
+        <header>
+          <h2>Form in a card</h2>
+        </header>
+        <section class="y-stack">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+          </div>
 
-        <div>
-          <label for="id">User id (read only)</label>
-          <input readonly name="id" id="id" value="04D6H89Z" />
-        </div>
+          <div>
+            <label for="id">User id (read only)</label>
+            <input readonly name="id" id="id" value="04D6H89Z" />
+          </div>
 
-        <div>
-          <label for="disabled">Random disabled input</label>
-          <input disabled name="disabled" id="disabled" placeholder="Because why not?" />
-        </div>
+          <div>
+            <label for="disabled">Random disabled input</label>
+            <input disabled name="disabled" id="disabled" placeholder="Because why not?" />
+          </div>
 
-        <div>
-          <label for="about">About me</label>
-          <textarea name="about" id="about" placeholder="I am a textarea..."></textarea>
-        </div>
+          <div>
+            <label for="about">About me</label>
+            <textarea name="about" id="about" placeholder="I am a textarea..."></textarea>
+          </div>
 
-        <div>
-          <input type="checkbox" name="remember" id="remember" />
-          <label for="remember">Remember me</label>
-        </div>
+          <div>
+            <input type="checkbox" name="remember" id="remember" />
+            <label for="remember">Remember me</label>
+          </div>
 
-        <div>
-          <label>
-            <input type="checkbox" name="in-label" id="in-label" checked />
-            Is this checkbox inside a <code>&lt;label&gt;</code> element?
-          </label>
-        </div>
+          <div>
+            <label>
+              <input type="checkbox" name="in-label" id="in-label" checked />
+              Is this checkbox inside a <code>&lt;label&gt;</code> element?
+            </label>
+          </div>
 
-        <div>
-          <fieldset>
-            <legend>Choose a cardinal direction:</legend>
+          <div>
+            <fieldset>
+              <legend>Choose a cardinal direction:</legend>
 
-            <div>
-              <input type="radio" id="north" name="direction" value="north" checked />
-              <label for="north">North</label>
-            </div>
+              <div>
+                <input type="radio" id="north" name="direction" value="north" checked />
+                <label for="north">North</label>
+              </div>
 
-            <div>
-              <input type="radio" id="east" name="direction" value="east" />
-              <label for="east">East</label>
-            </div>
+              <div>
+                <input type="radio" id="east" name="direction" value="east" />
+                <label for="east">East</label>
+              </div>
 
-            <div>
-              <input type="radio" id="south" name="direction" value="south" />
-              <label for="south">South</label>
-            </div>
+              <div>
+                <input type="radio" id="south" name="direction" value="south" />
+                <label for="south">South</label>
+              </div>
 
-            <div>
-              <input type="radio" id="west" name="direction" value="west" />
-              <label for="west">West</label>
-            </div>
-          </fieldset>
-        </div>
+              <div>
+                <input type="radio" id="west" name="direction" value="west" />
+                <label for="west">West</label>
+              </div>
+            </fieldset>
+          </div>
 
-        <input type="file" accept="image/*" />
+          <input type="file" accept="image/*" />
 
-        <input type="submit" />
+          <button type="submit">Submit</button>
+        </section>
       </form>
 
       <section class="section max-w-sm">

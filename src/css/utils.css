@@ -13,7 +13,7 @@
   }
 
   .y-stack {
-    @apply flex flex-col gap-3 h-auto;
+    @apply flex flex-col gap-4 h-auto;
 
     & > :is(h1, h2, h3, h4, h5, h6, p) {
       @apply m-0!;

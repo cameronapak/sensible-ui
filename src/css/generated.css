@@ -2123,7 +2123,7 @@
     display: flex;
     height: auto;
     flex-direction: column;
-    gap: calc(var(--spacing) * 3);
+    gap: calc(var(--spacing) * 4);
     & > :is(h1, h2, h3, h4, h5, h6, p) {
       margin: calc(var(--spacing) * 0) !important;
     }
