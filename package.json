@@ -1,15 +1,15 @@
 {
-  "name": "semantics-ui",
-  "version": "0.1.4",
+  "name": "@faith-tools/sensible-ui",
+  "version": "1.0.0",
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
   "type": "module",
   "exports": {
     ".": [
-      "./dist/semantics-ui.css",
-      "./dist/semantics-ui.min.css"
+      "./dist/sensible-ui.css",
+      "./dist/sensible-ui.min.css"
     ],
-    "./css": "./dist/semantics-ui.css",
+    "./css": "./dist/sensible-ui.css",
     "./badge": "./src/css/badge.css",
     "./base": "./src/css/base.css",
     "./button": "./src/css/button.css",
@@ -39,17 +39,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cameronapak/semantics-ui.git"
+    "url": "git+https://github.com/cameronapak/sensible-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/cameronapak/semantics-ui/issues"
+    "url": "https://github.com/cameronapak/sensible-ui/issues"
   },
-  "homepage": "https://github.com/cameronapak/semantics-ui#readme",
+  "homepage": "https://sensibleui.com",
   "scripts": {
     "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
     "dev:server": "bun ./index.ts",
-    "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.css --watch",
-    "build": "tailwindcss -i ./src/css/index.css -o ./dist/semantics-ui.min.css --minify",
+    "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.css --watch",
+    "build": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.min.css --minify",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
