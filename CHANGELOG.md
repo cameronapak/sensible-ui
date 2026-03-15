@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.0.2
+
+### Patch Changes
+
+- Forgot to build before publishing lol
+
 ## 1.0.1
 
 ### Patch Changes
