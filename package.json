@@ -1,5 +1,5 @@
 {
-  "name": "sensible-ui",
+  "name": "@faith-tools/sensible-ui",
   "version": "1.0.0",
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
