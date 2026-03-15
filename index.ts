@@ -14,4 +14,4 @@ const server = Bun.serve({
   },
 })
 
-console.log(`semantics/ui dev server running at ${server.url}`)
+console.log(`Sensible UI dev server running at ${server.url}`)

@@ -1,4 +1,10 @@
-# semantics-ui
+# Sensible UI
+
+## 1.0.0
+
+### Major Changes
+
+- Renaming from Semantics UI CSS to Sensible UI.
 
 ## 0.1.4
 

@@ -1,11 +1,11 @@
-# Semantics UI CSS
+# Sensible UI CSS
 
 A semantic-ish CSS component library in the likeness of Shadcn UI, without the front-end framework overhead. 
 
 - Styles native HTML elements by default, like typography elements, buttons, inputs, anchor tags, etc.
 - Want components like cards, items, loading-spinners, etc.? Then we use data attributes, classes, and aria attributes.
 
-Try Semantics UI Now!
+Try Sensible UI Now!
 
 ```css
 @import 'https://cdn.jsdelivr.net/npm/semantics-ui@latest/dist/semantics-ui.min.css';
