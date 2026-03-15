@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated README and want it to update on npmjs.com lol
+
 ## 1.0.0
 
 ### Major Changes
