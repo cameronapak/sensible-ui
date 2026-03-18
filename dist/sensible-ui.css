@@ -2400,6 +2400,139 @@
     }
   }
 }
+@layer components {
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  details {
+    gap: calc(var(--spacing) * 4);
+    border-radius: var(--radius-md);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-border);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    --tw-duration: 100ms;
+    transition-duration: 100ms;
+    --tw-outline-style: none;
+    outline-style: none;
+    &:focus-visible {
+      border-color: var(--color-ring);
+    }
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    &:focus-visible {
+      --tw-ring-color: var(--color-ring);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--color-ring) 50%, transparent);
+      }
+    }
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-accent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
+        }
+      }
+    }
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 150ms;
+    transition-duration: 150ms;
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
+    &:active {
+      &:not(*:disabled) {
+        --tw-translate-y: calc(var(--spacing) * 0.5);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  details > summary {
+    padding: calc(var(--spacing) * 4);
+    font-size: var(--text-base) !important;
+    line-height: var(--tw-leading, var(--text-base--line-height)) !important;
+    --tw-leading: 1 !important;
+    line-height: 1 !important;
+    --tw-font-weight: var(--font-weight-medium) !important;
+    font-weight: var(--font-weight-medium) !important;
+  }
+  details:has(+ details) {
+    border-radius: 0;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
+  details:not(:has(+ details)) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+  details:has(+ details):first-child {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+  }
+  details:not([open])::details-content {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    content-visibility: visible;
+  }
+  details > :not(summary) {
+    padding: calc(var(--spacing) * 4) !important;
+    padding-top: calc(var(--spacing) * 0) !important;
+  }
+  details {
+    &:hover {
+      @media (hover: hover) {
+        cursor: pointer;
+      }
+    }
+  }
+  details::details-content {
+    transition-timing-function: var(--ease-out);
+    transition: opacity 0.2s, height 0.2s;
+    transition-behavior: allow-discrete;
+  }
+  details {
+    :is(h2, h3, h4, h5, h6, p) {
+      margin-bottom: calc(var(--spacing) * 0) !important;
+      padding: calc(var(--spacing) * 0);
+    }
+    summary > * {
+      margin: calc(var(--spacing) * 0) !important;
+      padding: calc(var(--spacing) * 0) !important;
+    }
+    summary > :is(h2, h3, h4, h5, h6, p, span) {
+      font-size: var(--text-base) !important;
+      line-height: var(--tw-leading, var(--text-base--line-height)) !important;
+      --tw-leading: 1 !important;
+      line-height: 1 !important;
+      --tw-font-weight: var(--font-weight-medium) !important;
+      font-weight: var(--font-weight-medium) !important;
+    }
+  }
+  details[open]::details-content {
+    content-visibility: visible;
+    opacity: 1;
+    height: calc-size(auto, size);
+  }
+}
 @layer utilities {
   :root {
     --container-width: 640px;

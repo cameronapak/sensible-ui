@@ -1,0 +1,88 @@
+@layer components {
+  /* https://github.com/emilkowalski/skill/blob/main/skills/emil-design-eng/SKILL.md */
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  :root {
+    /* https://modern-css.com/smooth-height-auto-animations-without-javascript */
+    interpolate-size: allow-keywords;
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details {
+    @apply border text-sm rounded-md duration-100 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] border-border gap-4;
+    @apply transition-colors hover:bg-accent/50;
+    @apply bounce;
+  }
+
+  details > summary {
+    @apply p-4 leading-none! text-base! font-medium!;
+  }
+
+  details:has(+ details) {
+    @apply rounded-none border-b-0;
+  }
+
+  details:not(:has(+ details)) {
+    @apply rounded-t-none rounded-b-md;
+  }
+
+  details:has(+ details):first-child {
+    @apply rounded-t-md;
+  }
+
+  details:not([open])::details-content {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    content-visibility: visible;
+  }
+
+  details > :not(summary) {
+    @apply p-4! pt-0!;
+  }
+
+  details {
+    @apply hover:cursor-pointer;
+  }
+
+  details::details-content {
+    transition-timing-function: var(--ease-out);
+    transition:
+      opacity 0.2s,
+      height 0.2s;
+    transition-behavior: allow-discrete;
+  }
+
+  details {
+    :is(h2, h3, h4, h5, h6, p) {
+      @apply mb-0! p-0;
+    }
+
+    summary > * {
+      @apply m-0! p-0!;
+    }
+
+    summary > :is(h2, h3, h4, h5, h6, p, span) {
+      @apply leading-none! text-base! font-medium!;
+    }
+  }
+
+  details[open]::details-content {
+    content-visibility: visible;
+    opacity: 1;
+    height: calc-size(auto, size);
+  }
+
+  /* @TODO: Add chevron for accordion */
+}
