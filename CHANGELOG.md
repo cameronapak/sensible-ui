@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.0.3
+
+### Patch Changes
+
+- Added accordion component CSS styles
+
 ## 1.0.2
 
 ### Patch Changes
