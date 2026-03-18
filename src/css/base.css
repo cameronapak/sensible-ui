@@ -15,5 +15,7 @@
 
   body {
     @apply bg-background overscroll-none antialiased text-foreground text-base leading-normal;
+    /* https://modern-css.com/preventing-layout-shift-from-scrollbar/ */
+    scrollbar-gutter: stable;
   }
 }
