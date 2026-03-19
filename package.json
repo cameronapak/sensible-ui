@@ -50,6 +50,7 @@
     "dev": "bun run --hot ./index.tsx",
     "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.css --watch",
     "build": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.min.css --minify",
+    "build:site": "bun run build && bun build --target=browser ./src/html/index.html --outdir=./dist/static --outfile=./index.html",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
