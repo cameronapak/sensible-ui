@@ -14,7 +14,9 @@ export function Home(this: FC<State>, props: Props) {
   return (
     <main class="container">
       <h1>Sensible UI CSS</h1>
-      <p class="text-muted-foreground">Imagining Shadcn UI styles by default via a semantic CSS ui library</p>
+      <p class="text-muted-foreground">
+        <code>shadcn/ui</code> style primitives using semantic CSS
+      </p>
 
       <hr />
 
