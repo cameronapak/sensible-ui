@@ -9,11 +9,12 @@
       "./dist/sensible-ui.css",
       "./dist/sensible-ui.min.css"
     ],
-    "./css": "./dist/sensible-ui.css",
+    "./accordion": "./src/css/accordion.css",
     "./badge": "./src/css/badge.css",
     "./base": "./src/css/base.css",
     "./button": "./src/css/button.css",
     "./card": "./src/css/card.css",
+    "./css": "./dist/sensible-ui.css",
     "./image": "./src/css/image.css",
     "./index": "./src/css/index.css",
     "./item": "./src/css/item.css",
