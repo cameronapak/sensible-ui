@@ -19,31 +19,103 @@ export function Home(this: FC<State>, props: Props) {
       </p>
 
       <nav class="x-stack flex-wrap gap-1!">
-        <a href="#typography" class="badge" data-variant="outline">
+        <a
+          href="#typography"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('typography')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Typography
         </a>
-        <a href="#buttons" class="badge" data-variant="outline">
+        <a
+          href="#buttons"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('buttons')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Buttons
         </a>
-        <a href="#forms" class="badge" data-variant="outline">
+        <a
+          href="#forms"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('forms')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Form Elements
         </a>
-        <a href="#card" class="badge" data-variant="outline">
+        <a
+          href="#card"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('card')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Card
         </a>
-        <a href="#badges" class="badge" data-variant="outline">
+        <a
+          href="#badges"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('badges')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Badges
         </a>
-        <a href="#stacks" class="badge" data-variant="outline">
+        <a
+          href="#stacks"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('stacks')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Stacks
         </a>
-        <a href="#spinner" class="badge" data-variant="outline">
+        <a
+          href="#spinner"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('spinner')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Spinner
         </a>
-        <a href="#item" class="badge" data-variant="outline">
+        <a
+          href="#item"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('item')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Item
         </a>
-        <a href="#accordion" class="badge" data-variant="outline">
+        <a
+          href="#accordion"
+          class="badge"
+          data-variant="outline"
+          onClick={(e: MouseEvent) => {
+            e.preventDefault()
+            document.getElementById('accordion')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
           Accordion
         </a>
       </nav>
