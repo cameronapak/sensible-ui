@@ -302,6 +302,8 @@ export function Home(this: FC<State>, props: Props) {
       </section>
 
       <section class="section">
+        <h2>Accordion</h2>
+
         <details>
           <summary>What is an accordion?</summary>
           <p>All I know is that it plays music...</p>
