@@ -48,7 +48,7 @@
   "homepage": "https://sensibleui.com",
   "scripts": {
     "dev": "concurrently -k \"bun run dev:server\" \"bun run dev:css\"",
-    "dev:server": "bun ./index.ts",
+    "dev:server": "bun run --hot ./index.tsx",
     "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.css --watch",
     "build": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.min.css --minify",
     "changeset": "changeset",
@@ -63,5 +63,8 @@
     "prettier": "^3.8.1",
     "tailwindcss": "^4.2.1",
     "bun-plugin-tailwind": "^0.1.2"
+  },
+  "dependencies": {
+    "mono-jsx": "^0.9.12"
   }
 }
