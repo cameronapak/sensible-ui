@@ -18,9 +18,39 @@ export function Home(this: FC<State>, props: Props) {
         <code>shadcn/ui</code> style primitives using semantic CSS
       </p>
 
+      <nav class="x-stack flex-wrap gap-1!">
+        <a href="#typography" class="badge" data-variant="outline">
+          Typography
+        </a>
+        <a href="#buttons" class="badge" data-variant="outline">
+          Buttons
+        </a>
+        <a href="#forms" class="badge" data-variant="outline">
+          Form Elements
+        </a>
+        <a href="#card" class="badge" data-variant="outline">
+          Card
+        </a>
+        <a href="#badges" class="badge" data-variant="outline">
+          Badges
+        </a>
+        <a href="#stacks" class="badge" data-variant="outline">
+          Stacks
+        </a>
+        <a href="#spinner" class="badge" data-variant="outline">
+          Spinner
+        </a>
+        <a href="#item" class="badge" data-variant="outline">
+          Item
+        </a>
+        <a href="#accordion" class="badge" data-variant="outline">
+          Accordion
+        </a>
+      </nav>
+
       <hr />
 
-      <section class="section">
+      <section class="section" id="typography">
         <h2>Typography</h2>
 
         <h1>Heading 1</h1>
@@ -57,7 +87,7 @@ export function Home(this: FC<State>, props: Props) {
         </ol>
       </section>
 
-      <section class="section">
+      <section class="section" id="buttons">
         <h2>Buttons</h2>
 
         <h3>Variants</h3>
@@ -111,7 +141,7 @@ export function Home(this: FC<State>, props: Props) {
         </a>
       </section>
 
-      <section class="section">
+      <section class="section" id="forms">
         <h2>Form elements</h2>
         <form class="card">
           <header>
@@ -193,7 +223,7 @@ export function Home(this: FC<State>, props: Props) {
         </form>
       </section>
 
-      <section class="section max-w-sm">
+      <section class="section max-w-sm" id="card">
         <div class="card">
           <header>
             <h2>Today is the Lord's day</h2>
@@ -207,7 +237,7 @@ export function Home(this: FC<State>, props: Props) {
         </div>
       </section>
 
-      <section class="section x-stack">
+      <section class="section x-stack" id="badges">
         <span class="badge">Default</span>
         <span data-variant="secondary" class="badge">
           Secondary
@@ -222,7 +252,7 @@ export function Home(this: FC<State>, props: Props) {
         </span>
       </section>
 
-      <section class="section x-stack max-w-sm">
+      <section class="section x-stack max-w-sm" id="stacks">
         <h3>
           This is an <code>.x-stack</code>
         </h3>
@@ -236,7 +266,7 @@ export function Home(this: FC<State>, props: Props) {
         <span class="badge bg-blue-600">New</span>
       </section>
 
-      <section class="section y-stack">
+      <section class="section y-stack" id="spinner">
         <h2>Spinner</h2>
         <p>
           All you need to do is add <code>aria-busy="true"</code> to any element
@@ -255,7 +285,7 @@ export function Home(this: FC<State>, props: Props) {
         </div>
       </section>
 
-      <section class="section y-stack">
+      <section class="section y-stack" id="item">
         <h2>Item</h2>
 
         <div class="item">
@@ -303,7 +333,7 @@ export function Home(this: FC<State>, props: Props) {
         </a>
       </section>
 
-      <section class="section">
+      <section class="section" id="accordion">
         <h2>Accordion</h2>
 
         <details>

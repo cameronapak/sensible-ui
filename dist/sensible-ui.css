@@ -280,6 +280,15 @@
   .items-center {
     align-items: center;
   }
+  .gap-0\.5 {
+    gap: calc(var(--spacing) * 0.5);
+  }
+  .gap-0\.5\! {
+    gap: calc(var(--spacing) * 0.5) !important;
+  }
+  .gap-1\! {
+    gap: calc(var(--spacing) * 1) !important;
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -832,6 +841,9 @@
         translate: var(--tw-translate-x) var(--tw-translate-y);
       }
     }
+  }
+  a.badge {
+    text-decoration-line: none !important;
   }
   .badge {
     display: inline-flex;
