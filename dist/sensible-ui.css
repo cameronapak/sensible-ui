@@ -2167,7 +2167,7 @@
     border-bottom-right-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);
   }
-  details:has(+ details):first-child {
+  details:has(+ details):first-of-type {
     border-top-left-radius: var(--radius-md);
     border-top-right-radius: var(--radius-md);
   }
