@@ -13,7 +13,7 @@ export function Home(this: FC<State>, props: Props) {
 
   return (
     <main class="container">
-      <h1>Sensible UI CSS</h1>
+      <h1>Sensible UI</h1>
       <p class="text-muted-foreground">
         <code>shadcn/ui</code> style primitives using semantic CSS
       </p>
@@ -159,6 +159,8 @@ export function Home(this: FC<State>, props: Props) {
         </ol>
       </section>
 
+      <hr />
+
       <section class="section" id="buttons">
         <h2>Buttons</h2>
 
@@ -212,6 +214,8 @@ export function Home(this: FC<State>, props: Props) {
           Link as Button
         </a>
       </section>
+
+      <hr />
 
       <section class="section" id="forms">
         <h2>Form elements</h2>
@@ -295,7 +299,10 @@ export function Home(this: FC<State>, props: Props) {
         </form>
       </section>
 
+      <hr />
+
       <section class="section max-w-sm" id="card">
+        <h2>Card</h2>
         <div class="card">
           <header>
             <h2>Today is the Lord's day</h2>
@@ -309,34 +316,50 @@ export function Home(this: FC<State>, props: Props) {
         </div>
       </section>
 
-      <section class="section x-stack" id="badges">
-        <span class="badge">Default</span>
-        <span data-variant="secondary" class="badge">
-          Secondary
-        </span>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-          <span data-variant="outline" class="badge">
-            Outline
+      <hr />
+
+      <section class="section" id="badges">
+        <h2>Badge</h2>
+
+        <div class="x-stack">
+          <span class="badge">Default</span>
+          <span data-variant="secondary" class="badge">
+            Secondary
           </span>
-        </a>
-        <span data-variant="destructive" class="badge">
-          Destructive
-        </span>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <span data-variant="outline" class="badge">
+              Outline
+            </span>
+          </a>
+          <span data-variant="destructive" class="badge">
+            Destructive
+          </span>
+        </div>
       </section>
 
-      <section class="section x-stack max-w-sm" id="stacks">
-        <h3>
-          This is an <code>.x-stack</code>
-        </h3>
-        <span class="badge bg-blue-600">New</span>
+      <hr />
+
+      <section class="section y-stack" id="stacks">
+        <h2>
+          Stacks <em>(helper classes)</em>
+        </h2>
+
+        <div class="x-stack">
+          <h3>
+            This is an <code>.x-stack</code>
+          </h3>
+          <span class="badge bg-blue-600">New</span>
+        </div>
+
+        <div class="y-stack">
+          <h3>
+            This is a <code>.y-stack</code>
+          </h3>
+          <span class="badge bg-blue-600">New</span>
+        </div>
       </section>
 
-      <section class="section y-stack max-w-sm">
-        <h3>
-          This is a <code>.y-stack</code>
-        </h3>
-        <span class="badge bg-blue-600">New</span>
-      </section>
+      <hr />
 
       <section class="section y-stack" id="spinner">
         <h2>Spinner</h2>
@@ -356,6 +379,8 @@ export function Home(this: FC<State>, props: Props) {
           </section>
         </div>
       </section>
+
+      <hr />
 
       <section class="section y-stack" id="item">
         <h2>Item</h2>
@@ -405,6 +430,8 @@ export function Home(this: FC<State>, props: Props) {
         </a>
       </section>
 
+      <hr />
+
       <section class="section" id="accordion">
         <h2>Accordion</h2>
 
@@ -432,6 +459,34 @@ export function Home(this: FC<State>, props: Props) {
           <p>I'm afraid that's copyrighted.</p>
         </details>
       </section>
+
+      <hr />
+
+      <footer>
+        <h3>Sensible UI</h3>
+        <p>
+          Sensible UI is a fork of{' '}
+          <a href="https://basecoatui.com" target="_blank">
+            Basecoat UI
+          </a>{' '}
+          that's been re-written from the ground-up to style elements semantically
+        </p>
+        <h4>Resources</h4>
+        <ul>
+          <li>
+            <a href="https://github.com/cameronapak/sensible-ui" target="_blank">
+              GitHub Repo
+            </a>
+          </li>
+          <li>
+            Part of the{' '}
+            <a href="https://faith.tools" target="_blank">
+              faith.tools
+            </a>{' '}
+            ecosystem
+          </li>
+        </ul>
+      </footer>
     </main>
   )
 }
