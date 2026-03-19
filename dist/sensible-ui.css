@@ -317,6 +317,7 @@
   * {
     margin: calc(var(--spacing) * 0);
     flex-shrink: 0;
+    scroll-margin-top: calc(var(--spacing) * 4);
     overscroll-behavior: none;
     border-color: var(--color-border);
     outline-color: var(--color-ring);

@@ -1,6 +1,6 @@
 @layer base {
   * {
-    @apply shrink-0 overscroll-none border-border outline-ring/50 m-0;
+    @apply shrink-0 overscroll-none border-border outline-ring/50 m-0 scroll-mt-4;
   }
 
   /* https://x.com/ipwanciu/status/2032834385481707645 */
