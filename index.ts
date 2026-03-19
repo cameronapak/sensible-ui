@@ -1,12 +1,12 @@
-import homepage from './index.html'
-import demo from './screenshots-page.html'
-import demo2 from './dropin-template.html'
+import homepage from './src/html/index.html'
+import demoB from './src/html/demo-b.html'
+import demoC from './src/html/demo-c.html'
 
 const server = Bun.serve({
   routes: {
     '/': homepage,
-    '/demo': demo,
-    '/demo-2': demo2,
+    '/demo-b': demoB,
+    '/demo-c': demoC,
   },
   development: {
     hmr: true,
