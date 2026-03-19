@@ -68,7 +68,7 @@
     @apply font-mono p-4 bg-secondary rounded-md overflow-x-auto mb-4 whitespace-pre;
 
     & code {
-      @apply text-sm;
+      @apply text-sm select-all;
     }
   }
 
