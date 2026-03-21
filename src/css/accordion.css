@@ -1,88 +1,92 @@
 @layer components {
-  /* https://github.com/emilkowalski/skill/blob/main/skills/emil-design-eng/SKILL.md */
-  :root {
-    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  }
-
   :root {
     /* https://modern-css.com/smooth-height-auto-animations-without-javascript */
     interpolate-size: allow-keywords;
+    /* https://github.com/emilkowalski/skill/blob/main/skills/emil-design-eng/SKILL.md */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --icon-lucide-chevron: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E');
   }
 
   summary {
     list-style: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
+    &::-webkit-details-marker {
+      display: none;
+    }
   }
 
   details {
-    @apply border text-sm rounded-md duration-100 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] border-border gap-4;
-    @apply transition-colors hover:bg-accent/50;
+    @apply border text-sm rounded-md outline-none gap-4 border-border;
+    @apply hover:bg-accent/50 hover:cursor-pointer transition-colors duration-100;
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply bounce;
-  }
 
-  details > summary {
-    @apply p-4 leading-none! text-base! font-medium!;
-  }
+    > summary {
+      @apply p-4 leading-none! text-base! font-medium! grid grid-cols-[1fr_auto];
 
-  details:has(+ details) {
-    @apply rounded-none border-b-0;
-  }
+      > * {
+        @apply m-0! p-0!;
+      }
+      > :is(h2, h3, h4, h5, h6, p, span) {
+        @apply leading-none! text-base! font-medium!;
+      }
 
-  details:not(:has(+ details)) {
-    @apply rounded-t-none rounded-b-md;
-  }
+      &::after {
+        content: '';
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        background-color: currentColor;
+        mask-size: contain;
+        mask-image: var(--icon-lucide-chevron);
+        mask-repeat: no-repeat;
+        transition-timing-function: var(--ease-out);
+        transition: transform 0.2s;
+      }
+    }
 
-  details:has(+ details):first-of-type {
-    @apply rounded-t-md;
-  }
+    &:has(+ details) {
+      @apply rounded-none border-b-0;
+    }
+    &:not(:has(+ details)) {
+      @apply rounded-t-none rounded-b-md;
+    }
+    &:has(+ details):first-of-type {
+      @apply rounded-t-md;
+    }
 
-  details:not([open])::details-content {
-    overflow: hidden;
-    height: 0;
-    opacity: 0;
-    content-visibility: visible;
-  }
+    > :not(summary) {
+      @apply p-4! pt-0!;
+    }
 
-  details > :not(summary) {
-    @apply p-4! pt-0!;
-  }
-
-  details {
-    @apply hover:cursor-pointer;
-  }
-
-  details::details-content {
-    transition-timing-function: var(--ease-out);
-    transition:
-      opacity 0.2s,
-      height 0.2s;
-    transition-behavior: allow-discrete;
-  }
-
-  details {
     :is(h2, h3, h4, h5, h6, p) {
       @apply mb-0! p-0;
     }
 
-    summary > * {
-      @apply m-0! p-0!;
+    ::details-content {
+      transition-timing-function: var(--ease-out);
+      transition:
+        opacity 0.2s,
+        height 0.2s;
+      transition-behavior: allow-discrete;
     }
 
-    summary > :is(h2, h3, h4, h5, h6, p, span) {
-      @apply leading-none! text-base! font-medium!;
+    &:not([open])::details-content {
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      content-visibility: visible;
+    }
+
+    &[open] {
+      summary::after {
+        transform: rotate(-180deg);
+      }
+
+      ::details-content {
+        content-visibility: visible;
+        opacity: 1;
+        height: calc-size(auto, size);
+      }
     }
   }
-
-  details[open]::details-content {
-    content-visibility: visible;
-    opacity: 1;
-    height: calc-size(auto, size);
-  }
-
-  /* @TODO: Add chevron for accordion */
 }
