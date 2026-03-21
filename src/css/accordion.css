@@ -62,7 +62,7 @@
       @apply mb-0! p-0;
     }
 
-    ::details-content {
+    &::details-content {
       transition-timing-function: var(--ease-out);
       transition:
         opacity 0.2s,
@@ -82,7 +82,7 @@
         transform: rotate(-180deg);
       }
 
-      ::details-content {
+      &::details-content {
         content-visibility: visible;
         opacity: 1;
         height: calc-size(auto, size);
