@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.0.4
+
+### Patch Changes
+
+- Added a chevron arrow icon to the accordion component. Icon provied by https://lucide.dev
+
 ## 1.0.3
 
 ### Patch Changes
