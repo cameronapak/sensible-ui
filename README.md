@@ -24,6 +24,19 @@ Try Sensible UI Now!
 - **Easy customization**: Override a handful of CSS variables to theme everything
 - **Free and open source**: MIT licensed
 
+## Components
+
+- [x] Accordion
+- [x] Badge
+- [x] Button
+- [x] Image
+- [x] Input
+- [x] Item
+- [x] Loading Spinner
+- [x] Table
+- [x] Typography
+- [ ] More to be thought out soon...
+
 ## Development
 
 ```bash
