@@ -49,6 +49,9 @@ export function Home(this: FC<State>, props: Props) {
         <a href="#description-list" class="badge" data-variant="outline">
           Description List
         </a>
+        <a href="#table" class="badge" data-variant="outline">
+          Table
+        </a>
       </nav>
 
       <hr />
@@ -500,7 +503,7 @@ export function Home(this: FC<State>, props: Props) {
         </dl>
       </section>
 
-      <section class="section y-stack">
+      <section id="table" class="section y-stack">
         <h2>Table</h2>
 
         <table>
