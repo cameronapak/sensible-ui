@@ -62,7 +62,7 @@ export function Home(this: FC<State>, props: Props) {
       </ul>
 
       <h2>
-        This is <mark>NOT</mark> for those who want...
+        This is <em>NOT</em> for those who want...
       </h2>
 
       <ul>
@@ -107,7 +107,7 @@ export function Home(this: FC<State>, props: Props) {
         <h6>Heading 6</h6>
 
         <p>
-          This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, and <a href="#">a link</a>.
+          This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, <a href="#">a link</a>, and <mark>marked text</mark>
         </p>
 
         <p>
