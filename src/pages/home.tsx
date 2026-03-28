@@ -182,7 +182,7 @@ export function Home(this: FC<State>, props: Props) {
 
             <div>
               <label for="id">User id (read only)</label>
-              <input readonly name="id" id="id" value="04D6H89Z" />
+              <input readOnly name="id" id="id" value="04D6H89Z" />
             </div>
 
             <div>
@@ -399,7 +399,7 @@ export function Home(this: FC<State>, props: Props) {
           <p>Yep!</p>
         </details>
 
-        <details name="same">
+        <details open={true} name="same">
           <summary>Who lives in a pineapple under the sea?</summary>
           <p>I'm afraid that's copyrighted.</p>
         </details>
