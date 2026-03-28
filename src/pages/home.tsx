@@ -46,7 +46,31 @@ export function Home(this: FC<State>, props: Props) {
         <a href="#accordion" class="badge" data-variant="outline">
           Accordion
         </a>
+        <a href="#description-list" class="badge" data-variant="outline">
+          Description List
+        </a>
       </nav>
+
+      <hr />
+
+      <h2>This is for those who want...</h2>
+
+      <ul>
+        <li>...beautiful HTML elements by default</li>
+        <li>...the look and feel of shadcn/ui, without the React framework overhead</li>
+        <li>...to use as minimal CSS classes as necessary</li>
+      </ul>
+
+      <h2>
+        This is <mark>NOT</mark> for those who want...
+      </h2>
+
+      <ul>
+        <li>
+          ...to use shadcn/ui with React <em class="text-muted-foreground">(because then you should reach for shadcn/ui)</em>
+        </li>
+        <li>...to meticulously style every element on the page</li>
+      </ul>
 
       <hr />
 
@@ -407,7 +431,7 @@ export function Home(this: FC<State>, props: Props) {
 
       <hr />
 
-      <section class="section">
+      <section class="section" id="description-list">
         <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl" target="_blank">
           <h2>Description List</h2>
         </a>

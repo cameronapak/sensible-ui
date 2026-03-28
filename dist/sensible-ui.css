@@ -11,6 +11,8 @@
     --color-amber-100: oklch(96.2% 0.059 95.617);
     --color-amber-900: oklch(41.4% 0.112 45.904);
     --color-amber-950: oklch(27.9% 0.077 45.635);
+    --color-yellow-100: oklch(97.3% 0.071 103.193);
+    --color-yellow-200: oklch(94.5% 0.129 101.54);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -409,6 +411,11 @@
     &:first-child {
       margin-block-start: 0;
     }
+  }
+  mark {
+    border-radius: var(--radius-sm);
+    background-color: var(--color-yellow-200);
+    padding-inline: calc(var(--spacing) * 1);
   }
   p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
