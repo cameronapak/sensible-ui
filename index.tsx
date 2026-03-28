@@ -7,10 +7,6 @@ const routes = {
 }
 
 const server = Bun.serve({
-  development: {
-    hmr: true,
-    console: true,
-  },
   routes: {
     ...buildRoutes((req) => (
       <html request={req} routes={routes}>
