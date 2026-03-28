@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.0.5
+
+### Patch Changes
+
+- ac43c70: Introduce CSS for description lists (`<dl>`) with variants for standard lists and a card-like display. This includes styling for `<dt>` and `<dd>` elements to ensure proper spacing, borders, and text wrapping. Also adds example usage to the home page.
+
 ## 1.0.4
 
 ### Patch Changes
