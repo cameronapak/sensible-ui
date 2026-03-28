@@ -11,7 +11,6 @@
     --color-amber-100: oklch(96.2% 0.059 95.617);
     --color-amber-900: oklch(41.4% 0.112 45.904);
     --color-amber-950: oklch(27.9% 0.077 45.635);
-    --color-yellow-100: oklch(97.3% 0.071 103.193);
     --color-yellow-200: oklch(94.5% 0.129 101.54);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-white: #fff;
@@ -269,6 +268,15 @@
   }
   .gap-1\! {
     gap: calc(var(--spacing) * 1) !important;
+  }
+  .card {
+    border-radius: var(--radius-xl);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    background-color: var(--color-card);
+    color: var(--color-card-foreground);
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .border-t {
     border-top-style: var(--tw-border-style);
@@ -968,7 +976,7 @@
   }
 }
 @layer components {
-  .card {
+  .card:not(:is(table, dl)) {
     display: flex;
     flex-direction: column;
     gap: calc(var(--spacing) * 6);
@@ -1865,6 +1873,10 @@
     caption-side: bottom;
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
+    &.card {
+      border-color: transparent;
+      outline: 1px solid var(--color-border);
+    }
     thead {
       & tr {
         border-bottom-style: var(--tw-border-style);
@@ -1967,6 +1979,7 @@
         &:first-child {
           padding-top: calc(var(--spacing) * 2);
         }
+        padding-inline: calc(var(--spacing) * 2);
         --tw-leading: var(--leading-normal);
         line-height: var(--leading-normal);
         --tw-font-weight: var(--font-weight-semibold);
@@ -1975,7 +1988,9 @@
       & > dd {
         border-bottom-style: var(--tw-border-style);
         border-bottom-width: 1px;
+        padding-inline: calc(var(--spacing) * 2);
         padding-bottom: calc(var(--spacing) * 2);
+        text-wrap: balance;
       }
       &:last-of-type > dd {
         --tw-border-style: none;
@@ -1983,6 +1998,7 @@
       }
     }
     & > dt {
+      padding-inline: calc(var(--spacing) * 2);
       --tw-leading: var(--leading-normal);
       line-height: var(--leading-normal);
       --tw-font-weight: var(--font-weight-semibold);
@@ -1995,6 +2011,7 @@
       }
     }
     & > dd {
+      padding-inline: calc(var(--spacing) * 2);
       text-wrap: balance;
       &:has(+ dd) {
         margin-bottom: calc(var(--spacing) * 1);
@@ -2012,12 +2029,6 @@
         }
       }
     }
-  }
-  dl.card {
-    display: block;
-    padding-block: calc(var(--spacing) * 0);
-    padding-block: calc(var(--spacing) * 2);
-    padding-inline-start: calc(var(--spacing) * 4);
   }
 }
 @layer components {
@@ -2318,46 +2329,6 @@
   inherits: false;
   initial-value: solid;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
-@property --tw-leading {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-font-weight {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-tracking {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-duration {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-translate-x {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-translate-y {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-translate-z {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-ease {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-shadow {
   syntax: "*";
   inherits: false;
@@ -2423,6 +2394,46 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-content {
   syntax: "*";
   inherits: false;
@@ -2437,15 +2448,6 @@
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
-      --tw-outline-style: solid;
-      --tw-leading: initial;
-      --tw-font-weight: initial;
-      --tw-tracking: initial;
-      --tw-duration: initial;
-      --tw-translate-x: 0;
-      --tw-translate-y: 0;
-      --tw-translate-z: 0;
-      --tw-ease: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
@@ -2460,6 +2462,15 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-duration: initial;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-ease: initial;
       --tw-content: "";
     }
   }

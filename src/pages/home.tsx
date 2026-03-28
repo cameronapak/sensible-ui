@@ -500,6 +500,84 @@ export function Home(this: FC<State>, props: Props) {
         </dl>
       </section>
 
+      <section class="section y-stack">
+        <h2>Table</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">ID</th>
+              <th scope="col">Member Since</th>
+              <th scope="col">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Margaret Nguyen</th>
+              <td>427311</td>
+              <td>
+                <time dateTime="2010-06-03">June 3, 2010</time>
+              </td>
+              <td>0.00</td>
+            </tr>
+            <tr>
+              <th scope="row">Edvard Galinski</th>
+              <td>533175</td>
+              <td>
+                <time dateTime="2011-01-13">January 13, 2011</time>
+              </td>
+              <td>37.00</td>
+            </tr>
+            <tr>
+              <th scope="row">Hoshi Nakamura</th>
+              <td>601942</td>
+              <td>
+                <time dateTime="2012-07-23">July 23, 2012</time>
+              </td>
+              <td>15.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="card">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">ID</th>
+              <th scope="col">Member Since</th>
+              <th scope="col">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Margaret Nguyen</th>
+              <td>427311</td>
+              <td>
+                <time dateTime="2010-06-03">June 3, 2010</time>
+              </td>
+              <td>0.00</td>
+            </tr>
+            <tr>
+              <th scope="row">Edvard Galinski</th>
+              <td>533175</td>
+              <td>
+                <time dateTime="2011-01-13">January 13, 2011</time>
+              </td>
+              <td>37.00</td>
+            </tr>
+            <tr>
+              <th scope="row">Hoshi Nakamura</th>
+              <td>601942</td>
+              <td>
+                <time dateTime="2012-07-23">July 23, 2012</time>
+              </td>
+              <td>15.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <footer>
         <h3>Sensible UI</h3>
         <p>

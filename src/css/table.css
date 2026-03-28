@@ -1,6 +1,13 @@
 @layer components {
   table {
     @apply w-full caption-bottom text-sm;
+
+    /* TL;DR - table elements do not handle border radius with borders well... */
+    &.card {
+      border-color: transparent;
+      outline: 1px solid var(--color-border);
+    }
+
     thead {
       @apply [&_tr]:border-b;
     }

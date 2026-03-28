@@ -33,6 +33,10 @@
   @apply active:not-disabled:translate-y-0.5 transition-transform duration-150 ease-out;
 }
 
+@utility card {
+  @apply bg-card text-card-foreground rounded-xl border shadow-sm;
+}
+
 @utility touch-hitbox {
   position: relative;
 
