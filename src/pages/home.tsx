@@ -1,4 +1,5 @@
 /** @jsxImportSource mono-jsx */
+import { version } from '../../package.json'
 
 interface Props {
   title: string
@@ -16,6 +17,7 @@ export function Home(this: FC<State>, props: Props) {
       <div class="y-stack">
         <div class="x-stack">
           <h1>Sensible UI</h1>
+          <code>v{version}</code>
           <span class="badge">beta</span>
         </div>
 
@@ -93,7 +95,7 @@ export function Home(this: FC<State>, props: Props) {
           </p>
           <pre>
             <code>
-              &#60;link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.min.css" type="text/css"
+              &#60;link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@{version}/dist/sensible-ui.min.css" type="text/css"
               rel="stylesheet"&#62;
             </code>
           </pre>
