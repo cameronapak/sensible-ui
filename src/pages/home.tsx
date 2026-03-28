@@ -407,13 +407,82 @@ export function Home(this: FC<State>, props: Props) {
 
       <hr />
 
+      <section class="section">
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl" target="_blank">
+          <h2>Description List</h2>
+        </a>
+
+        <dl>
+          <div>
+            <dt>Name</dt>
+            <dd>Godzilla</dd>
+          </div>
+          <div>
+            <dt>Born</dt>
+            <dd>1952</dd>
+          </div>
+          <div>
+            <dt>Birthplace</dt>
+            <dd>Japan</dd>
+          </div>
+          <div>
+            <dt>Color</dt>
+            <dd>Green</dd>
+          </div>
+        </dl>
+
+        <h3>Single term, multiple descriptions</h3>
+
+        <dl>
+          <dt>Firefox</dt>
+          <dd>
+            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
+          </dd>
+          <dd>
+            The Red Panda also known as the Lesser Panda, Wah, Bear Cat or Firefox, is a mostly herbivorous mammal, slightly larger than a
+            domestic cat (60 cm long).
+          </dd>
+        </dl>
+
+        <h3>Multiple terms, single description</h3>
+
+        <dl>
+          <dt>Fx</dt>
+          <dt>Firefox</dt>
+          <dt>Mozilla Firefox</dt>
+          <dd>
+            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
+          </dd>
+
+          <dt>JavaScript</dt>
+          <dt>JS</dt>
+          <dd>
+            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
+          </dd>
+        </dl>
+
+        <h3>
+          Here's a card <code>dl.card</code>
+        </h3>
+
+        <dl class="card">
+          <dt>Banana</dt>
+          <dd>A yellow fruit that is easy to peel.</dd>
+          <dd>Which also grows on a tree.</dd>
+          <dt>Cashew</dt>
+          <dd>A tan nut without a peel.</dd>
+          <dt>Cherry</dt>
+          <dd>A red fruit that is hard to peel.</dd>
+        </dl>
+      </section>
+
       <footer>
         <h3>Sensible UI</h3>
         <p>
-          Sensible UI is a fork of
+          Sensible UI is a fork of{' '}
           <a href="https://basecoatui.com" target="_blank">
             Basecoat UI
-          </a>
+          </a>{' '}
           that's been re-written from the ground-up to style elements semantically
         </p>
         <h4>Resources</h4>
@@ -424,10 +493,10 @@ export function Home(this: FC<State>, props: Props) {
             </a>
           </li>
           <li>
-            Part of the
+            Part of the{' '}
             <a href="https://faith.tools" target="_blank">
               faith.tools
-            </a>
+            </a>{' '}
             ecosystem
           </li>
         </ul>

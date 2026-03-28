@@ -1,0 +1,58 @@
+@layer components {
+  dl {
+    /* This represents any wrapping component around the description term and description detail elements */
+    & > * {
+      & > dt {
+        &:first-child {
+          @apply pt-2;
+        }
+
+        @apply font-semibold leading-normal;
+      }
+
+      & > dd {
+        @apply border-b pb-2;
+      }
+
+      &:last-of-type > dd {
+        @apply border-none;
+      }
+    }
+
+    & > dt {
+      @apply font-semibold leading-normal;
+
+      &:first-child {
+        @apply pt-2;
+      }
+
+      &:has(+ dd) {
+        @apply mb-1;
+      }
+    }
+
+    & > dd {
+      @apply text-balance;
+
+      &:has(+ dd) {
+        @apply mb-1;
+      }
+
+      & + dt {
+        @apply pt-2;
+      }
+
+      &:not(:has(+ dd)) {
+        @apply border-b pb-2;
+
+        &:not(:has(+ dt)) {
+          @apply border-none;
+        }
+      }
+    }
+  }
+
+  dl.card {
+    @apply block py-0 ps-4 py-2;
+  }
+}
