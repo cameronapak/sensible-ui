@@ -13,46 +13,52 @@ export function Home(this: FC<State>, props: Props) {
 
   return (
     <main class="container">
-      <h1>Sensible UI</h1>
-      <p class="text-muted-foreground">
-        <code>shadcn/ui</code> style primitives using semantic CSS
-      </p>
+      <div class="y-stack">
+        <div class="x-stack">
+          <h1>Sensible UI</h1>
+          <span class="badge">beta</span>
+        </div>
 
-      <nav class="x-stack flex-wrap gap-1!">
-        <a href="#typography" class="badge" data-variant="outline">
-          Typography
-        </a>
-        <a href="#buttons" class="badge" data-variant="outline">
-          Buttons
-        </a>
-        <a href="#forms" class="badge" data-variant="outline">
-          Form Elements
-        </a>
-        <a href="#card" class="badge" data-variant="outline">
-          Card
-        </a>
-        <a href="#badges" class="badge" data-variant="outline">
-          Badges
-        </a>
-        <a href="#stacks" class="badge" data-variant="outline">
-          Stacks
-        </a>
-        <a href="#spinner" class="badge" data-variant="outline">
-          Spinner
-        </a>
-        <a href="#item" class="badge" data-variant="outline">
-          Item
-        </a>
-        <a href="#accordion" class="badge" data-variant="outline">
-          Accordion
-        </a>
-        <a href="#description-list" class="badge" data-variant="outline">
-          Description List
-        </a>
-        <a href="#table" class="badge" data-variant="outline">
-          Table
-        </a>
-      </nav>
+        <p class="text-muted-foreground">
+          <code>shadcn/ui</code> style primitives using semantic CSS
+        </p>
+
+        <nav class="x-stack flex-wrap gap-1!">
+          <a href="#typography" class="badge" data-variant="outline">
+            Typography
+          </a>
+          <a href="#buttons" class="badge" data-variant="outline">
+            Buttons
+          </a>
+          <a href="#forms" class="badge" data-variant="outline">
+            Form Elements
+          </a>
+          <a href="#card" class="badge" data-variant="outline">
+            Card
+          </a>
+          <a href="#badges" class="badge" data-variant="outline">
+            Badges
+          </a>
+          <a href="#stacks" class="badge" data-variant="outline">
+            Stacks
+          </a>
+          <a href="#spinner" class="badge" data-variant="outline">
+            Spinner
+          </a>
+          <a href="#item" class="badge" data-variant="outline">
+            Item
+          </a>
+          <a href="#accordion" class="badge" data-variant="outline">
+            Accordion
+          </a>
+          <a href="#description-list" class="badge" data-variant="outline">
+            Description List
+          </a>
+          <a href="#table" class="badge" data-variant="outline">
+            Table
+          </a>
+        </nav>
+      </div>
 
       <hr />
 
