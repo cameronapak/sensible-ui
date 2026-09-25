@@ -1,11 +1,11 @@
 # Sensible UI CSS
 
-A semantic-ish CSS component library in the likeness of Shadcn UI, without the front-end framework overhead. 
+A semantic CSS component library in the likeness of shadcn/ui. The published stylesheet does not require Tailwind CSS or a JavaScript framework.
 
 - Styles native HTML elements by default, like typography elements, buttons, inputs, anchor tags, etc.
 - Want components like cards, items, loading-spinners, etc.? Then we use data attributes, classes, and aria attributes.
 
-Try Sensible UI Now!
+Add Sensible UI to your page:
 
 ```css
 @import 'https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.min.css';
@@ -24,6 +24,22 @@ Try Sensible UI Now!
 - **Easy customization**: Override a handful of CSS variables to theme everything
 - **Free and open source**: MIT licensed
 
+To change the theme, override the CSS variables after importing the stylesheet:
+
+```css
+:root {
+  --primary: oklch(0.5 0.2 260);
+  --primary-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --primary: oklch(0.75 0.14 260);
+  --primary-foreground: oklch(0.145 0 0);
+}
+```
+
+The full set of light and dark tokens is in [`src/css/theme.css`](src/css/theme.css).
+
 ## Components
 
 - [x] Accordion
@@ -41,8 +57,11 @@ Try Sensible UI Now!
 
 ```bash
 bun install
-bun dev
+bun run dev
 ```
+
+`bun run build` bundles the plain CSS source into `dist/sensible-ui.css` and `dist/sensible-ui.min.css`.
+`bun run build:site` renders the same demo used by the Bun preview into `dist/static` with its CSS for static hosting.
 
 ## Attributions
 

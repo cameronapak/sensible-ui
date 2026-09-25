@@ -1,27 +1,120 @@
 @layer components {
   a > .badge {
-    @apply bounce;
+    transition: translate 150ms cubic-bezier(0, 0, 0.2, 1);
+
+    &:active:not(:disabled) {
+      translate: 0 0.125rem;
+    }
   }
 
   a.badge {
-    @apply no-underline!;
+    text-decoration-line: none !important;
   }
 
   .badge {
-    @apply inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden;
+    display: inline-flex;
+    width: fit-content;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    overflow: hidden;
+    border: 1px solid;
+    border-radius: 9999px;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      color 150ms,
+      box-shadow 150ms;
+
+    > svg {
+      width: 0.75rem;
+      height: 0.75rem;
+      pointer-events: none;
+    }
+
+    &:focus-visible {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 20%, transparent);
+    }
+
+    .dark &[aria-invalid="true"] {
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 40%, transparent);
+    }
 
     &:not([variant]),
-    &[data-variant='primary'] {
-      @apply border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90;
+    &[data-variant="primary"] {
+      border-color: transparent;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+
+      &:is(a):hover {
+        background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+      }
     }
-    &[data-variant='secondary'] {
-      @apply border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90;
+    &[data-variant="secondary"] {
+      border-color: transparent;
+      background-color: var(--secondary);
+      color: var(--secondary-foreground);
+
+      &:is(a):hover {
+        background-color: color-mix(
+          in oklab,
+          var(--secondary) 90%,
+          transparent
+        );
+      }
     }
-    &[data-variant='destructive'] {
-      @apply border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+    &[data-variant="destructive"] {
+      border-color: transparent;
+      background-color: var(--destructive);
+      color: white;
+
+      &:is(a):hover {
+        background-color: color-mix(
+          in oklab,
+          var(--destructive) 90%,
+          transparent
+        );
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--destructive) 20%, transparent);
+      }
+
+      .dark & {
+        background-color: color-mix(
+          in oklab,
+          var(--destructive) 60%,
+          transparent
+        );
+
+        &:focus-visible {
+          box-shadow: 0 0 0 3px
+            color-mix(in oklab, var(--destructive) 40%, transparent);
+        }
+      }
     }
-    &[data-variant='outline'] {
-      @apply text-foreground bg-[unset] border border-border [a&]:hover:bg-accent [a&]:hover:text-accent-foreground;
+    &[data-variant="outline"] {
+      border-color: var(--border);
+      background: unset;
+      color: var(--foreground);
+
+      &:is(a):hover {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+      }
     }
   }
 }

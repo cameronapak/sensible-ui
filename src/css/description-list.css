@@ -4,49 +4,58 @@
     & > * {
       & > dt {
         &:first-child {
-          @apply pt-2;
+          padding-top: 0.5rem;
         }
 
-        @apply px-2 font-semibold leading-normal;
+        padding-inline: 0.5rem;
+        font-weight: 600;
+        line-height: 1.5;
       }
 
       & > dd {
-        @apply px-2 border-b pb-2 text-balance;
+        border-bottom: 1px solid var(--border);
+        padding-inline: 0.5rem;
+        padding-bottom: 0.5rem;
+        text-wrap: balance;
       }
 
       &:last-of-type > dd {
-        @apply border-none;
+        border-style: none;
       }
     }
 
     & > dt {
-      @apply px-2 font-semibold leading-normal;
+      padding-inline: 0.5rem;
+      font-weight: 600;
+      line-height: 1.5;
 
       &:first-child {
-        @apply pt-2;
+        padding-top: 0.5rem;
       }
 
       &:has(+ dd) {
-        @apply mb-1;
+        margin-bottom: 0.25rem;
       }
     }
 
     & > dd {
-      @apply px-2 text-balance;
+      padding-inline: 0.5rem;
+      text-wrap: balance;
 
       &:has(+ dd) {
-        @apply mb-1;
+        margin-bottom: 0.25rem;
       }
 
       & + dt {
-        @apply pt-2;
+        padding-top: 0.5rem;
       }
 
       &:not(:has(+ dd)) {
-        @apply border-b pb-2;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
 
         &:not(:has(+ dt)) {
-          @apply border-none;
+          border-style: none;
         }
       }
     }

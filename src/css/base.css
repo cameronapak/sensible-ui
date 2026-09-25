@@ -1,6 +1,83 @@
 @layer base {
+  *,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid var(--border);
+  }
+
   * {
-    @apply shrink-0 border-border outline-ring/50 m-0 scroll-mt-4;
+    flex-shrink: 0;
+    scroll-margin-top: 1rem;
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  html {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  :is(ul, ol) {
+    list-style: none;
+  }
+
+  :is(img, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+    vertical-align: middle;
+  }
+
+  :is(img, video) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    text-indent: 0;
+  }
+
+  :is(button, input, select, optgroup, textarea, ::file-selector-button) {
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  :is(
+    button,
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"],
+    ::file-selector-button
+  ) {
+    appearance: button;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  [hidden]:not([hidden="until-found"]) {
+    display: none !important;
+  }
+
+  hr {
+    border-top-width: 1px;
   }
 
   /* https://x.com/ipwanciu/status/2032834385481707645 */
@@ -8,13 +85,14 @@
     navigation: auto;
   }
 
-  /* https://x.com/BHolmesDev/status/1970489474866958642 */
-  html {
-    @apply scroll-smooth overscroll-none;
-  }
-
   body {
-    @apply bg-background overscroll-none antialiased text-foreground text-base leading-normal;
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 1rem;
+    line-height: 1.5;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     /* https://modern-css.com/preventing-layout-shift-from-scrollbar/ */
     scrollbar-gutter: stable;
   }

@@ -4,20 +4,21 @@
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
   "type": "module",
+  "files": ["dist/sensible-ui.css", "dist/sensible-ui.min.css", "src/css"],
   "exports": {
-    ".": [
-      "./dist/sensible-ui.css",
-      "./dist/sensible-ui.min.css"
-    ],
+    ".": "./dist/sensible-ui.css",
     "./accordion": "./src/css/accordion.css",
     "./badge": "./src/css/badge.css",
     "./base": "./src/css/base.css",
     "./button": "./src/css/button.css",
     "./card": "./src/css/card.css",
     "./css": "./dist/sensible-ui.css",
+    "./description-list": "./src/css/description-list.css",
     "./image": "./src/css/image.css",
     "./index": "./src/css/index.css",
+    "./input": "./src/css/input.css",
     "./item": "./src/css/item.css",
+    "./min": "./dist/sensible-ui.min.css",
     "./spinner": "./src/css/spinner.css",
     "./table": "./src/css/table.css",
     "./theme": "./src/css/theme.css",
@@ -32,8 +33,6 @@
     "ui kit",
     "shadcn",
     "shadcn/ui",
-    "tailwind",
-    "tailwindcss",
     "css",
     "html"
   ],
@@ -48,24 +47,19 @@
   "homepage": "https://sensibleui.com",
   "scripts": {
     "dev": "concurrently \"bun run dev:css\" \"bun run --hot ./index.tsx\"",
-    "dev:css": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.css --watch",
+    "dev:css": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css --watch",
     "prod": "bun run ./index.tsx",
-    "build": "tailwindcss -i ./src/css/index.css -o ./dist/sensible-ui.min.css --minify",
-    "build:site": "bun run build && bun build --target=browser ./src/html/index.html --outdir=./dist/static --outfile=./index.html",
+    "build": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
+    "build:site": "bun run build && bun run ./build-site.tsx",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",
-    "@tailwindcss/cli": "^4.2.1",
     "@types/bun": "^1.3.10",
     "concurrently": "^9.2.1",
-    "prettier": "^3.8.1",
-    "tailwindcss": "^4.2.1",
-    "bun-plugin-tailwind": "^0.1.2"
-  },
-  "dependencies": {
-    "mono-jsx": "^0.9.13"
+    "mono-jsx": "^0.9.13",
+    "prettier": "^3.8.1"
   }
 }
