@@ -8,3 +8,5 @@ node_modules/
 npm-debug.log*
 
 /dist/static/*
+
+.amp/portals/*

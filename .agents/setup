@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Installing Bun dependencies from bun.lock"
+time bun install --frozen-lockfile
