@@ -100,7 +100,7 @@ export function Home(this: FC<State>, props: Props) {
             </code>
           </pre>
           <p>
-            Instructions on how to use this with Tailwind CSS and <code>shadcn/ui</code> CSS themes coming soon!
+            No Tailwind CSS is required. Override <code>--primary</code> and the other theme variables to customize the styles.
           </p>
         </section>
       </section>

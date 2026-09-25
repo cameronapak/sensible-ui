@@ -1,34 +1,69 @@
 @layer components {
   .item {
-    @apply flex items-center border text-sm rounded-md duration-100 flex-wrap outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] border-border p-4 gap-4;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 2px);
+    padding: 1rem;
+    outline: none;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition-duration: 100ms;
+
+    &:focus-visible {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
 
     &:is(a[href]) {
-      @apply transition-colors hover:bg-accent/50 no-underline!;
-      @apply bounce;
+      text-decoration-line: none !important;
+      transition: translate 150ms cubic-bezier(0, 0, 0.2, 1);
+
+      &:hover {
+        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      }
+
+      &:active:not(:disabled) {
+        translate: 0 0.125rem;
+      }
     }
 
     &:has(> svg) {
-      @apply flex-nowrap;
+      flex-wrap: nowrap;
     }
 
     & > svg {
-      @apply shrink-0 text-muted-foreground;
+      flex-shrink: 0;
+      color: var(--muted-foreground);
     }
 
     & > :is(div, section, article) {
-      @apply flex flex-col justify-center gap-0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
 
       & > :is(h1, h2, h3, h4, h5, h6) {
-        @apply m-0! text-base!;
+        margin: 0 !important;
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
       }
 
       & > p {
-        @apply m-0! text-muted-foreground line-clamp-2 text-balance;
+        display: -webkit-box;
+        margin: 0 !important;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        color: var(--muted-foreground);
+        text-wrap: balance;
       }
     }
 
     & > *:not(svg):has(h1, h2, h3, h4, h5, h6, p) {
-      @apply grow;
+      flex-grow: 1;
     }
   }
 }

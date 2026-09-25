@@ -1,14 +1,18 @@
 @layer components {
   img[src] {
-    @apply rounded-xl;
+    border-radius: calc(var(--radius) + 4px);
   }
 
   figure {
-    @apply w-fit;
+    width: fit-content;
 
     .caption,
     figcaption {
-      @apply text-center text-muted-foreground mt-3 text-sm;
+      margin-top: 0.75rem;
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      text-align: center;
     }
   }
 }

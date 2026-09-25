@@ -1,71 +1,177 @@
 @layer button {
   /* Button */
-  :not(form[method='dialog']) > :is(button:not([role]), input:is([type='submit'], [type='reset'], [type='button']), a.button) {
-    @apply bounce;
-    @apply inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer rounded-md;
+  :not(form[method="dialog"])
+    > :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    ) {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) - 2px);
+    outline: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 150ms ease-out;
 
-    /* Default size */
+    &:active:not(:disabled) {
+      translate: 0 0.125rem;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &:focus-visible {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 20%, transparent);
+    }
+
+    &:is(.dark *)[aria-invalid="true"] {
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 40%, transparent);
+    }
+
+    & svg {
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    & svg:not([class*="size-"]) {
+      width: 1rem;
+      height: 1rem;
+    }
+
     &:not([data-size]) {
-      @apply gap-2 h-9 px-4 py-2 has-[>svg]:px-3;
+      height: 2.25rem;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+
+      &:has(> svg) {
+        padding-inline: 0.75rem;
+      }
     }
 
-    &[data-size='sm'] {
-      @apply gap-1.5 h-8 px-3 has-[>svg]:px-2.5;
+    &[data-size="sm"] {
+      height: 2rem;
+      gap: 0.375rem;
+      padding-inline: 0.75rem;
+
+      &:has(> svg) {
+        padding-inline: 0.625rem;
+      }
     }
 
-    &[data-size='lg'] {
-      @apply gap-2 h-10 px-6 has-[>svg]:px-4;
+    &[data-size="lg"] {
+      height: 2.5rem;
+      gap: 0.5rem;
+      padding-inline: 1.5rem;
+
+      &:has(> svg) {
+        padding-inline: 1rem;
+      }
     }
 
-    &[data-size='icon'] {
-      @apply size-9;
+    &[data-size="icon"] {
+      width: 2.25rem;
+      height: 2.25rem;
     }
 
     &:not([data-variant]),
-    &[data-variant='primary'] {
-      @apply bg-primary text-primary-foreground shadow-xs hover:not-disabled:bg-primary/90;
-      &[aria-pressed='true'] {
-        @apply bg-primary/90;
-      }
-    }
+    &[data-variant="primary"] {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
 
-    &[data-variant='secondary'] {
-      @apply bg-secondary text-secondary-foreground shadow-xs;
-
-      &:hover:not(disabled),
-      &[aria-pressed='true'] {
-        @apply bg-secondary/80;
-      }
-    }
-
-    &[data-variant='outline'] {
-      @apply border bg-background shadow-xs dark:bg-input/30 dark:border-input;
       &:hover:not(:disabled),
-      &[aria-pressed='true'] {
-        @apply bg-accent text-accent-foreground dark:bg-accent/50;
+      &[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--primary) 90%, transparent);
       }
     }
 
-    &[data-variant='ghost'] {
+    &[data-variant="secondary"] {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+
       &:hover:not(:disabled),
-      &[aria-pressed='true'] {
-        @apply bg-accent text-accent-foreground dark:bg-accent/50;
+      &[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--secondary) 80%, transparent);
       }
     }
 
-    &[data-variant='link'] {
-      @apply text-primary underline-offset-4;
-      &:hover:not(:disabled),
-      &[aria-pressed='true'] {
-        @apply hover:underline;
+    &[data-variant="outline"] {
+      border: 1px solid var(--border);
+      background: var(--background);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+
+      &:is(.dark *) {
+        border-color: var(--input);
+        background: color-mix(in oklab, var(--input) 30%, transparent);
       }
     }
 
-    &[data-variant='destructive'] {
-      @apply bg-destructive text-white shadow-xs focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+    &[data-variant="outline"],
+    &[data-variant="ghost"] {
       &:hover:not(:disabled),
-      &[aria-pressed='true'] {
-        @apply bg-destructive/90 dark:bg-destructive/50;
+      &[aria-pressed="true"] {
+        background: var(--accent);
+        color: var(--accent-foreground);
+      }
+
+      &:is(.dark *):hover:not(:disabled),
+      &:is(.dark *)[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--accent) 50%, transparent);
+      }
+    }
+
+    &[data-variant="link"] {
+      color: var(--primary);
+      text-underline-offset: 4px;
+
+      &:hover:not(:disabled),
+      &[aria-pressed="true"] {
+        text-decoration-line: underline;
+      }
+    }
+
+    &[data-variant="destructive"] {
+      background: var(--destructive);
+      color: white;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--destructive) 20%, transparent);
+      }
+
+      &:hover:not(:disabled),
+      &[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--destructive) 90%, transparent);
+      }
+
+      &:is(.dark *) {
+        background: color-mix(in oklab, var(--destructive) 60%, transparent);
+      }
+      &:is(.dark *):focus-visible {
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--destructive) 40%, transparent);
+      }
+      &:is(.dark *):hover:not(:disabled),
+      &:is(.dark *)[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--destructive) 50%, transparent);
       }
     }
   }
