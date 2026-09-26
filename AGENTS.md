@@ -23,3 +23,13 @@ CSS-only UI component library inspired by shadcn/ui. Pure semantic HTML + CSS, n
 - Use native CSS declarations and theme variables (`--primary`, `--foreground`, etc.) from `theme.css`. Do not introduce Tailwind directives or generated `--tw-*` variables.
 - Colors use `oklch()`. Follow the `--name` / `--name-foreground` pairing pattern.
 - Keep selectors targeting semantic HTML (e.g., `button`, `table`, `input`) not class-based.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs are tracked in GitHub Issues using the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+This repo uses the single-context domain doc layout. See `docs/agents/domain.md`.
