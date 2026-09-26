@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "lib": ["dom", "esnext"],
+    "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "types": ["bun"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "allowImportingTsExtensions": true,

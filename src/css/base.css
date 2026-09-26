@@ -80,11 +80,6 @@
     border-top-width: 1px;
   }
 
-  /* https://x.com/ipwanciu/status/2032834385481707645 */
-  @view-transition {
-    navigation: auto;
-  }
-
   body {
     background: var(--background);
     color: var(--foreground);

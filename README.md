@@ -40,6 +40,16 @@ To change the theme, override the CSS variables after importing the stylesheet:
 
 The full set of light and dark tokens is in [`src/css/theme.css`](src/css/theme.css).
 
+## Page view transitions
+
+Cross-document page view transitions are available as an opt-in stylesheet:
+
+```css
+@import '@faith-tools/sensible-ui/view-transition';
+```
+
+This enables same-origin navigation with `@view-transition { navigation: auto; }`. The default bundle does not enable page view transitions.
+
 ## Components
 
 - [x] Accordion

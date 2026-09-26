@@ -91,6 +91,10 @@ export function Home() {
           <p>
             No Tailwind CSS is required. Override <code>--primary</code> and the other theme variables to customize the styles.
           </p>
+          <p>
+            Page view transitions are optional. Enable them by importing <code>@faith-tools/sensible-ui/view-transition</code> after the main
+            stylesheet.
+          </p>
         </section>
       </section>
 

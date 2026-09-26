@@ -24,7 +24,8 @@
     "./table": "./src/css/table.css",
     "./theme": "./src/css/theme.css",
     "./typography": "./src/css/typography.css",
-    "./utils": "./src/css/utils.css"
+    "./utils": "./src/css/utils.css",
+    "./view-transition": "./src/css/view-transition.css"
   },
   "keywords": [
     "components",
@@ -52,7 +53,8 @@
     "prod": "bun run ./index.tsx",
     "build": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
-    "check": "bun run build && git diff --exit-code -- dist/sensible-ui.css dist/sensible-ui.min.css",
+    "check": "bun run typecheck && bun run build && git diff --exit-code -- dist/sensible-ui.css dist/sensible-ui.min.css",
+    "typecheck": "tsc --noEmit",
     "changeset": "changeset",
     "changeset:version": "changeset version"
   },
@@ -61,6 +63,7 @@
     "@types/bun": "^1.3.10",
     "concurrently": "^9.2.1",
     "hono": "^4.13.9",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "typescript": "5.9.3"
   }
 }
