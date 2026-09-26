@@ -27,6 +27,7 @@ Read `CONTEXT.md` before changing the public styling model, compatibility expect
 - Use native CSS declarations and theme variables (`--primary`, `--foreground`, etc.) from `theme.css`. Do not introduce Tailwind directives or generated `--tw-*` variables.
 - Colors use `oklch()`. Follow the `--name` / `--name-foreground` pairing pattern.
 - Treat strict semantic styling, the current hybrid, and opt-in scoping as open design directions. Do not silently turn the current implementation into a permanent policy.
+- Use web components when they own meaningful behavior or state, or when their structure is unusually complex. Do not wrap CSS-only presentation in a custom element. Prefer dependency-free, light-DOM progressive enhancement that preserves semantic content without JavaScript.
 
 ## Agent skills
 

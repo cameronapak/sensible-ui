@@ -14,14 +14,23 @@
   }
 
   .card:not(:is(table, dl)) {
+    container-type: inline-size;
     display: flex;
+    inline-size: 100%;
+    min-inline-size: 0;
     flex-direction: column;
+    flex-shrink: 1;
     gap: 1.5rem;
-    padding-block: 1rem;
+    padding-block-start: 1rem;
+    padding-block-end: 0;
+    overflow-wrap: anywhere;
 
-    &:has(> footer) {
-      padding-top: 1rem;
-      padding-bottom: 0;
+    > :is(header, section, footer) {
+      min-inline-size: 0;
+    }
+
+    > :last-child:not(footer) {
+      margin-block-end: 1rem;
     }
 
     > header {
@@ -33,7 +42,18 @@
       padding-inline: 1rem;
 
       &:has([data-slot="card-action"]) {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      [data-slot="card-action"] {
+        grid-row: 1 / span 2;
+        grid-column: 2;
+        min-inline-size: 0;
+        max-inline-size: 50cqi;
+        height: auto;
+        min-height: 2.25rem;
+        justify-self: end;
+        white-space: normal;
       }
 
       &.border-b {
@@ -46,6 +66,7 @@
         font-size: 1rem !important;
         line-height: 1;
         font-weight: 600;
+        overflow-wrap: anywhere;
       }
 
       :is(p, span) {
@@ -54,11 +75,17 @@
         color: var(--muted-foreground);
         font-size: 0.875rem;
         line-height: 1.25rem;
+        overflow-wrap: anywhere;
       }
     }
 
     > section {
       padding-inline: 1rem;
+
+      & * {
+        min-inline-size: 0;
+        overflow-wrap: anywhere;
+      }
 
       & > *:last-child {
         margin-bottom: 0 !important;
@@ -73,6 +100,43 @@
       border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
       background-color: var(--secondary);
       padding: 1rem;
+
+      > * {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+      }
+
+      > :is(button, a.button) {
+        height: auto;
+        min-height: 2.25rem;
+        white-space: normal;
+      }
+    }
+  }
+
+  @container (width < 24rem) {
+    .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+      grid-template-columns: minmax(0, 1fr);
+
+      [data-slot="card-action"] {
+        grid-row: auto;
+        grid-column: 1;
+        inline-size: 100%;
+        max-inline-size: 100%;
+        justify-self: stretch;
+      }
+    }
+  }
+
+  @container (width < 12rem) {
+    .card:not(:is(table, dl)) {
+      > :is(header, section) {
+        padding-inline: 0.5rem;
+      }
+
+      > footer {
+        padding: 0.5rem;
+      }
     }
   }
 }

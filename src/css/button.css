@@ -19,6 +19,21 @@
     white-space: nowrap;
     transition: all 150ms ease-out;
 
+    &:is(
+      .card > header > [data-slot="card-action"],
+      .card > footer > *
+    ) {
+      height: auto;
+      min-height: 2.25rem;
+      white-space: normal;
+    }
+
+    @container (width < 12rem) {
+      &:is(.card > footer > *) {
+        padding-inline: 0.5rem;
+      }
+    }
+
     &:active:not(:disabled) {
       translate: 0 0.125rem;
     }
