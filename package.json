@@ -62,7 +62,7 @@
     "prod": "bun run ./index.tsx",
     "generate:utilities": "bun run ./generate-utilities.ts",
     "build": "bun run generate:utilities && bun run build:core && bun run build:utilities",
-    "build:core": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
+    "build:core": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css && bun run ./normalize-core-css.ts",
     "build:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css && bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.min.css --minify && prettier --write ./dist/sensible-ui.utilities.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
     "check": "bun run typecheck && bun run build && bun run check:exports && git diff --exit-code -- src/css/generated/utilities.css dist/sensible-ui.css dist/sensible-ui.min.css dist/sensible-ui.utilities.css dist/sensible-ui.utilities.min.css",

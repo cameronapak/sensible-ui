@@ -175,8 +175,6 @@
 }
 
 /* src/css/theme.css */
-@layer base, typography, components, button, utilities;
-
 :root {
   --radius: 0.625rem;
   --font-sans:
