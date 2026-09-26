@@ -4,6 +4,7 @@
   "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
   "author": "cameronapak",
   "type": "module",
+  "packageManager": "bun@1.3.10",
   "files": ["dist/sensible-ui.css", "dist/sensible-ui.min.css", "src/css"],
   "exports": {
     ".": "./dist/sensible-ui.css",
@@ -51,6 +52,7 @@
     "prod": "bun run ./index.tsx",
     "build": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
+    "check": "bun run build && git diff --exit-code -- dist/sensible-ui.css dist/sensible-ui.min.css",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "publish": "changeset publish"
