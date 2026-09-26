@@ -295,9 +295,15 @@ const layoutsExample = `
 </div>`;
 
 const utilitiesExample = `
-<div class="flex items-center justify-between gap-4 p-4">
-  <span>Optional utilities</span>
-  <span class="badge size-8 justify-center">3</span>
+<div class="x-stack">
+  <div class="card relative w-16 shrink-0 aspect-square overflow-hidden">
+    <span class="absolute inset-0 flex items-center justify-center">1:1</span>
+  </div>
+  <div class="y-stack min-w-0 grow shrink" style="--layout-gap: var(--space-1)">
+    <span class="sr-only">Status:</span>
+    <strong>Utility example</strong>
+    <p class="truncate">A long status message is truncated with an ellipsis when the available inline space is limited, preserving a compact row without wrapping into the content below or pushing neighboring controls out of view.</p>
+  </div>
 </div>`;
 
 const darkExample = `
@@ -697,10 +703,15 @@ export function Home() {
         </p>
         <p>
           The companion stylesheet provides token-backed display, flex, grid,
-          alignment, sizing, spacing, and gap helpers. It is plain generated CSS
-          and requires no template scanning or consumer-side tooling. Override
-          the <code>--space-*</code> custom properties to change its spacing
-          scale.
+          alignment, sizing, spacing, positioning, overflow, text, aspect-ratio,
+          and accessibility helpers. It is plain generated CSS and requires no
+          template scanning or consumer-side tooling. Override the{" "}
+          <code>--space-*</code> custom properties to change its spacing scale.
+          Prefer named helpers such as <code>.stack</code>, <code>.y-stack</code>,
+          and <code>.x-stack</code> for common composition, then use atomic
+          helpers for exceptions. Breakpoint-prefixed variants are intentionally
+          not generated; use intrinsic layouts or consumer-owned media queries
+          instead.
         </p>
         <CodeExample code={utilitiesExample} />
       </section>

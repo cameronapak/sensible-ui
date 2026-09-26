@@ -129,9 +129,13 @@ Atomic layout utilities are available as an optional stylesheet:
 <link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.utilities.min.css" type="text/css" rel="stylesheet">
 ```
 
-The stylesheet provides familiar helpers such as `mt-4`, `px-2`, `gap-3`, `size-8`, `flex`, `items-center`, and `justify-between`. It is generated when Sensible UI is built, but consumers receive plain CSS and do not need JavaScript, template scanning, or configuration.
+The stylesheet provides familiar helpers such as `mt-4`, `px-2`, `gap-3`, `size-8`, `flex`, `grow`, `items-center`, `justify-between`, `sr-only`, `truncate`, `aspect-square`, `relative`, `inset-0`, and `overflow-auto`. It also includes text alignment, z-index, and min/max-height helpers. It is generated when Sensible UI is built, but consumers receive plain CSS and do not need JavaScript, template scanning, or configuration.
 
 Spacing and sizing use the `--space-0`, `--space-1`, `--space-2`, `--space-3`, `--space-4`, `--space-6`, `--space-8`, `--space-12`, and `--space-16` tokens defined by the utility stylesheet. Override those custom properties after importing it to change the scale.
+
+Prefer the core `.stack`/`.y-stack`, `.x-stack`, `.cluster`, `.split`, and `.auto-grid` helpers for common composition. Use atomic utilities when no named layout describes the exception clearly.
+
+The stylesheet does not generate breakpoint-prefixed variants. This keeps its size and public API predictable without imposing a breakpoint scale. Prefer intrinsic layouts such as `.auto-grid` and `.flex-wrap`, or add project-specific media queries when composition must change at a breakpoint.
 
 ## Component catalog
 
