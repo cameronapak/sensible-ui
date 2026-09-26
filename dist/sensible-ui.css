@@ -2702,10 +2702,42 @@
   [aria-busy="true"]:after {
     content: "";
     display: block;
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>');
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
     animation: sensible-spinner-spin 1s linear infinite;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-circle-icon lucide-loader-circle"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>');
+    background-color: currentColor;
+    flex-shrink: 0;
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  :-webkit-any(button, a.button)[aria-busy="true"]:not(:empty):after {
+    position: static;
+    order: -1;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    inset: auto;
+  }
+
+  :-moz-any(button, a.button)[aria-busy="true"]:not(:empty):after {
+    position: static;
+    order: -1;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    inset: auto;
+  }
+
+  :is(button, a.button)[aria-busy="true"]:not(:empty):after {
+    position: static;
+    order: -1;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    inset: auto;
   }
 
   @keyframes sensible-spinner-spin {
@@ -3101,6 +3133,15 @@
     ):disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  :not(form[method="dialog"])
+    > :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    )[aria-busy="true"] {
+    cursor: wait;
   }
 
   :not(form[method="dialog"])
@@ -3585,6 +3626,15 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    )[aria-busy="true"] {
+    cursor: wait;
+  }
+
+  :not(form[method="dialog"])
+    > :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
     ):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
@@ -4055,6 +4105,15 @@
     ):disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  :not(form[method="dialog"])
+    > :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    )[aria-busy="true"] {
+    cursor: wait;
   }
 
   :not(form[method="dialog"])

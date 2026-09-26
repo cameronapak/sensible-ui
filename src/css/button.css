@@ -43,6 +43,10 @@
       opacity: 0.5;
     }
 
+    &[aria-busy="true"] {
+      cursor: wait;
+    }
+
     &:focus-visible {
       border-color: var(--ring);
       box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);

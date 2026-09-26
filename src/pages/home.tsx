@@ -194,6 +194,11 @@ export function Home() {
         <a href="#" class="button" data-variant="primary">
           Link as Button
         </a>
+
+        <h3>Loading</h3>
+        <button aria-busy="true" disabled>
+          Loading...
+        </button>
       </section>
 
       <hr />
