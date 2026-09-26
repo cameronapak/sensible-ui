@@ -1,5 +1,17 @@
 # Sensible UI
 
+## 1.2.0
+
+### Minor Changes
+
+- dd58681: Make every component subpath export standalone by including its required theme and base styles. Move shared card styling into the card module so importing `@faith-tools/sensible-ui/card` provides the complete card interface.
+- 70d071d: Prefer Geist and Geist Mono when available, and add font family theme tokens for customization.
+
+### Patch Changes
+
+- 00fceff: Make cross-document page view transitions opt-in through the `@faith-tools/sensible-ui/view-transition` export instead of enabling them in the default bundle.
+- 653c6cf: Keep card text and actions contained when content grows or the card is squeezed into a narrow layout.
+
 ## 1.1.0
 
 ### Minor Changes
