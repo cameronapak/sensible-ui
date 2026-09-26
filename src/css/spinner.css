@@ -46,4 +46,10 @@
       transform: rotate(360deg);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    [aria-busy="true"]::after {
+      animation: none;
+    }
+  }
 }

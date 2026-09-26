@@ -43,6 +43,12 @@
     line-height: 1.5;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   :-webkit-any(h1, h2, h3, h4, h5, h6) {
     font-size: inherit;
     font-weight: inherit;
@@ -2743,6 +2749,12 @@
       transform: rotate(360deg);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    [aria-busy="true"]:after {
+      animation: none;
+    }
+  }
 }
 
 /* src/css/item.css */
@@ -3067,6 +3079,17 @@
     content-visibility: visible;
     opacity: 1;
     height: calc-size(auto, size);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    details,
+    details > summary:after {
+      transition-duration: 0s;
+    }
+
+    details::details-content {
+      transition-duration: 0s;
+    }
   }
 }
 

@@ -48,7 +48,13 @@ Cross-document page view transitions are available as an opt-in stylesheet:
 @import '@faith-tools/sensible-ui/view-transition';
 ```
 
-This enables same-origin navigation with `@view-transition { navigation: auto; }`. The default bundle does not enable page view transitions.
+This enables same-origin navigation with `@view-transition { navigation: auto; }` when the user has not requested reduced motion. The default bundle does not enable page view transitions.
+
+## Motion preferences
+
+Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes immediate, accordion state changes happen without transitions, spinners keep their busy indicator without rotating, and the optional page view transitions stay disabled.
+
+Future components should put decorative motion behind `prefers-reduced-motion: no-preference` or provide a reduced-motion rule that preserves the visible state change without animation.
 
 ## Fonts
 

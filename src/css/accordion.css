@@ -113,4 +113,15 @@
       }
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    details,
+    details > summary::after {
+      transition-duration: 0s;
+    }
+
+    details::details-content {
+      transition-duration: 0s;
+    }
+  }
 }
