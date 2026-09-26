@@ -12,6 +12,7 @@ The current release is a semantic-first hybrid:
 
 - Native elements such as headings, buttons, inputs, tables, and `details` receive default styles.
 - Named classes cover components or layout concepts that HTML cannot identify precisely, including `.card`, `.badge`, `.item`, `.button`, `.x-stack`, and `.y-stack`.
+- The core bundle includes named layout recipes. Atomic layout utilities are an opt-in companion stylesheet.
 - Native state and ARIA attributes express state. `data-*` attributes express visual variants, sizes, or slots.
 - CSS custom properties are the theming API. A `.dark` ancestor selects the bundled dark theme.
 - Consumers can import the complete bundle or standalone modules through package exports.
@@ -31,7 +32,8 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 ## Boundaries
 
 - `src/css/` is the source of truth for the library. Each component or styling concern owns one CSS module, and `src/css/index.css` composes the complete bundle.
-- `dist/sensible-ui.css` and `dist/sensible-ui.min.css` are generated, published artifacts. Keep them in sync with the source by running `bun run check`.
+- The core and optional utility stylesheets in `dist/` are generated, published artifacts. Keep them in sync with the source by running `bun run check`.
+- `generate-utilities.ts` owns the repetitive atomic utility families. Named layouts remain hand-written in `src/css/utils.css`.
 - `src/pages/home.tsx` is both the component gallery and the source for the static site. New public behavior should have a representative example there.
 - `src/app.tsx` defines the shared Hono JSX document and gallery route.
 - `index.tsx` serves the Hono app during development. `build-site.tsx` renders the same app for static hosting.
@@ -43,7 +45,8 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 - **Variant**: A visual alternative selected with `data-variant` or another documented `data-*` attribute.
 - **State**: Meaning carried by native state or ARIA, such as `disabled`, `open`, `aria-busy`, or `aria-invalid`.
 - **Theme token**: A public CSS custom property, such as `--primary` or `--border`, that consumers can override.
-- **Bundle**: The generated stylesheet containing every source module.
+- **Bundle**: The generated stylesheet containing every core source module.
+- **Companion stylesheet**: An optional stylesheet that extends the core without requiring consumer-side JavaScript or build tooling.
 - **Standalone module**: A package subpath stylesheet that includes the theme and base styles required to work without another Sensible UI import.
 - **Gallery**: The home page that documents and visually exercises the public API.
 

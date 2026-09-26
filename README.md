@@ -104,6 +104,29 @@ Every component subpath is standalone. It includes the theme tokens and base sty
 Use the root import when you want the complete bundle. Use subpath imports when you only need selected components.
 If markup combines components, such as `<table class="card">`, import both subpaths.
 
+## Layouts and optional utilities
+
+The core bundle includes named layout helpers for common composition patterns:
+
+- `.stack` arranges content vertically.
+- `.cluster` arranges wrapping inline content.
+- `.split` separates content across the available width.
+- `.auto-grid` creates an intrinsic responsive grid. Set `--min-item-size` to control when its columns wrap.
+
+Atomic layout utilities are available as an optional stylesheet:
+
+```css
+@import '@faith-tools/sensible-ui/utilities';
+```
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.utilities.min.css" type="text/css" rel="stylesheet">
+```
+
+The stylesheet provides familiar helpers such as `mt-4`, `px-2`, `gap-3`, `size-8`, `flex`, `items-center`, and `justify-between`. It is generated when Sensible UI is built, but consumers receive plain CSS and do not need JavaScript, template scanning, or configuration.
+
+Spacing and sizing use the `--space-0`, `--space-1`, `--space-2`, `--space-3`, `--space-4`, `--space-6`, `--space-8`, `--space-12`, and `--space-16` tokens defined by the utility stylesheet. Override those custom properties after importing it to change the scale.
+
 ## Components
 
 - [x] Accordion
@@ -124,7 +147,7 @@ bun install
 bun run dev
 ```
 
-`bun run build` bundles the plain CSS source into `dist/sensible-ui.css` and `dist/sensible-ui.min.css`.
+`bun run build` bundles the core and optional utility stylesheets into `dist`.
 `bun run build:site` renders the same demo used by the Bun preview into `dist/static` with its CSS for static hosting.
 
 ## Attributions

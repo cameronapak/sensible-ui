@@ -54,6 +54,29 @@ for (const [name, moduleMarker] of Object.entries(modules)) {
   }
 }
 
-console.log(`Verified ${Object.keys(modules).length} standalone CSS exports`)
+const utilitiesEntry = await Bun.file("./src/css/entries/utilities.css").text()
+if (!utilitiesEntry.includes('@import "../generated/utilities.css";')) {
+  throw new Error("The utilities export is missing its generated stylesheet")
+}
+
+const utilitiesResult = await Bun.build({
+  entrypoints: ["./src/css/entries/utilities.css"],
+  target: "browser",
+})
+if (!utilitiesResult.success) {
+  throw new AggregateError(
+    utilitiesResult.logs,
+    "Failed to build the utilities export",
+  )
+}
+
+const utilitiesCss = await utilitiesResult.outputs[0].text()
+for (const marker of ["--space-1:", ".mt-1 {", ".size-8 {"]) {
+  if (!utilitiesCss.includes(marker)) {
+    throw new Error(`The utilities export is missing ${JSON.stringify(marker)}`)
+  }
+}
+
+console.log(`Verified ${Object.keys(modules).length + 1} standalone CSS exports`)
 
 export {}

@@ -18,6 +18,7 @@ app.use(
           href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
         />
         <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="./utilities.css" />
       </head>
       <body>{children}</body>
     </html>

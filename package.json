@@ -5,7 +5,13 @@
   "author": "cameronapak",
   "type": "module",
   "packageManager": "bun@1.3.10",
-  "files": ["dist/sensible-ui.css", "dist/sensible-ui.min.css", "src/css"],
+  "files": [
+    "dist/sensible-ui.css",
+    "dist/sensible-ui.min.css",
+    "dist/sensible-ui.utilities.css",
+    "dist/sensible-ui.utilities.min.css",
+    "src/css"
+  ],
   "exports": {
     ".": "./dist/sensible-ui.css",
     "./accordion": "./src/css/entries/accordion.css",
@@ -24,6 +30,8 @@
     "./table": "./src/css/entries/table.css",
     "./theme": "./src/css/theme.css",
     "./typography": "./src/css/entries/typography.css",
+    "./utilities": "./dist/sensible-ui.utilities.css",
+    "./utilities/min": "./dist/sensible-ui.utilities.min.css",
     "./utils": "./src/css/entries/utils.css",
     "./view-transition": "./src/css/view-transition.css"
   },
@@ -48,12 +56,16 @@
   },
   "homepage": "https://sensibleui.com",
   "scripts": {
-    "dev": "concurrently \"bun run dev:css\" \"bun run --hot ./index.tsx\"",
+    "dev": "bun run generate:utilities && concurrently \"bun run dev:css\" \"bun run dev:utilities\" \"bun run --hot ./index.tsx\"",
     "dev:css": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css --watch",
+    "dev:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css --watch",
     "prod": "bun run ./index.tsx",
-    "build": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
+    "generate:utilities": "bun run ./generate-utilities.ts",
+    "build": "bun run generate:utilities && bun run build:core && bun run build:utilities",
+    "build:core": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css",
+    "build:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css && bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.min.css --minify && prettier --write ./dist/sensible-ui.utilities.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
-    "check": "bun run typecheck && bun run build && bun run check:exports && git diff --exit-code -- dist/sensible-ui.css dist/sensible-ui.min.css",
+    "check": "bun run typecheck && bun run build && bun run check:exports && git diff --exit-code -- src/css/generated/utilities.css dist/sensible-ui.css dist/sensible-ui.min.css dist/sensible-ui.utilities.css dist/sensible-ui.utilities.min.css",
     "check:exports": "bun run ./check-css-exports.ts",
     "typecheck": "tsc --noEmit",
     "changeset": "changeset",

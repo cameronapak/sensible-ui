@@ -33,6 +33,9 @@ export function Home() {
           <a href="#stacks" class="badge" data-variant="outline">
             Stacks
           </a>
+          <a href="#utilities" class="badge" data-variant="outline">
+            Utilities
+          </a>
           <a href="#spinner" class="badge" data-variant="outline">
             Spinner
           </a>
@@ -334,6 +337,60 @@ export function Home() {
             This is a <code>.y-stack</code>
           </h3>
           <span class="badge bg-blue-600">New</span>
+        </div>
+
+        <div class="split">
+          <h3>
+            This is a <code>.split</code>
+          </h3>
+          <span class="badge" data-variant="secondary">
+            Named layout
+          </span>
+        </div>
+      </section>
+
+      <hr />
+
+      <section class="section stack" id="utilities">
+        <h2>Optional CSS utilities</h2>
+        <p>
+          Import <code>@faith-tools/sensible-ui/utilities</code> for token-backed layout helpers. The stylesheet is plain CSS and does not require
+          template scanning or JavaScript.
+        </p>
+
+        <div class="auto-grid gap-4 mt-4" style="--min-item-size: 12rem">
+          <article class="card">
+            <header>
+              <h3>Spacing and sizing</h3>
+              <p>
+                <code>gap-2 size-8</code>
+              </p>
+            </header>
+            <section>
+              <div class="cluster justify-center gap-2">
+                <span class="badge size-8 justify-center">1</span>
+                <span class="badge size-8 justify-center">2</span>
+                <span class="badge size-8 justify-center">3</span>
+              </div>
+            </section>
+          </article>
+
+          <article class="card">
+            <header>
+              <h3>Flexible layout</h3>
+              <p>
+                <code>flex items-center justify-between</code>
+              </p>
+            </header>
+            <section>
+              <div class="flex items-center justify-between gap-4">
+                <span>Semantic first</span>
+                <span class="badge" data-variant="secondary">
+                  Opt in
+                </span>
+              </div>
+            </section>
+          </article>
         </div>
       </section>
 

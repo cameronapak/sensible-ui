@@ -3,6 +3,7 @@ import app from './src/app.tsx'
 const server = Bun.serve({
   routes: {
     '/index.css': Bun.file('./dist/sensible-ui.css'),
+    '/utilities.css': Bun.file('./dist/sensible-ui.utilities.css'),
   },
   fetch: app.fetch,
 })

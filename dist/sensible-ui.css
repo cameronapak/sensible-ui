@@ -175,6 +175,8 @@
 }
 
 /* src/css/theme.css */
+@layer base, typography, components, button, utilities;
+
 :root {
   --radius: 0.625rem;
   --font-sans:
@@ -4497,22 +4499,42 @@
     margin-bottom: 2rem;
   }
 
+  .stack,
   .y-stack {
     display: flex;
+    gap: var(--layout-gap, 1rem);
     flex-direction: column;
-    gap: 1rem;
     height: auto;
   }
 
-  .y-stack > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
+  :is(.stack, .y-stack) > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
     margin: 0 !important;
   }
 
-  .y-stack > :-moz-any(h1, h2, h3, h4, h5, h6, p) {
+  :is(.stack, .y-stack) > :-moz-any(h1, h2, h3, h4, h5, h6, p) {
     margin: 0 !important;
   }
 
-  .y-stack > :is(h1, h2, h3, h4, h5, h6, p) {
+  :is(.stack, .y-stack) > :is(h1, h2, h3, h4, h5, h6, p) {
+    margin: 0 !important;
+  }
+
+  .cluster {
+    display: flex;
+    align-items: center;
+    gap: var(--layout-gap, 0.75rem);
+    flex-wrap: wrap;
+  }
+
+  .cluster > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
+    margin: 0 !important;
+  }
+
+  .cluster > :-moz-any(h1, h2, h3, h4, h5, h6, p) {
+    margin: 0 !important;
+  }
+
+  .cluster > :is(h1, h2, h3, h4, h5, h6, p) {
     margin: 0 !important;
   }
 
@@ -4532,6 +4554,23 @@
 
   .x-stack > :is(h1, h2, h3, h4, h5, h6, p) {
     margin: 0 !important;
+  }
+
+  .split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--layout-gap, 1rem);
+    flex-wrap: wrap;
+  }
+
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--min-item-size, 16rem)), 1fr)
+    );
+    gap: var(--layout-gap, 1rem);
   }
 
   .text-muted-foreground {

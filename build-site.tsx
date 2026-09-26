@@ -12,4 +12,5 @@ if (!response.ok) {
 await Promise.all([
   Bun.write(`${output}/index.html`, await response.text()),
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),
+  Bun.write(`${output}/utilities.css`, Bun.file('./dist/sensible-ui.utilities.css')),
 ])
