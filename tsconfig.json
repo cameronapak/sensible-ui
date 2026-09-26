@@ -4,7 +4,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "mono-jsx",
+    "jsxImportSource": "hono/jsx",
     "allowImportingTsExtensions": true,
     "noEmit": true,
   },

@@ -33,8 +33,9 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 - `src/css/` is the source of truth for the library. Each component or styling concern owns one CSS module, and `src/css/index.css` composes the complete bundle.
 - `dist/sensible-ui.css` and `dist/sensible-ui.min.css` are generated, published artifacts. Keep them in sync with the source by running `bun run check`.
 - `src/pages/home.tsx` is both the component gallery and the source for the static site. New public behavior should have a representative example there.
+- `src/app.tsx` defines the shared Hono JSX document and gallery route.
 - `src/html/` contains broader element test pages. They are supporting visual fixtures, not separate products.
-- `index.tsx` serves the gallery during development. `build-site.tsx` renders the same gallery for static hosting.
+- `index.tsx` serves the Hono app during development. `build-site.tsx` renders the same app for static hosting.
 
 ## Vocabulary
 
@@ -48,8 +49,8 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 
 ## Direction under exploration
 
-Interactive features may eventually use web components to keep adoption simple without turning the CSS core into a framework-specific library. Datastar Rocket is one possible implementation reference. Even layout APIs such as `x-stack` and `y-stack` may be explored as web components.
+Interactive features may eventually use web components to keep adoption simple without turning the CSS core into a framework-specific library. [Ilha](https://ilha.build/guide/ui/custom-elements) and Datastar Rocket are possible implementation references. Even layout APIs such as `x-stack` and `y-stack` may be explored as web components.
 
 This is a direction, not an architecture decision. Record a decision before adding a web-component runtime or changing the package's CSS-only core.
 
-Design references are [Oat CSS](https://oat.ink/), [Basecoat](https://basecoatui.com/), [Web Awesome](https://webawesome.com/docs/components/), shadcn/ui, and [Datastar Rocket](https://data-star.dev/reference/rocket). Treat them as inspiration, not specifications.
+Design references are [Oat CSS](https://oat.ink/), [Basecoat](https://basecoatui.com/), [Web Awesome](https://webawesome.com/docs/components/), shadcn/ui, [Ilha](https://ilha.build/guide/ui/custom-elements), and [Datastar Rocket](https://data-star.dev/reference/rocket). Treat them as inspiration, not specifications.

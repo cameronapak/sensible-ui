@@ -1,25 +1,15 @@
-/** @jsxImportSource mono-jsx */
 import { mkdir } from 'node:fs/promises'
-import { Home } from './src/pages/home.tsx'
+import app from './src/app.tsx'
 
 const output = './dist/static'
 await mkdir(output, { recursive: true })
 
-const page = (
-  <html lang="en">
-    <head>
-      <meta charSet="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Sensible UI</title>
-      <link rel="stylesheet" href="./index.css" />
-    </head>
-    <body>
-      <Home title="Sensible UI" />
-    </body>
-  </html>
-)
+const response = await app.request('/')
+if (!response.ok) {
+  throw new Error(`Failed to render the static site: ${response.status}`)
+}
 
 await Promise.all([
-  Bun.write(`${output}/index.html`, await page.text()),
+  Bun.write(`${output}/index.html`, await response.text()),
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),
 ])

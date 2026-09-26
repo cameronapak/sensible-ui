@@ -1,17 +1,6 @@
-/** @jsxImportSource mono-jsx */
 import { version } from '../../package.json'
 
-interface Props {
-  title: string
-}
-
-interface State {
-  title: string
-}
-
-export function Home(this: FC<State>, props: Props) {
-  this.title = props.title
-
+export function Home() {
   return (
     <main class="container">
       <div class="y-stack">
