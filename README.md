@@ -50,6 +50,48 @@ Cross-document page view transitions are available as an opt-in stylesheet:
 
 This enables same-origin navigation with `@view-transition { navigation: auto; }`. The default bundle does not enable page view transitions.
 
+## Fonts
+
+Sensible UI prefers Geist and Geist Mono, then falls back to your system fonts. The core stylesheet does not download fonts for you.
+
+For a plain HTML site, load Geist from Google Fonts before Sensible UI:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+```
+
+For a Next.js app, install the official [`geist`](https://www.npmjs.com/package/geist) package:
+
+```bash
+npm install geist
+```
+
+Then expose its font variables on your root layout. Sensible UI uses these variables automatically:
+
+```tsx
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+To use different fonts, override the theme tokens:
+
+```css
+:root {
+  --font-sans: "Atkinson Hyperlegible", sans-serif;
+  --font-mono: "Berkeley Mono", monospace;
+}
+```
+
 ## Components
 
 - [x] Accordion

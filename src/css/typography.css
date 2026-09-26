@@ -78,9 +78,7 @@
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
     padding: 0.125rem 0.25rem;
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
+    font-family: var(--font-mono);
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
@@ -91,9 +89,7 @@
     border-radius: calc(var(--radius) - 2px);
     background: var(--secondary);
     padding: 1rem;
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
+    font-family: var(--font-mono);
     white-space: pre;
 
     & code {
@@ -156,7 +152,7 @@
     background: var(--muted);
     padding-inline: 0.25rem;
     color: var(--muted-foreground);
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 500;

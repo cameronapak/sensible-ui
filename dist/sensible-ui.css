@@ -37,20 +37,9 @@
   }
 
   html {
+    font-family: var(--font-sans);
     scroll-behavior: smooth;
     overscroll-behavior: none;
-    font-family:
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      Segoe UI,
-      Roboto,
-      Noto Sans,
-      Ubuntu,
-      Cantarell,
-      Helvetica Neue,
-      sans-serif;
     line-height: 1.5;
   }
 
@@ -188,6 +177,13 @@
 /* src/css/theme.css */
 :root {
   --radius: 0.625rem;
+  --font-sans:
+    var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
+  --font-mono:
+    var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -359,16 +355,8 @@
   :not(pre) > :-webkit-any(code, samp) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
+    font-family: var(--font-mono);
     padding: 0.125rem 0.25rem;
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      Liberation Mono,
-      Courier New,
-      monospace;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
@@ -376,16 +364,8 @@
   :not(pre) > :-moz-any(code, samp) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
+    font-family: var(--font-mono);
     padding: 0.125rem 0.25rem;
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      Liberation Mono,
-      Courier New,
-      monospace;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
@@ -393,16 +373,8 @@
   :not(pre) > :is(code, samp) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
+    font-family: var(--font-mono);
     padding: 0.125rem 0.25rem;
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      Liberation Mono,
-      Courier New,
-      monospace;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
@@ -411,18 +383,10 @@
     overflow-x: auto;
     border-radius: calc(var(--radius) - 2px);
     background: var(--secondary);
+    font-family: var(--font-mono);
     white-space: pre;
     margin-bottom: 1rem;
     padding: 1rem;
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      Liberation Mono,
-      Courier New,
-      monospace;
   }
 
   pre code {
@@ -505,6 +469,7 @@
     border-radius: calc(var(--radius) - 4px);
     background: var(--muted);
     color: var(--muted-foreground);
+    font-family: var(--font-sans);
     user-select: none;
     justify-content: center;
     align-items: center;
@@ -515,18 +480,6 @@
     height: 1.25rem;
     padding-inline-start: 0.25rem;
     padding-inline-end: 0.25rem;
-    font-family:
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      Segoe UI,
-      Roboto,
-      Noto Sans,
-      Ubuntu,
-      Cantarell,
-      Helvetica Neue,
-      sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1rem;

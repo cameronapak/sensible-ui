@@ -17,7 +17,7 @@
   }
 
   html {
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.5;
     scroll-behavior: smooth;
     overscroll-behavior: none;
