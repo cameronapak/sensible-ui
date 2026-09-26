@@ -1,5 +1,15 @@
 # Sensible UI
 
+## 1.4.0
+
+### Minor Changes
+
+- 62d3fbd: Expand the optional utility stylesheet with accessibility, overflow, text, aspect-ratio, positioning, inset, z-index, and height-bound helpers.
+
+### Patch Changes
+
+- 6777ad7: Respect reduced-motion preferences for smooth scrolling, accordions, spinners, and optional page transitions.
+
 ## 1.3.0
 
 ### Minor Changes
