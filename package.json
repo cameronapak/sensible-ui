@@ -54,8 +54,7 @@
     "build:site": "bun run build && bun run ./build-site.tsx",
     "check": "bun run build && git diff --exit-code -- dist/sensible-ui.css dist/sensible-ui.min.css",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
-    "publish": "changeset publish"
+    "changeset:version": "changeset version"
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",
