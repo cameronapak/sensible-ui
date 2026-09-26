@@ -92,6 +92,18 @@ To use different fonts, override the theme tokens:
 }
 ```
 
+## Individual modules
+
+Every component subpath is standalone. It includes the theme tokens and base styles that its component needs:
+
+```css
+@import '@faith-tools/sensible-ui/button';
+@import '@faith-tools/sensible-ui/card';
+```
+
+Use the root import when you want the complete bundle. Use subpath imports when you only need selected components.
+If markup combines components, such as `<table class="card">`, import both subpaths.
+
 ## Components
 
 - [x] Accordion

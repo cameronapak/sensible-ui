@@ -686,17 +686,34 @@
 
 /* src/css/card.css */
 @layer components {
-  .card:not(:-webkit-any(table, dl)) {
-    display: flex;
+  .card {
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) + 4px);
-    background-color: var(--card);
+    background: var(--card);
     color: var(--card-foreground);
+    box-shadow:
+      0 1px 3px #0000001a,
+      0 1px 2px -1px #0000001a;
+  }
+
+  .card:-webkit-any(table) {
+    border: 0;
+  }
+
+  .card:-moz-any(table) {
+    border: 0;
+  }
+
+  .card:is(table) {
+    border: 0;
+  }
+
+  .card:not(:-webkit-any(table, dl)) {
+    display: flex;
     flex-direction: column;
     gap: 1.5rem;
     padding-block-start: 1rem;
     padding-block-end: 1rem;
-    box-shadow: 0 1px 2px #0000000d;
   }
 
   .card:not(:-webkit-any(table, dl)):has(> footer) {
@@ -791,15 +808,10 @@
 
   .card:not(:-moz-any(table, dl)) {
     display: flex;
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
-    background-color: var(--card);
-    color: var(--card-foreground);
     flex-direction: column;
     gap: 1.5rem;
     padding-block-start: 1rem;
     padding-block-end: 1rem;
-    box-shadow: 0 1px 2px #0000000d;
   }
 
   .card:not(:-moz-any(table, dl)):has(> footer) {
@@ -894,15 +906,10 @@
 
   .card:not(:is(table, dl)) {
     display: flex;
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
-    background-color: var(--card);
-    color: var(--card-foreground);
     flex-direction: column;
     gap: 1.5rem;
     padding-block-start: 1rem;
     padding-block-end: 1rem;
-    box-shadow: 0 1px 2px #0000000d;
   }
 
   .card:not(:is(table, dl)):has(> footer) {
@@ -4250,20 +4257,6 @@
 
   .x-stack > :is(h1, h2, h3, h4, h5, h6, p) {
     margin: 0 !important;
-  }
-
-  .card {
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
-    background: var(--card);
-    color: var(--card-foreground);
-    box-shadow:
-      0 1px 3px #0000001a,
-      0 1px 2px -1px #0000001a;
-  }
-
-  table.card {
-    border: 0;
   }
 
   .text-muted-foreground {

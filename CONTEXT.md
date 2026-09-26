@@ -14,7 +14,7 @@ The current release is a semantic-first hybrid:
 - Named classes cover components or layout concepts that HTML cannot identify precisely, including `.card`, `.badge`, `.item`, `.button`, `.x-stack`, and `.y-stack`.
 - Native state and ARIA attributes express state. `data-*` attributes express visual variants, sizes, or slots.
 - CSS custom properties are the theming API. A `.dark` ancestor selects the bundled dark theme.
-- Consumers can import the complete bundle or individual source modules through package exports.
+- Consumers can import the complete bundle or standalone modules through package exports.
 
 This model describes the current implementation. It is not a permanent commitment. Strict semantic styling, the current hybrid, and an opt-in or parent-scoped mode all remain open design directions.
 
@@ -44,6 +44,7 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 - **State**: Meaning carried by native state or ARIA, such as `disabled`, `open`, `aria-busy`, or `aria-invalid`.
 - **Theme token**: A public CSS custom property, such as `--primary` or `--border`, that consumers can override.
 - **Bundle**: The generated stylesheet containing every source module.
+- **Standalone module**: A package subpath stylesheet that includes the theme and base styles required to work without another Sensible UI import.
 - **Gallery**: The home page that documents and visually exercises the public API.
 
 ## Direction under exploration

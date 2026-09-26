@@ -1,3 +1,5 @@
+@layer base, typography, components, button, utilities;
+
 :root {
   --radius: 0.625rem;
   --font-sans: var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui,
