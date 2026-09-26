@@ -13,4 +13,6 @@ await Promise.all([
   Bun.write(`${output}/index.html`, await response.text()),
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),
   Bun.write(`${output}/utilities.css`, Bun.file('./dist/sensible-ui.utilities.css')),
+  Bun.write(`${output}/site.css`, Bun.file('./src/site.css')),
+  Bun.write(`${output}/site.js`, Bun.file('./src/site.js')),
 ])

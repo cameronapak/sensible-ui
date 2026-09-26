@@ -133,18 +133,25 @@ The stylesheet provides familiar helpers such as `mt-4`, `px-2`, `gap-3`, `size-
 
 Spacing and sizing use the `--space-0`, `--space-1`, `--space-2`, `--space-3`, `--space-4`, `--space-6`, `--space-8`, `--space-12`, and `--space-16` tokens defined by the utility stylesheet. Override those custom properties after importing it to change the scale.
 
-## Components
+## Component catalog
 
-- [x] Accordion
-- [x] Badge
-- [x] Button
-- [x] Image
-- [x] Input
-- [x] Item
-- [x] Loading Spinner
-- [x] Table
-- [x] Typography
-- [ ] More to be thought out soon...
+The [main gallery](https://sensibleui.com) documents each component's markup, variants, states, accessibility requirements, and standalone import.
+
+| Component        | Standalone import                           |
+| ---------------- | ------------------------------------------- |
+| Accordion        | `@faith-tools/sensible-ui/accordion`        |
+| Badge            | `@faith-tools/sensible-ui/badge`            |
+| Button           | `@faith-tools/sensible-ui/button`           |
+| Card             | `@faith-tools/sensible-ui/card`             |
+| Description list | `@faith-tools/sensible-ui/description-list` |
+| Image and figure | `@faith-tools/sensible-ui/image`            |
+| Form controls    | `@faith-tools/sensible-ui/input`            |
+| Item             | `@faith-tools/sensible-ui/item`             |
+| Loading spinner  | `@faith-tools/sensible-ui/spinner`          |
+| Table            | `@faith-tools/sensible-ui/table`            |
+| Typography       | `@faith-tools/sensible-ui/typography`       |
+
+Named layouts are available from `@faith-tools/sensible-ui/utils` and are included in the complete bundle. The optional atomic utility stylesheet is available from `@faith-tools/sensible-ui/utilities`.
 
 ## Development
 

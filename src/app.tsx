@@ -19,6 +19,8 @@ app.use(
         />
         <link rel="stylesheet" href="./index.css" />
         <link rel="stylesheet" href="./utilities.css" />
+        <link rel="stylesheet" href="./site.css" />
+        <script src="./site.js" defer></script>
       </head>
       <body>{children}</body>
     </html>

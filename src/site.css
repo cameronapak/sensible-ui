@@ -1,0 +1,148 @@
+.docs-page {
+  --container-width: 72rem;
+}
+
+.docs-hero {
+  padding-block: 2rem;
+}
+
+.docs-hero h1,
+.docs-section h2,
+.docs-subsection h3,
+.docs-footer h2 {
+  margin: 0;
+}
+
+.docs-hero > p {
+  max-width: 44rem;
+  color: var(--muted-foreground);
+  font-size: 1.125rem;
+}
+
+.docs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.docs-nav a {
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  text-decoration: none !important;
+}
+
+.docs-nav a:hover {
+  background: var(--accent);
+}
+
+.docs-section {
+  border-top: 1px solid var(--border);
+  padding-block: 3rem;
+}
+
+.docs-section > p,
+.docs-subsection > p {
+  max-width: 72ch;
+}
+
+.docs-subsection {
+  padding-block: 1.5rem;
+}
+
+.docs-subsection + .docs-subsection {
+  border-top: 1px dashed var(--border);
+}
+
+.docs-import {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.docs-example {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  background: var(--background);
+}
+
+.docs-preview {
+  min-width: 0;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.docs-preview.dark {
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: dark;
+}
+
+.docs-preview > :is(.card, form, figure) {
+  max-width: 40rem;
+}
+
+.docs-preview figure img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.docs-code-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: var(--secondary);
+  padding: 0.5rem 0.75rem;
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.docs-code-toolbar button {
+  min-height: 2rem;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.docs-example > pre {
+  max-height: 24rem;
+  margin: 0;
+  border-radius: 0;
+}
+
+.docs-table-scroll {
+  min-width: 0;
+  overflow-x: auto;
+  padding: 1px;
+}
+
+.docs-table-scroll .docs-example {
+  min-width: 36rem;
+}
+
+.docs-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 3rem;
+}
+
+@media (width < 40rem) {
+  .docs-section {
+    padding-block: 2rem;
+  }
+
+  .docs-nav {
+    align-items: flex-start;
+  }
+
+  .docs-example > pre,
+  .docs-section > pre {
+    white-space: pre-wrap;
+  }
+
+  .docs-example > pre code,
+  .docs-section > pre code {
+    overflow-wrap: anywhere;
+  }
+}

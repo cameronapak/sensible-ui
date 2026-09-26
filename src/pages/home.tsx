@@ -1,674 +1,732 @@
-import { version } from '../../package.json'
+import { version } from "../../package.json";
+
+type CodeExampleProps = {
+  code: string;
+  dark?: boolean;
+};
+
+function CodeExample({ code, dark = false }: CodeExampleProps) {
+  const markup = code.trim();
+
+  return (
+    <div class="docs-example">
+      <div
+        class={`docs-preview${dark ? " dark" : ""}`}
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
+      <div class="docs-code-toolbar">
+        <span>HTML</span>
+        <button
+          type="button"
+          data-copy-code
+          aria-label="Copy HTML example"
+          aria-live="polite"
+        >
+          Copy
+        </button>
+      </div>
+      <pre>
+        <code>{markup}</code>
+      </pre>
+    </div>
+  );
+}
+
+function StandaloneImport({ path }: { path: string }) {
+  return (
+    <p class="docs-import">
+      Standalone import: <code>@import '@faith-tools/sensible-ui/{path}';</code>
+    </p>
+  );
+}
+
+const typographyExample = `
+<article>
+  <h1>A clear heading</h1>
+  <p>Use <strong>semantic HTML</strong> for meaning and <em>emphasis</em>.</p>
+  <blockquote>Good defaults should support the content.</blockquote>
+  <p>Press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search.</p>
+  <pre><code>const greeting = "Hello";</code></pre>
+</article>`;
+
+const buttonExample = `
+<div class="cluster">
+  <button type="button">Primary</button>
+  <button type="button" data-variant="secondary">Secondary</button>
+  <button type="button" data-variant="outline">Outline</button>
+  <button type="button" data-variant="ghost">Ghost</button>
+  <button type="button" data-variant="link">Link</button>
+  <button type="button" data-variant="destructive">Destructive</button>
+  <button type="button" data-size="sm">Small</button>
+  <button type="button" data-size="lg">Large</button>
+  <button type="button" aria-pressed="true">Pressed</button>
+  <button type="button" disabled>Disabled</button>
+  <a class="button" href="#buttons">Link as button</a>
+</div>`;
+
+const textInputExample = `
+<div class="stack">
+  <div>
+    <label for="profile-email">Email</label>
+    <input id="profile-email" name="email" type="email" placeholder="name@example.com">
+  </div>
+  <div>
+    <label for="profile-id">Account ID</label>
+    <input id="profile-id" name="id" value="04D6H89Z" readonly>
+  </div>
+  <div>
+    <label for="invalid-email">Email with an error</label>
+    <input id="invalid-email" type="email" aria-invalid="true" aria-describedby="email-error">
+    <small id="email-error">Enter a valid email address.</small>
+  </div>
+  <div>
+    <label for="disabled-input">Disabled input</label>
+    <input id="disabled-input" disabled value="Unavailable">
+  </div>
+</div>`;
+
+const textareaExample = `
+<div>
+  <label for="profile-about">About</label>
+  <textarea id="profile-about" name="about" placeholder="Tell us about yourself"></textarea>
+</div>`;
+
+const selectExample = `
+<div>
+  <label for="timezone">Time zone</label>
+  <select id="timezone" name="timezone">
+    <option value="">Choose a time zone</option>
+    <optgroup label="North America">
+      <option value="America/Chicago">Central Time</option>
+      <option value="America/New_York">Eastern Time</option>
+    </optgroup>
+  </select>
+</div>`;
+
+const checkboxExample = `
+<fieldset>
+  <legend>Notifications</legend>
+  <div>
+    <input id="product-updates" type="checkbox" name="updates" checked>
+    <label for="product-updates">Product updates</label>
+  </div>
+  <div>
+    <input id="security-alerts" type="checkbox" name="security" disabled>
+    <label for="security-alerts">Security alerts</label>
+  </div>
+</fieldset>`;
+
+const radioExample = `
+<fieldset>
+  <legend>Contact preference</legend>
+  <div>
+    <input id="contact-email" type="radio" name="contact" value="email" checked>
+    <label for="contact-email">Email</label>
+  </div>
+  <div>
+    <input id="contact-phone" type="radio" name="contact" value="phone">
+    <label for="contact-phone">Phone</label>
+  </div>
+</fieldset>`;
+
+const switchExample = `
+<label>
+  <input type="checkbox" role="switch" name="marketing" checked>
+  Marketing emails
+</label>`;
+
+const rangeExample = `
+<div>
+  <label for="volume">Volume</label>
+  <input id="volume" name="volume" type="range" min="0" max="100" value="65">
+</div>`;
+
+const dateExample = `
+<div class="auto-grid" style="--min-item-size: 12rem">
+  <div>
+    <label for="start-date">Start date</label>
+    <input id="start-date" name="start-date" type="date">
+  </div>
+  <div>
+    <label for="appointment">Appointment</label>
+    <input id="appointment" name="appointment" type="datetime-local">
+  </div>
+</div>`;
+
+const colorExample = `
+<label>
+  <input name="accent" type="color" value="#2563eb">
+  Accent color
+</label>`;
+
+const fileExample = `
+<div>
+  <label for="avatar-file">Profile image</label>
+  <input id="avatar-file" name="avatar" type="file" accept="image/*">
+</div>`;
+
+const cardExample = `
+<article class="card">
+  <header>
+    <h3>Team plan</h3>
+    <p>For growing organizations</p>
+    <button type="button" data-slot="card-action" data-variant="outline">Manage</button>
+  </header>
+  <section>
+    <p>Invite collaborators and share project settings.</p>
+  </section>
+  <footer>
+    <button type="button">Choose plan</button>
+    <button type="button" data-variant="outline">Learn more</button>
+  </footer>
+</article>`;
+
+const badgeExample = `
+<div class="cluster">
+  <span class="badge">Default</span>
+  <span class="badge" data-variant="secondary">Secondary</span>
+  <span class="badge" data-variant="outline">Outline</span>
+  <span class="badge" data-variant="destructive">Destructive</span>
+  <a class="badge" data-variant="outline" href="#badges">Linked badge</a>
+</div>`;
+
+const imageExample = `
+<figure>
+  <img
+    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=960&q=80"
+    alt="A mountain ridge beneath a cloudy sky"
+    width="960"
+    height="540"
+  >
+  <figcaption>Images and captions receive sensible defaults.</figcaption>
+</figure>`;
+
+const itemExample = `
+<div class="stack">
+  <div class="item">
+    <section>
+      <h3>Project settings</h3>
+      <p>Manage members, billing, and notifications.</p>
+    </section>
+    <button type="button" data-variant="outline">Open</button>
+  </div>
+  <a class="item" href="#item">
+    <section>
+      <h3>Linked item</h3>
+      <p>The whole row is one descriptive link.</p>
+    </section>
+    <span aria-hidden="true">→</span>
+  </a>
+</div>`;
+
+const spinnerExample = `
+<div class="stack">
+  <button type="button" aria-busy="true" disabled>Saving</button>
+  <div class="card" aria-busy="true" data-variant="overlay">
+    <header><h3>Loading report</h3></header>
+    <section><p>The current content remains visible while loading.</p></section>
+  </div>
+</div>`;
+
+const accordionExample = `
+<div>
+  <details name="questions">
+    <summary>Does this require JavaScript?</summary>
+    <p>No. It uses the native details and summary elements.</p>
+  </details>
+  <details name="questions" open>
+    <summary>Can only one item stay open?</summary>
+    <p>Yes. Give related details elements the same name.</p>
+  </details>
+</div>`;
+
+const descriptionListExample = `
+<dl class="card">
+  <dt>Status</dt>
+  <dd>Active</dd>
+  <dt>Plan</dt>
+  <dd>Team</dd>
+  <dt>Renewal date</dt>
+  <dd><time datetime="2027-01-15">January 15, 2027</time></dd>
+</dl>`;
+
+const tableExample = `
+<table class="card">
+  <caption>Current project members</caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Role</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Margaret Nguyen</th>
+      <td>Owner</td>
+      <td>Active</td>
+    </tr>
+    <tr>
+      <th scope="row">Hoshi Nakamura</th>
+      <td>Editor</td>
+      <td>Invited</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr><th scope="row" colspan="2">Total</th><td>2</td></tr>
+  </tfoot>
+</table>`;
+
+const layoutsExample = `
+<div class="stack">
+  <div class="cluster">
+    <span class="badge">Cluster</span>
+    <span class="badge" data-variant="secondary">Wraps inline content</span>
+  </div>
+  <div class="split">
+    <strong>Split layout</strong>
+    <button type="button" data-size="sm">Action</button>
+  </div>
+  <div class="auto-grid" style="--min-item-size: 10rem">
+    <div class="card"><section>First</section></div>
+    <div class="card"><section>Second</section></div>
+    <div class="card"><section>Third</section></div>
+  </div>
+</div>`;
+
+const utilitiesExample = `
+<div class="flex items-center justify-between gap-4 p-4">
+  <span>Optional utilities</span>
+  <span class="badge size-8 justify-center">3</span>
+</div>`;
+
+const darkExample = `
+<div class="auto-grid" style="--min-item-size: 12rem">
+  <article class="card">
+    <header><h3>Dark card</h3><p>The same semantic markup works.</p></header>
+    <section><span class="badge" data-variant="secondary">Dark theme</span></section>
+  </article>
+  <form>
+    <div>
+      <label for="dark-email">Email</label>
+      <input id="dark-email" type="email" placeholder="name@example.com">
+    </div>
+    <button type="button">Continue</button>
+  </form>
+</div>`;
 
 export function Home() {
   return (
-    <main class="container">
-      <div class="y-stack">
-        <div class="x-stack">
+    <main class="container docs-page">
+      <header class="docs-hero stack">
+        <div class="cluster">
           <h1>Sensible UI</h1>
           <code>v{version}</code>
           <span class="badge">beta</span>
         </div>
+        <p>
+          A semantic-first CSS component library with shadcn-style visual
+          defaults.
+        </p>
+        <nav class="docs-nav" aria-label="Component documentation">
+          <a href="#getting-started">Getting started</a>
+          <a href="#typography">Typography</a>
+          <a href="#buttons">Buttons</a>
+          <a href="#forms">Forms</a>
+          <a href="#card">Card</a>
+          <a href="#badges">Badge</a>
+          <a href="#image">Image</a>
+          <a href="#item">Item</a>
+          <a href="#spinner">Spinner</a>
+          <a href="#accordion">Accordion</a>
+          <a href="#description-list">Description list</a>
+          <a href="#table">Table</a>
+          <a href="#layouts">Layouts</a>
+          <a href="#utilities">Utilities</a>
+          <a href="#dark-mode">Dark mode</a>
+        </nav>
+      </header>
 
-        <p class="text-muted-foreground">
-          <code>shadcn/ui</code> style primitives using semantic CSS
+      <section class="docs-section stack" id="getting-started">
+        <h2>Getting started</h2>
+        <p>
+          Import the complete stylesheet when you want every semantic default
+          and component:
+        </p>
+        <pre>
+          <code>@import '@faith-tools/sensible-ui';</code>
+        </pre>
+        <p>Or use the versioned CDN build:</p>
+        <pre>
+          <code>{`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}</code>
+        </pre>
+        <p>
+          Standalone component imports include the theme and base styles they
+          need. When markup combines components, import each component. For
+          example, <code>&lt;table class="card"&gt;</code> needs both{" "}
+          <code>/table</code> and <code>/card</code>.
+        </p>
+        <details>
+          <summary>All public stylesheet exports</summary>
+          <div class="docs-table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Export</th>
+                  <th scope="col">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    <code>.</code>, <code>/css</code>
+                  </th>
+                  <td>Complete bundled stylesheet</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/min</code>
+                  </th>
+                  <td>Minified complete bundle</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/index</code>
+                  </th>
+                  <td>Source CSS entry point</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/base</code>
+                  </th>
+                  <td>Theme tokens and semantic reset</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/theme</code>
+                  </th>
+                  <td>Theme tokens and cascade layer order</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/accordion</code>, <code>/badge</code>,{" "}
+                    <code>/button</code>, <code>/card</code>
+                  </th>
+                  <td>Standalone component modules</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/description-list</code>, <code>/image</code>,{" "}
+                    <code>/input</code>, <code>/item</code>
+                  </th>
+                  <td>Standalone component modules</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/spinner</code>, <code>/table</code>,{" "}
+                    <code>/typography</code>
+                  </th>
+                  <td>Standalone component modules</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/utils</code>
+                  </th>
+                  <td>Named layouts, container, and composition helpers</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/utilities</code>, <code>/utilities/min</code>
+                  </th>
+                  <td>Optional generated atomic utilities</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/view-transition</code>
+                  </th>
+                  <td>Optional same-origin page transitions</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section class="docs-section stack" id="typography">
+        <h2>Typography</h2>
+        <StandaloneImport path="typography" />
+        <p>
+          Headings, paragraphs, links, lists, code, keyboard input, quotations,
+          and inline text semantics are styled without classes. Keep the native
+          element that matches the content’s meaning.
+        </p>
+        <CodeExample code={typographyExample} />
+      </section>
+
+      <section class="docs-section stack" id="buttons">
+        <h2>Buttons</h2>
+        <StandaloneImport path="button" />
+        <p>
+          Native buttons, button-like inputs, and <code>a.button</code> are
+          supported. Use <code>data-variant</code> for primary, secondary,
+          outline, ghost, link, or destructive treatment. Use{" "}
+          <code>data-size</code> for <code>sm</code>, <code>lg</code>, or{" "}
+          <code>icon</code>. Native <code>disabled</code>,{" "}
+          <code>aria-pressed</code>, <code>aria-busy</code>, and{" "}
+          <code>aria-invalid</code> attributes style state.
+        </p>
+        <p>
+          Use a button for actions and a link for navigation. Give icon-only
+          buttons an accessible name.
+        </p>
+        <CodeExample code={buttonExample} />
+      </section>
+
+      <section class="docs-section stack" id="forms">
+        <h2>Form controls</h2>
+        <StandaloneImport path="input" />
+        <p>
+          The input module styles native controls and their labels. Associate
+          every control with a label. Use <code>fieldset</code> and
+          <code>legend</code> for related choices, and use{" "}
+          <code>aria-describedby</code> when an error or hint needs to be
+          announced.
         </p>
 
-        <nav class="x-stack flex-wrap gap-1!">
-          <a href="#typography" class="badge" data-variant="outline">
-            Typography
-          </a>
-          <a href="#buttons" class="badge" data-variant="outline">
-            Buttons
-          </a>
-          <a href="#forms" class="badge" data-variant="outline">
-            Form Elements
-          </a>
-          <a href="#card" class="badge" data-variant="outline">
-            Card
-          </a>
-          <a href="#badges" class="badge" data-variant="outline">
-            Badges
-          </a>
-          <a href="#stacks" class="badge" data-variant="outline">
-            Stacks
-          </a>
-          <a href="#utilities" class="badge" data-variant="outline">
-            Utilities
-          </a>
-          <a href="#spinner" class="badge" data-variant="outline">
-            Spinner
-          </a>
-          <a href="#item" class="badge" data-variant="outline">
-            Item
-          </a>
-          <a href="#accordion" class="badge" data-variant="outline">
-            Accordion
-          </a>
-          <a href="#description-list" class="badge" data-variant="outline">
-            Description List
-          </a>
-          <a href="#table" class="badge" data-variant="outline">
-            Table
-          </a>
-        </nav>
-      </div>
-
-      <hr />
-
-      <h2>This is for those who want...</h2>
-
-      <ul>
-        <li>...beautiful HTML elements by default</li>
-        <li>...the look and feel of shadcn/ui, without the React framework overhead</li>
-        <li>...to use as minimal CSS classes as necessary</li>
-      </ul>
-
-      <h2>
-        This is <em>NOT</em> for those who want...
-      </h2>
-
-      <ul>
-        <li>
-          ...to use shadcn/ui with React <em class="text-muted-foreground">(because then you should reach for shadcn/ui)</em>
-        </li>
-        <li>...to meticulously style every element on the page</li>
-      </ul>
-
-      <hr />
-
-      <section class="section card">
-        <header>
-          <h3>How to install</h3>
-        </header>
-        <section>
+        <section class="docs-subsection stack" id="text-input">
+          <h3>Text-like inputs and states</h3>
           <p>
-            Simply add this to your <code>head</code> tag in your HTML
+            Text, email, password, number, search, URL, and similar inputs share
+            the same semantic default.
           </p>
-          <pre>
-            <code>
-              &#60;link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@{version}/dist/sensible-ui.min.css" type="text/css"
-              rel="stylesheet"&#62;
-            </code>
-          </pre>
+          <CodeExample code={textInputExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="textarea">
+          <h3>Textarea</h3>
+          <CodeExample code={textareaExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="select">
+          <h3>Select</h3>
           <p>
-            No Tailwind CSS is required. Override <code>--primary</code> and the other theme variables to customize the styles.
+            Use the native select when choosing one option from a list. Group
+            long option lists with optgroup.
           </p>
+          <CodeExample code={selectExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="checkbox">
+          <h3>Checkbox</h3>
           <p>
-            Page view transitions are optional. Enable them by importing <code>@faith-tools/sensible-ui/view-transition</code> after the main
-            stylesheet.
+            Use checkboxes for independent choices. The checked and disabled
+            states are native.
           </p>
+          <CodeExample code={checkboxExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="radio">
+          <h3>Radio group</h3>
+          <p>
+            Radio buttons with the same name represent one choice. Wrap the
+            group in a fieldset with a legend.
+          </p>
+          <CodeExample code={radioExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="switch">
+          <h3>Switch</h3>
+          <p>
+            Add <code>role="switch"</code> to a checkbox only when the control
+            immediately turns a setting on or off.
+          </p>
+          <CodeExample code={switchExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="range">
+          <h3>Range</h3>
+          <p>
+            Provide a visible label and meaningful minimum, maximum, and initial
+            values.
+          </p>
+          <CodeExample code={rangeExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="date-time">
+          <h3>Date and time</h3>
+          <p>
+            Date and datetime-local inputs preserve each browser’s native picker
+            and keyboard behavior.
+          </p>
+          <CodeExample code={dateExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="color">
+          <h3>Color</h3>
+          <CodeExample code={colorExample} />
+        </section>
+
+        <section class="docs-subsection stack" id="file">
+          <h3>File</h3>
+          <p>
+            Use the accept attribute as a picker hint, not as file validation.
+          </p>
+          <CodeExample code={fileExample} />
         </section>
       </section>
 
-      <hr />
-
-      <section class="section" id="typography">
-        <h2>Typography</h2>
-
-        <h1>Heading 1</h1>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 4</h4>
-        <h5>Heading 5</h5>
-        <h6>Heading 6</h6>
-
-        <p>
-          This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, <a href="#">a link</a>, and <mark>marked text</mark>
-        </p>
-
-        <p>
-          Here's some <code>inline code</code> and a code block:
-        </p>
-
-        <pre>
-          <code>console.log('Hello, World!');</code>
-        </pre>
-
-        <blockquote>This is a blockquote. It's styled automatically.</blockquote>
-
-        <ul>
-          <li>Unordered list item 1</li>
-          <li>Unordered list item 2</li>
-          <li>Unordered list item 3</li>
-        </ul>
-
-        <ol>
-          <li>Ordered list item 1</li>
-          <li>Ordered list item 2</li>
-          <li>Ordered list item 3</li>
-        </ol>
-      </section>
-
-      <hr />
-
-      <section class="section" id="buttons">
-        <h2>Buttons</h2>
-
-        <h3>Variants</h3>
-        <div class="x-stack flex-wrap">
-          <button>Primary (default)</button>
-          <button data-variant="secondary">Secondary</button>
-          <button data-variant="outline">Outline</button>
-          <button data-variant="ghost">Ghost</button>
-          <button data-variant="link">Link</button>
-          <button data-variant="destructive">Destructive</button>
-        </div>
-
-        <h3>Sizes</h3>
-        <div class="x-stack flex-wrap">
-          <button data-variant="primary" data-size="sm">
-            Small
-          </button>
-          <button data-variant="primary">Default</button>
-          <button data-variant="primary" data-size="lg">
-            Large
-          </button>
-          <button data-variant="primary" data-size="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-          </button>
-        </div>
-
-        <h3>States</h3>
-        <div class="x-stack flex-wrap">
-          <button data-variant="primary" disabled>
-            Disabled
-          </button>
-          <button data-variant="primary" aria-pressed="true">
-            Pressed
-          </button>
-        </div>
-
-        <h3>As Link</h3>
-        <a href="#" class="button" data-variant="primary">
-          Link as Button
-        </a>
-
-        <h3>Loading</h3>
-        <button aria-busy="true" disabled>
-          Loading...
-        </button>
-      </section>
-
-      <hr />
-
-      <section class="section" id="forms">
-        <h2>Form elements</h2>
-        <form class="card">
-          <header>
-            <h2>Form in a card</h2>
-          </header>
-
-          <section class="y-stack">
-            <div>
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
-            </div>
-
-            <div>
-              <label for="id">User id (read only)</label>
-              <input readOnly name="id" id="id" value="04D6H89Z" />
-            </div>
-
-            <div>
-              <label for="disabled">Random disabled input</label>
-              <input disabled name="disabled" id="disabled" placeholder="Because why not?" />
-            </div>
-
-            <div>
-              <label for="about">About me</label>
-              <textarea name="about" id="about" placeholder="I am a textarea..."></textarea>
-            </div>
-
-            <div>
-              <input type="checkbox" name="remember" id="remember" />
-              <label for="remember">Remember me</label>
-            </div>
-
-            <div>
-              <label>
-                <input type="checkbox" name="in-label" id="in-label" checked />
-                Is this checkbox inside a <code>&lt;label&gt;</code> element?
-              </label>
-            </div>
-
-            <div>
-              <fieldset>
-                <legend>Choose a cardinal direction:</legend>
-
-                <div>
-                  <input type="radio" id="north" name="direction" value="north" checked />
-                  <label for="north">North</label>
-                </div>
-
-                <div>
-                  <input type="radio" id="east" name="direction" value="east" />
-                  <label for="east">East</label>
-                </div>
-
-                <div>
-                  <input type="radio" id="south" name="direction" value="south" />
-                  <label for="south">South</label>
-                </div>
-
-                <div>
-                  <input type="radio" id="west" name="direction" value="west" />
-                  <label for="west">West</label>
-                </div>
-              </fieldset>
-            </div>
-
-            <input type="file" accept="image/*" />
-
-            <label>
-              {' '}
-              <input type="checkbox" role="switch" /> Switch{' '}
-            </label>
-            <label>
-              {' '}
-              <input type="checkbox" role="switch" checked /> Switch{' '}
-            </label>
-
-            <button type="submit">Submit</button>
-          </section>
-        </form>
-      </section>
-
-      <hr />
-
-      <section class="section max-w-sm" id="card">
+      <section class="docs-section stack" id="card">
         <h2>Card</h2>
-        <div class="card">
-          <header>
-            <h2>Today is the Lord's day</h2>
-            <p>Fart</p>
-          </header>
-          <section>I can put whatever info I want in here</section>
-          <footer class="border-t">
-            <button>Go!</button>
-            <button data-variant="outline">Cancel</button>
-          </footer>
-        </div>
+        <StandaloneImport path="card" />
+        <p>
+          Add <code>class="card"</code> to a semantic container. Direct{" "}
+          <code>header</code>, <code>section</code>, and <code>footer</code>{" "}
+          children define its regions. Add <code>data-slot="card-action"</code>{" "}
+          to a header action. Cards adapt their layout through container
+          queries.
+        </p>
+        <CodeExample code={cardExample} />
       </section>
 
-      <hr />
-
-      <section class="section" id="badges">
+      <section class="docs-section stack" id="badges">
         <h2>Badge</h2>
-
-        <div class="x-stack">
-          <span class="badge">Default</span>
-          <span data-variant="secondary" class="badge">
-            Secondary
-          </span>
-          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-            <span data-variant="outline" class="badge">
-              Outline
-            </span>
-          </a>
-          <span data-variant="destructive" class="badge">
-            Destructive
-          </span>
-        </div>
-      </section>
-
-      <hr />
-
-      <section class="section y-stack" id="stacks">
-        <h2>
-          Stacks <em>(helper classes)</em>
-        </h2>
-
-        <div class="x-stack">
-          <h3>
-            This is an <code>.x-stack</code>
-          </h3>
-          <span class="badge bg-blue-600">New</span>
-        </div>
-
-        <div class="y-stack">
-          <h3>
-            This is a <code>.y-stack</code>
-          </h3>
-          <span class="badge bg-blue-600">New</span>
-        </div>
-
-        <div class="split">
-          <h3>
-            This is a <code>.split</code>
-          </h3>
-          <span class="badge" data-variant="secondary">
-            Named layout
-          </span>
-        </div>
-      </section>
-
-      <hr />
-
-      <section class="section stack" id="utilities">
-        <h2>Optional CSS utilities</h2>
+        <StandaloneImport path="badge" />
         <p>
-          Import <code>@faith-tools/sensible-ui/utilities</code> for token-backed layout helpers. The stylesheet is plain CSS and does not require
-          template scanning or JavaScript.
+          Add <code>class="badge"</code> to short status or category text.
+          Supported variants are primary, secondary, outline, and destructive.
+          Use a link only when the badge navigates somewhere.{" "}
+          <code>aria-invalid="true"</code> provides the invalid state.
         </p>
-
-        <div class="auto-grid gap-4 mt-4" style="--min-item-size: 12rem">
-          <article class="card">
-            <header>
-              <h3>Spacing and sizing</h3>
-              <p>
-                <code>gap-2 size-8</code>
-              </p>
-            </header>
-            <section>
-              <div class="cluster justify-center gap-2">
-                <span class="badge size-8 justify-center">1</span>
-                <span class="badge size-8 justify-center">2</span>
-                <span class="badge size-8 justify-center">3</span>
-              </div>
-            </section>
-          </article>
-
-          <article class="card">
-            <header>
-              <h3>Flexible layout</h3>
-              <p>
-                <code>flex items-center justify-between</code>
-              </p>
-            </header>
-            <section>
-              <div class="flex items-center justify-between gap-4">
-                <span>Semantic first</span>
-                <span class="badge" data-variant="secondary">
-                  Opt in
-                </span>
-              </div>
-            </section>
-          </article>
-        </div>
+        <CodeExample code={badgeExample} />
       </section>
 
-      <hr />
-
-      <section class="section y-stack" id="spinner">
-        <h2>Spinner</h2>
+      <section class="docs-section stack" id="image">
+        <h2>Image</h2>
+        <StandaloneImport path="image" />
         <p>
-          All you need to do is add <code>aria-busy="true"</code> to any element
+          Images receive responsive sizing and rounded corners. Use an empty alt
+          value for decorative images and useful alternative text for
+          informative images. Pair an image and caption with <code>figure</code>{" "}
+          and <code>figcaption</code>.
         </p>
-        <div aria-busy="true"></div>
-        <p>
-          And, if you want an overlay, you'll need to also add <code>data-variant="overlay"</code>
-        </p>
-        <div aria-busy="true" class="card" data-variant="overlay">
-          <header>
-            <h3>This is a card</h3>
-          </header>
-          <section>
-            <p>All the things and contents in here</p>
-          </section>
-        </div>
+        <CodeExample code={imageExample} />
       </section>
 
-      <hr />
-
-      <section class="section y-stack" id="item">
+      <section class="docs-section stack" id="item">
         <h2>Item</h2>
-
-        <div class="item">
-          <div>
-            <h3>Basic Item</h3>
-            <p>A simple item with title and description.</p>
-          </div>
-          <button data-variant="outline">Action</button>
-        </div>
-
-        <a class="item" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-          </svg>
-          <section>
-            <h2>Link Item</h2>
-            <p>Another simple item with title and description.</p>
-          </section>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </a>
-      </section>
-
-      <hr />
-
-      <section class="section" id="accordion">
-        <h2>Accordion</h2>
-
-        <details>
-          <summary>What is an accordion?</summary>
-          <p>All I know is that it plays music...</p>
-        </details>
-
-        <details>
-          <summary>
-            <h2>What is Sensible UI?</h2>
-          </summary>
-          <p>Think "shadcn/ui" as a semantic CSS library. We are a fork of BasecoatCSS and influenced by Oat</p>
-        </details>
-
-        <details name="same">
-          <summary>Can you have a connected accordion?</summary>
-          <p>Yep!</p>
-        </details>
-
-        <details open={true} name="same">
-          <summary>Who lives in a pineapple under the sea?</summary>
-          <p>I'm afraid that's copyrighted.</p>
-        </details>
-      </section>
-
-      <hr />
-
-      <section class="section" id="description-list">
-        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl" target="_blank">
-          <h2>Description List</h2>
-        </a>
-
-        <dl>
-          <div>
-            <dt>Name</dt>
-            <dd>Godzilla</dd>
-          </div>
-          <div>
-            <dt>Born</dt>
-            <dd>1952</dd>
-          </div>
-          <div>
-            <dt>Birthplace</dt>
-            <dd>Japan</dd>
-          </div>
-          <div>
-            <dt>Color</dt>
-            <dd>Green</dd>
-          </div>
-        </dl>
-
-        <h3>Single term, multiple descriptions</h3>
-
-        <dl>
-          <dt>Firefox</dt>
-          <dd>
-            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
-          </dd>
-          <dd>
-            The Red Panda also known as the Lesser Panda, Wah, Bear Cat or Firefox, is a mostly herbivorous mammal, slightly larger than a
-            domestic cat (60 cm long).
-          </dd>
-        </dl>
-
-        <h3>Multiple terms, single description</h3>
-
-        <dl>
-          <dt>Fx</dt>
-          <dt>Firefox</dt>
-          <dt>Mozilla Firefox</dt>
-          <dd>
-            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
-          </dd>
-
-          <dt>JavaScript</dt>
-          <dt>JS</dt>
-          <dd>
-            A free, open source, cross-platform, graphical web browser developed by the Mozilla Corporation and hundreds of volunteers.
-          </dd>
-        </dl>
-
-        <h3>
-          Here's a card <code>dl.card</code>
-        </h3>
-
-        <dl class="card">
-          <dt>Banana</dt>
-          <dd>A yellow fruit that is easy to peel.</dd>
-          <dd>Which also grows on a tree.</dd>
-          <dt>Cashew</dt>
-          <dd>A tan nut without a peel.</dd>
-          <dt>Cherry</dt>
-          <dd>A red fruit that is hard to peel.</dd>
-        </dl>
-      </section>
-
-      <section id="table" class="section y-stack">
-        <h2>Table</h2>
-
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">ID</th>
-              <th scope="col">Member Since</th>
-              <th scope="col">Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Margaret Nguyen</th>
-              <td>427311</td>
-              <td>
-                <time dateTime="2010-06-03">June 3, 2010</time>
-              </td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <th scope="row">Edvard Galinski</th>
-              <td>533175</td>
-              <td>
-                <time dateTime="2011-01-13">January 13, 2011</time>
-              </td>
-              <td>37.00</td>
-            </tr>
-            <tr>
-              <th scope="row">Hoshi Nakamura</th>
-              <td>601942</td>
-              <td>
-                <time dateTime="2012-07-23">July 23, 2012</time>
-              </td>
-              <td>15.00</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <table class="card">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">ID</th>
-              <th scope="col">Member Since</th>
-              <th scope="col">Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Margaret Nguyen</th>
-              <td>427311</td>
-              <td>
-                <time dateTime="2010-06-03">June 3, 2010</time>
-              </td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <th scope="row">Edvard Galinski</th>
-              <td>533175</td>
-              <td>
-                <time dateTime="2011-01-13">January 13, 2011</time>
-              </td>
-              <td>37.00</td>
-            </tr>
-            <tr>
-              <th scope="row">Hoshi Nakamura</th>
-              <td>601942</td>
-              <td>
-                <time dateTime="2012-07-23">July 23, 2012</time>
-              </td>
-              <td>15.00</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <footer>
-        <h3>Sensible UI</h3>
+        <StandaloneImport path="item" />
         <p>
-          Sensible UI is a fork of{' '}
-          <a href="https://basecoatui.com" target="_blank">
-            Basecoat UI
-          </a>{' '}
-          that's been re-written from the ground-up to style elements semantically
+          An item is a compact content row with an optional icon or action. Use{" "}
+          <code>a.item</code> when the entire row navigates. Do not put another
+          interactive control inside a linked item.
         </p>
-        <h4>Resources</h4>
-        <ul>
-          <li>
-            <a href="https://github.com/cameronapak/sensible-ui" target="_blank">
-              GitHub Repo
-            </a>
-          </li>
-          <li>
-            Part of the{' '}
-            <a href="https://faith.tools" target="_blank">
-              faith.tools
-            </a>{' '}
-            ecosystem
-          </li>
-        </ul>
+        <CodeExample code={itemExample} />
+      </section>
+
+      <section class="docs-section stack" id="spinner">
+        <h2>Loading spinner</h2>
+        <StandaloneImport path="spinner" />
+        <p>
+          Add <code>aria-busy="true"</code> while an element is updating. Add{" "}
+          <code>data-variant="overlay"</code> to dim existing children. Keep
+          visible loading text or an accessible name so the state is
+          understandable without relying on motion.
+        </p>
+        <CodeExample code={spinnerExample} />
+      </section>
+
+      <section class="docs-section stack" id="accordion">
+        <h2>Accordion</h2>
+        <StandaloneImport path="accordion" />
+        <p>
+          Native <code>details</code> and <code>summary</code> provide
+          disclosure behavior without JavaScript. The <code>open</code>{" "}
+          attribute sets the initial state. Give related details elements the
+          same <code>name</code> when only one should remain open.
+        </p>
+        <CodeExample code={accordionExample} />
+      </section>
+
+      <section class="docs-section stack" id="description-list">
+        <h2>Description list</h2>
+        <StandaloneImport path="description-list" />
+        <p>
+          Use a description list for name-value groups, terms and definitions,
+          or metadata. Multiple terms may share a description and one term may
+          have multiple descriptions. Add <code>class="card"</code> and import
+          the card module for the bordered treatment.
+        </p>
+        <CodeExample code={descriptionListExample} />
+      </section>
+
+      <section class="docs-section stack" id="table">
+        <h2>Table</h2>
+        <StandaloneImport path="table" />
+        <p>
+          Use tables for two-dimensional data. Add a caption when the
+          surrounding context does not already identify the table, and use
+          <code>scope</code> on row and column headers. Add{" "}
+          <code>class="card"</code> and import the card module for the bordered
+          treatment.
+        </p>
+        <div class="docs-table-scroll">
+          <CodeExample code={tableExample} />
+        </div>
+      </section>
+
+      <section class="docs-section stack" id="layouts">
+        <h2>Named layouts</h2>
+        <StandaloneImport path="utils" />
+        <p>
+          The core bundle includes <code>.stack</code> for vertical flow,{" "}
+          <code>.cluster</code> for wrapping inline groups, <code>.split</code>{" "}
+          for separated content, and <code>.auto-grid</code> for intrinsic
+          grids. <code>.y-stack</code> aliases stack and <code>.x-stack</code>{" "}
+          is a non-wrapping inline stack. Set <code>--layout-gap</code> to
+          adjust spacing and <code>--min-item-size</code> to control grid
+          wrapping.
+        </p>
+        <CodeExample code={layoutsExample} />
+      </section>
+
+      <section class="docs-section stack" id="utilities">
+        <h2>Optional atomic utilities</h2>
+        <p class="docs-import">
+          Optional import:{" "}
+          <code>@import '@faith-tools/sensible-ui/utilities';</code>
+        </p>
+        <p>
+          The companion stylesheet provides token-backed display, flex, grid,
+          alignment, sizing, spacing, and gap helpers. It is plain generated CSS
+          and requires no template scanning or consumer-side tooling. Override
+          the <code>--space-*</code> custom properties to change its spacing
+          scale.
+        </p>
+        <CodeExample code={utilitiesExample} />
+      </section>
+
+      <section class="docs-section stack" id="dark-mode">
+        <h2>Dark mode</h2>
+        <p>
+          Add <code>class="dark"</code> to an ancestor to select the bundled
+          dark theme. Components use the same markup in both themes. System
+          preference behavior is not enabled by the core bundle.
+        </p>
+        <CodeExample code={darkExample} dark />
+      </section>
+
+      <footer class="docs-footer stack">
+        <h2>Sensible UI</h2>
+        <p>
+          Sensible UI is a semantic-first fork of{" "}
+          <a href="https://basecoatui.com">Basecoat</a>, influenced by shadcn/ui
+          and Oat CSS.
+        </p>
+        <p>
+          <a href="https://github.com/cameronapak/sensible-ui">GitHub</a> ·{" "}
+          <a href="https://faith.tools">faith.tools</a>
+        </p>
       </footer>
     </main>
-  )
+  );
 }
