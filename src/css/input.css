@@ -110,8 +110,6 @@
   }
 
   input[type="file"] {
-    transition: transform 150ms ease-out;
-
     &:active:not(:disabled) {
       translate: 0 0.125rem;
     }
@@ -379,7 +377,6 @@
     height: 30px !important;
     border: 1px solid var(--border);
     border-radius: 50%;
-    transition: transform 150ms;
 
     &:active {
       translate: 0 0.125rem;

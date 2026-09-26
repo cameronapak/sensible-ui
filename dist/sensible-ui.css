@@ -756,7 +756,6 @@
   }
 
   .card:not(:-webkit-any(table, dl)) > header {
-    container: card-header / inline-size;
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -860,7 +859,6 @@
   }
 
   .card:not(:-moz-any(table, dl)) > header {
-    container: card-header / inline-size;
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -964,7 +962,6 @@
   }
 
   .card:not(:is(table, dl)) > header {
-    container: card-header / inline-size;
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -1895,10 +1892,6 @@
     padding: 0.25rem 0.75rem;
   }
 
-  input[type="file"] {
-    transition: transform 0.15s ease-out;
-  }
-
   input[type="file"]:active:not(:disabled) {
     translate: 0 0.125rem;
   }
@@ -2251,7 +2244,6 @@
   input[type="color" i] {
     border: 1px solid var(--border);
     border-radius: 50%;
-    transition: transform 0.15s;
     width: 30px !important;
     height: 30px !important;
   }
@@ -2762,7 +2754,6 @@
     border-radius: calc(var(--radius) - 2px);
     outline: none;
     transition: translate 0.15s var(--ease-out);
-    gap: 1rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
@@ -2818,7 +2809,6 @@
     mask-size: contain;
     mask-image: var(--icon-lucide-chevron);
     mask-repeat: no-repeat;
-    transition-timing-function: var(--ease-out);
     background-color: currentColor;
     flex-shrink: 0;
     width: 1em;
@@ -2859,7 +2849,6 @@
   }
 
   details::details-content {
-    transition-timing-function: var(--ease-out);
     transition-behavior: allow-discrete;
     transition:
       opacity 0.2s,

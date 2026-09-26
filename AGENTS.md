@@ -16,7 +16,7 @@ Read `CONTEXT.md` before changing the public styling model, compatibility expect
 - `src/css/` — Component CSS files (button, card, badge, etc.), each wrapped in `@layer <name>`
 - `src/css/index.css` — Entry point that `@import`s all component files
 - `src/css/theme.css` — Design tokens as CSS custom properties (oklch colors, shadcn-style naming). Dark mode via `.dark` class.
-- `src/pages/home.tsx` — Demo page served by Bun (`index.tsx`) and rendered for the static site (`build-site.tsx`); `src/html/` contains other standalone demos
+- `src/pages/home.tsx` — Demo page served by Bun (`index.tsx`) and rendered for the static site (`build-site.tsx`)
 - `dist/` — Built CSS output (do not edit directly)
 - Components are individually exportable via package.json `exports` map.
 

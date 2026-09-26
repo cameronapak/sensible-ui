@@ -15,7 +15,6 @@
   }
 
   details {
-    gap: 1rem;
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -64,7 +63,6 @@
         mask-size: contain;
         mask-image: var(--icon-lucide-chevron);
         mask-repeat: no-repeat;
-        transition-timing-function: var(--ease-out);
         transition: transform 0.2s;
       }
     }
@@ -90,7 +88,6 @@
     }
 
     &::details-content {
-      transition-timing-function: var(--ease-out);
       transition:
         opacity 0.2s,
         height 0.2s;

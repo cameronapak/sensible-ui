@@ -16,7 +16,6 @@
     }
 
     > header {
-      container: card-header / inline-size;
       display: grid;
       grid-template-rows: auto auto;
       grid-auto-rows: min-content;

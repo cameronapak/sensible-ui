@@ -34,7 +34,6 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 - `dist/sensible-ui.css` and `dist/sensible-ui.min.css` are generated, published artifacts. Keep them in sync with the source by running `bun run check`.
 - `src/pages/home.tsx` is both the component gallery and the source for the static site. New public behavior should have a representative example there.
 - `src/app.tsx` defines the shared Hono JSX document and gallery route.
-- `src/html/` contains broader element test pages. They are supporting visual fixtures, not separate products.
 - `index.tsx` serves the Hono app during development. `build-site.tsx` renders the same app for static hosting.
 
 ## Vocabulary
