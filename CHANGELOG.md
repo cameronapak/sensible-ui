@@ -1,5 +1,15 @@
 # Sensible UI
 
+## 1.3.0
+
+### Minor Changes
+
+- 1baf18c: Add an optional generated CSS utility stylesheet with token-backed spacing, sizing, flexbox, grid, and alignment helpers. Add stack, cluster, split, and intrinsic grid layouts to the core bundle.
+
+### Patch Changes
+
+- 5d3ec00: Make busy buttons easier to read by placing a foreground-colored spinner beside the visible label without changing the button height. Use the wait cursor for busy buttons while leaving disabled behavior under consumer control.
+
 ## 1.2.0
 
 ### Minor Changes
