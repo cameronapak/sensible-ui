@@ -238,6 +238,62 @@ const accordionExample = `
   </details>
 </div>`;
 
+const dialogExample = `
+<button type="button" onclick="document.getElementById('project-dialog').showModal()">View project</button>
+<dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-description">
+  <header>
+    <h2 id="project-title">Project details</h2>
+    <p id="project-description">A quick look at your project.</p>
+    <form method="dialog">
+      <button type="submit" value="close" data-variant="ghost" data-size="icon" aria-label="Close" autofocus>×</button>
+    </form>
+  </header>
+  <section><p>Website redesign is ready for review.</p></section>
+  <footer>
+    <form method="dialog"><button type="submit" value="done">Done</button></form>
+  </footer>
+</dialog>`;
+
+const lightDismissDialogExample = `
+<button type="button" onclick="document.getElementById('tip-dialog').showModal()">Show tip</button>
+<dialog id="tip-dialog" closedby="any" aria-labelledby="tip-title">
+  <header>
+    <h2 id="tip-title">A quick tip</h2>
+    <form method="dialog"><button type="submit" value="close" data-variant="ghost" data-size="icon" aria-label="Close" autofocus>×</button></form>
+  </header>
+  <section><p>Click outside this dialog, press Escape, or select Close.</p></section>
+</dialog>`;
+
+const longDialogExample = `
+<button type="button" onclick="document.getElementById('long-dialog').showModal()">Read project notes</button>
+<dialog id="long-dialog" aria-labelledby="long-title" aria-describedby="long-description">
+  <header>
+    <h2 id="long-title">Project notes</h2>
+    <p id="long-description">Review the notes before continuing.</p>
+    <form method="dialog"><button type="submit" value="close" data-variant="ghost" data-size="icon" aria-label="Close">×</button></form>
+  </header>
+  <section>
+    <p>Start with the goals and the people the project serves.</p>
+    <p>Check the scope, timeline, and remaining questions.</p>
+    <p>Record feedback from the team and assign follow-up work.</p>
+    <p>Review the revised design with stakeholders.</p>
+    <p>Confirm the final content and accessibility checks.</p>
+    <p>Prepare the handoff notes and the release checklist.</p>
+    <p>Keep decisions and open questions together for reference.</p>
+  </section>
+  <footer><form method="dialog"><button type="submit" value="done">Done</button></form></footer>
+</dialog>`;
+
+const nonModalDialogExample = `
+<button type="button" onclick="document.getElementById('note-dialog').show()">Open note</button>
+<dialog id="note-dialog" aria-labelledby="note-title">
+  <header>
+    <h2 id="note-title">Quick note</h2>
+    <form method="dialog"><button type="submit" value="close" data-variant="ghost" data-size="icon" aria-label="Close" autofocus>×</button></form>
+  </header>
+  <section><p>You can still use the rest of the page.</p></section>
+</dialog>`;
+
 const descriptionListExample = `
 <dl class="card">
   <dt>Status</dt>
@@ -350,6 +406,7 @@ export function Home() {
           <a href="#item">Item</a>
           <a href="#spinner">Spinner</a>
           <a href="#accordion">Accordion</a>
+          <a href="#dialog">Dialog</a>
           <a href="#description-list">Description list</a>
           <a href="#table">Table</a>
           <a href="#layouts">Layouts</a>
@@ -439,8 +496,8 @@ export function Home() {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <code>/description-list</code>, <code>/image</code>,{" "}
-                    <code>/input</code>, <code>/item</code>
+                    <code>/description-list</code>, <code>/dialog</code>,{" "}
+                    <code>/image</code>, <code>/input</code>, <code>/item</code>
                   </th>
                   <td>Standalone component modules</td>
                 </tr>
@@ -769,6 +826,59 @@ export function Home() {
           same <code>name</code> when only one should remain open.
         </p>
         <CodeExample code={accordionExample} />
+      </section>
+
+      <section class="docs-section stack" id="dialog">
+        <h2>Dialog</h2>
+        <StandaloneImport path="dialog" />
+        <p>
+          A native <code>dialog</code> opens modally with{" "}
+          <code>showModal()</code> or non-modally with <code>show()</code>. The
+          standalone dialog import includes button styles; import{" "}
+          <code>/input</code> separately for form controls. JavaScript only
+          connects your trigger to the native method; no component runtime is
+          required. Do not set <code>open</code> directly to create a modal.
+        </p>
+        <p>
+          Identify the dialog with <code>aria-labelledby</code> and add{" "}
+          <code>aria-describedby</code> for a short description. Direct{" "}
+          <code>header</code>, <code>section</code>, and <code>footer</code>{" "}
+          children provide the title, scrollable content, and actions. Provide a
+          visible close control. A <code>form method="dialog"</code> closes
+          without submitting data; handle saving in your application and close
+          only after it succeeds. Choose initial focus with{" "}
+          <code>autofocus</code> when needed.
+        </p>
+        <CodeExample code={dialogExample} />
+        <div class="docs-subsection stack">
+          <h3>Optional backdrop dismissal</h3>
+          <p>
+            Modal dialogs close with Escape by default, but a backdrop click
+            does not dismiss them. Add <code>closedby="any"</code> only when
+            discarding the dialog is safe. Keep a visible close control for
+            browsers that do not support <code>closedby</code>.
+          </p>
+          <CodeExample code={lightDismissDialogExample} />
+        </div>
+        <div class="docs-subsection stack">
+          <h3>Long content</h3>
+          <p>
+            The content region scrolls while the header and actions stay visible.
+            On short viewports, the whole dialog scrolls so the body remains
+            readable. The same layout works in dark mode and at narrow widths.
+          </p>
+          <CodeExample code={longDialogExample} />
+        </div>
+        <div class="docs-subsection stack">
+          <h3>Non-modal</h3>
+          <p>
+            <code>show()</code> leaves the page interactive and has no backdrop
+            or automatic Escape dismissal. Always include an explicit close
+            control. Use a modal when the task requires focus to stay inside the
+            dialog.
+          </p>
+          <CodeExample code={nonModalDialogExample} />
+        </div>
       </section>
 
       <section class="docs-section stack" id="description-list">

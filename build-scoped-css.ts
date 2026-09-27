@@ -11,6 +11,7 @@ export const scopedEntries = {
   base: './src/css/entries/base.css',
   button: './src/css/entries/button.css',
   card: './src/css/entries/card.css',
+  dialog: './src/css/entries/dialog.css',
   'description-list': './src/css/entries/description-list.css',
   image: './src/css/entries/image.css',
   input: './src/css/entries/input.css',

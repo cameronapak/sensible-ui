@@ -1387,6 +1387,192 @@
   }
 }
 
+/* src/css/dialog.css */
+@layer components {
+  dialog {
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 4px);
+    background: var(--background);
+    color: var(--foreground);
+    opacity: 0;
+    transition:
+      opacity 0.18s ease-out,
+      transform 0.18s ease-out,
+      display 0.18s allow-discrete,
+      overlay 0.18s allow-discrete;
+    flex-direction: column;
+    max-block-size: calc(100dvh - 2rem);
+    inline-size: min(32rem, 100% - 2rem);
+    max-inline-size: none;
+    margin: auto;
+    transform: translateY(-0.25rem) scale(0.98);
+    box-shadow:
+      0 20px 25px -5px #0000001a,
+      0 8px 10px -6px #0000001a;
+  }
+
+  dialog:not([open]) {
+    display: none;
+  }
+
+  dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: translateY(-0.25rem) scale(0.98);
+    }
+  }
+
+  dialog:not(:modal) {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+  }
+
+  dialog::backdrop {
+    transition:
+      background 0.18s ease-out,
+      display 0.18s allow-discrete,
+      overlay 0.18s allow-discrete;
+    background: none;
+  }
+
+  dialog[open]::backdrop {
+    background: #00000080;
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      background: none;
+    }
+  }
+
+  dialog > :-webkit-any(header, section, footer) {
+    padding: 1.5rem;
+  }
+
+  dialog > :-moz-any(header, section, footer) {
+    padding: 1.5rem;
+  }
+
+  dialog > :is(header, section, footer) {
+    padding: 1.5rem;
+  }
+
+  dialog > header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 0.375rem 1rem;
+  }
+
+  dialog > header > :-webkit-any(h1, h2, h3, h4, h5, h6) {
+    grid-column: 1;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+  }
+
+  dialog > header > :-moz-any(h1, h2, h3, h4, h5, h6) {
+    grid-column: 1;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+  }
+
+  dialog > header > :is(h1, h2, h3, h4, h5, h6) {
+    grid-column: 1;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+  }
+
+  dialog > header > p {
+    grid-column: 1;
+    color: var(--muted-foreground);
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  dialog > header > form[method="dialog"] {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: -0.5rem -0.5rem 0 0;
+  }
+
+  dialog > section {
+    overflow: auto;
+    flex-shrink: 1;
+    min-block-size: 0;
+    padding-block-start: 0;
+    padding-block-end: 0.75rem;
+  }
+
+  dialog > section > :last-child {
+    margin-block-end: 0;
+  }
+
+  dialog > footer {
+    display: flex;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  dialog > footer > form {
+    margin: 0;
+  }
+
+  @media (max-width: calc(40rem - 0.001px)) {
+    dialog > footer > :-webkit-any(button, form) {
+      flex: auto;
+    }
+
+    dialog > footer > :-moz-any(button, form) {
+      flex: auto;
+    }
+
+    dialog > footer > :is(button, form) {
+      flex: auto;
+    }
+
+    dialog > footer > form > button {
+      inline-size: 100%;
+    }
+  }
+
+  @media (max-height: calc(25rem - 0.001px)) {
+    dialog > section {
+      overflow: visible;
+      flex-shrink: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog {
+      transition: none;
+    }
+
+    dialog::backdrop {
+      transition: none;
+    }
+  }
+}
+
 /* src/css/input.css */
 @layer components {
   form {
@@ -3274,7 +3460,7 @@
     button:not([role]),
     input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
     a.button
-  ):not(form[method="dialog"] > *) {
+  ):not(form[method="dialog"]:not(dialog form) > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -3293,7 +3479,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
       .card > header > [data-slot="card-action"],
       .card > footer > *
     ) {
@@ -3302,12 +3488,26 @@
     min-height: 2.25rem;
   }
 
+  :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      dialog > footer button:not([role])
+    ) {
+    height: auto;
+    min-height: 2.25rem;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    max-inline-size: 100%;
+  }
+
   @container (width < 12rem) {
     :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):not(form[method="dialog"] > *):is(.card > footer > *) {
+      ):not(form[method="dialog"]:not(dialog form) > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
@@ -3316,7 +3516,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):active:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
@@ -3324,7 +3524,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):disabled {
+    ):not(form[method="dialog"]:not(dialog form) > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
@@ -3333,7 +3533,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-busy="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-busy="true"] {
     cursor: wait;
   }
 
@@ -3341,7 +3541,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):focus-visible {
+    ):not(form[method="dialog"]:not(dialog form) > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
@@ -3350,7 +3550,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
@@ -3360,7 +3560,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      .dark *
+    )[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -3369,7 +3571,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
@@ -3379,7 +3581,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
@@ -3389,7 +3591,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
@@ -3399,7 +3601,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]):has(
+      > svg
+    ) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
@@ -3408,7 +3612,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
@@ -3419,7 +3623,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"]:has(
+      > svg
+    ) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
@@ -3428,7 +3634,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
@@ -3439,7 +3645,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"]:has(
+      > svg
+    ) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
@@ -3448,7 +3656,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="icon"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
@@ -3457,7 +3665,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3467,7 +3675,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3475,7 +3685,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3483,7 +3695,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3493,9 +3705,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="primary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3504,7 +3716,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
@@ -3513,7 +3725,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3523,9 +3737,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
@@ -3534,7 +3748,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
@@ -3543,7 +3757,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
@@ -3553,7 +3767,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
@@ -3562,9 +3778,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -3574,7 +3790,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -3584,9 +3800,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -3594,9 +3810,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -3604,9 +3820,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="ghost"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -3616,7 +3832,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -3626,7 +3842,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -3636,7 +3852,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -3646,7 +3862,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
@@ -3655,7 +3871,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
@@ -3663,7 +3881,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
@@ -3671,7 +3891,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
@@ -3681,7 +3903,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
@@ -3690,9 +3914,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
@@ -3701,7 +3925,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
@@ -3710,7 +3934,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
@@ -3718,9 +3944,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -3729,9 +3955,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
@@ -3739,9 +3965,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
@@ -3749,7 +3975,7 @@
     button:not([role]),
     input:-moz-any([type="submit"], [type="reset"], [type="button"]),
     a.button
-  ):not(form[method="dialog"] > *) {
+  ):not(form[method="dialog"]:not(dialog form) > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -3768,7 +3994,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
       .card > header > [data-slot="card-action"],
       .card > footer > *
     ) {
@@ -3777,12 +4003,26 @@
     min-height: 2.25rem;
   }
 
+  :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      dialog > footer button:not([role])
+    ) {
+    height: auto;
+    min-height: 2.25rem;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    max-inline-size: 100%;
+  }
+
   @container (width < 12rem) {
     :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):not(form[method="dialog"] > *):is(.card > footer > *) {
+      ):not(form[method="dialog"]:not(dialog form) > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
@@ -3791,7 +4031,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):active:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
@@ -3799,7 +4039,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):disabled {
+    ):not(form[method="dialog"]:not(dialog form) > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
@@ -3808,7 +4048,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-busy="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-busy="true"] {
     cursor: wait;
   }
 
@@ -3816,7 +4056,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):focus-visible {
+    ):not(form[method="dialog"]:not(dialog form) > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
@@ -3825,7 +4065,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
@@ -3835,7 +4075,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      .dark *
+    )[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -3844,7 +4086,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
@@ -3854,7 +4096,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
@@ -3864,7 +4106,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
@@ -3874,7 +4116,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]):has(
+      > svg
+    ) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
@@ -3883,7 +4127,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
@@ -3894,7 +4138,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"]:has(
+      > svg
+    ) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
@@ -3903,7 +4149,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
@@ -3914,7 +4160,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"]:has(
+      > svg
+    ) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
@@ -3923,7 +4171,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="icon"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
@@ -3932,7 +4180,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3942,7 +4190,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3950,7 +4200,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3958,7 +4210,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3968,9 +4220,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="primary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -3979,7 +4231,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
@@ -3988,7 +4240,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -3998,9 +4252,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
@@ -4009,7 +4263,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
@@ -4018,7 +4272,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
@@ -4028,7 +4282,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
@@ -4037,9 +4293,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -4049,7 +4305,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -4059,9 +4315,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -4069,9 +4325,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -4079,9 +4335,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="ghost"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -4091,7 +4347,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -4101,7 +4357,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -4111,7 +4367,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -4121,7 +4377,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
@@ -4130,7 +4386,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
@@ -4138,7 +4396,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
@@ -4146,7 +4406,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
@@ -4156,7 +4418,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
@@ -4165,9 +4429,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
@@ -4176,7 +4440,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
@@ -4185,7 +4449,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
@@ -4193,9 +4459,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -4204,9 +4470,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
@@ -4214,9 +4480,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
@@ -4224,7 +4490,7 @@
     button:not([role]),
     input:is([type="submit"], [type="reset"], [type="button"]),
     a.button
-  ):not(form[method="dialog"] > *) {
+  ):not(form[method="dialog"]:not(dialog form) > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -4243,7 +4509,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
       .card > header > [data-slot="card-action"],
       .card > footer > *
     ) {
@@ -4252,12 +4518,26 @@
     min-height: 2.25rem;
   }
 
+  :is(
+      button:not([role]),
+      input:is([type="submit"], [type="reset"], [type="button"]),
+      a.button
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      dialog > footer button:not([role])
+    ) {
+    height: auto;
+    min-height: 2.25rem;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    max-inline-size: 100%;
+  }
+
   @container (width < 12rem) {
     :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):not(form[method="dialog"] > *):is(.card > footer > *) {
+      ):not(form[method="dialog"]:not(dialog form) > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
@@ -4266,7 +4546,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):active:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
@@ -4274,7 +4554,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):disabled {
+    ):not(form[method="dialog"]:not(dialog form) > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
@@ -4283,7 +4563,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-busy="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-busy="true"] {
     cursor: wait;
   }
 
@@ -4291,7 +4571,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):focus-visible {
+    ):not(form[method="dialog"]:not(dialog form) > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
@@ -4300,7 +4580,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
@@ -4310,7 +4590,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):is(
+      .dark *
+    )[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -4319,7 +4601,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
@@ -4329,7 +4611,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)
+    ):not(form[method="dialog"]:not(dialog form) > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
@@ -4339,7 +4621,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
@@ -4349,7 +4631,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-size]):has(
+      > svg
+    ) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
@@ -4358,7 +4642,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
@@ -4369,7 +4653,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="sm"]:has(
+      > svg
+    ) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
@@ -4378,7 +4664,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
@@ -4389,7 +4675,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="lg"]:has(
+      > svg
+    ) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
@@ -4398,7 +4686,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-size="icon"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
@@ -4407,7 +4695,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -4417,7 +4705,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -4425,7 +4715,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"]:not(dialog form) > *):not(
+      [data-variant]
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -4433,7 +4725,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -4443,9 +4735,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="primary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
@@ -4454,7 +4746,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
@@ -4463,7 +4755,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
@@ -4473,9 +4767,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="secondary"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
@@ -4484,7 +4778,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
@@ -4493,7 +4787,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
@@ -4503,7 +4797,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
@@ -4512,9 +4808,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -4524,7 +4820,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -4534,9 +4830,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -4544,9 +4840,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
@@ -4554,9 +4850,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="ghost"]:hover:not(:disabled) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
@@ -4566,7 +4862,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -4576,7 +4872,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -4586,7 +4882,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="ghost"]:is(
       .dark *
     )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -4596,7 +4892,7 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"] {
+    ):not(form[method="dialog"]:not(dialog form) > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
@@ -4605,7 +4901,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
@@ -4613,7 +4911,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
@@ -4621,7 +4921,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
@@ -4631,7 +4933,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
@@ -4640,9 +4944,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
-      :disabled
-    ) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
@@ -4651,7 +4955,7 @@
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
     ):not(
-      form[method="dialog"] > *
+      form[method="dialog"]:not(dialog form) > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
@@ -4660,7 +4964,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
@@ -4668,9 +4974,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):focus-visible {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -4679,9 +4985,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    ):hover:not(:disabled) {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
@@ -4689,9 +4995,9 @@
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
-      .dark *
-    )[aria-pressed="true"] {
+    ):not(
+      form[method="dialog"]:not(dialog form) > *
+    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 }

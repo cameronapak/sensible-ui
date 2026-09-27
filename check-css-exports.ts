@@ -6,6 +6,7 @@ const modules = {
   base: "scroll-behavior: smooth",
   button: '[data-size="icon"]',
   card: ".card {",
+  dialog: "dialog {",
   "description-list": "dl > dt:has( + dd)",
   image: "figure {",
   input: '[role="switch"]',

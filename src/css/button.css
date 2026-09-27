@@ -4,7 +4,7 @@
     button:not([role]),
     input:is([type="submit"], [type="reset"], [type="button"]),
     a.button
-  ):not(form[method="dialog"] > *) {
+  ):not(form[method="dialog"]:not(dialog form) > *) {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
@@ -21,6 +21,14 @@
     &:is(.card > header > [data-slot="card-action"], .card > footer > *) {
       height: auto;
       min-height: 2.25rem;
+      white-space: normal;
+    }
+
+    &:is(dialog > footer button:not([role])) {
+      height: auto;
+      min-height: 2.25rem;
+      max-inline-size: 100%;
+      overflow-wrap: anywhere;
       white-space: normal;
     }
 

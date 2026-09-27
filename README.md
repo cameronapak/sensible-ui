@@ -209,6 +209,7 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Button           | `@faith-tools/sensible-ui/button`           |
 | Card             | `@faith-tools/sensible-ui/card`             |
 | Description list | `@faith-tools/sensible-ui/description-list` |
+| Dialog           | `@faith-tools/sensible-ui/dialog`           |
 | Image and figure | `@faith-tools/sensible-ui/image`            |
 | Form controls    | `@faith-tools/sensible-ui/input`            |
 | Item             | `@faith-tools/sensible-ui/item`             |
