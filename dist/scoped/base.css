@@ -1,8 +1,7 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
-    /* src/css/theme.css */
     @layer base, typography, components, button, utilities;
-
+    /* src/css/theme.css */
     :root {
       --radius: 0.625rem;
       --font-sans:

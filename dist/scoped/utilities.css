@@ -1,5 +1,6 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
+    @layer base, typography, components, button, utilities;
     /* src/css/generated/utilities.css */
     @layer utilities {
       :root {

@@ -95,7 +95,7 @@
     "build:scoped": "bun run ./build-scoped-css.ts",
     "build:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css && bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.min.css --minify && prettier --write ./dist/sensible-ui.utilities.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
-    "check": "bun run typecheck && bun run test:scoped && bun run build && bun run check:site && bun run check:exports && playwright test && test -z \"$(git status --porcelain --untracked-files=all -- src/css/generated/utilities.css dist/sensible-ui.css dist/sensible-ui.min.css dist/sensible-ui.utilities.css dist/sensible-ui.utilities.min.css dist/sensible-code.js dist/scoped)\"",
+    "check": "bun run ./check-generated.ts --version-only && bun run typecheck && bun run test:scoped && bun run build && bun run check:site && bun run check:exports && playwright test && bun run ./check-generated.ts",
     "check:exports": "bun run ./check-css-exports.ts",
     "check:site": "bun run ./build-site.tsx",
     "test:browser": "bun run build && playwright test",

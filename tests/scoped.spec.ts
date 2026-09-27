@@ -71,6 +71,12 @@ test('keeps generated bundle variants and standalone exports equivalent', async 
     readFile('./dist/scoped/utilities.css', 'utf8'),
     readFile('./dist/sensible-ui.css', 'utf8'),
   ])
+  const layerOrder = (await readFile('./src/css/theme.css', 'utf8')).match(
+    /^@layer [^;]+;/,
+  )![0]
+  for (const css of [readable, minified, button, utilities]) {
+    expect(css).toContain(layerOrder)
+  }
 
   const measureBundle = async (css: string) => {
     await page.setContent(`

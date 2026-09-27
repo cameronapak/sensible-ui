@@ -49,14 +49,19 @@ async function bundle(entrypoint: string, minify = false) {
 export async function buildScopedCss() {
   await rm('./dist/scoped', { recursive: true, force: true })
   await mkdir('./dist/scoped', { recursive: true })
+  const layerOrder = (await Bun.file('./src/css/theme.css').text()).match(
+    /^@layer [^;]+;/,
+  )?.[0]
+  const withLayerOrder = (css: string) =>
+    layerOrder && !css.includes(layerOrder) ? `${layerOrder}\n${css}` : css
 
   for (const [name, entrypoint] of Object.entries(scopedEntries)) {
-    const scoped = scopeCss(await bundle(entrypoint))
+    const scoped = scopeCss(withLayerOrder(await bundle(entrypoint)))
     const readable = await format(scoped, { parser: 'css' })
     await Bun.write(`./dist/scoped/${name}.css`, readable)
 
     if (name === 'sensible-ui' || name === 'utilities') {
-      const minified = scopeCss(await bundle(entrypoint, true))
+      const minified = scopeCss(withLayerOrder(await bundle(entrypoint, true)))
       await Bun.write(`./dist/scoped/${name}.min.css`, minified)
     }
   }
