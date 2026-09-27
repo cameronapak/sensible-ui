@@ -1,0 +1,97 @@
+@layer base, typography, components, button, utilities;
+
+@layer components {
+  sensible-code {
+    --code-surface: var(--secondary, oklch(0.9701 0 0));
+    --code-background: var(--background, oklch(1 0 0));
+    --code-foreground: var(--foreground, oklch(0.2099 0.0341 263.5));
+    --code-muted: var(--muted-foreground, oklch(0.5444 0.035 265.2));
+    --code-border: var(--border, oklch(0.8715 0.0123 260));
+    --sh-class: oklch(0.498 0.1953 291.5);
+    --sh-identifier: oklch(0.3695 0.0381 260.5);
+    --sh-sign: oklch(0.5444 0.035 265.2);
+    --sh-string: oklch(0.5355 0.0951 180.6);
+    --sh-keyword: oklch(0.5003 0.1821 29.5);
+    --sh-comment: oklch(0.5444 0.035 265.2);
+    --sh-jsxliterals: oklch(0.5301 0.1375 340.4);
+    --sh-entity: oklch(0.498 0.1953 291.5);
+    --sh-property: oklch(0.5093 0.1954 260.9);
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--code-border);
+    border-radius: var(--radius, 0.625rem);
+  }
+
+  .dark sensible-code,
+  sensible-code.dark {
+    --code-surface: var(--secondary, oklch(0.2732 0.0115 271));
+    --code-background: var(--background, oklch(0.1964 0.0082 274.6));
+    --code-foreground: var(--foreground, oklch(0.8715 0.0123 260));
+    --code-muted: var(--muted-foreground, oklch(0.7098 0.0273 261.2));
+    --code-border: var(--border, oklch(0.3882 0.0154 275.8));
+    --sh-class: oklch(0.7863 0.1258 298.6);
+    --sh-identifier: oklch(0.8715 0.0123 260);
+    --sh-sign: oklch(0.7098 0.0273 261.2);
+    --sh-string: oklch(0.8222 0.0934 180.9);
+    --sh-keyword: oklch(0.8254 0.0973 23.2);
+    --sh-comment: oklch(0.7098 0.0273 261.2);
+    --sh-jsxliterals: oklch(0.8421 0.0827 337);
+    --sh-entity: oklch(0.7863 0.1258 298.6);
+    --sh-property: oklch(0.7835 0.1103 258.7);
+  }
+
+  sensible-code .sensible-code-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    background: var(--code-surface);
+    color: var(--code-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  sensible-code > :is(pre, textarea) {
+    overflow: auto;
+    margin: 0;
+    border-radius: 0;
+    background: var(--code-surface);
+    color: var(--code-foreground);
+    padding: 1rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    white-space: pre;
+  }
+
+  sensible-code > textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 4rem;
+    border: 0;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    resize: none;
+    field-sizing: content;
+  }
+
+  sensible-code > pre > code {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    user-select: text;
+  }
+}
+
+@layer button {
+  sensible-code
+    .sensible-code-toolbar
+    button[type="button"]:not([data-size]):not([data-variant]) {
+    min-height: 2rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--code-border);
+    border-radius: calc(var(--radius, 0.625rem) - 4px);
+    background: var(--code-background);
+    color: var(--code-foreground);
+    font: inherit;
+    cursor: pointer;
+  }
+}

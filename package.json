@@ -10,6 +10,7 @@
     "dist/sensible-ui.min.css",
     "dist/sensible-ui.utilities.css",
     "dist/sensible-ui.utilities.min.css",
+    "dist/sensible-code.js",
     "dist/scoped",
     "src/css"
   ],
@@ -20,6 +21,8 @@
     "./base": "./src/css/entries/base.css",
     "./button": "./src/css/entries/button.css",
     "./card": "./src/css/entries/card.css",
+    "./code": "./dist/sensible-code.js",
+    "./code/css": "./src/css/code.css",
     "./css": "./dist/sensible-ui.css",
     "./description-list": "./src/css/entries/description-list.css",
     "./image": "./src/css/entries/image.css",
@@ -77,18 +80,20 @@
   },
   "homepage": "https://sensibleui.com",
   "scripts": {
-    "dev": "bun run generate:utilities && concurrently \"bun run dev:css\" \"bun run dev:utilities\" \"bun run dev:scoped\" \"bun run --hot ./index.tsx\"",
+    "dev": "bun run generate:utilities && concurrently \"bun run dev:css\" \"bun run dev:code\" \"bun run dev:utilities\" \"bun run dev:scoped\" \"bun run --hot ./index.tsx\"",
     "dev:css": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css --watch",
+    "dev:code": "bun build --target=browser ./src/components/code.ts --outfile=./dist/sensible-code.js --minify --watch",
     "dev:scoped": "bun run ./build-scoped-css.ts --watch",
     "dev:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css --watch",
     "prod": "bun run ./index.tsx",
     "generate:utilities": "bun run ./generate-utilities.ts",
-    "build": "bun run generate:utilities && bun run build:core && bun run build:utilities && bun run build:scoped",
+    "build": "bun run generate:utilities && bun run build:core && bun run build:code && bun run build:utilities && bun run build:scoped",
     "build:core": "bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.css && bun build --target=browser ./src/css/index.css --outfile=./dist/sensible-ui.min.css --minify && prettier --write ./dist/sensible-ui.css && bun run ./normalize-core-css.ts",
+    "build:code": "bun build --target=browser ./src/components/code.ts --outfile=./dist/sensible-code.js --minify",
     "build:scoped": "bun run ./build-scoped-css.ts",
     "build:utilities": "bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.css && bun build --target=browser ./src/css/entries/utilities.css --outfile=./dist/sensible-ui.utilities.min.css --minify && prettier --write ./dist/sensible-ui.utilities.css",
     "build:site": "bun run build && bun run ./build-site.tsx",
-    "check": "bun run typecheck && bun run test:scoped && bun run build && bun run check:site && bun run check:exports && playwright test && test -z \"$(git status --porcelain --untracked-files=all -- src/css/generated/utilities.css dist/sensible-ui.css dist/sensible-ui.min.css dist/sensible-ui.utilities.css dist/sensible-ui.utilities.min.css dist/scoped)\"",
+    "check": "bun run typecheck && bun run test:scoped && bun run build && bun run check:site && bun run check:exports && playwright test && test -z \"$(git status --porcelain --untracked-files=all -- src/css/generated/utilities.css dist/sensible-ui.css dist/sensible-ui.min.css dist/sensible-ui.utilities.css dist/sensible-ui.utilities.min.css dist/sensible-code.js dist/scoped)\"",
     "check:exports": "bun run ./check-css-exports.ts",
     "check:site": "bun run ./build-site.tsx",
     "test:browser": "bun run build && playwright test",
@@ -104,6 +109,7 @@
     "concurrently": "^9.2.1",
     "hono": "^4.13.9",
     "prettier": "^3.8.1",
+    "sugar-high": "^2.5.0",
     "typescript": "5.9.3"
   }
 }

@@ -79,6 +79,28 @@ To change the theme, override the CSS variables after importing the stylesheet:
 
 The full set of light and dark tokens is in [`src/css/theme.css`](src/css/theme.css).
 
+## Optional highlighted code
+
+The `sensible-code` web component adds syntax highlighting and a Copy button without adding JavaScript to the core stylesheet. Import its CSS and JavaScript only on pages that need it:
+
+```css
+@import '@faith-tools/sensible-ui/code/css';
+```
+
+```js
+import '@faith-tools/sensible-ui/code'
+```
+
+Put the source in a read-only text area. The component creates `<pre><code>` when its JavaScript loads:
+
+```html
+<sensible-code language="html">
+  <textarea readonly><button>Save</button></textarea>
+</sensible-code>
+```
+
+Without JavaScript, the read-only text area remains visible. In HTML source, escape `&` before entity names. If the example contains `</textarea>`, write its opening angle bracket as `&lt;` to prevent the HTML parser from closing the text area. The component accepts Sugar High language names and common aliases such as `js` and `py`; an unknown or missing language displays as plain text. A `content` attribute would require quote escaping and would not provide readable source without JavaScript.
+
 ## Page view transitions
 
 Cross-document page view transitions are available as an opt-in stylesheet:

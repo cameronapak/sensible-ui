@@ -88,28 +88,22 @@
   object-fit: cover;
 }
 
-.docs-code-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.docs-example > sensible-code {
+  border: 0;
   border-top: 1px solid var(--border);
-  background: var(--secondary);
-  padding: 0.5rem 0.75rem;
-  color: var(--muted-foreground);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.docs-code-toolbar button {
-  min-height: 2rem;
-  background: var(--background);
-  color: var(--foreground);
-}
-
-.docs-example > pre {
-  max-height: 24rem;
-  margin: 0;
   border-radius: 0;
+}
+
+.docs-code-only > sensible-code {
+  border-top: 0;
+}
+
+.docs-example > sensible-code > pre {
+  max-height: 24rem;
+}
+
+.docs-page pre code {
+  user-select: text;
 }
 
 .docs-table-scroll {
@@ -136,13 +130,11 @@
     align-items: flex-start;
   }
 
-  .docs-example > pre,
-  .docs-section > pre {
+  .docs-example sensible-code > pre {
     white-space: pre-wrap;
   }
 
-  .docs-example > pre code,
-  .docs-section > pre code {
+  .docs-example sensible-code > pre code {
     overflow-wrap: anywhere;
   }
 }

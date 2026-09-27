@@ -23,6 +23,8 @@ await Promise.all([
   Bun.write(`${output}/index.html`, await response.text()),
   Bun.write(`${output}/scoped/index.html`, scopedHtml),
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),
+  Bun.write(`${output}/code.css`, Bun.file('./src/css/code.css')),
+  Bun.write(`${output}/code.js`, Bun.file('./dist/sensible-code.js')),
   Bun.write(`${output}/scoped.css`, Bun.file('./dist/scoped/sensible-ui.css')),
   Bun.write(`${output}/utilities.css`, Bun.file('./dist/sensible-ui.utilities.css')),
   Bun.write(`${output}/site.css`, Bun.file('./src/site.css')),

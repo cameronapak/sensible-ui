@@ -3,6 +3,7 @@ import { html } from 'hono/html'
 import { jsxRenderer } from 'hono/jsx-renderer'
 import { Home } from './pages/home.tsx'
 import { ScopedDemo } from './pages/scoped.tsx'
+import { CodeBreak } from './pages/code-break.tsx'
 
 const app = new Hono()
 
@@ -21,8 +22,10 @@ app.use(
         />
         <link rel="stylesheet" href="./index.css" />
         <link rel="stylesheet" href="./utilities.css" />
+        <link rel="stylesheet" href="./code.css" />
         <link rel="stylesheet" href="./site.css" />
         <script src="./site.js" defer></script>
+        <script src="./code.js" type="module"></script>
       </head>
       <body>{children}</body>
     </html>
@@ -30,6 +33,7 @@ app.use(
 )
 
 app.get('/', (context) => context.render(<Home />))
+app.get('/code-break', (context) => context.render(<CodeBreak />))
 app.get('/scoped/', (context) =>
   context.html(html`<!DOCTYPE html>${<ScopedDemo />}`),
 )

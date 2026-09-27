@@ -3,31 +3,29 @@ import { version } from "../../package.json";
 type CodeExampleProps = {
   code: string;
   dark?: boolean;
+  language?: "html" | "css" | "javascript";
+  showPreview?: boolean;
 };
 
-function CodeExample({ code, dark = false }: CodeExampleProps) {
-  const markup = code.trim();
+function CodeExample({
+  code,
+  dark = false,
+  language = "html",
+  showPreview = true,
+}: CodeExampleProps) {
+  const source = code.trim();
 
   return (
-    <div class="docs-example">
-      <div
-        class={`docs-preview${dark ? " dark" : ""}`}
-        dangerouslySetInnerHTML={{ __html: markup }}
-      />
-      <div class="docs-code-toolbar">
-        <span>HTML</span>
-        <button
-          type="button"
-          data-copy-code
-          aria-label="Copy HTML example"
-          aria-live="polite"
-        >
-          Copy
-        </button>
-      </div>
-      <pre>
-        <code>{markup}</code>
-      </pre>
+    <div class={`docs-example${showPreview ? "" : " docs-code-only"}`}>
+      {showPreview && (
+        <div
+          class={`docs-preview${dark ? " dark" : ""}`}
+          dangerouslySetInnerHTML={{ __html: source }}
+        />
+      )}
+      <sensible-code language={language}>
+        <textarea readonly>{source}</textarea>
+      </sensible-code>
     </div>
   );
 }
@@ -343,6 +341,7 @@ export function Home() {
           <a href="#getting-started">Getting started</a>
           <a href="#scoped-mode">Scoped adoption</a>
           <a href="#typography">Typography</a>
+          <a href="#code">Code</a>
           <a href="#buttons">Buttons</a>
           <a href="#forms">Forms</a>
           <a href="#card">Card</a>
@@ -365,13 +364,16 @@ export function Home() {
           Import the complete stylesheet when you want every semantic default
           and component:
         </p>
-        <pre>
-          <code>@import '@faith-tools/sensible-ui';</code>
-        </pre>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui';"
+          language="css"
+          showPreview={false}
+        />
         <p>Or use the versioned CDN build:</p>
-        <pre>
-          <code>{`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}</code>
-        </pre>
+        <CodeExample
+          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}
+          showPreview={false}
+        />
         <p>
           Standalone component imports include the theme and base styles they
           need. When markup combines components, import each component. For
@@ -428,6 +430,15 @@ export function Home() {
                 </tr>
                 <tr>
                   <th scope="row">
+                    <code>/code/css</code>
+                  </th>
+                  <td>
+                    Optional code component styles; JavaScript is under{" "}
+                    <code>/code</code>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
                     <code>/description-list</code>, <code>/image</code>,{" "}
                     <code>/input</code>, <code>/item</code>
                   </th>
@@ -471,17 +482,20 @@ export function Home() {
           application. Semantic defaults apply only inside a neutral{" "}
           <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
         </p>
-        <pre>
-          <code>@import '@faith-tools/sensible-ui/scoped';</code>
-        </pre>
-        <pre>
-          <code>{`<section class="sensible-ui">
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/scoped';"
+          language="css"
+          showPreview={false}
+        />
+        <CodeExample
+          code={`<section class="sensible-ui">
   <h2>Account settings</h2>
   <label for="display-name">Display name</label>
   <input id="display-name">
   <button>Save changes</button>
-</section>`}</code>
-        </pre>
+</section>`}
+          showPreview={false}
+        />
         <p>
           Put the class on a wrapper, not on a card, table, link, or form
           control. Sensible UI layout and utility classes such as{" "}
@@ -505,7 +519,72 @@ export function Home() {
           and inline text semantics are styled without classes. Keep the native
           element that matches the content’s meaning.
         </p>
+        <p>
+          Geist and Geist Mono are optional. The stylesheet prefers them but
+          does not load them, so your system fonts are used unless you provide
+          the fonts separately. See the{" "}
+          <a href="https://github.com/cameronapak/sensible-ui#fonts">
+            font setup in the README
+          </a>{" "}
+          for HTML and Next.js examples, or override <code>--font-sans</code>{" "}
+          and <code>--font-mono</code> to use your own fonts.
+        </p>
         <CodeExample code={typographyExample} />
+      </section>
+
+      <section class="docs-section stack" id="code">
+        <h2>Add highlighted code</h2>
+        <p>
+          If your project uses a bundler, import the optional stylesheet and
+          browser module. The default Sensible UI stylesheet does not include
+          either one. If you have not installed the package, run{" "}
+          <code>npm install @faith-tools/sensible-ui</code> first.
+        </p>
+        <ol>
+          <li>
+            <p>Import the component styles in your CSS entry:</p>
+            <CodeExample
+              code="@import '@faith-tools/sensible-ui/code/css';"
+              language="css"
+              showPreview={false}
+            />
+          </li>
+          <li>
+            <p>Import the component in your browser JavaScript entry:</p>
+            <CodeExample
+              code="import '@faith-tools/sensible-ui/code';"
+              language="javascript"
+              showPreview={false}
+            />
+          </li>
+          <li>
+            <p>
+              Add <code>sensible-code</code> with a read-only{" "}
+              <code>textarea</code> containing the source:
+            </p>
+            <CodeExample
+              code={`<sensible-code language="html">
+  <textarea readonly><button>Save</button></textarea>
+</sensible-code>`}
+              showPreview={false}
+            />
+          </li>
+        </ol>
+        <p>
+          The code below shows syntax colors and a Copy button. Without
+          JavaScript, the read-only text area remains readable. The component
+          creates <code>pre</code> and <code>code</code> when it loads. In HTML
+          source, escape <code>&amp;</code> before entity names. If the example
+          contains <code>&lt;/textarea&gt;</code>, write its opening angle
+          bracket as <code>&amp;lt;</code>. Set <code>language</code> to a
+          supported language name, such as <code>html</code>, <code>css</code>,
+          or <code>python</code>.
+        </p>
+        <sensible-code language="html">
+          <textarea readonly>
+            {'<button type="button">Save</button>\n<p>Ready & waiting</p>'}
+          </textarea>
+        </sensible-code>
       </section>
 
       <section class="docs-section stack" id="buttons">
@@ -746,11 +825,11 @@ export function Home() {
           and accessibility helpers. It is plain generated CSS and requires no
           template scanning or consumer-side tooling. Override the{" "}
           <code>--space-*</code> custom properties to change its spacing scale.
-          Prefer named helpers such as <code>.stack</code>, <code>.y-stack</code>,
-          and <code>.x-stack</code> for common composition, then use atomic
-          helpers for exceptions. Breakpoint-prefixed variants are intentionally
-          not generated; use intrinsic layouts or consumer-owned media queries
-          instead.
+          Prefer named helpers such as <code>.stack</code>,{" "}
+          <code>.y-stack</code>, and <code>.x-stack</code> for common
+          composition, then use atomic helpers for exceptions.
+          Breakpoint-prefixed variants are intentionally not generated; use
+          intrinsic layouts or consumer-owned media queries instead.
         </p>
         <CodeExample code={utilitiesExample} />
       </section>
