@@ -1,7 +1,7 @@
 # AGENTS.md — Sensible UI (aka Basecoat)
 
 ## Overview
-CSS-only UI component library inspired by shadcn/ui. Pure semantic HTML + CSS, no JS framework or Tailwind dependency. Published as `@faith-tools/sensible-ui`.
+CSS-only core inspired by shadcn/ui, with optional web components for behavior. The core uses semantic HTML + CSS and has no JS framework or Tailwind dependency. Published as `@faith-tools/sensible-ui`.
 
 Read `CONTEXT.md` before changing the public styling model, compatibility expectations, or package boundaries. Read `docs/adr/0003-parent-scoped-css.md` before changing scoped output, scope-root behavior, or the `.sensible-ui` contract.
 
@@ -10,9 +10,9 @@ Read `CONTEXT.md` before changing the public styling model, compatibility expect
 - `bun run build` — Build the global and scoped CSS bundles and standalone modules
 - `bun run build:site` — Render the gallery and scoped demo and copy their CSS to `dist/static`
 - `bun run test:scoped` — Run the scoped CSS builder tests
-- `bun run test:browser` — Build and run the scoped browser contract test; install Chromium once with `bunx playwright install chromium`
+- `bun run test:browser` — Build and run all Playwright browser tests; install Chromium once with `bunx playwright install chromium`
 - `bun run check` — Run types, tests, builds, export validation, and generated-file checks
-- Verify visual changes through the dev server in addition to the automated checks.
+- For visual changes, inspect the normal state and a likely failure state (such as narrow width, long content, or a changed state) through the dev server; exercise the relevant user action.
 
 ## Architecture
 - `src/css/` — Component CSS files (button, card, badge, etc.), each wrapped in `@layer <name>`
