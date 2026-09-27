@@ -1,5 +1,12 @@
 # Sensible UI
 
+## 1.7.0
+
+### Minor Changes
+
+- 0d4b476: Add native dialog styles, a standalone export, and accessible modal and non-modal examples. Backdrop dismissal remains opt-in through `closedby="any"`.
+- 9539ac2: Let authors start sensible-code blocks wrapped with `data-wrap="true"`, and let readers toggle wrapping per block. Code scrolls by default at all screen widths. Switching modes resets the code panel to the start so previously scrolled content stays readable.
+
 ## 1.6.0
 
 ### Minor Changes
