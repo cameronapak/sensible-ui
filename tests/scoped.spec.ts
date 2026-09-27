@@ -80,6 +80,9 @@ test('keeps generated bundle variants and standalone exports equivalent', async 
         <code id="code">Code</code>
       </section>
     `)
+    await page.addStyleTag({
+      content: '*, *::before, *::after { transition: none !important; }',
+    })
     await page.addStyleTag({ content: css })
 
     return page.evaluate(() => {
