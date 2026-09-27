@@ -1,11 +1,10 @@
 @layer button {
   /* Button */
-  :not(form[method="dialog"])
-    > :is(
-      button:not([role]),
-      input:is([type="submit"], [type="reset"], [type="button"]),
-      a.button
-    ) {
+  :is(
+    button:not([role]),
+    input:is([type="submit"], [type="reset"], [type="button"]),
+    a.button
+  ):not(form[method="dialog"] > *) {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
@@ -19,10 +18,7 @@
     white-space: nowrap;
     transition: all 150ms ease-out;
 
-    &:is(
-      .card > header > [data-slot="card-action"],
-      .card > footer > *
-    ) {
+    &:is(.card > header > [data-slot="card-action"], .card > footer > *) {
       height: auto;
       min-height: 2.25rem;
       white-space: normal;

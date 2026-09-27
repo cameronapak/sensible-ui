@@ -1,5 +1,6 @@
 @layer components {
-  :root {
+  :root,
+  :where(:scope) {
     /* https://modern-css.com/smooth-height-auto-animations-without-javascript */
     interpolate-size: allow-keywords;
     /* https://github.com/emilkowalski/skill/blob/main/skills/emil-design-eng/SKILL.md */

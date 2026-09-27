@@ -71,5 +71,6 @@ jobs:
         with:
           bun-version: 1.3.10
       - run: bun install --frozen-lockfile
+      - run: bunx playwright install --with-deps chromium
       - run: bun run check
       - uses: changesets/action/publish@v2.0.0

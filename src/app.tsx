@@ -1,6 +1,8 @@
 import { Hono } from 'hono'
+import { html } from 'hono/html'
 import { jsxRenderer } from 'hono/jsx-renderer'
 import { Home } from './pages/home.tsx'
+import { ScopedDemo } from './pages/scoped.tsx'
 
 const app = new Hono()
 
@@ -28,5 +30,8 @@ app.use(
 )
 
 app.get('/', (context) => context.render(<Home />))
+app.get('/scoped/', (context) =>
+  context.html(html`<!DOCTYPE html>${<ScopedDemo />}`),
+)
 
 export default app

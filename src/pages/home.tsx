@@ -336,6 +336,7 @@ export function Home() {
         </p>
         <nav class="docs-nav" aria-label="Component documentation">
           <a href="#getting-started">Getting started</a>
+          <a href="#scoped-mode">Scoped adoption</a>
           <a href="#typography">Typography</a>
           <a href="#buttons">Buttons</a>
           <a href="#forms">Forms</a>
@@ -456,6 +457,39 @@ export function Home() {
             </table>
           </div>
         </details>
+      </section>
+
+      <section class="docs-section stack" id="scoped-mode">
+        <h2>Limit styles to part of a page</h2>
+        <p>
+          Use the scoped bundle when adding Sensible UI to an existing
+          application. Semantic defaults apply only inside a neutral{" "}
+          <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
+        </p>
+        <pre>
+          <code>@import '@faith-tools/sensible-ui/scoped';</code>
+        </pre>
+        <pre>
+          <code>{`<section class="sensible-ui">
+  <h2>Account settings</h2>
+  <label for="display-name">Display name</label>
+  <input id="display-name">
+  <button>Save changes</button>
+</section>`}</code>
+        </pre>
+        <p>
+          Put the class on a wrapper, not on a card, table, link, or form
+          control. Sensible UI layout and utility classes such as{" "}
+          <code>.stack</code>, <code>.mt-4</code>, and <code>.size-8</code> also
+          belong on descendants, not the scope root. You can combine the scope
+          class with a host-owned wrapper class. Scoped component and utility
+          imports use the same names under <code>/scoped</code>, such as{" "}
+          <code>/scoped/button</code> and <code>/scoped/utilities</code>. Scoped
+          mode requires browser support for <code>@scope</code>.
+        </p>
+        <p>
+          <a href="./scoped/">View the scoped bundle beside host styles</a>.
+        </p>
       </section>
 
       <section class="docs-section stack" id="typography">

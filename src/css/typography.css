@@ -74,7 +74,7 @@
     margin-bottom: 1rem;
   }
 
-  :not(pre) > :is(code, samp) {
+  :is(code, samp):not(pre > *) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
     padding: 0.125rem 0.25rem;

@@ -1,0 +1,712 @@
+@layer sensible-ui {
+  @scope (.sensible-ui) {
+    /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
+    :root {
+      --radius: 0.625rem;
+      --font-sans:
+        var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui,
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-mono:
+        var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular,
+        Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --sidebar: oklch(0.985 0 0);
+      --sidebar-foreground: oklch(0.145 0 0);
+      --sidebar-primary: oklch(0.205 0 0);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.97 0 0);
+      --sidebar-accent-foreground: oklch(0.205 0 0);
+      --sidebar-border: oklch(0.922 0 0);
+      --sidebar-ring: oklch(0.708 0 0);
+      --sidebar-width: 16rem;
+      --sidebar-mobile-width: 18rem;
+      --scrollbar-track: transparent;
+      --scrollbar-thumb: #0000004d;
+      --scrollbar-width: 6px;
+      --scrollbar-radius: 6px;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+    }
+
+    :where(:scope) {
+      --radius: 0.625rem;
+      --font-sans:
+        var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui,
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-mono:
+        var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular,
+        Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --sidebar: oklch(0.985 0 0);
+      --sidebar-foreground: oklch(0.145 0 0);
+      --sidebar-primary: oklch(0.205 0 0);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.97 0 0);
+      --sidebar-accent-foreground: oklch(0.205 0 0);
+      --sidebar-border: oklch(0.922 0 0);
+      --sidebar-ring: oklch(0.708 0 0);
+      --sidebar-width: 16rem;
+      --sidebar-mobile-width: 18rem;
+      --scrollbar-track: transparent;
+      --scrollbar-thumb: #0000004d;
+      --scrollbar-width: 6px;
+      --scrollbar-radius: 6px;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+    }
+
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.269 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.922 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.371 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.704 0.191 22.216);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.556 0 0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+      --sidebar: oklch(0.205 0 0);
+      --sidebar-foreground: oklch(0.985 0 0);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.269 0 0);
+      --sidebar-accent-foreground: oklch(0.985 0 0);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.439 0 0);
+      --scrollbar-thumb: #ffffff4d;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+      --buncss-light: ;
+      --buncss-dark: initial;
+      color-scheme: dark;
+    }
+
+    :where(:scope):is(.dark, .dark *) {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.269 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.922 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.371 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.704 0.191 22.216);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.556 0 0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+      --sidebar: oklch(0.205 0 0);
+      --sidebar-foreground: oklch(0.985 0 0);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.269 0 0);
+      --sidebar-accent-foreground: oklch(0.985 0 0);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.439 0 0);
+      --scrollbar-thumb: #ffffff4d;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+      --buncss-light: ;
+      --buncss-dark: initial;
+      color-scheme: dark;
+    }
+
+    /* src/css/base.css */
+    @layer base {
+      *,
+      :before,
+      :after {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope) {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::backdrop {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::-webkit-file-upload-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::file-selector-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope):before {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope):after {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::backdrop {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::-webkit-file-upload-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::file-selector-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      * {
+        outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+        flex-shrink: 0;
+        scroll-margin-top: 1rem;
+      }
+
+      :where(:scope) {
+        outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+        flex-shrink: 0;
+        scroll-margin-top: 1rem;
+      }
+
+      html {
+        font-family: var(--font-sans);
+        line-height: 1.5;
+      }
+
+      :where(:scope) {
+        font-family: var(--font-sans);
+        line-height: 1.5;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        overscroll-behavior: none;
+      }
+
+      :where(:scope:root) {
+        scroll-behavior: smooth;
+        overscroll-behavior: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        :where(:scope:root) {
+          scroll-behavior: auto;
+        }
+      }
+
+      :-webkit-any(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      :-moz-any(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      :is(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      :-webkit-any(ul, ol) {
+        list-style: none;
+      }
+
+      :-moz-any(ul, ol) {
+        list-style: none;
+      }
+
+      :is(ul, ol) {
+        list-style: none;
+      }
+
+      :-webkit-any(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :-moz-any(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :is(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :-webkit-any(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      :-moz-any(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      :is(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        text-indent: 0;
+      }
+
+      :-webkit-any(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :-moz-any(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :is(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :-webkit-any(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      :-moz-any(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      :is(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      [hidden]:not([hidden="until-found"]) {
+        display: none !important;
+      }
+
+      hr {
+        border-top-width: 1px;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      :where(:scope:not(:root)) {
+        background: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      body {
+        overscroll-behavior: none;
+        scrollbar-gutter: stable;
+      }
+    }
+
+    /* src/css/typography.css */
+    @layer typography {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+        scroll-margin: 5rem;
+        font-weight: 600;
+      }
+
+      :is(h1, h2, h3, h4, h5, h6):first-child {
+        margin-block-start: 0;
+      }
+
+      mark {
+        border-radius: calc(var(--radius) - 4px);
+        background: oklch(0.945 0.129 101.54);
+        padding-inline-start: 0.25rem;
+        padding-inline-end: 0.25rem;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+
+      h1 {
+        margin: 2.5rem 0 1.5rem;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+
+      h2 {
+        margin: 2rem 0 1.25rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
+
+      h3 {
+        margin: 1.5rem 0 1rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      h4 {
+        margin: 1.25rem 0 0.75rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+
+      h5 {
+        margin: 1rem 0 0.5rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+
+      h6 {
+        margin: 1rem 0 0.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+
+      strong,
+      b {
+        font-weight: 600;
+      }
+
+      em,
+      i {
+        font-style: italic;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      :-webkit-any(code, samp):not(pre > *) {
+        border-radius: calc(var(--radius) - 4px);
+        background: var(--secondary);
+        font-family: var(--font-mono);
+        padding: 0.125rem 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      :-moz-any(code, samp):not(pre > *) {
+        border-radius: calc(var(--radius) - 4px);
+        background: var(--secondary);
+        font-family: var(--font-mono);
+        padding: 0.125rem 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      :is(code, samp):not(pre > *) {
+        border-radius: calc(var(--radius) - 4px);
+        background: var(--secondary);
+        font-family: var(--font-mono);
+        padding: 0.125rem 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      pre {
+        overflow-x: auto;
+        border-radius: calc(var(--radius) - 2px);
+        background: var(--secondary);
+        font-family: var(--font-mono);
+        white-space: pre;
+        margin-bottom: 1rem;
+        padding: 1rem;
+      }
+
+      pre code {
+        user-select: all;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      blockquote {
+        border-inline-start: 4px solid var(--border);
+        color: var(--muted-foreground);
+        margin-block-start: 1rem;
+        margin-block-end: 1rem;
+        padding-inline-start: 1rem;
+        font-style: italic;
+      }
+
+      hr {
+        margin-block-start: 2rem;
+        margin-block-end: 2rem;
+      }
+
+      ul,
+      ol {
+        margin-bottom: 1rem;
+        padding-inline-start: 1.5rem;
+      }
+
+      :is(ul, ol) li {
+        margin-bottom: 0.25rem;
+      }
+
+      ul {
+        list-style-type: disc;
+      }
+
+      ol {
+        list-style-type: decimal;
+      }
+
+      a[href]:not(:-webkit-any(.button, .item)) {
+        display: inline-block;
+        color: var(--foreground);
+        text-decoration-line: underline;
+        text-underline-offset: 4px;
+        transition: all 0.1s;
+      }
+
+      a[href]:not(:-webkit-any(.button, .item)):active {
+        translate: 0 1px;
+      }
+
+      a[href]:not(:-moz-any(.button, .item)) {
+        display: inline-block;
+        color: var(--foreground);
+        text-decoration-line: underline;
+        text-underline-offset: 4px;
+        transition: all 0.1s;
+      }
+
+      a[href]:not(:-moz-any(.button, .item)):active {
+        translate: 0 1px;
+      }
+
+      a[href]:not(:is(.button, .item)) {
+        display: inline-block;
+        color: var(--foreground);
+        text-decoration-line: underline;
+        text-underline-offset: 4px;
+        transition: all 0.1s;
+      }
+
+      a[href]:not(:is(.button, .item)):active {
+        translate: 0 1px;
+      }
+
+      kbd {
+        pointer-events: none;
+        display: inline-flex;
+        border-radius: calc(var(--radius) - 4px);
+        background: var(--muted);
+        color: var(--muted-foreground);
+        font-family: var(--font-sans);
+        user-select: none;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+        width: -moz-fit-content;
+        width: fit-content;
+        min-width: 1.25rem;
+        height: 1.25rem;
+        padding-inline-start: 0.25rem;
+        padding-inline-end: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1rem;
+      }
+
+      kbd svg:not([class*="size-"]) {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+
+      s,
+      del {
+        color: var(--muted-foreground);
+      }
+
+      u,
+      ins,
+      abbr,
+      a[href] {
+        text-decoration-color: color-mix(
+          in oklab,
+          var(--primary) 20%,
+          transparent
+        );
+        text-underline-offset: 4px;
+      }
+
+      :is(u, ins, abbr, a[href]):-webkit-any(a[href]):hover {
+        color: var(--primary);
+        text-decoration-color: var(--primary);
+      }
+
+      :is(u, ins, abbr, a[href]):-moz-any(a[href]):hover {
+        color: var(--primary);
+        text-decoration-color: var(--primary);
+      }
+
+      :is(u, ins, abbr, a[href]):is(a[href]):hover {
+        color: var(--primary);
+        text-decoration-color: var(--primary);
+      }
+    }
+
+    /* src/css/entries/typography.css */
+  }
+}

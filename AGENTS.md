@@ -3,20 +3,23 @@
 ## Overview
 CSS-only UI component library inspired by shadcn/ui. Pure semantic HTML + CSS, no JS framework or Tailwind dependency. Published as `@faith-tools/sensible-ui`.
 
-Read `CONTEXT.md` before changing the public styling model, compatibility expectations, or package boundaries.
+Read `CONTEXT.md` before changing the public styling model, compatibility expectations, or package boundaries. Read `docs/adr/0003-parent-scoped-css.md` before changing scoped output, scope-root behavior, or the `.sensible-ui` contract.
 
 ## Commands
 - `bun run dev` — Start the Bun dev server and CSS bundle watcher concurrently
-- `bun run build` — Bundle plain CSS to `dist/sensible-ui.css` and `dist/sensible-ui.min.css`
-- `bun run build:site` — Render `src/pages/home.tsx` and copy the CSS to `dist/static` for the static site
-- `bun run check` - Rebuild the published CSS and fail when the committed bundles are stale
-- No test suite exists. Verify changes visually via the dev server at localhost.
+- `bun run build` — Build the global and scoped CSS bundles and standalone modules
+- `bun run build:site` — Render the gallery and scoped demo and copy their CSS to `dist/static`
+- `bun run test:scoped` — Run the scoped CSS builder tests
+- `bun run test:browser` — Build and run the scoped browser contract test; install Chromium once with `bunx playwright install chromium`
+- `bun run check` — Run types, tests, builds, export validation, and generated-file checks
+- Verify visual changes through the dev server in addition to the automated checks.
 
 ## Architecture
 - `src/css/` — Component CSS files (button, card, badge, etc.), each wrapped in `@layer <name>`
 - `src/css/index.css` — Entry point that `@import`s all component files
 - `src/css/theme.css` — Design tokens as CSS custom properties (oklch colors, shadcn-style naming). Dark mode via `.dark` class.
 - `src/pages/home.tsx` — Demo page served by Bun (`index.tsx`) and rendered for the static site (`build-site.tsx`)
+- `build-scoped-css.ts` — Generates native `@scope (.sensible-ui)` counterparts from the shared CSS source graph
 - `dist/` — Built CSS output (do not edit directly)
 - Components are individually exportable via package.json `exports` map.
 
@@ -26,7 +29,7 @@ Read `CONTEXT.md` before changing the public styling model, compatibility expect
 - Use `data-variant` and `data-size` attributes for visual alternatives, and native or ARIA attributes for state.
 - Use native CSS declarations and theme variables (`--primary`, `--foreground`, etc.) from `theme.css`. Do not introduce Tailwind directives or generated `--tw-*` variables.
 - Colors use `oklch()`. Follow the `--name` / `--name-foreground` pairing pattern.
-- Treat strict semantic styling, the current hybrid, and opt-in scoping as open design directions. Do not silently turn the current implementation into a permanent policy.
+- Treat strict semantic styling and future changes to the current hybrid as open design directions. Parent-scoped CSS is part of the current public model, not a permanent policy.
 - Use web components when they own meaningful behavior or state, or when their structure is unusually complex. Do not wrap CSS-only presentation in a custom element. Prefer dependency-free, light-DOM progressive enhancement that preserves semantic content without JavaScript.
 
 ## Agent skills

@@ -9,6 +9,13 @@
     padding: 0;
   }
 
+  :where(:scope) {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
   ::backdrop {
     box-sizing: border-box;
     border: 0 solid var(--border);
@@ -30,7 +37,48 @@
     padding: 0;
   }
 
+  :where(:scope):before {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(:scope):after {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(:scope)::backdrop {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(:scope)::-webkit-file-upload-button {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(:scope)::file-selector-button {
+    box-sizing: border-box;
+    border: 0 solid var(--border);
+    margin: 0;
+    padding: 0;
+  }
+
   * {
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+    flex-shrink: 0;
+    scroll-margin-top: 1rem;
+  }
+
+  :where(:scope) {
     outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
     flex-shrink: 0;
     scroll-margin-top: 1rem;
@@ -38,13 +86,30 @@
 
   html {
     font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  :where(:scope) {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  html {
     scroll-behavior: smooth;
     overscroll-behavior: none;
-    line-height: 1.5;
+  }
+
+  :where(:scope:root) {
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
+      scroll-behavior: auto;
+    }
+
+    :where(:scope:root) {
       scroll-behavior: auto;
     }
   }
@@ -171,12 +236,24 @@
   body {
     background: var(--background);
     color: var(--foreground);
-    overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scrollbar-gutter: stable;
     font-size: 1rem;
     line-height: 1.5;
+  }
+
+  :where(:scope:not(:root)) {
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  body {
+    overscroll-behavior: none;
+    scrollbar-gutter: stable;
   }
 }
 
@@ -232,7 +309,99 @@
   --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
 }
 
+:where(:scope) {
+  --radius: 0.625rem;
+  --font-sans:
+    var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
+  --font-mono:
+    var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-width: 16rem;
+  --sidebar-mobile-width: 18rem;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: #0000004d;
+  --scrollbar-width: 6px;
+  --scrollbar-radius: 6px;
+  --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+  --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+  --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+}
+
 .dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.371 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.439 0 0);
+  --scrollbar-thumb: #ffffff4d;
+  --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+  --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+  --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+  --buncss-light: ;
+  --buncss-dark: initial;
+  color-scheme: dark;
+}
+
+:where(:scope):is(.dark, .dark *) {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -358,7 +527,7 @@
     margin-bottom: 1rem;
   }
 
-  :not(pre) > :-webkit-any(code, samp) {
+  :-webkit-any(code, samp):not(pre > *) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
     font-family: var(--font-mono);
@@ -367,7 +536,7 @@
     line-height: 1.25rem;
   }
 
-  :not(pre) > :-moz-any(code, samp) {
+  :-moz-any(code, samp):not(pre > *) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
     font-family: var(--font-mono);
@@ -376,7 +545,7 @@
     line-height: 1.25rem;
   }
 
-  :not(pre) > :is(code, samp) {
+  :is(code, samp):not(pre > *) {
     border-radius: calc(var(--radius) - 4px);
     background: var(--secondary);
     font-family: var(--font-mono);
@@ -577,7 +746,7 @@
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  .dark .badge[aria-invalid="true"] {
+  .badge:is(.dark *)[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -659,11 +828,11 @@
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  .dark .badge[data-variant="destructive"] {
+  .badge[data-variant="destructive"]:is(.dark *) {
     background-color: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
-  .dark .badge[data-variant="destructive"]:focus-visible {
+  .badge[data-variant="destructive"]:is(.dark *):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
@@ -2950,6 +3119,12 @@
     --icon-lucide-chevron: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E");
   }
 
+  :where(:scope) {
+    interpolate-size: allow-keywords;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --icon-lucide-chevron: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E");
+  }
+
   summary {
     list-style: none;
   }
@@ -3095,12 +3270,11 @@
 
 /* src/css/button.css */
 @layer button {
-  :not(form[method="dialog"])
-    > :-webkit-any(
-      button:not([role]),
-      input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
-      a.button
-    ) {
+  :-webkit-any(
+    button:not([role]),
+    input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
+    a.button
+  ):not(form[method="dialog"] > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -3115,478 +3289,467 @@
     line-height: 1.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.card > header > [data-slot="card-action"], .card > footer > *) {
+    ):not(form[method="dialog"] > *):is(
+      .card > header > [data-slot="card-action"],
+      .card > footer > *
+    ) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
   @container (width < 12rem) {
-    :not(form[method="dialog"])
-      > :is(
+    :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):is(.card > footer > *) {
+      ):not(form[method="dialog"] > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):active:not(:disabled) {
+    ):not(form[method="dialog"] > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):disabled {
+    ):not(form[method="dialog"] > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-busy="true"] {
+    ):not(form[method="dialog"] > *)[aria-busy="true"] {
     cursor: wait;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):focus-visible {
+    ):not(form[method="dialog"] > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]) {
+    ):not(form[method="dialog"] > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"] {
+    ):not(form[method="dialog"] > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"] {
+    ):not(form[method="dialog"] > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
     padding-inline-end: 1.5rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="icon"] {
+    ):not(form[method="dialog"] > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]) {
+    ):not(form[method="dialog"] > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"] {
+    ):not(form[method="dialog"] > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"] {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"][aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :-moz-any(
-      button:not([role]),
-      input:-moz-any([type="submit"], [type="reset"], [type="button"]),
-      a.button
-    ) {
+  :-moz-any(
+    button:not([role]),
+    input:-moz-any([type="submit"], [type="reset"], [type="button"]),
+    a.button
+  ):not(form[method="dialog"] > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -3601,478 +3764,467 @@
     line-height: 1.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.card > header > [data-slot="card-action"], .card > footer > *) {
+    ):not(form[method="dialog"] > *):is(
+      .card > header > [data-slot="card-action"],
+      .card > footer > *
+    ) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
   @container (width < 12rem) {
-    :not(form[method="dialog"])
-      > :is(
+    :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):is(.card > footer > *) {
+      ):not(form[method="dialog"] > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):active:not(:disabled) {
+    ):not(form[method="dialog"] > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):disabled {
+    ):not(form[method="dialog"] > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-busy="true"] {
+    ):not(form[method="dialog"] > *)[aria-busy="true"] {
     cursor: wait;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):focus-visible {
+    ):not(form[method="dialog"] > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]) {
+    ):not(form[method="dialog"] > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"] {
+    ):not(form[method="dialog"] > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"] {
+    ):not(form[method="dialog"] > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
     padding-inline-end: 1.5rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="icon"] {
+    ):not(form[method="dialog"] > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]) {
+    ):not(form[method="dialog"] > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"] {
+    ):not(form[method="dialog"] > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"] {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"][aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
-      button:not([role]),
-      input:is([type="submit"], [type="reset"], [type="button"]),
-      a.button
-    ) {
+  :is(
+    button:not([role]),
+    input:is([type="submit"], [type="reset"], [type="button"]),
+    a.button
+  ):not(form[method="dialog"] > *) {
     display: inline-flex;
     border-radius: calc(var(--radius) - 2px);
     outline: none;
@@ -4087,469 +4239,459 @@
     line-height: 1.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.card > header > [data-slot="card-action"], .card > footer > *) {
+    ):not(form[method="dialog"] > *):is(
+      .card > header > [data-slot="card-action"],
+      .card > footer > *
+    ) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
   @container (width < 12rem) {
-    :not(form[method="dialog"])
-      > :is(
+    :is(
         button:not([role]),
         input:is([type="submit"], [type="reset"], [type="button"]),
         a.button
-      ):is(.card > footer > *) {
+      ):not(form[method="dialog"] > *):is(.card > footer > *) {
       padding-inline: 0.5rem;
     }
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):active:not(:disabled) {
+    ):not(form[method="dialog"] > *):active:not(:disabled) {
     translate: 0 0.125rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):disabled {
+    ):not(form[method="dialog"] > *):disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-busy="true"] {
+    ):not(form[method="dialog"] > *)[aria-busy="true"] {
     cursor: wait;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):focus-visible {
+    ):not(form[method="dialog"] > *):focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *)[aria-invalid="true"] {
     border-color: var(--destructive);
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):is(.dark *)[aria-invalid="true"] {
+    ):not(form[method="dialog"] > *):is(.dark *)[aria-invalid="true"] {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg {
     pointer-events: none;
     flex-shrink: 0;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )
+    ):not(form[method="dialog"] > *)
     svg:not([class*="size-"]) {
     width: 1rem;
     height: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]) {
+    ):not(form[method="dialog"] > *):not([data-size]) {
     gap: 0.5rem;
     height: 2.25rem;
     padding: 0.5rem 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-size]):has(> svg) {
+    ):not(form[method="dialog"] > *):not([data-size]):has(> svg) {
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"] {
+    ):not(form[method="dialog"] > *)[data-size="sm"] {
     gap: 0.375rem;
     height: 2rem;
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.75rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="sm"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="sm"]:has(> svg) {
     padding-inline-start: 0.625rem;
     padding-inline-end: 0.625rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"] {
+    ):not(form[method="dialog"] > *)[data-size="lg"] {
     gap: 0.5rem;
     height: 2.5rem;
     padding-inline-start: 1.5rem;
     padding-inline-end: 1.5rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="lg"]:has(> svg) {
+    ):not(form[method="dialog"] > *)[data-size="lg"]:has(> svg) {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-size="icon"] {
+    ):not(form[method="dialog"] > *)[data-size="icon"] {
     width: 2.25rem;
     height: 2.25rem;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]) {
+    ):not(form[method="dialog"] > *):not([data-variant]) {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant]):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *):not([data-variant]):hover:not(:disabled) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    ):not([data-variant])[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *):not([data-variant])[aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"] {
+    ):not(form[method="dialog"] > *)[data-variant="primary"] {
     background: var(--primary);
     color: var(--primary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="primary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="primary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="primary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"] {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"] {
     background: var(--secondary);
     color: var(--secondary-foreground);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="secondary"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="secondary"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="secondary"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--secondary) 80%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"] {
     border: 1px solid var(--border);
     background: var(--background);
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(.dark *) {
     border-color: var(--input);
     background: color-mix(in oklab, var(--input) 30%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="outline"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="outline"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="outline"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:hover:not(
+      :disabled
+    ) {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="ghost"][aria-pressed="true"] {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="ghost"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="ghost"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--accent) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"] {
     color: var(--primary);
     text-underline-offset: 4px;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="link"]:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="link"][aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="link"][aria-pressed="true"] {
     text-decoration-line: underline;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"] {
     background: var(--destructive);
     color: #fff;
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 20%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:hover:not(
+      :disabled
+    ) {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
+    ):not(
+      form[method="dialog"] > *
     )[data-variant="destructive"][aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 90%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(.dark *) {
     background: color-mix(in oklab, var(--destructive) 60%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):focus-visible {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):focus-visible {
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--destructive) 40%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *):hover:not(:disabled) {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    ):hover:not(:disabled) {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 
-  :not(form[method="dialog"])
-    > :is(
+  :is(
       button:not([role]),
       input:is([type="submit"], [type="reset"], [type="button"]),
       a.button
-    )[data-variant="destructive"]:is(.dark *)[aria-pressed="true"] {
+    ):not(form[method="dialog"] > *)[data-variant="destructive"]:is(
+      .dark *
+    )[aria-pressed="true"] {
     background: color-mix(in oklab, var(--destructive) 50%, transparent);
   }
 }
@@ -4557,6 +4699,10 @@
 /* src/css/utils.css */
 @layer utilities {
   :root {
+    --container-width: 640px;
+  }
+
+  :where(:scope) {
     --container-width: 640px;
   }
 

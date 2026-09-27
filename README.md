@@ -15,6 +15,45 @@ Add Sensible UI to your page:
 <link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.min.css" type="text/css" rel="stylesheet">
 ```
 
+### Limit styles to part of a page
+
+Use the scoped stylesheet when you add Sensible UI to an existing application and don't want its semantic defaults to affect the whole page:
+
+```css
+@import '@faith-tools/sensible-ui/scoped';
+```
+
+```html
+<section class="sensible-ui">
+  <h2>Account settings</h2>
+  <label for="display-name">Display name</label>
+  <input id="display-name">
+  <button>Save changes</button>
+</section>
+```
+
+The `.sensible-ui` parent establishes local theme and base defaults. Its descendants receive Sensible UI's semantic and component styles. Use the class on a neutral wrapper around the styled markup, not on a component element such as a card, table, link, or form control. Sensible UI layout and utility classes such as `.stack`, `.mt-4`, and `.size-8` also belong on descendants, not the scope root. You can combine `.sensible-ui` with a host-owned wrapper class. Elements outside the parent don't. Use the global and scoped stylesheets as alternatives. Importing the global stylesheet still applies semantic defaults to the whole document.
+
+Scoped mode uses the Baseline `@scope` CSS rule and requires a browser that supports it. Unsupported browsers ignore the scoped rules instead of applying them globally.
+
+The scoped stylesheet doesn't isolate the subtree like Shadow DOM. Host styles can still cascade into it, and inherited styles can continue beyond it. If a framework renders a dialog or popover in a portal outside the subtree, add `sensible-ui` to the portal container.
+
+Dark mode works when `dark` is on the scope root, inside it, or on an ancestor:
+
+```html
+<section class="sensible-ui dark">...</section>
+```
+
+Override scoped theme tokens on the scope root instead of `:root`:
+
+```css
+.sensible-ui {
+  --primary: oklch(0.5 0.2 260);
+}
+```
+
+The minified CDN build is available at `dist/scoped/sensible-ui.min.css`. Scoped standalone imports use the same component names as global standalone imports, such as `@faith-tools/sensible-ui/scoped/button`. Scoped utilities are available from `@faith-tools/sensible-ui/scoped/utilities`.
+
 ## Features
 
 - **Semantic HTML** (as much as possible): Native elements like `<button>`, `<input>`, `<h1>` are styled automatically

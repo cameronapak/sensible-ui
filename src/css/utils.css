@@ -1,5 +1,6 @@
 @layer utilities {
-  :root {
+  :root,
+  :where(:scope) {
     --container-width: 640px;
   }
 

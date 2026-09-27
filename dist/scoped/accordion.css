@@ -1,0 +1,613 @@
+@layer sensible-ui {
+  @scope (.sensible-ui) {
+    /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
+    :root {
+      --radius: 0.625rem;
+      --font-sans:
+        var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui,
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-mono:
+        var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular,
+        Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --sidebar: oklch(0.985 0 0);
+      --sidebar-foreground: oklch(0.145 0 0);
+      --sidebar-primary: oklch(0.205 0 0);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.97 0 0);
+      --sidebar-accent-foreground: oklch(0.205 0 0);
+      --sidebar-border: oklch(0.922 0 0);
+      --sidebar-ring: oklch(0.708 0 0);
+      --sidebar-width: 16rem;
+      --sidebar-mobile-width: 18rem;
+      --scrollbar-track: transparent;
+      --scrollbar-thumb: #0000004d;
+      --scrollbar-width: 6px;
+      --scrollbar-radius: 6px;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+    }
+
+    :where(:scope) {
+      --radius: 0.625rem;
+      --font-sans:
+        var(--font-geist-sans, "Geist"), ui-sans-serif, system-ui,
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+        Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-mono:
+        var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular,
+        Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --sidebar: oklch(0.985 0 0);
+      --sidebar-foreground: oklch(0.145 0 0);
+      --sidebar-primary: oklch(0.205 0 0);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.97 0 0);
+      --sidebar-accent-foreground: oklch(0.205 0 0);
+      --sidebar-border: oklch(0.922 0 0);
+      --sidebar-ring: oklch(0.708 0 0);
+      --sidebar-width: 16rem;
+      --sidebar-mobile-width: 18rem;
+      --scrollbar-track: transparent;
+      --scrollbar-thumb: #0000004d;
+      --scrollbar-width: 6px;
+      --scrollbar-radius: 6px;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.556 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+    }
+
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.269 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.922 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.371 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.704 0.191 22.216);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.556 0 0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+      --sidebar: oklch(0.205 0 0);
+      --sidebar-foreground: oklch(0.985 0 0);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.269 0 0);
+      --sidebar-accent-foreground: oklch(0.985 0 0);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.439 0 0);
+      --scrollbar-thumb: #ffffff4d;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+      --buncss-light: ;
+      --buncss-dark: initial;
+      color-scheme: dark;
+    }
+
+    :where(:scope):is(.dark, .dark *) {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.269 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.922 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.371 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.704 0.191 22.216);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.556 0 0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+      --sidebar: oklch(0.205 0 0);
+      --sidebar-foreground: oklch(0.985 0 0);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.269 0 0);
+      --sidebar-accent-foreground: oklch(0.985 0 0);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.439 0 0);
+      --scrollbar-thumb: #ffffff4d;
+      --chevron-down-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --chevron-down-icon-50: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0 / 0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
+      --check-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.708 0 0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>');
+      --buncss-light: ;
+      --buncss-dark: initial;
+      color-scheme: dark;
+    }
+
+    /* src/css/base.css */
+    @layer base {
+      *,
+      :before,
+      :after {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope) {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::backdrop {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::-webkit-file-upload-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      ::file-selector-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope):before {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope):after {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::backdrop {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::-webkit-file-upload-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      :where(:scope)::file-selector-button {
+        box-sizing: border-box;
+        border: 0 solid var(--border);
+        margin: 0;
+        padding: 0;
+      }
+
+      * {
+        outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+        flex-shrink: 0;
+        scroll-margin-top: 1rem;
+      }
+
+      :where(:scope) {
+        outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+        flex-shrink: 0;
+        scroll-margin-top: 1rem;
+      }
+
+      html {
+        font-family: var(--font-sans);
+        line-height: 1.5;
+      }
+
+      :where(:scope) {
+        font-family: var(--font-sans);
+        line-height: 1.5;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        overscroll-behavior: none;
+      }
+
+      :where(:scope:root) {
+        scroll-behavior: smooth;
+        overscroll-behavior: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        :where(:scope:root) {
+          scroll-behavior: auto;
+        }
+      }
+
+      :-webkit-any(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      :-moz-any(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      :is(h1, h2, h3, h4, h5, h6) {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      :-webkit-any(ul, ol) {
+        list-style: none;
+      }
+
+      :-moz-any(ul, ol) {
+        list-style: none;
+      }
+
+      :is(ul, ol) {
+        list-style: none;
+      }
+
+      :-webkit-any(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :-moz-any(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :is(img, svg, video, canvas, audio, iframe, embed, object) {
+        display: block;
+        vertical-align: middle;
+      }
+
+      :-webkit-any(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      :-moz-any(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      :is(img, video) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        text-indent: 0;
+      }
+
+      :-webkit-any(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :-moz-any(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :is(button, input, select, optgroup, textarea) {
+        font: inherit;
+        color: inherit;
+        background-color: #0000;
+      }
+
+      :-webkit-any(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      :-moz-any(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      :is(
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"]
+      ) {
+        appearance: button;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      [hidden]:not([hidden="until-found"]) {
+        display: none !important;
+      }
+
+      hr {
+        border-top-width: 1px;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      :where(:scope:not(:root)) {
+        background: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      body {
+        overscroll-behavior: none;
+        scrollbar-gutter: stable;
+      }
+    }
+
+    /* src/css/accordion.css */
+    @layer components {
+      :root {
+        interpolate-size: allow-keywords;
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        --icon-lucide-chevron: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E");
+      }
+
+      :where(:scope) {
+        interpolate-size: allow-keywords;
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        --icon-lucide-chevron: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E");
+      }
+
+      summary {
+        list-style: none;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details {
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) - 2px);
+        outline: none;
+        transition: translate 0.15s var(--ease-out);
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      details:hover {
+        cursor: pointer;
+        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      }
+
+      details:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      details:active:not(:disabled) {
+        translate: 0 0.125rem;
+      }
+
+      details > summary {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        padding: 1rem;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
+      }
+
+      details > summary > * {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      details > summary > :-webkit-any(h2, h3, h4, h5, h6, p, span) {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
+      }
+
+      details > summary > :-moz-any(h2, h3, h4, h5, h6, p, span) {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
+      }
+
+      details > summary > :is(h2, h3, h4, h5, h6, p, span) {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
+      }
+
+      details > summary:after {
+        content: "";
+        mask-size: contain;
+        mask-image: var(--icon-lucide-chevron);
+        mask-repeat: no-repeat;
+        background-color: currentColor;
+        flex-shrink: 0;
+        width: 1em;
+        height: 1em;
+        transition: transform 0.2s;
+      }
+
+      details:has(+ details) {
+        border-bottom-width: 0;
+        border-radius: 0;
+      }
+
+      details:not(:has(+ details)) {
+        border-radius: 0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px);
+      }
+
+      details:has(+ details):first-of-type {
+        border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
+      }
+
+      details > :not(summary) {
+        padding: 0 1rem 1rem !important;
+      }
+
+      details :-webkit-any(h2, h3, h4, h5, h6, p) {
+        padding: 0;
+        margin-bottom: 0 !important;
+      }
+
+      details :-moz-any(h2, h3, h4, h5, h6, p) {
+        padding: 0;
+        margin-bottom: 0 !important;
+      }
+
+      details :is(h2, h3, h4, h5, h6, p) {
+        padding: 0;
+        margin-bottom: 0 !important;
+      }
+
+      details::details-content {
+        transition-behavior: allow-discrete;
+        transition:
+          opacity 0.2s,
+          height 0.2s;
+      }
+
+      details:not([open])::details-content {
+        overflow: hidden;
+        opacity: 0;
+        content-visibility: visible;
+        height: 0;
+      }
+
+      details[open] summary:after {
+        transform: rotate(-180deg);
+      }
+
+      details[open]::details-content {
+        content-visibility: visible;
+        opacity: 1;
+        height: calc-size(auto, size);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        details,
+        details > summary:after {
+          transition-duration: 0s;
+        }
+
+        details::details-content {
+          transition-duration: 0s;
+        }
+      }
+    }
+
+    /* src/css/entries/accordion.css */
+  }
+}

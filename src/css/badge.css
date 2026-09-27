@@ -47,7 +47,7 @@
         color-mix(in oklab, var(--destructive) 20%, transparent);
     }
 
-    .dark &[aria-invalid="true"] {
+    &:is(.dark *)[aria-invalid="true"] {
       box-shadow: 0 0 0 3px
         color-mix(in oklab, var(--destructive) 40%, transparent);
     }
@@ -93,7 +93,7 @@
           color-mix(in oklab, var(--destructive) 20%, transparent);
       }
 
-      .dark & {
+      &:is(.dark *) {
         background-color: color-mix(
           in oklab,
           var(--destructive) 60%,

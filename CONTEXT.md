@@ -16,8 +16,9 @@ The current release is a semantic-first hybrid:
 - Native state and ARIA attributes express state. `data-*` attributes express visual variants, sizes, or slots.
 - CSS custom properties are the theming API. A `.dark` ancestor selects the bundled dark theme.
 - Consumers can import the complete bundle or standalone modules through package exports.
+- Consumers adopting Sensible UI inside an existing application can use the generated `.sensible-ui`-scoped bundle or its scoped standalone modules instead of the global exports.
 
-This model describes the current implementation. It is not a permanent commitment. Strict semantic styling, the current hybrid, and an opt-in or parent-scoped mode all remain open design directions.
+This model describes the current implementation. It is not a permanent commitment. Strict semantic styling and future changes to the current hybrid remain open design directions.
 
 ## Compatibility
 
@@ -48,6 +49,7 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 - **Bundle**: The generated stylesheet containing every core source module.
 - **Companion stylesheet**: An optional stylesheet that extends the core without requiring consumer-side JavaScript or build tooling.
 - **Standalone module**: A package subpath stylesheet that includes the theme and base styles required to work without another Sensible UI import.
+- **Scoped bundle**: A generated stylesheet that applies Sensible UI declarations only to a `.sensible-ui` scope root and its descendants.
 - **Gallery**: The home page that documents and visually exercises the public API.
 
 ## Direction under exploration

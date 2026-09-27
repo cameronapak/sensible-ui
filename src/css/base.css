@@ -1,30 +1,42 @@
 @layer base {
   *,
+  :where(:scope),
   ::before,
   ::after,
   ::backdrop,
-  ::file-selector-button {
+  ::file-selector-button,
+  :where(:scope)::before,
+  :where(:scope)::after,
+  :where(:scope)::backdrop,
+  :where(:scope)::file-selector-button {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0 solid var(--border);
   }
 
-  * {
+  *,
+  :where(:scope) {
     flex-shrink: 0;
     scroll-margin-top: 1rem;
     outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
   }
 
-  html {
+  html,
+  :where(:scope) {
     font-family: var(--font-sans);
     line-height: 1.5;
+  }
+
+  html,
+  :where(:scope:root) {
     scroll-behavior: smooth;
     overscroll-behavior: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
+    html,
+    :where(:scope:root) {
       scroll-behavior: auto;
     }
   }
@@ -86,14 +98,18 @@
     border-top-width: 1px;
   }
 
-  body {
+  body,
+  :where(:scope:not(:root)) {
     background: var(--background);
     color: var(--foreground);
     font-size: 1rem;
     line-height: 1.5;
-    overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    overscroll-behavior: none;
     /* https://modern-css.com/preventing-layout-shift-from-scrollbar/ */
     scrollbar-gutter: stable;
   }
