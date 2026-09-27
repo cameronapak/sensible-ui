@@ -42,13 +42,24 @@
 
   sensible-code .sensible-code-toolbar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    gap: 0.5rem;
     padding: 0.5rem 0.75rem;
     background: var(--code-surface);
     color: var(--code-muted);
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  sensible-code .sensible-code-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.375rem;
+    max-width: 100%;
+    margin-inline-start: auto;
   }
 
   sensible-code > :is(pre, textarea) {
@@ -60,6 +71,11 @@
     padding: 1rem;
     font-family: var(--font-mono, ui-monospace, monospace);
     white-space: pre;
+  }
+
+  sensible-code[data-wrap="true"] > :is(pre, textarea) {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
   }
 
   sensible-code > textarea {
@@ -82,16 +98,62 @@
 }
 
 @layer button {
-  sensible-code
-    .sensible-code-toolbar
-    button[type="button"]:not([data-size]):not([data-variant]) {
-    min-height: 2rem;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid var(--code-border);
-    border-radius: calc(var(--radius, 0.625rem) - 4px);
+  /* Standalone code/css fallback; shared button rules take precedence. */
+  :where(
+    sensible-code
+      .sensible-code-toolbar
+      button[data-size="sm"]:is(
+        [data-variant="outline"],
+        [data-variant="primary"]
+      )
+  ) {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 2rem;
+    padding-inline: 0.75rem;
+    border: 0 solid var(--code-border);
+    border-radius: calc(var(--radius, 0.625rem) - 2px);
     background: var(--code-background);
     color: var(--code-foreground);
-    font: inherit;
+    font: 500 0.875rem/1.25rem var(--font-sans, system-ui, sans-serif);
+    white-space: nowrap;
     cursor: pointer;
+  }
+
+  :where(sensible-code .sensible-code-toolbar button[data-variant="outline"]) {
+    border-width: 1px;
+  }
+
+  :where(sensible-code .sensible-code-toolbar button[data-variant="primary"]) {
+    background: var(--primary, var(--code-foreground));
+    color: var(--primary-foreground, var(--code-background));
+  }
+
+  :where(
+    sensible-code
+      .sensible-code-toolbar
+      button[data-variant="outline"]:is(
+        :hover:not(:disabled),
+        [aria-pressed="true"]
+      )
+  ) {
+    background: var(--code-surface);
+  }
+
+  :where(
+    sensible-code
+      .sensible-code-toolbar
+      button:is(
+        [data-variant="outline"],
+        [data-variant="primary"]
+      ):focus-visible
+  ) {
+    outline: none;
+    border-color: var(--ring, var(--code-border));
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--ring, var(--code-border)) 50%, transparent);
   }
 }

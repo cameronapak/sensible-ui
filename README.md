@@ -99,6 +99,8 @@ Put the source in a read-only text area. The component creates `<pre><code>` whe
 </sensible-code>
 ```
 
+Code scrolls horizontally by default, including on narrow screens. Add `data-wrap="true"` to `<sensible-code>` to start with wrapped lines instead. When JavaScript loads, readers can use **Wrap lines** to switch either way for that block. The attribute also wraps the read-only text area when JavaScript is unavailable.
+
 Without JavaScript, the read-only text area remains visible. In HTML source, escape `&` before entity names. If the example contains `</textarea>`, write its opening angle bracket as `&lt;` to prevent the HTML parser from closing the text area. The component accepts Sugar High language names and common aliases such as `js` and `py`; an unknown or missing language displays as plain text. A `content` attribute would require quote escaping and would not provide readable source without JavaScript.
 
 ## Page view transitions

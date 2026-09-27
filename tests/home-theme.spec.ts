@@ -135,7 +135,7 @@ test("documents the optional code component imports and markup", async ({
     [
       "@import '@faith-tools/sensible-ui/code/css';",
       "import '@faith-tools/sensible-ui/code';",
-      `<sensible-code language="html">\n  <textarea readonly><button>Save</button></textarea>\n</sensible-code>`,
+      `<sensible-code language="html" data-wrap="true">\n  <textarea readonly><button>Save</button></textarea>\n</sensible-code>`,
     ],
     { useInnerText: false },
   );

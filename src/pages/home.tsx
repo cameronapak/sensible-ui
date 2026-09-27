@@ -620,7 +620,7 @@ export function Home() {
               <code>textarea</code> containing the source:
             </p>
             <CodeExample
-              code={`<sensible-code language="html">
+              code={`<sensible-code language="html" data-wrap="true">
   <textarea readonly><button>Save</button></textarea>
 </sensible-code>`}
               showPreview={false}
@@ -628,7 +628,10 @@ export function Home() {
           </li>
         </ol>
         <p>
-          The code below shows syntax colors and a Copy button. Without
+          The code below shows syntax colors, a Wrap lines toggle, and a Copy
+          button. Code scrolls horizontally by default at every screen width.
+          Set <code>data-wrap="true"</code> to start a block wrapped. Readers
+          can switch either block between wrapping and scrolling. Without
           JavaScript, the read-only text area remains readable. The component
           creates <code>pre</code> and <code>code</code> when it loads. In HTML
           source, escape <code>&amp;</code> before entity names. If the example
@@ -640,6 +643,11 @@ export function Home() {
         <sensible-code language="html">
           <textarea readonly>
             {'<button type="button">Save</button>\n<p>Ready & waiting</p>'}
+          </textarea>
+        </sensible-code>
+        <sensible-code language="html" data-wrap="true">
+          <textarea readonly>
+            {`<a href="/${"a/long/example/path/".repeat(10)}">Read the example</a>`}
           </textarea>
         </sensible-code>
       </section>

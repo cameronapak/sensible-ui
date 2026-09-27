@@ -129,12 +129,4 @@
   .docs-nav {
     align-items: flex-start;
   }
-
-  .docs-example sensible-code > pre {
-    white-space: pre-wrap;
-  }
-
-  .docs-example sensible-code > pre code {
-    overflow-wrap: anywhere;
-  }
 }
