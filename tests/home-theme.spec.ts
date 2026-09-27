@@ -3,6 +3,27 @@ import packageJson from "../package.json" with { type: "json" };
 
 const { version } = packageJson;
 
+test("links to the repository with a visible GitHub icon in both themes", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const link = page.getByRole("link", { name: "GitHub repository" });
+  await expect(link).toHaveAttribute("href", "https://git.new/sensible");
+  await expect(link.locator("svg path")).toHaveCount(1);
+  await expect(link.locator("svg")).toHaveCSS("color", "rgb(0, 0, 0)");
+
+  await page.locator("[data-theme-toggle]").click();
+  await expect(link.locator("svg")).toHaveCSS("color", "rgb(255, 255, 255)");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(link).toBeInViewport();
+  await expect(page.locator("[data-theme-toggle]")).toBeInViewport();
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+  ).toBe(true);
+});
+
 test("toggles the gallery between light and dark themes", async ({ page }) => {
   await page.goto("/");
 
@@ -75,15 +96,22 @@ test("highlights and copies the installation snippets in their own languages", a
   await page.goto("/");
 
   const snippets = [
-    ["#getting-started", "CSS", "@import '@faith-tools/sensible-ui';"],
     [
       "#getting-started",
+      0,
       "HTML",
       `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`,
     ],
-    ["#scoped-mode", "CSS", "@import '@faith-tools/sensible-ui/scoped';"],
+    ["#getting-started", 1, "CSS", "@import '@faith-tools/sensible-ui';"],
     [
       "#scoped-mode",
+      0,
+      "HTML",
+      `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`,
+    ],
+    [
+      "#scoped-mode",
+      1,
       "HTML",
       `<section class="sensible-ui">
   <h2>Account settings</h2>
@@ -92,10 +120,11 @@ test("highlights and copies the installation snippets in their own languages", a
   <button>Save changes</button>
 </section>`,
     ],
+    ["#scoped-mode", 2, "CSS", "@import '@faith-tools/sensible-ui/scoped';"],
   ] as const;
 
-  for (const [index, [section, language, source]] of snippets.entries()) {
-    const example = page.locator(`${section} > .docs-code-only`).nth(index % 2);
+  for (const [section, position, language, source] of snippets) {
+    const example = page.locator(`${section} > .docs-code-only`).nth(position);
     await expect(example.locator(".sensible-code-toolbar span")).toHaveText(
       language,
     );
@@ -115,9 +144,13 @@ test("highlights and copies the installation snippets in their own languages", a
       source,
     );
   }
+
+  await expect(
+    page.locator("#getting-started > .docs-example .docs-preview h1"),
+  ).toHaveText("Get in touch");
 });
 
-test("documents the optional code component imports and markup", async ({
+test("documents CDN setup before optional bundler imports", async ({
   page,
 }) => {
   await page.goto("/");
@@ -125,17 +158,29 @@ test("documents the optional code component imports and markup", async ({
   const section = page.locator("#code");
   await expect(section.locator("ol > li")).toHaveCount(3);
   await expect(section.locator("ol .sensible-code-toolbar span")).toHaveText([
-    "CSS",
-    "JAVASCRIPT",
+    "HTML",
+    "HTML",
     "HTML",
   ]);
   await expect(
     section.locator("ol .docs-example sensible-code > pre > code"),
   ).toHaveText(
     [
+      `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/src/css/code.css">`,
+      `<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-code.js"></script>`,
+      `<sensible-code language="html" data-wrap="true">\n  <textarea readonly><button>Save</button></textarea>\n</sensible-code>`,
+    ],
+    { useInnerText: false },
+  );
+  await expect(
+    section.locator(":scope > .docs-code-only .sensible-code-toolbar span"),
+  ).toHaveText(["CSS", "JAVASCRIPT"]);
+  await expect(
+    section.locator(":scope > .docs-code-only sensible-code > pre > code"),
+  ).toHaveText(
+    [
       "@import '@faith-tools/sensible-ui/code/css';",
       "import '@faith-tools/sensible-ui/code';",
-      `<sensible-code language="html" data-wrap="true">\n  <textarea readonly><button>Save</button></textarea>\n</sensible-code>`,
     ],
     { useInnerText: false },
   );

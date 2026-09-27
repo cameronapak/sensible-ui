@@ -6,6 +6,14 @@
   padding-block: 2rem;
 }
 
+.docs-github-icon {
+  color: black;
+}
+
+.dark .docs-github-icon {
+  color: white;
+}
+
 .docs-hero h1,
 .docs-section h2,
 .docs-subsection h3,

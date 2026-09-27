@@ -1,26 +1,49 @@
 # Sensible UI CSS
 
-A semantic CSS component library in the likeness of shadcn/ui. The published stylesheet does not require Tailwind CSS or a JavaScript framework.
+A semantic CSS component library with useful visual defaults for native HTML. Use it without a front-end framework or a build step. Optional web components add behavior where HTML and CSS are not enough.
 
 - Styles native HTML elements by default, like typography elements, buttons, inputs, anchor tags, etc.
 - Want components like cards, items, loading-spinners, etc.? Then we use data attributes, classes, and aria attributes.
 
-Add Sensible UI to your page:
-
-```css
-@import 'https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.min.css';
-```
+Add the stylesheet to an HTML page to style native content and controls:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.min.css" type="text/css" rel="stylesheet">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sensible UI example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/dist/sensible-ui.min.css">
+  </head>
+  <body>
+    <main>
+      <h1>Get in touch</h1>
+      <p>Send a message and we will reply by email.</p>
+      <form>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email">
+        <button type="submit">Send message</button>
+      </form>
+    </main>
+  </body>
+</html>
+```
+
+Serve the file over HTTP, including when testing locally. The CDN URL pins version `1.7.0`; change the version when you want to update. The stylesheet provides visual defaults, while you choose the page layout.
+
+If you use a bundler, install `@faith-tools/sensible-ui` and import the complete stylesheet in your CSS:
+
+```css
+@import '@faith-tools/sensible-ui';
 ```
 
 ### Limit styles to part of a page
 
 Use the scoped stylesheet when you add Sensible UI to an existing application and don't want its semantic defaults to affect the whole page:
 
-```css
-@import '@faith-tools/sensible-ui/scoped';
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/dist/scoped/sensible-ui.min.css">
 ```
 
 ```html
@@ -31,6 +54,8 @@ Use the scoped stylesheet when you add Sensible UI to an existing application an
   <button>Save changes</button>
 </section>
 ```
+
+If you use a bundler, import `@faith-tools/sensible-ui/scoped` in your CSS instead of using the CDN link.
 
 The `.sensible-ui` parent establishes local theme and base defaults. Its descendants receive Sensible UI's semantic and component styles. Use the class on a neutral wrapper around the styled markup, not on a component element such as a card, table, link, or form control. Sensible UI layout and utility classes such as `.stack`, `.mt-4`, and `.size-8` also belong on descendants, not the scope root. You can combine `.sensible-ui` with a host-owned wrapper class. Elements outside the parent don't. Use the global and scoped stylesheets as alternatives. Importing the global stylesheet still applies semantic defaults to the whole document.
 
@@ -57,7 +82,7 @@ The minified CDN build is available at `dist/scoped/sensible-ui.min.css`. Scoped
 ## Features
 
 - **Semantic HTML** (as much as possible): Native elements like `<button>`, `<input>`, `<h1>` are styled automatically
-- **Lightweight**: Just CSS, zero framework dependencies
+- **Lightweight**: CSS-only core with no framework dependency; optional JavaScript for behavior
 - **Accessible**: Semantic HTML and ARIA roles baked in
 - **Dark mode ready**: Built-in dark theme support
 - **Easy customization**: Override a handful of CSS variables to theme everything
@@ -81,14 +106,11 @@ The full set of light and dark tokens is in [`src/css/theme.css`](src/css/theme.
 
 ## Optional highlighted code
 
-The `sensible-code` web component adds syntax highlighting and a Copy button without adding JavaScript to the core stylesheet. Import its CSS and JavaScript only on pages that need it:
+The `sensible-code` web component adds syntax highlighting, line wrapping, and a Copy button without adding JavaScript to the core stylesheet. Add its CSS and browser module to a page that needs it. Its CSS also works without the main Sensible UI stylesheet:
 
-```css
-@import '@faith-tools/sensible-ui/code/css';
-```
-
-```js
-import '@faith-tools/sensible-ui/code'
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/src/css/code.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/dist/sensible-code.js"></script>
 ```
 
 Put the source in a read-only text area. The component creates `<pre><code>` when its JavaScript loads:
@@ -97,6 +119,16 @@ Put the source in a read-only text area. The component creates `<pre><code>` whe
 <sensible-code language="html">
   <textarea readonly><button>Save</button></textarea>
 </sensible-code>
+```
+
+If you use a bundler, install `@faith-tools/sensible-ui`, then import the styles in your CSS and the component in your browser JavaScript:
+
+```css
+@import '@faith-tools/sensible-ui/code/css';
+```
+
+```js
+import '@faith-tools/sensible-ui/code';
 ```
 
 Code scrolls horizontally by default, including on narrow screens. Add `data-wrap="true"` to `<sensible-code>` to start with wrapped lines instead. When JavaScript loads, readers can use **Wrap lines** to switch either way for that block. The attribute also wraps the read-only text area when JavaScript is unavailable.
@@ -165,6 +197,13 @@ To use different fonts, override the theme tokens:
 
 Every component subpath is standalone. It includes the theme tokens and base styles that its component needs:
 
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/src/css/entries/button.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/src/css/entries/card.css">
+```
+
+If you use a bundler, import the matching package subpaths in your CSS:
+
 ```css
 @import '@faith-tools/sensible-ui/button';
 @import '@faith-tools/sensible-ui/card';
@@ -184,12 +223,14 @@ The core bundle includes named layout helpers for common composition patterns:
 
 Atomic layout utilities are available as an optional stylesheet:
 
-```css
-@import '@faith-tools/sensible-ui/utilities';
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@1.7.0/dist/sensible-ui.utilities.min.css">
 ```
 
-```html
-<link href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@latest/dist/sensible-ui.utilities.min.css" type="text/css" rel="stylesheet">
+If you use a bundler, import the utilities in your CSS instead:
+
+```css
+@import '@faith-tools/sensible-ui/utilities';
 ```
 
 The stylesheet provides familiar helpers such as `mt-4`, `px-2`, `gap-3`, `size-8`, `flex`, `grow`, `items-center`, `justify-between`, `sr-only`, `truncate`, `aspect-square`, `relative`, `inset-0`, and `overflow-auto`. It also includes text alignment, z-index, and min/max-height helpers. It is generated when Sensible UI is built, but consumers receive plain CSS and do not need JavaScript, template scanning, or configuration.
@@ -236,7 +277,7 @@ bun run dev
 > [!NOTE]
 > This project is a fork of [Basecoat](https://github.com/hunvreus/basecoat) by [Ronan Berder (hunvreus)](https://github.com/hunvreus), originally a vanilla CSS/JS port of [shadcn/ui](https://ui.shadcn.com). This fork reimagines Basecoat as a semantic CSS library — styling native HTML elements directly instead of using utility classes.
 
-SVG's come from Lucide.dev
+The UI icons use [Lucide](https://lucide.dev/). The header's GitHub mark comes from [Simple Icons](https://github.com/simple-icons/simple-icons/blob/master/icons/github.svg). GitHub and the Invertocat are trademarks of GitHub, Inc.; this project is not affiliated with or endorsed by GitHub. The project's MIT license does not grant rights to the GitHub mark. See the [Simple Icons disclaimer](https://github.com/simple-icons/simple-icons/blob/master/DISCLAIMER.md) and [GitHub's brand guidelines](https://brand.github.com/foundations/logo).
 
 ## License
 

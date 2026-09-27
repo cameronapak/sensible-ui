@@ -385,13 +385,32 @@ export function Home() {
             <code>v{version}</code>
             <span class="badge">beta</span>
           </div>
-          <button type="button" data-variant="outline" data-theme-toggle>
-            Dark mode
-          </button>
+          <div class="cluster">
+            <a
+              class="button"
+              data-variant="outline"
+              data-size="icon"
+              href="https://git.new/sensible"
+              aria-label="GitHub repository"
+            >
+              <svg
+                class="docs-github-icon"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+              >
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+            </a>
+            <button type="button" data-variant="outline" data-theme-toggle>
+              Dark mode
+            </button>
+          </div>
         </div>
         <p>
-          A semantic-first CSS component library with shadcn-style visual
-          defaults.
+          Give semantic HTML useful visual defaults with one stylesheet. Add
+          optional components when you need more behavior.
         </p>
         <nav class="docs-nav" aria-label="Component documentation">
           <a href="#getting-started">Getting started</a>
@@ -418,17 +437,37 @@ export function Home() {
       <section class="docs-section stack" id="getting-started">
         <h2>Getting started</h2>
         <p>
-          Import the complete stylesheet when you want every semantic default
-          and component:
+          Add the versioned stylesheet to your HTML page. You do not need a
+          framework, an npm install, or a build step.
+        </p>
+        <CodeExample
+          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}
+          showPreview={false}
+        />
+        <p>
+          Native content and controls get visual defaults without component
+          classes. Serve your page over HTTP, including when you test locally.
+          Keep the URL pinned to a release and change the version when you want
+          to update.
+        </p>
+        <CodeExample
+          code={`<section>
+  <h1>Get in touch</h1>
+  <p>Send a message and we will reply by email.</p>
+  <form>
+    <label for="example-email">Email</label>
+    <input id="example-email" name="email" type="email">
+    <button type="button">Send message</button>
+  </form>
+</section>`}
+        />
+        <p>
+          If you use a bundler, install <code>@faith-tools/sensible-ui</code>{" "}
+          and import the complete stylesheet in your CSS:
         </p>
         <CodeExample
           code="@import '@faith-tools/sensible-ui';"
           language="css"
-          showPreview={false}
-        />
-        <p>Or use the versioned CDN build:</p>
-        <CodeExample
-          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}
           showPreview={false}
         />
         <p>
@@ -540,8 +579,7 @@ export function Home() {
           <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
         </p>
         <CodeExample
-          code="@import '@faith-tools/sensible-ui/scoped';"
-          language="css"
+          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`}
           showPreview={false}
         />
         <CodeExample
@@ -551,6 +589,15 @@ export function Home() {
   <input id="display-name">
   <button>Save changes</button>
 </section>`}
+          showPreview={false}
+        />
+        <p>
+          If you use a bundler, import the scoped bundle in your CSS instead
+          of using the CDN link:
+        </p>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/scoped';"
+          language="css"
           showPreview={false}
         />
         <p>
@@ -592,25 +639,23 @@ export function Home() {
       <section class="docs-section stack" id="code">
         <h2>Add highlighted code</h2>
         <p>
-          If your project uses a bundler, import the optional stylesheet and
-          browser module. The default Sensible UI stylesheet does not include
-          either one. If you have not installed the package, run{" "}
-          <code>npm install @faith-tools/sensible-ui</code> first.
+          Add the optional stylesheet and browser module to pages that need
+          syntax highlighting. The component works without the main Sensible UI
+          stylesheet. Serve the page over HTTP so the browser can load the
+          module.
         </p>
         <ol>
           <li>
-            <p>Import the component styles in your CSS entry:</p>
+            <p>Add the component styles to your HTML:</p>
             <CodeExample
-              code="@import '@faith-tools/sensible-ui/code/css';"
-              language="css"
+              code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/src/css/code.css">`}
               showPreview={false}
             />
           </li>
           <li>
-            <p>Import the component in your browser JavaScript entry:</p>
+            <p>Load the component as a browser module:</p>
             <CodeExample
-              code="import '@faith-tools/sensible-ui/code';"
-              language="javascript"
+              code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-code.js"></script>`}
               showPreview={false}
             />
           </li>
@@ -627,6 +672,21 @@ export function Home() {
             />
           </li>
         </ol>
+        <p>
+          If you use a bundler, install <code>@faith-tools/sensible-ui</code>.
+          Import the styles in your CSS and the component in your browser
+          JavaScript instead of using the CDN tags:
+        </p>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/code/css';"
+          language="css"
+          showPreview={false}
+        />
+        <CodeExample
+          code="import '@faith-tools/sensible-ui/code';"
+          language="javascript"
+          showPreview={false}
+        />
         <p>
           The code below shows syntax colors, a Wrap lines toggle, and a Copy
           button. Code scrolls horizontally by default at every screen width.
