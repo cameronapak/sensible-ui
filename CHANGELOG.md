@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.6.0
+
+### Minor Changes
+
+- 4738ad8: Add an opt-in syntax-highlighted code web component with separate JavaScript and CSS imports.
+
 ## 1.5.0
 
 ### Minor Changes
