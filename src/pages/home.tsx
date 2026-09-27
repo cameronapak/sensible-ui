@@ -325,10 +325,15 @@ export function Home() {
   return (
     <main class="container docs-page">
       <header class="docs-hero stack">
-        <div class="cluster">
-          <h1>Sensible UI</h1>
-          <code>v{version}</code>
-          <span class="badge">beta</span>
+        <div class="split">
+          <div class="cluster">
+            <h1>Sensible UI</h1>
+            <code>v{version}</code>
+            <span class="badge">beta</span>
+          </div>
+          <button type="button" data-variant="outline" data-theme-toggle>
+            Dark mode
+          </button>
         </div>
         <p>
           A semantic-first CSS component library with shadcn-style visual

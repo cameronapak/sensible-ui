@@ -1,3 +1,10 @@
+document
+  .querySelector("[data-theme-toggle]")
+  ?.addEventListener("click", (event) => {
+    const dark = document.documentElement.classList.toggle("dark");
+    event.currentTarget.textContent = dark ? "Light mode" : "Dark mode";
+  });
+
 document.addEventListener("click", async (event) => {
   const button = event.target.closest("[data-copy-code]");
   if (!button) return;
