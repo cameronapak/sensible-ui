@@ -13,6 +13,18 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 
 Infer the repo from `git remote -v`; `gh` does this automatically when run inside a clone.
 
+## Find roadmap work
+
+The roadmap is issue #11. Its native sub-issues define the intended implementation order; their titles need not contain "roadmap". List them before selecting the next task:
+
+```sh
+repo=$(gh repo view --json nameWithOwner --jq .nameWithOwner)
+gh api "repos/$repo/issues/11/sub_issues" --paginate \
+  --jq '.[] | {number, title, state}'
+```
+
+Read the selected issue and its comments before planning. If an open issue appears implemented, compare its definition of done with the source, exports, gallery, tests, and changelog before repeating the work. When authorized, record completion evidence and close it. An optional native web component does not by itself complete the separate Rocket prototype or runtime decision.
+
 ## Pull requests as a triage surface
 
 **PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag.)_

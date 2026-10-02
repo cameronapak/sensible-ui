@@ -1,0 +1,12 @@
+services:
+  gallery:
+    command: bun run prod
+    health: /
+    portal:
+      title: Sensible UI gallery
+      description: Serves the built bundles. Run bun run build after changing library sources.
+    portals:
+      - url: /scoped/
+        title: Scoped demo
+      - url: /code-break
+        title: Code stress cases

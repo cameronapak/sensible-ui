@@ -4,6 +4,7 @@
 CSS-only core inspired by shadcn/ui, with optional web components for behavior. The core uses semantic HTML + CSS and has no JS framework or Tailwind dependency. Published as `@faith-tools/sensible-ui`.
 
 Read `CONTEXT.md` before changing the public styling model, compatibility expectations, or package boundaries. Read `docs/adr/0003-parent-scoped-css.md` before changing scoped output, scope-root behavior, or the `.sensible-ui` contract.
+For component, gallery, export, or build work, use the task-to-files map and build gotchas in `CONTEXT.md`.
 
 ## Commands
 - `bun run dev` — Start the Bun dev server and CSS bundle watcher concurrently
@@ -12,6 +13,7 @@ Read `CONTEXT.md` before changing the public styling model, compatibility expect
 - `bun run test:scoped` — Run the scoped CSS builder tests
 - `bun run test:browser` — Build and run all Playwright browser tests; install Chromium once with `bunx playwright install chromium`
 - `bun run check` — Run types, tests, builds, export validation, and generated-file checks
+- `amp orb services ensure` — Start the supervised gallery and print its preview portals
 - For visual changes, inspect the normal state and a likely failure state (such as narrow width, long content, or a changed state) through the dev server; exercise the relevant user action.
 
 ## Architecture

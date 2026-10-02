@@ -17,6 +17,7 @@ The current release is a semantic-first hybrid:
 - CSS custom properties are the theming API. A `.dark` ancestor selects the bundled dark theme.
 - Consumers can import the complete bundle or standalone modules through package exports.
 - Consumers adopting Sensible UI inside an existing application can use the generated `.sensible-ui`-scoped bundle or its scoped standalone modules instead of the global exports.
+- The optional light-DOM `<sensible-code>` web component bundles Sugar High for highlighting and adds Copy and Wrap controls. Its JavaScript and CSS are separate exports, as recorded in [ADR-0004](docs/adr/0004-optional-code-component.md). The core remains CSS-only.
 
 This model describes the current implementation. It is not a permanent commitment. Strict semantic styling and future changes to the current hybrid remain open design directions.
 
@@ -32,12 +33,31 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 
 ## Boundaries
 
-- `src/css/` is the source of truth for the library. Each component or styling concern owns one CSS module, and `src/css/index.css` composes the complete bundle.
-- The core and optional utility stylesheets in `dist/` are generated, published artifacts. Keep them in sync with the source by running `bun run check`.
-- `generate-utilities.ts` owns the repetitive atomic utility families. Named layouts remain hand-written in `src/css/utils.css`.
-- `src/pages/home.tsx` is both the component gallery and the source for the static site. New public behavior should have a representative example there.
-- `src/app.tsx` defines the shared Hono JSX document and gallery route.
-- `index.tsx` serves the Hono app during development. `build-site.tsx` renders the same app for static hosting.
+- `src/css/` owns the library's CSS; `src/components/` owns optional web-component behavior.
+- `dist/` and `src/css/generated/` contain generated artifacts. Change their sources and rebuild rather than editing the output.
+- The gallery documents and exercises the public API. New public behavior should have a representative example there.
+
+## Task-to-files map
+
+| Task | Start here | Related contracts |
+| --- | --- | --- |
+| Add or change a CSS component | `src/css/<name>.css`; `src/css/index.css` composes the core | `src/css/entries/<name>.css` supplies standalone dependencies; `package.json` exports; `build-scoped-css.ts` lists scoped entries; `check-css-exports.ts` validates exports |
+| Change theme tokens or native defaults | `src/css/theme.css`, `src/css/base.css` | `tests/scoped.spec.ts` checks scope-root defaults and host isolation; scoped behavior follows [ADR-0003](docs/adr/0003-parent-scoped-css.md) |
+| Change highlighted code | `src/components/code.ts`, `src/css/code.css` | `tests/code.spec.ts`; `src/pages/code-break.tsx` at `/code-break`; separate CSS and JS exports follow [ADR-0004](docs/adr/0004-optional-code-component.md) |
+| Change gallery examples or import guidance | `src/pages/home.tsx`, `README.md` | `tests/home-theme.spec.ts` checks documentation, highlighting, and theme behavior; `tests/dialog.spec.ts` exercises native dialog examples |
+| Change gallery-only appearance or behavior | `src/site.css`, `src/site.js` | These files are not published library styles or component behavior. Check them when the gallery differs from standalone usage. |
+| Change layouts or atomic utilities | `src/css/utils.css` owns named layouts; `generate-utilities.ts` owns atomic families | `src/css/entries/utils.css`, `src/css/entries/utilities.css`; [ADR-0002](docs/adr/0002-optional-css-utilities.md) records the split |
+| Change scoped output | `build-scoped-css.ts`, `src/pages/scoped.tsx` | `build-scoped-css.test.ts`, `tests/scoped.spec.ts`, `check-css-exports.ts`; read [ADR-0003](docs/adr/0003-parent-scoped-css.md) first |
+| Change site routing or asset delivery | `src/app.tsx` owns the shared document and routes; `index.tsx` serves assets | `build-site.tsx` renders the same app and copies static assets; `/code-break` is a development stress page, not a static-site output |
+| Diagnose build or test setup | `package.json` scripts and `packageManager`, `check-generated.ts`, `playwright.config.ts` | `.agents/setup` prepares orbs; `.github/workflows/check.yml` runs the full check in CI |
+
+### Build and preview gotchas
+
+Run `bun run check:toolchain` before diagnosing generated-file drift. It checks the Bun version used by package scripts; if it differs from `bun --version`, inspect `node_modules/.bin/bun` for a stale shim.
+
+The development watchers write generated CSS without the release build's formatting. Run `bun run build` before reviewing generated diffs. The final generated-file check rejects uncommitted output changes, including intentional ones; inspect those diffs before committing them.
+
+In an orb, run `amp orb services ensure` for the gallery, scoped demo, and code stress-page portals declared in `.amp/services.yaml`. The preview serves the existing generated bundles without watchers. After changing library sources, run `bun run build`; after changing server code, run `amp orb service restart gallery`.
 
 ## Vocabulary
 
@@ -54,8 +74,8 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 
 ## Direction under exploration
 
-Interactive features may eventually use web components to keep adoption simple without turning the CSS core into a framework-specific library. [Ilha](https://ilha.build/guide/ui/custom-elements) and Datastar Rocket are possible implementation references. Even layout APIs such as `x-stack` and `y-stack` may be explored as web components.
+Additional interactive features and layout APIs such as `x-stack` and `y-stack` may be explored as web components. [Ilha](https://ilha.build/guide/ui/custom-elements) and Datastar Rocket are possible implementation references, not dependencies of the shipped `<sensible-code>` component.
 
-This is a direction, not an architecture decision. Record a decision before adding a web-component runtime or changing the package's CSS-only core.
+ADR-0004 records the optional native code component, not a general runtime choice. Record a decision before adding a web-component runtime or changing the package's CSS-only core. The Rocket prototype and runtime decision remain separate roadmap work.
 
 Design references are [Oat CSS](https://oat.ink/), [Basecoat](https://basecoatui.com/), [Web Awesome](https://webawesome.com/docs/components/), shadcn/ui, [Ilha](https://ilha.build/guide/ui/custom-elements), and [Datastar Rocket](https://data-star.dev/reference/rocket). Treat them as inspiration, not specifications.

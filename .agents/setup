@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+echo "Validating the pinned Bun version"
+time bun run check:toolchain
+
 echo "Installing Bun dependencies from bun.lock"
 time bun install --frozen-lockfile
+
+echo "Checking the Bun version resolved by installed package scripts"
+time bun run check:toolchain
+
+echo "Installing Playwright Chromium and its system dependencies"
+time bunx playwright install --with-deps chromium
