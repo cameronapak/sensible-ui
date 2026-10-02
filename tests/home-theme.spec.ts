@@ -3,6 +3,89 @@ import packageJson from "../package.json" with { type: "json" };
 
 const { version } = packageJson;
 
+test("puts native HTML before class-based components and optional extras", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const order = [
+    "getting-started",
+    "typography",
+    "buttons",
+    "forms",
+    "image",
+    "accordion",
+    "dialog",
+    "description-list",
+    "table",
+    "card",
+    "badges",
+    "item",
+    "spinner",
+    "container",
+    "layouts",
+    "dark-mode",
+    "scoped-mode",
+    "utilities",
+    "code",
+  ];
+  expect(
+    await page
+      .locator(".docs-page > .docs-section")
+      .evaluateAll((sections) => sections.map((section) => section.id)),
+  ).toEqual(order);
+  expect(
+    await page
+      .locator(".docs-nav a")
+      .evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
+  ).toEqual(order.map((id) => `#${id}`));
+
+  await page.getByRole("link", { name: "Container", exact: true }).click();
+  await expect(page.locator("#container > h2")).toBeInViewport();
+  await page.getByRole("link", { name: "Code web component" }).click();
+  await expect(page.locator("#code > h2")).toBeInViewport();
+});
+
+test("shows a centered container with a width override and responsive padding", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/#container");
+
+  const container = page.locator("#container .docs-preview > .container");
+  await expect(container).toHaveCSS("max-width", "512px");
+  await expect(container).toHaveCSS("width", "512px");
+  const margins = await container.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return [parseFloat(style.marginLeft), parseFloat(style.marginRight)];
+  });
+  expect(margins[0]).toBeGreaterThan(0);
+  expect(margins[0]).toBeCloseTo(margins[1], 1);
+
+  for (const [width, padding] of [
+    [639, "16px"],
+    [640, "24px"],
+    [390, "16px"],
+  ] as const) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(container).toHaveCSS("padding", padding);
+    if (width === 390) {
+      expect(
+        await container.evaluate(
+          (element) => element.getBoundingClientRect().width,
+        ),
+      ).toBeLessThan(512);
+    } else {
+      await expect(container).toHaveCSS("width", "512px");
+    }
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+  }
+});
+
 test("links to the repository with a visible GitHub icon in both themes", async ({
   page,
 }) => {
@@ -20,7 +103,9 @@ test("links to the repository with a visible GitHub icon in both themes", async 
   await expect(link).toBeInViewport();
   await expect(page.locator("[data-theme-toggle]")).toBeInViewport();
   expect(
-    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
   ).toBe(true);
 });
 

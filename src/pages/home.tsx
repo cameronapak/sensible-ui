@@ -409,46 +409,49 @@ export function Home() {
           </div>
         </div>
         <p>
-          Give semantic HTML useful visual defaults with one stylesheet. Add
-          optional components when you need more behavior.
+          Build shadcn/ui-inspired components with plain HTML and one stylesheet.
+          Start with polished defaults, then make them your own with CSS variables.
+          No Tailwind, JavaScript framework, or build step required.
         </p>
         <nav class="docs-nav" aria-label="Component documentation">
           <a href="#getting-started">Getting started</a>
-          <a href="#scoped-mode">Scoped adoption</a>
           <a href="#typography">Typography</a>
-          <a href="#code">Code</a>
           <a href="#buttons">Buttons</a>
           <a href="#forms">Forms</a>
-          <a href="#card">Card</a>
-          <a href="#badges">Badge</a>
           <a href="#image">Image</a>
-          <a href="#item">Item</a>
-          <a href="#spinner">Spinner</a>
           <a href="#accordion">Accordion</a>
           <a href="#dialog">Dialog</a>
           <a href="#description-list">Description list</a>
           <a href="#table">Table</a>
+          <a href="#card">Card</a>
+          <a href="#badges">Badge</a>
+          <a href="#item">Item</a>
+          <a href="#spinner">Spinner</a>
+          <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
-          <a href="#utilities">Utilities</a>
           <a href="#dark-mode">Dark mode</a>
+          <a href="#scoped-mode">Scoped adoption</a>
+          <a href="#utilities">Utilities</a>
+          <a href="#code">Code web component</a>
         </nav>
       </header>
 
       <section class="docs-section stack" id="getting-started">
         <h2>Getting started</h2>
         <p>
-          Add the versioned stylesheet to your HTML page. You do not need a
-          framework, an npm install, or a build step.
+          Add one stylesheet to your HTML page. Buttons, form controls, typography,
+          and tables get shadcn/ui-inspired styles by default. The core is CSS-only:
+          no JavaScript or npm install needed.
         </p>
         <CodeExample
           code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}
           showPreview={false}
         />
         <p>
-          Native content and controls get visual defaults without component
-          classes. Serve your page over HTTP, including when you test locally.
-          Keep the URL pinned to a release and change the version when you want
-          to update.
+          Write semantic HTML and the stylesheet handles the look. Native elements
+          do not need component classes. Serve your page over HTTP, including when
+          you test locally. Keep the URL pinned to a release and change the version
+          when you want to update.
         </p>
         <CodeExample
           code={`<section>
@@ -461,6 +464,15 @@ export function Home() {
   </form>
 </section>`}
         />
+        <p>
+          To add a component, copy an example below. Use named classes such as{" "}
+          <code>class="card"</code> for patterns without a native HTML element,
+          and attributes such as <code>data-variant="outline"</code> to choose a
+          style. Override CSS variables such as <code>--primary</code>,{" "}
+          <code>--primary-foreground</code>, and <code>--radius</code> to change
+          colors and rounded corners. Optional JavaScript adds behavior such as
+          syntax highlighting and code copying.
+        </p>
         <p>
           If you use a bundler, install <code>@faith-tools/sensible-ui</code>{" "}
           and import the complete stylesheet in your CSS:
@@ -571,50 +583,6 @@ export function Home() {
         </details>
       </section>
 
-      <section class="docs-section stack" id="scoped-mode">
-        <h2>Limit styles to part of a page</h2>
-        <p>
-          Use the scoped bundle when adding Sensible UI to an existing
-          application. Semantic defaults apply only inside a neutral{" "}
-          <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
-        </p>
-        <CodeExample
-          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`}
-          showPreview={false}
-        />
-        <CodeExample
-          code={`<section class="sensible-ui">
-  <h2>Account settings</h2>
-  <label for="display-name">Display name</label>
-  <input id="display-name">
-  <button>Save changes</button>
-</section>`}
-          showPreview={false}
-        />
-        <p>
-          If you use a bundler, import the scoped bundle in your CSS instead
-          of using the CDN link:
-        </p>
-        <CodeExample
-          code="@import '@faith-tools/sensible-ui/scoped';"
-          language="css"
-          showPreview={false}
-        />
-        <p>
-          Put the class on a wrapper, not on a card, table, link, or form
-          control. Sensible UI layout and utility classes such as{" "}
-          <code>.stack</code>, <code>.mt-4</code>, and <code>.size-8</code> also
-          belong on descendants, not the scope root. You can combine the scope
-          class with a host-owned wrapper class. Scoped component and utility
-          imports use the same names under <code>/scoped</code>, such as{" "}
-          <code>/scoped/button</code> and <code>/scoped/utilities</code>. Scoped
-          mode requires browser support for <code>@scope</code>.
-        </p>
-        <p>
-          <a href="./scoped/">View the scoped bundle beside host styles</a>.
-        </p>
-      </section>
-
       <section class="docs-section stack" id="typography">
         <h2>Typography</h2>
         <StandaloneImport path="typography" />
@@ -634,82 +602,6 @@ export function Home() {
           and <code>--font-mono</code> to use your own fonts.
         </p>
         <CodeExample code={typographyExample} />
-      </section>
-
-      <section class="docs-section stack" id="code">
-        <h2>Add highlighted code</h2>
-        <p>
-          Add the optional stylesheet and browser module to pages that need
-          syntax highlighting. The component works without the main Sensible UI
-          stylesheet. Serve the page over HTTP so the browser can load the
-          module.
-        </p>
-        <ol>
-          <li>
-            <p>Add the component styles to your HTML:</p>
-            <CodeExample
-              code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/src/css/code.css">`}
-              showPreview={false}
-            />
-          </li>
-          <li>
-            <p>Load the component as a browser module:</p>
-            <CodeExample
-              code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-code.js"></script>`}
-              showPreview={false}
-            />
-          </li>
-          <li>
-            <p>
-              Add <code>sensible-code</code> with a read-only{" "}
-              <code>textarea</code> containing the source:
-            </p>
-            <CodeExample
-              code={`<sensible-code language="html" data-wrap="true">
-  <textarea readonly><button>Save</button></textarea>
-</sensible-code>`}
-              showPreview={false}
-            />
-          </li>
-        </ol>
-        <p>
-          If you use a bundler, install <code>@faith-tools/sensible-ui</code>.
-          Import the styles in your CSS and the component in your browser
-          JavaScript instead of using the CDN tags:
-        </p>
-        <CodeExample
-          code="@import '@faith-tools/sensible-ui/code/css';"
-          language="css"
-          showPreview={false}
-        />
-        <CodeExample
-          code="import '@faith-tools/sensible-ui/code';"
-          language="javascript"
-          showPreview={false}
-        />
-        <p>
-          The code below shows syntax colors, a Wrap lines toggle, and a Copy
-          button. Code scrolls horizontally by default at every screen width.
-          Set <code>data-wrap="true"</code> to start a block wrapped. Readers
-          can switch either block between wrapping and scrolling. Without
-          JavaScript, the read-only text area remains readable. The component
-          creates <code>pre</code> and <code>code</code> when it loads. In HTML
-          source, escape <code>&amp;</code> before entity names. If the example
-          contains <code>&lt;/textarea&gt;</code>, write its opening angle
-          bracket as <code>&amp;lt;</code>. Set <code>language</code> to a
-          supported language name, such as <code>html</code>, <code>css</code>,
-          or <code>python</code>.
-        </p>
-        <sensible-code language="html">
-          <textarea readonly>
-            {'<button type="button">Save</button>\n<p>Ready & waiting</p>'}
-          </textarea>
-        </sensible-code>
-        <sensible-code language="html" data-wrap="true">
-          <textarea readonly>
-            {`<a href="/${"a/long/example/path/".repeat(10)}">Read the example</a>`}
-          </textarea>
-        </sensible-code>
       </section>
 
       <section class="docs-section stack" id="buttons">
@@ -824,31 +716,6 @@ export function Home() {
         </section>
       </section>
 
-      <section class="docs-section stack" id="card">
-        <h2>Card</h2>
-        <StandaloneImport path="card" />
-        <p>
-          Add <code>class="card"</code> to a semantic container. Direct{" "}
-          <code>header</code>, <code>section</code>, and <code>footer</code>{" "}
-          children define its regions. Add <code>data-slot="card-action"</code>{" "}
-          to a header action. Cards adapt their layout through container
-          queries.
-        </p>
-        <CodeExample code={cardExample} />
-      </section>
-
-      <section class="docs-section stack" id="badges">
-        <h2>Badge</h2>
-        <StandaloneImport path="badge" />
-        <p>
-          Add <code>class="badge"</code> to short status or category text.
-          Supported variants are primary, secondary, outline, and destructive.
-          Use a link only when the badge navigates somewhere.{" "}
-          <code>aria-invalid="true"</code> provides the invalid state.
-        </p>
-        <CodeExample code={badgeExample} />
-      </section>
-
       <section class="docs-section stack" id="image">
         <h2>Image</h2>
         <StandaloneImport path="image" />
@@ -859,29 +726,6 @@ export function Home() {
           and <code>figcaption</code>.
         </p>
         <CodeExample code={imageExample} />
-      </section>
-
-      <section class="docs-section stack" id="item">
-        <h2>Item</h2>
-        <StandaloneImport path="item" />
-        <p>
-          An item is a compact content row with an optional icon or action. Use{" "}
-          <code>a.item</code> when the entire row navigates. Do not put another
-          interactive control inside a linked item.
-        </p>
-        <CodeExample code={itemExample} />
-      </section>
-
-      <section class="docs-section stack" id="spinner">
-        <h2>Loading spinner</h2>
-        <StandaloneImport path="spinner" />
-        <p>
-          Add <code>aria-busy="true"</code> while an element is updating. Add{" "}
-          <code>data-variant="overlay"</code> to dim existing children. Keep
-          visible loading text or an accessible name so the state is
-          understandable without relying on motion.
-        </p>
-        <CodeExample code={spinnerExample} />
       </section>
 
       <section class="docs-section stack" id="accordion">
@@ -976,6 +820,79 @@ export function Home() {
         </div>
       </section>
 
+      <section class="docs-section stack" id="card">
+        <h2>Card</h2>
+        <StandaloneImport path="card" />
+        <p>
+          Add <code>class="card"</code> to a semantic container. Direct{" "}
+          <code>header</code>, <code>section</code>, and <code>footer</code>{" "}
+          children define its regions. Add <code>data-slot="card-action"</code>{" "}
+          to a header action. Cards adapt their layout through container
+          queries.
+        </p>
+        <CodeExample code={cardExample} />
+      </section>
+
+      <section class="docs-section stack" id="badges">
+        <h2>Badge</h2>
+        <StandaloneImport path="badge" />
+        <p>
+          Add <code>class="badge"</code> to short status or category text.
+          Supported variants are primary, secondary, outline, and destructive.
+          Use a link only when the badge navigates somewhere.{" "}
+          <code>aria-invalid="true"</code> provides the invalid state.
+        </p>
+        <CodeExample code={badgeExample} />
+      </section>
+
+      <section class="docs-section stack" id="item">
+        <h2>Item</h2>
+        <StandaloneImport path="item" />
+        <p>
+          An item is a compact content row with an optional icon or action. Use{" "}
+          <code>a.item</code> when the entire row navigates. Do not put another
+          interactive control inside a linked item.
+        </p>
+        <CodeExample code={itemExample} />
+      </section>
+
+      <section class="docs-section stack" id="spinner">
+        <h2>Loading spinner</h2>
+        <StandaloneImport path="spinner" />
+        <p>
+          Add <code>aria-busy="true"</code> while an element is updating. Add{" "}
+          <code>data-variant="overlay"</code> to dim existing children. Keep
+          visible loading text or an accessible name so the state is
+          understandable without relying on motion.
+        </p>
+        <CodeExample code={spinnerExample} />
+      </section>
+
+      <section class="docs-section stack" id="container">
+        <h2>Container</h2>
+        <StandaloneImport path="utils" />
+        <p>
+          Add <code>class="container"</code> to center content and limit its
+          width. It fills the available width up to <code>640px</code> by default,
+          with <code>1rem</code> of padding on all sides. At viewport widths of{" "}
+          <code>40rem</code> and above, the padding becomes <code>1.5rem</code>.
+          The core bundle includes this class; no companion stylesheet is needed.
+        </p>
+        <p>
+          Set <code>--container-width</code> on the container to choose a different
+          maximum width. The example uses <code>32rem</code>. The class works on{" "}
+          <code>main</code>, <code>section</code>, or <code>div</code>; a plain{" "}
+          <code>main</code> does not get container styles automatically.{" "}
+          <code>.page</code> is an alias for <code>.container</code>.
+        </p>
+        <CodeExample
+          code={`<div class="container" style="--container-width: 32rem">
+  <h3>Centered content</h3>
+  <p>Keep content readable without stretching across the whole page.</p>
+</div>`}
+        />
+      </section>
+
       <section class="docs-section stack" id="layouts">
         <h2>Named layouts</h2>
         <StandaloneImport path="utils" />
@@ -989,6 +906,60 @@ export function Home() {
           wrapping.
         </p>
         <CodeExample code={layoutsExample} />
+      </section>
+
+      <section class="docs-section stack" id="dark-mode">
+        <h2>Dark mode</h2>
+        <p>
+          Add <code>class="dark"</code> to an ancestor to select the bundled
+          dark theme. Components use the same markup in both themes. System
+          preference behavior is not enabled by the core bundle.
+        </p>
+        <CodeExample code={darkExample} dark />
+      </section>
+
+      <section class="docs-section stack" id="scoped-mode">
+        <h2>Limit styles to part of a page</h2>
+        <p>
+          Use the scoped bundle when adding Sensible UI to an existing
+          application. Semantic defaults apply only inside a neutral{" "}
+          <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
+        </p>
+        <CodeExample
+          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`}
+          showPreview={false}
+        />
+        <CodeExample
+          code={`<section class="sensible-ui">
+  <h2>Account settings</h2>
+  <label for="display-name">Display name</label>
+  <input id="display-name">
+  <button>Save changes</button>
+</section>`}
+          showPreview={false}
+        />
+        <p>
+          If you use a bundler, import the scoped bundle in your CSS instead
+          of using the CDN link:
+        </p>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/scoped';"
+          language="css"
+          showPreview={false}
+        />
+        <p>
+          Put the class on a wrapper, not on a card, table, link, or form
+          control. Sensible UI layout and utility classes such as{" "}
+          <code>.stack</code>, <code>.mt-4</code>, and <code>.size-8</code> also
+          belong on descendants, not the scope root. You can combine the scope
+          class with a host-owned wrapper class. Scoped component and utility
+          imports use the same names under <code>/scoped</code>, such as{" "}
+          <code>/scoped/button</code> and <code>/scoped/utilities</code>. Scoped
+          mode requires browser support for <code>@scope</code>.
+        </p>
+        <p>
+          <a href="./scoped/">View the scoped bundle beside host styles</a>.
+        </p>
       </section>
 
       <section class="docs-section stack" id="utilities">
@@ -1012,14 +983,80 @@ export function Home() {
         <CodeExample code={utilitiesExample} />
       </section>
 
-      <section class="docs-section stack" id="dark-mode">
-        <h2>Dark mode</h2>
+      <section class="docs-section stack" id="code">
+        <h2>Add highlighted code</h2>
         <p>
-          Add <code>class="dark"</code> to an ancestor to select the bundled
-          dark theme. Components use the same markup in both themes. System
-          preference behavior is not enabled by the core bundle.
+          Add the optional stylesheet and browser module to pages that need
+          syntax highlighting. The component works without the main Sensible UI
+          stylesheet. Serve the page over HTTP so the browser can load the
+          module.
         </p>
-        <CodeExample code={darkExample} dark />
+        <ol>
+          <li>
+            <p>Add the component styles to your HTML:</p>
+            <CodeExample
+              code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/src/css/code.css">`}
+              showPreview={false}
+            />
+          </li>
+          <li>
+            <p>Load the component as a browser module:</p>
+            <CodeExample
+              code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-code.js"></script>`}
+              showPreview={false}
+            />
+          </li>
+          <li>
+            <p>
+              Add <code>sensible-code</code> with a read-only{" "}
+              <code>textarea</code> containing the source:
+            </p>
+            <CodeExample
+              code={`<sensible-code language="html" data-wrap="true">
+  <textarea readonly><button>Save</button></textarea>
+</sensible-code>`}
+              showPreview={false}
+            />
+          </li>
+        </ol>
+        <p>
+          If you use a bundler, install <code>@faith-tools/sensible-ui</code>.
+          Import the styles in your CSS and the component in your browser
+          JavaScript instead of using the CDN tags:
+        </p>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/code/css';"
+          language="css"
+          showPreview={false}
+        />
+        <CodeExample
+          code="import '@faith-tools/sensible-ui/code';"
+          language="javascript"
+          showPreview={false}
+        />
+        <p>
+          The code below shows syntax colors, a Wrap lines toggle, and a Copy
+          button. Code scrolls horizontally by default at every screen width.
+          Set <code>data-wrap="true"</code> to start a block wrapped. Readers
+          can switch either block between wrapping and scrolling. Without
+          JavaScript, the read-only text area remains readable. The component
+          creates <code>pre</code> and <code>code</code> when it loads. In HTML
+          source, escape <code>&amp;</code> before entity names. If the example
+          contains <code>&lt;/textarea&gt;</code>, write its opening angle
+          bracket as <code>&amp;lt;</code>. Set <code>language</code> to a
+          supported language name, such as <code>html</code>, <code>css</code>,
+          or <code>python</code>.
+        </p>
+        <sensible-code language="html">
+          <textarea readonly>
+            {'<button type="button">Save</button>\n<p>Ready & waiting</p>'}
+          </textarea>
+        </sensible-code>
+        <sensible-code language="html" data-wrap="true">
+          <textarea readonly>
+            {`<a href="/${"a/long/example/path/".repeat(10)}">Read the example</a>`}
+          </textarea>
+        </sensible-code>
       </section>
 
       <footer class="docs-footer stack">

@@ -13,7 +13,11 @@ app.use(
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sensible UI</title>
+        <title>Sensible UI: shadcn/ui-inspired components for plain HTML</title>
+        <meta
+          name="description"
+          content="Build shadcn/ui-inspired components with plain HTML and one stylesheet. Customize with CSS variables. No Tailwind, JavaScript framework, or build step required."
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
