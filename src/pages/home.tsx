@@ -618,7 +618,8 @@ export function Home() {
         </p>
         <p>
           Use a button for actions and a link for navigation. Give icon-only
-          buttons an accessible name.
+          buttons an accessible name. Enabled buttons scale down slightly while
+          pressed; reduced-motion preferences disable this movement.
         </p>
         <CodeExample code={buttonExample} />
       </section>

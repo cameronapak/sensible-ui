@@ -465,7 +465,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -517,7 +523,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(
@@ -988,7 +1014,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -1040,7 +1072,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(
@@ -1511,7 +1563,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -1563,7 +1621,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(

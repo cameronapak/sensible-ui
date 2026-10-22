@@ -1601,7 +1601,10 @@
         flex-shrink: 0;
         align-items: center;
         height: 1.15rem;
-        transition: all 0.15s;
+        transition:
+          background-color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out;
         box-shadow: 0 1px 2px #0000000d;
         width: 2rem !important;
       }
@@ -1636,7 +1639,9 @@
         border-radius: 50%;
         width: 1rem;
         height: 1rem;
-        transition: all 0.15s;
+        transition:
+          margin-inline-start 0.15s ease-out,
+          background-color 0.15s ease-out;
       }
 
       input[type="checkbox"][role="switch"]:is(.dark *):before {
@@ -1649,6 +1654,16 @@
 
       input[type="checkbox"][role="switch"]:is(.dark *):checked:before {
         background: var(--primary-foreground);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        input[type="checkbox"][role="switch"] {
+          transition-duration: 0s;
+        }
+
+        input[type="checkbox"][role="switch"]:before {
+          transition-duration: 0s;
+        }
       }
 
       input[type="color" i] {

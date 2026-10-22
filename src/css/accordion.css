@@ -64,7 +64,7 @@
         mask-size: contain;
         mask-image: var(--icon-lucide-chevron);
         mask-repeat: no-repeat;
-        transition: transform 0.2s;
+        transition: transform 0.2s var(--ease-out);
       }
     }
 
@@ -90,8 +90,8 @@
 
     &::details-content {
       transition:
-        opacity 0.2s,
-        height 0.2s;
+        opacity 0.2s var(--ease-out),
+        height 0.2s var(--ease-out);
       transition-behavior: allow-discrete;
     }
 

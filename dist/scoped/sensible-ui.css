@@ -2779,7 +2779,10 @@
         flex-shrink: 0;
         align-items: center;
         height: 1.15rem;
-        transition: all 0.15s;
+        transition:
+          background-color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out;
         box-shadow: 0 1px 2px #0000000d;
         width: 2rem !important;
       }
@@ -2814,7 +2817,9 @@
         border-radius: 50%;
         width: 1rem;
         height: 1rem;
-        transition: all 0.15s;
+        transition:
+          margin-inline-start 0.15s ease-out,
+          background-color 0.15s ease-out;
       }
 
       input[type="checkbox"][role="switch"]:is(.dark *):before {
@@ -2827,6 +2832,16 @@
 
       input[type="checkbox"][role="switch"]:is(.dark *):checked:before {
         background: var(--primary-foreground);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        input[type="checkbox"][role="switch"] {
+          transition-duration: 0s;
+        }
+
+        input[type="checkbox"][role="switch"]:before {
+          transition-duration: 0s;
+        }
       }
 
       input[type="color" i] {
@@ -3127,7 +3142,7 @@
         mask-position: center;
         mask-repeat: no-repeat;
         mask-size: contain;
-        animation: sensible-spinner-spin 1s linear infinite;
+        animation: sensible-spinner-spin 0.75s linear infinite;
         background-color: currentColor;
         flex-shrink: 0;
         width: 1.5rem;
@@ -3447,11 +3462,11 @@
         mask-size: contain;
         mask-image: var(--icon-lucide-chevron);
         mask-repeat: no-repeat;
+        transition: transform 0.2s var(--ease-out);
         background-color: currentColor;
         flex-shrink: 0;
         width: 1em;
         height: 1em;
-        transition: transform 0.2s;
       }
 
       details:has(+ details) {
@@ -3487,10 +3502,10 @@
       }
 
       details::details-content {
-        transition-behavior: allow-discrete;
         transition:
-          opacity 0.2s,
-          height 0.2s;
+          opacity 0.2s var(--ease-out),
+          height 0.2s var(--ease-out);
+        transition-behavior: allow-discrete;
       }
 
       details:not([open])::details-content {
@@ -3537,7 +3552,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -3589,7 +3610,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(
@@ -4060,7 +4101,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -4112,7 +4159,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(
@@ -4583,7 +4650,13 @@
         flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        transition: all 0.15s ease-out;
+        transition:
+          scale 0.15s ease-out,
+          background-color 0.15s ease-out,
+          color 0.15s ease-out,
+          border-color 0.15s ease-out,
+          box-shadow 0.15s ease-out,
+          opacity 0.15s ease-out;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.25rem;
@@ -4635,7 +4708,27 @@
         ):not(form[method="dialog"]:not(dialog form) > *):active:not(
           :disabled
         ) {
-        translate: 0 0.125rem;
+        scale: 0.97;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *) {
+          transition-duration: 0s;
+        }
+
+        :is(
+            button:not([role]),
+            input:is([type="submit"], [type="reset"], [type="button"]),
+            a.button
+          ):not(form[method="dialog"]:not(dialog form) > *):active:not(
+            :disabled
+          ) {
+          scale: none;
+        }
       }
 
       :is(

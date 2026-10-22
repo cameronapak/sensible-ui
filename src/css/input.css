@@ -330,7 +330,10 @@
     outline: none;
     background: var(--input);
     box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
-    transition: all 150ms;
+    transition:
+      background-color 150ms ease-out,
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out;
 
     &:focus-visible {
       border-color: var(--ring);
@@ -358,7 +361,9 @@
       height: 1rem;
       border-radius: 50%;
       background: var(--background);
-      transition: all 150ms;
+      transition:
+        margin-inline-start 150ms ease-out,
+        background-color 150ms ease-out;
     }
 
     &:is(.dark *)::before {
@@ -369,6 +374,13 @@
     }
     &:is(.dark *):checked::before {
       background: var(--primary-foreground);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      &::before {
+        transition-duration: 0s;
+      }
     }
   }
 

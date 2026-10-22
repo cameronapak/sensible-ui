@@ -532,11 +532,11 @@
         mask-size: contain;
         mask-image: var(--icon-lucide-chevron);
         mask-repeat: no-repeat;
+        transition: transform 0.2s var(--ease-out);
         background-color: currentColor;
         flex-shrink: 0;
         width: 1em;
         height: 1em;
-        transition: transform 0.2s;
       }
 
       details:has(+ details) {
@@ -572,10 +572,10 @@
       }
 
       details::details-content {
-        transition-behavior: allow-discrete;
         transition:
-          opacity 0.2s,
-          height 0.2s;
+          opacity 0.2s var(--ease-out),
+          height 0.2s var(--ease-out);
+        transition-behavior: allow-discrete;
       }
 
       details:not([open])::details-content {

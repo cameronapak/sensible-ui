@@ -16,7 +16,13 @@
     line-height: 1.25rem;
     font-weight: 500;
     white-space: nowrap;
-    transition: all 150ms ease-out;
+    transition:
+      scale 150ms ease-out,
+      background-color 150ms ease-out,
+      color 150ms ease-out,
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out,
+      opacity 150ms ease-out;
 
     &:is(.card > header > [data-slot="card-action"], .card > footer > *) {
       height: auto;
@@ -39,7 +45,15 @@
     }
 
     &:active:not(:disabled) {
-      translate: 0 0.125rem;
+      scale: 0.97;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0s;
+
+      &:active:not(:disabled) {
+        scale: none;
+      }
     }
 
     &:disabled {

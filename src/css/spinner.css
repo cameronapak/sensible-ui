@@ -29,7 +29,7 @@
     mask-size: contain;
     width: 1.5rem;
     height: 1.5rem;
-    animation: sensible-spinner-spin 1s linear infinite;
+    animation: sensible-spinner-spin 0.75s linear infinite;
   }
 
   :is(button, a.button)[aria-busy="true"]:not(:empty)::after {
