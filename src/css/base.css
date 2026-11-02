@@ -26,6 +26,7 @@
   :where(:scope) {
     font-family: var(--font-sans);
     line-height: 1.5;
+    overflow-wrap: break-word;
   }
 
   html,
@@ -63,6 +64,10 @@
   :is(img, video) {
     max-width: 100%;
     height: auto;
+  }
+
+  img {
+    object-fit: cover;
   }
 
   table {

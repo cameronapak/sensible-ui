@@ -5,6 +5,7 @@
 
   figure {
     width: fit-content;
+    max-width: 100%;
 
     .caption,
     figcaption {

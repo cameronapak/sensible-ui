@@ -33,8 +33,10 @@
         background-color 150ms,
         border-color 150ms;
 
-      &:hover {
-        background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+      @media (hover: hover) {
+        &:hover {
+          background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+        }
       }
     }
     th {

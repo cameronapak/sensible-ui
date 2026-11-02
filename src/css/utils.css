@@ -61,6 +61,11 @@
     gap: var(--layout-gap, 1rem);
   }
 
+  :is(.x-stack, .cluster, .split) > :is(h1, h2, h3, h4, h5, h6, p) {
+    min-inline-size: 0;
+    flex-shrink: 1;
+  }
+
   .auto-grid {
     display: grid;
     grid-template-columns: repeat(

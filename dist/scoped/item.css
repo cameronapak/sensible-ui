@@ -274,11 +274,13 @@
 
       html {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
       :where(:scope) {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
@@ -362,6 +364,10 @@
       :is(img, video) {
         max-width: 100%;
         height: auto;
+      }
+
+      img {
+        object-fit: cover;
       }
 
       table {
@@ -476,8 +482,10 @@
         text-decoration-line: none !important;
       }
 
-      .item:-webkit-any(a[href]):hover {
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      @media (hover: hover) {
+        .item:-webkit-any(a[href]):hover {
+          background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        }
       }
 
       .item:-webkit-any(a[href]):active:not(:disabled) {
@@ -489,8 +497,10 @@
         text-decoration-line: none !important;
       }
 
-      .item:-moz-any(a[href]):hover {
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      @media (hover: hover) {
+        .item:-moz-any(a[href]):hover {
+          background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        }
       }
 
       .item:-moz-any(a[href]):active:not(:disabled) {
@@ -502,8 +512,10 @@
         text-decoration-line: none !important;
       }
 
-      .item:is(a[href]):hover {
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      @media (hover: hover) {
+        .item:is(a[href]):hover {
+          background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        }
       }
 
       .item:is(a[href]):active:not(:disabled) {
@@ -522,8 +534,10 @@
       .item > :-webkit-any(div, section, article) {
         display: flex;
         flex-direction: column;
+        flex-shrink: 1;
         justify-content: center;
         gap: 0;
+        min-inline-size: 0;
       }
 
       .item
@@ -561,8 +575,10 @@
       .item > :-moz-any(div, section, article) {
         display: flex;
         flex-direction: column;
+        flex-shrink: 1;
         justify-content: center;
         gap: 0;
+        min-inline-size: 0;
       }
 
       .item
@@ -600,8 +616,10 @@
       .item > :is(div, section, article) {
         display: flex;
         flex-direction: column;
+        flex-shrink: 1;
         justify-content: center;
         gap: 0;
+        min-inline-size: 0;
       }
 
       .item

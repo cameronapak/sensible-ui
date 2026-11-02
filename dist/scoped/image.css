@@ -274,11 +274,13 @@
 
       html {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
       :where(:scope) {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
@@ -362,6 +364,10 @@
       :is(img, video) {
         max-width: 100%;
         height: auto;
+      }
+
+      img {
+        object-fit: cover;
       }
 
       table {
@@ -459,6 +465,7 @@
       figure {
         width: -moz-fit-content;
         width: fit-content;
+        max-width: 100%;
       }
 
       figure .caption {

@@ -21,16 +21,6 @@
     padding-inline: 0.25rem;
   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    overflow-wrap: break-word;
-  }
-
   h1 {
     margin: 2.5rem 0 1.5rem;
     font-size: 1.875rem;
@@ -86,6 +76,7 @@
   pre {
     margin-bottom: 1rem;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     border-radius: calc(var(--radius) - 2px);
     background: var(--secondary);
     padding: 1rem;
@@ -129,6 +120,7 @@
 
   a[href]:not(:is(.button, .item)) {
     display: inline-block;
+    max-inline-size: 100%;
     color: var(--foreground);
     text-decoration-line: underline;
     text-underline-offset: 4px;
@@ -176,9 +168,11 @@
     text-decoration-color: color-mix(in oklab, var(--primary) 20%, transparent);
     text-underline-offset: 4px;
 
-    &:is(a[href]):hover {
-      color: var(--primary);
-      text-decoration-color: var(--primary);
+    @media (hover: hover) {
+      &:is(a[href]):hover {
+        color: var(--primary);
+        text-decoration-color: var(--primary);
+      }
     }
   }
 }

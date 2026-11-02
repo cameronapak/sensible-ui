@@ -23,9 +23,11 @@
     line-height: 1.25rem;
     transition: translate 150ms var(--ease-out);
 
-    &:hover {
-      cursor: pointer;
-      background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      }
     }
 
     &:focus-visible {
@@ -39,7 +41,7 @@
 
     > summary {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       padding: 1rem;
       font-size: 1rem !important;
       line-height: 1 !important;

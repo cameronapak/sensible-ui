@@ -274,11 +274,13 @@
 
       html {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
       :where(:scope) {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
@@ -362,6 +364,10 @@
       :is(img, video) {
         max-width: 100%;
         height: auto;
+      }
+
+      img {
+        object-fit: cover;
       }
 
       table {
@@ -481,9 +487,11 @@
         line-height: 1.25rem;
       }
 
-      details:hover {
-        cursor: pointer;
-        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      @media (hover: hover) {
+        details:hover {
+          cursor: pointer;
+          background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+        }
       }
 
       details:focus-visible {
@@ -497,7 +505,7 @@
 
       details > summary {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: minmax(0, 1fr) auto;
         padding: 1rem;
         font-size: 1rem !important;
         font-weight: 500 !important;

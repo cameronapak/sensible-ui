@@ -274,11 +274,13 @@
 
       html {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
       :where(:scope) {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
@@ -362,6 +364,10 @@
       :is(img, video) {
         max-width: 100%;
         height: auto;
+      }
+
+      img {
+        object-fit: cover;
       }
 
       table {
@@ -475,16 +481,6 @@
         padding-inline-end: 0.25rem;
       }
 
-      p,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        overflow-wrap: break-word;
-      }
-
       h1 {
         margin: 2.5rem 0 1.5rem;
         font-size: 1.875rem;
@@ -564,6 +560,7 @@
 
       pre {
         overflow-x: auto;
+        overscroll-behavior-x: contain;
         border-radius: calc(var(--radius) - 2px);
         background: var(--secondary);
         font-family: var(--font-mono);
@@ -615,6 +612,7 @@
         color: var(--foreground);
         text-decoration-line: underline;
         text-underline-offset: 4px;
+        max-inline-size: 100%;
         transition: all 0.1s;
       }
 
@@ -627,6 +625,7 @@
         color: var(--foreground);
         text-decoration-line: underline;
         text-underline-offset: 4px;
+        max-inline-size: 100%;
         transition: all 0.1s;
       }
 
@@ -639,6 +638,7 @@
         color: var(--foreground);
         text-decoration-line: underline;
         text-underline-offset: 4px;
+        max-inline-size: 100%;
         transition: all 0.1s;
       }
 
@@ -690,19 +690,21 @@
         text-underline-offset: 4px;
       }
 
-      :is(u, ins, abbr, a[href]):-webkit-any(a[href]):hover {
-        color: var(--primary);
-        text-decoration-color: var(--primary);
-      }
+      @media (hover: hover) {
+        :is(u, ins, abbr, a[href]):-webkit-any(a[href]):hover {
+          color: var(--primary);
+          text-decoration-color: var(--primary);
+        }
 
-      :is(u, ins, abbr, a[href]):-moz-any(a[href]):hover {
-        color: var(--primary);
-        text-decoration-color: var(--primary);
-      }
+        :is(u, ins, abbr, a[href]):-moz-any(a[href]):hover {
+          color: var(--primary);
+          text-decoration-color: var(--primary);
+        }
 
-      :is(u, ins, abbr, a[href]):is(a[href]):hover {
-        color: var(--primary);
-        text-decoration-color: var(--primary);
+        :is(u, ins, abbr, a[href]):is(a[href]):hover {
+          color: var(--primary);
+          text-decoration-color: var(--primary);
+        }
       }
     }
 

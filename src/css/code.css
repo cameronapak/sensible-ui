@@ -71,6 +71,7 @@
     padding: 1rem;
     font-family: var(--font-mono, ui-monospace, monospace);
     white-space: pre;
+    overscroll-behavior-x: contain;
   }
 
   sensible-code[data-wrap="true"] > :is(pre, textarea) {
@@ -135,12 +136,19 @@
   :where(
     sensible-code
       .sensible-code-toolbar
-      button[data-variant="outline"]:is(
-        :hover:not(:disabled),
-        [aria-pressed="true"]
-      )
+      button[data-variant="outline"][aria-pressed="true"]
   ) {
     background: var(--code-surface);
+  }
+
+  @media (hover: hover) {
+    :where(
+      sensible-code
+        .sensible-code-toolbar
+        button[data-variant="outline"]:hover:not(:disabled)
+    ) {
+      background: var(--code-surface);
+    }
   }
 
   :where(

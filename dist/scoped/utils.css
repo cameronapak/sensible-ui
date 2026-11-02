@@ -274,11 +274,13 @@
 
       html {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
       :where(:scope) {
         font-family: var(--font-sans);
+        overflow-wrap: break-word;
         line-height: 1.5;
       }
 
@@ -362,6 +364,10 @@
       :is(img, video) {
         max-width: 100%;
         height: auto;
+      }
+
+      img {
+        object-fit: cover;
       }
 
       table {
@@ -542,6 +548,23 @@
         align-items: center;
         gap: var(--layout-gap, 1rem);
         flex-wrap: wrap;
+      }
+
+      :-webkit-any(.x-stack, .cluster, .split)
+        > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
+        flex-shrink: 1;
+        min-inline-size: 0;
+      }
+
+      :-moz-any(.x-stack, .cluster, .split)
+        > :-moz-any(h1, h2, h3, h4, h5, h6, p) {
+        flex-shrink: 1;
+        min-inline-size: 0;
+      }
+
+      :is(.x-stack, .cluster, .split) > :is(h1, h2, h3, h4, h5, h6, p) {
+        flex-shrink: 1;
+        min-inline-size: 0;
       }
 
       .auto-grid {

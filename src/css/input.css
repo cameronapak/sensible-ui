@@ -144,7 +144,8 @@
     justify-content: space-between;
     gap: 0.5rem;
     padding: 0.5rem 2.25rem 0.5rem 0.75rem;
-    font-size: 0.875rem;
+    /* 16px below the breakpoint prevents iOS Safari from zooming on focus. */
+    font-size: 1rem;
     line-height: 1.25rem;
     white-space: nowrap;
     background-image: var(--chevron-down-icon-50);
@@ -152,8 +153,14 @@
     background-repeat: no-repeat;
     background-size: 1rem;
 
-    &:is(.dark *):hover {
-      background-color: color-mix(in oklab, var(--input) 50%, transparent);
+    @media (width >= 48rem) {
+      font-size: 0.875rem;
+    }
+
+    @media (hover: hover) {
+      &:is(.dark *):hover {
+        background-color: color-mix(in oklab, var(--input) 50%, transparent);
+      }
     }
 
     option,
@@ -170,6 +177,7 @@
     font-size: 0.875rem;
     line-height: 1;
     font-weight: 500;
+    overflow-wrap: anywhere;
     user-select: none;
 
     &:has(+ :is(input, textarea, select)) {
@@ -243,6 +251,7 @@
 
   fieldset {
     display: flex;
+    min-inline-size: 0;
     flex-direction: column;
     gap: 1rem;
     border: 1px solid var(--border);
@@ -250,6 +259,7 @@
     padding: 1rem 1rem 1.25rem;
 
     legend {
+      max-inline-size: 100%;
       color: var(--muted-foreground);
       font-size: 0.875rem;
       line-height: 1;
@@ -277,6 +287,11 @@
     line-height: 1;
     font-weight: 500;
     user-select: none;
+
+    > label {
+      min-inline-size: 0;
+      flex-shrink: 1;
+    }
   }
 
   input[type="radio"] {
@@ -393,13 +408,16 @@
     &:active {
       translate: 0 0.125rem;
     }
-    &::-webkit-color-swatch-wrapper,
-    &::-webkit-color-swatch,
-    &::-moz-color-swatch {
-      border-radius: 99px;
-    }
+    /* Keep vendor pseudo-elements in separate rules; one unknown selector drops a whole list. */
     &::-webkit-color-swatch-wrapper {
       padding: 0.25rem;
+      border-radius: 99px;
+    }
+    &::-webkit-color-swatch {
+      border-radius: 99px;
+    }
+    &::-moz-color-swatch {
+      border-radius: 99px;
     }
   }
 
@@ -407,18 +425,7 @@
     width: 100%;
     accent-color: var(--primary);
 
-    &:hover,
-    &:focus-visible {
-      &::-webkit-slider-thumb,
-      &::-moz-range-thumb,
-      &::-ms-thumb {
-        box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
-      }
-    }
-
-    &::-webkit-slider-thumb,
-    &::-moz-range-thumb,
-    &::-ms-thumb {
+    &::-webkit-slider-thumb {
       display: block;
       width: 1rem;
       height: 1rem;
@@ -429,6 +436,34 @@
       box-shadow:
         0 1px 3px rgb(0 0 0 / 10%),
         0 1px 2px -1px rgb(0 0 0 / 10%);
+    }
+    &::-moz-range-thumb {
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      appearance: none;
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+      background: var(--background);
+      box-shadow:
+        0 1px 3px rgb(0 0 0 / 10%),
+        0 1px 2px -1px rgb(0 0 0 / 10%);
+    }
+
+    &:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+    &:focus-visible::-moz-range-thumb {
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    @media (hover: hover) {
+      &:hover::-webkit-slider-thumb {
+        box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+      &:hover::-moz-range-thumb {
+        box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
     }
   }
 }
