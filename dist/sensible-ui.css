@@ -3412,6 +3412,78 @@
   }
 }
 
+/* src/css/progress.css */
+@layer components {
+  progress {
+    --progress-track: color-mix(in oklab, var(--primary) 20%, transparent);
+    display: block;
+    overflow: hidden;
+    background-color: var(--progress-track);
+    color: var(--primary);
+    appearance: none;
+    border: 0;
+    border-radius: 9999px;
+    block-size: 0.5rem;
+    inline-size: 100%;
+  }
+
+  progress::-webkit-progress-bar {
+    border-radius: inherit;
+    background: none;
+  }
+
+  progress::-webkit-progress-value {
+    border-radius: inherit;
+    background-color: var(--primary);
+  }
+
+  progress::-moz-progress-bar {
+    border-radius: inherit;
+    background-color: var(--primary);
+  }
+
+  progress:indeterminate {
+    background-image: linear-gradient(var(--primary), var(--primary));
+    animation: sensible-progress-indeterminate 1s ease-in-out infinite alternate;
+    background-repeat: no-repeat;
+    background-size: 40% 100%;
+  }
+
+  progress:indeterminate::-webkit-progress-bar {
+    background: none;
+  }
+
+  progress:indeterminate::-moz-progress-bar {
+    background: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    progress:indeterminate {
+      background-image: repeating-linear-gradient(
+        -45deg in srgb,
+        var(--primary) 0 0.375rem,
+        transparent 0.375rem 0.75rem
+      );
+      animation: none;
+      background-size: auto;
+    }
+  }
+
+  label + progress {
+    margin-block-start: 0.5rem;
+  }
+
+  @keyframes sensible-progress-indeterminate {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 100% 0;
+    }
+  }
+}
+
 /* src/css/item.css */
 @layer components {
   .item {

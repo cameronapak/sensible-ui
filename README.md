@@ -147,7 +147,7 @@ This enables same-origin navigation with `@view-transition { navigation: auto; }
 
 ## Motion preferences
 
-Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes immediate, accordion state changes happen without transitions, spinners keep their busy indicator without rotating, and the optional page view transitions stay disabled.
+Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes immediate, accordion state changes happen without transitions, spinners keep their busy indicator without rotating, indeterminate progress bars show still stripes, and the optional page view transitions stay disabled.
 
 Future components should put decorative motion behind `prefers-reduced-motion: no-preference` or provide a reduced-motion rule that preserves the visible state change without animation.
 
@@ -257,6 +257,7 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Form controls    | `@faith-tools/sensible-ui/input`            |
 | Item             | `@faith-tools/sensible-ui/item`             |
 | Loading spinner  | `@faith-tools/sensible-ui/spinner`          |
+| Progress         | `@faith-tools/sensible-ui/progress`         |
 | Table            | `@faith-tools/sensible-ui/table`            |
 | Typography       | `@faith-tools/sensible-ui/typography`       |
 

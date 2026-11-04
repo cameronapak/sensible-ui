@@ -11,6 +11,7 @@ const modules = {
   image: "figure {",
   input: '[role="switch"]',
   item: ".item {",
+  progress: "sensible-progress-indeterminate",
   spinner: "sensible-spinner-spin",
   table: "caption-side: bottom",
   typography: "blockquote {",

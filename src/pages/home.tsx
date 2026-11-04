@@ -226,6 +226,20 @@ const spinnerExample = `
   </div>
 </div>`;
 
+const progressExample = `
+<div class="stack">
+  <div>
+    <label for="upload-progress" class="split">
+      Uploading report.pdf <span aria-hidden="true">60%</span>
+    </label>
+    <progress id="upload-progress" max="100" value="60">60%</progress>
+  </div>
+  <div>
+    <label for="sync-progress">Syncing your library</label>
+    <progress id="sync-progress">Syncing</progress>
+  </div>
+</div>`;
+
 const accordionExample = `
 <div>
   <details name="questions">
@@ -429,6 +443,7 @@ export function Home() {
           <a href="#badges">Badge</a>
           <a href="#item">Item</a>
           <a href="#spinner">Spinner</a>
+          <a href="#progress">Progress</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
           <a href="#dark-mode">Dark mode</a>
@@ -557,8 +572,8 @@ export function Home() {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <code>/spinner</code>, <code>/table</code>,{" "}
-                    <code>/typography</code>
+                    <code>/progress</code>, <code>/spinner</code>,{" "}
+                    <code>/table</code>, <code>/typography</code>
                   </th>
                   <td>Standalone component modules</td>
                 </tr>
@@ -875,6 +890,28 @@ export function Home() {
           understandable without relying on motion.
         </p>
         <CodeExample code={spinnerExample} />
+      </section>
+
+      <section class="docs-section stack" id="progress">
+        <h2>Progress</h2>
+        <StandaloneImport path="progress" />
+        <p>
+          Use the native <code>progress</code> element without a class. Set{" "}
+          <code>value</code> and <code>max</code> when you know how much work
+          is done. Leave out <code>value</code> for indeterminate work, and a
+          segment moves along the track. With reduced motion, indeterminate
+          progress shows still stripes instead.
+        </p>
+        <p>
+          Give each bar a visible <code>label</code>. When people need the
+          number, show it as text inside the label with{" "}
+          <code>aria-hidden="true"</code>; screen readers already announce the
+          bar's value.
+          Change the color with <code>--primary</code>. Use{" "}
+          <code>aria-busy="true"</code> on the region that is updating, not on
+          the progress bar.
+        </p>
+        <CodeExample code={progressExample} />
       </section>
 
       <section class="docs-section stack" id="container">
