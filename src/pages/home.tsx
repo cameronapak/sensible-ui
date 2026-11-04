@@ -621,15 +621,252 @@ const darkExample = `
   </form>
 </div>`;
 
+const showcaseHtml = `
+<article class="card">
+  <header>
+    <h3>Create your account</h3>
+    <p>Start a free 14-day trial.</p>
+  </header>
+  <section>
+    <form>
+      <div>
+        <label for="showcase-name">Name</label>
+        <input id="showcase-name" name="name" autocomplete="name" placeholder="Ada Lovelace">
+      </div>
+      <div>
+        <label for="showcase-email">Email</label>
+        <input id="showcase-email" name="email" type="email" placeholder="ada@example.com">
+      </div>
+      <div>
+        <input id="showcase-updates" type="checkbox" name="updates" checked>
+        <label for="showcase-updates">Send me product updates</label>
+      </div>
+      <button type="button">Create account</button>
+    </form>
+  </section>
+</article>
+
+<div data-slot="table-container" class="card" role="region" aria-labelledby="showcase-members" tabindex="0">
+  <table>
+    <caption id="showcase-members">Team members</caption>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Margaret Nguyen</th>
+        <td>Owner</td>
+        <td><span class="badge">Active</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Hoshi Nakamura</th>
+        <td>Editor</td>
+        <td><span class="badge" data-variant="secondary">Invited</span></td>
+      </tr>
+      <tr>
+        <th scope="row">Samuel Okafor</th>
+        <td>Viewer</td>
+        <td><span class="badge" data-variant="outline">Paused</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<article class="card">
+  <header>
+    <h3>Notifications</h3>
+    <p>Choose what reaches your inbox.</p>
+  </header>
+  <section>
+    <form>
+      <label><input type="checkbox" role="switch" name="replies" checked> Comments and replies</label>
+      <label><input type="checkbox" role="switch" name="deploys" checked> Failed deploys</label>
+      <label><input type="checkbox" role="switch" name="summary"> Weekly summary</label>
+      <div>
+        <label for="showcase-digest">Email digest</label>
+        <select id="showcase-digest" name="digest">
+          <option>Daily</option>
+          <option selected>Weekly</option>
+          <option>Never</option>
+        </select>
+      </div>
+    </form>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <h3>Projects</h3>
+    <p>Two projects need review.</p>
+    <button type="button" data-slot="card-action" data-variant="outline" onclick="document.getElementById('showcase-dialog').showModal()">Invite</button>
+  </header>
+  <section>
+    <div class="stack">
+      <a class="item" href="#item">
+        <section>
+          <h4>Website redesign</h4>
+          <p>Updated 2 hours ago</p>
+        </section>
+        <span class="badge" data-variant="secondary">Review</span>
+      </a>
+      <a class="item" href="#item">
+        <section>
+          <h4>Mobile onboarding</h4>
+          <p>Updated yesterday</p>
+        </section>
+        <span class="badge" data-variant="secondary">Review</span>
+      </a>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <h3>Questions</h3>
+  </header>
+  <section>
+    <details name="showcase-faq" open>
+      <summary>Do I need React or Tailwind?</summary>
+      <p>No. Add one stylesheet and write HTML.</p>
+    </details>
+    <details name="showcase-faq">
+      <summary>Do I need JavaScript?</summary>
+      <p>Not for styles. Accordions use native details, and a dialog needs one line to open.</p>
+    </details>
+    <details name="showcase-faq">
+      <summary>Can I match my brand?</summary>
+      <p>Yes. Override CSS variables such as --primary and --radius.</p>
+    </details>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <h3>Release 2.4</h3>
+    <p>12 changes passed review.</p>
+  </header>
+  <footer>
+    <button type="button">Publish release</button>
+    <button type="button" data-variant="outline" aria-busy="true" disabled>Running checks</button>
+  </footer>
+</article>
+
+<dialog id="showcase-dialog" closedby="any" aria-labelledby="showcase-dialog-title" aria-describedby="showcase-dialog-description">
+  <header>
+    <h2 id="showcase-dialog-title">Invite a teammate</h2>
+    <p id="showcase-dialog-description">They will get an email with a link to join.</p>
+    <form method="dialog"><button type="submit" value="close" data-variant="ghost" data-size="icon" aria-label="Close">×</button></form>
+  </header>
+  <section>
+    <label for="showcase-invite">Email</label>
+    <input id="showcase-invite" name="invite" type="email" placeholder="name@example.com" autofocus>
+  </section>
+  <footer>
+    <form method="dialog"><button type="submit" value="cancel" data-variant="outline">Cancel</button></form>
+    <form method="dialog"><button type="submit" value="send">Send invite</button></form>
+  </footer>
+</dialog>`;
+
+const justHtmlExample = `
+<article class="card">
+  <header>
+    <h3>Sign in</h3>
+    <p>Use the email linked to your account.</p>
+  </header>
+  <section>
+    <form>
+      <div>
+        <label for="signin-email">Email</label>
+        <input id="signin-email" type="email" placeholder="name@example.com">
+      </div>
+      <div>
+        <label for="signin-password">Password</label>
+        <input id="signin-password" type="password">
+      </div>
+      <button type="button">Sign in</button>
+      <button type="button" data-variant="outline">Create an account</button>
+    </form>
+  </section>
+</article>`;
+
+const cdnLink = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`;
+
+const themeExample = `
+:root {
+  --primary: oklch(0.5 0.2 260);
+  --primary-foreground: oklch(1 0 0);
+  --radius: 0.375rem;
+}
+
+.dark {
+  --primary: oklch(0.75 0.14 260);
+  --primary-foreground: oklch(0.145 0 0);
+}`;
+
+const navGroups = [
+  {
+    title: "Get started",
+    links: [
+      ["getting-started", "Installation"],
+      ["theming", "Theming"],
+      ["dark-mode", "Dark mode"],
+      ["scoped-mode", "Scoped adoption"],
+    ],
+  },
+  {
+    title: "HTML elements",
+    links: [
+      ["typography", "Typography"],
+      ["buttons", "Buttons"],
+      ["forms", "Forms"],
+      ["image", "Image"],
+      ["accordion", "Accordion"],
+      ["dialog", "Dialog"],
+      ["description-list", "Description list"],
+      ["table", "Table"],
+    ],
+  },
+  {
+    title: "Components",
+    links: [
+      ["card", "Card"],
+      ["badges", "Badge"],
+      ["item", "Item"],
+      ["spinner", "Spinner"],
+      ["progress", "Progress"],
+      ["button-group", "Button group"],
+      ["input-group", "Input group"],
+      ["tooltip", "Tooltip"],
+    ],
+  },
+  {
+    title: "Layout",
+    links: [
+      ["navigation", "Navigation"],
+      ["container", "Container"],
+      ["layouts", "Layouts"],
+      ["utilities", "Utilities"],
+    ],
+  },
+  {
+    title: "Optional JavaScript",
+    links: [["code", "Code web component"]],
+  },
+];
+
 export function Home() {
   return (
     <main class="container docs-page">
-      <header class="docs-hero stack">
+      <header class="site-header">
         <div class="split">
-          <div class="cluster">
-            <h1>Sensible UI</h1>
+          <div class="cluster site-brand">
+            <strong>Sensible UI</strong>
             <code>v{version}</code>
-            <span class="badge">beta</span>
+            <span class="badge" data-variant="secondary">beta</span>
           </div>
           <div class="cluster">
             <a
@@ -654,55 +891,134 @@ export function Home() {
             </button>
           </div>
         </div>
-        <p>
-          Build shadcn/ui-inspired components with plain HTML and one stylesheet.
-          Start with polished defaults, then make them your own with CSS variables.
-          No Tailwind, JavaScript framework, or build step required.
-        </p>
-        <nav class="docs-nav" aria-label="Component documentation">
-          <a href="#getting-started">Getting started</a>
-          <a href="#typography">Typography</a>
-          <a href="#buttons">Buttons</a>
-          <a href="#forms">Forms</a>
-          <a href="#image">Image</a>
-          <a href="#accordion">Accordion</a>
-          <a href="#dialog">Dialog</a>
-          <a href="#description-list">Description list</a>
-          <a href="#table">Table</a>
-          <a href="#card">Card</a>
-          <a href="#badges">Badge</a>
-          <a href="#item">Item</a>
-          <a href="#spinner">Spinner</a>
-          <a href="#progress">Progress</a>
-          <a href="#button-group">Button group</a>
-          <a href="#input-group">Input group</a>
-          <a href="#tooltip">Tooltip</a>
-          <a href="#navigation">Navigation</a>
-          <a href="#container">Container</a>
-          <a href="#layouts">Layouts</a>
-          <a href="#dark-mode">Dark mode</a>
-          <a href="#scoped-mode">Scoped adoption</a>
-          <a href="#utilities">Utilities</a>
-          <a href="#code">Code web component</a>
-        </nav>
       </header>
+
+      <section class="landing-hero stack" aria-labelledby="landing-title">
+        <h1 id="landing-title">The shadcn/ui look. Just write HTML.</h1>
+        <p class="landing-lead">
+          Add one stylesheet, and your buttons, forms, tables, and dialogs look
+          polished right away. Add a few readable classes for cards and badges,
+          and theme everything with CSS variables. No React, Tailwind, or build
+          step.
+        </p>
+        <div class="cluster landing-actions">
+          <a class="button" data-size="lg" href="#getting-started">
+            Get started
+          </a>
+          <a
+            class="button"
+            data-size="lg"
+            data-variant="outline"
+            href="#typography"
+          >
+            Browse components
+          </a>
+        </div>
+        <p class="landing-attribution">
+          Inspired by <a href="https://ui.shadcn.com">shadcn/ui</a>. Sensible UI
+          is an independent project and is not affiliated with or endorsed by
+          shadcn/ui.
+        </p>
+      </section>
+
+      <section class="landing-section stack" aria-label="Showcase">
+        <div
+          class="landing-showcase"
+          dangerouslySetInnerHTML={{ __html: showcaseHtml.trim() }}
+        />
+        <p class="landing-note">
+          Everything above is plain HTML styled by Sensible UI. Its only classes
+          are <code>card</code>, <code>badge</code>, <code>item</code>, and{" "}
+          <code>stack</code>.
+        </p>
+      </section>
+
+      <section class="landing-section stack" aria-labelledby="just-html-title">
+        <h2 id="just-html-title">Write the HTML you already know</h2>
+        <p>
+          This sign-in card uses one class, <code>card</code>, and one
+          attribute, <code>data-variant="outline"</code>. The headings, labels,
+          inputs, and buttons get their styles because they are HTML.
+        </p>
+        <CodeExample code={justHtmlExample} />
+      </section>
+
+      <section class="landing-section stack" aria-labelledby="why-title">
+        <h2 id="why-title">Why Sensible UI</h2>
+        <div class="landing-points">
+          <article>
+            <h3>Native elements look right</h3>
+            <p>
+              Buttons, inputs, selects, checkboxes, switches, tables, dialogs,
+              and accordions are styled without classes.
+            </p>
+          </article>
+          <article>
+            <h3>A few readable classes</h3>
+            <p>
+              Add <code>card</code>, <code>badge</code>, or <code>item</code>{" "}
+              when HTML has no element for a pattern. Choose a style with{" "}
+              <code>data-variant</code>.
+            </p>
+          </article>
+          <article>
+            <h3>Familiar theme tokens</h3>
+            <p>
+              Change <code>--primary</code>, <code>--radius</code>, and other
+              shadcn/ui-style variables. Light and dark themes are included.
+            </p>
+          </article>
+          <article>
+            <h3>Fits your project</h3>
+            <p>
+              Use a CDN link or a bundler. The scoped stylesheet styles one part
+              of an existing app, and an optional web component adds highlighted
+              code.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <nav class="docs-nav" aria-label="Documentation">
+        <details data-docs-nav>
+          <summary>Browse the docs</summary>
+          <div class="docs-nav-groups">
+            {navGroups.map((group, index) => (
+              <div class="docs-nav-group">
+                <p id={`docs-nav-group-${index}`}>{group.title}</p>
+                <ul aria-labelledby={`docs-nav-group-${index}`}>
+                  {group.links.map(([id, label]) => (
+                    <li>
+                      <a href={`#${id}`}>{label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </details>
+      </nav>
 
       <section class="docs-section stack" id="getting-started">
         <h2>Getting started</h2>
         <p>
-          Add one stylesheet to your HTML page. Buttons, form controls, typography,
-          and tables get shadcn/ui-inspired styles by default. The core is CSS-only:
-          no JavaScript or npm install needed.
+          Pick the setup that matches your project. Every option gives you the
+          same styles.
         </p>
-        <CodeExample
-          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-ui.min.css">`}
-          showPreview={false}
-        />
+        <h3>Add it to an HTML page</h3>
         <p>
-          Write semantic HTML and the stylesheet handles the look. Native elements
-          do not need component classes. Serve your page over HTTP, including when
-          you test locally. Keep the URL pinned to a release and change the version
-          when you want to update.
+          Paste the stylesheet link into your page’s <code>head</code>. You
+          don’t need npm or JavaScript.
+        </p>
+        <CodeExample code={cdnLink} showPreview={false} />
+        <p>
+          Serve your page over HTTP, including when you test locally. The link
+          pins version {version}; change the version when you want to update.
+        </p>
+        <h3>Write HTML</h3>
+        <p>
+          Native elements don’t need classes. Headings, text, forms, and buttons
+          get their styles from the elements themselves.
         </p>
         <CodeExample
           code={`<section>
@@ -716,17 +1032,21 @@ export function Home() {
 </section>`}
         />
         <p>
-          To add a component, copy an example below. Use named classes such as{" "}
-          <code>class="card"</code> for patterns without a native HTML element,
-          and attributes such as <code>data-variant="outline"</code> to choose a
-          style. Override CSS variables such as <code>--primary</code>,{" "}
-          <code>--primary-foreground</code>, and <code>--radius</code> to change
-          colors and rounded corners. Optional JavaScript adds behavior such as
-          syntax highlighting and code copying.
+          To add a component, copy an example below. A few patterns that HTML
+          can’t name use a class, such as <code>class="card"</code>. Choose a
+          style with an attribute, such as <code>data-variant="outline"</code>.
+          To change colors and corners, see <a href="#theming">Theming</a>.
         </p>
+        <h3>Style part of an existing app</h3>
         <p>
-          If you use a bundler, install <code>@faith-tools/sensible-ui</code>{" "}
-          and import the complete stylesheet in your CSS:
+          If your app already has its own styles, use the scoped stylesheet. It
+          styles only the markup inside a <code>.sensible-ui</code> wrapper. See{" "}
+          <a href="#scoped-mode">Scoped adoption</a>.
+        </p>
+        <h3>Use a bundler</h3>
+        <p>
+          Install <code>@faith-tools/sensible-ui</code>, then import the
+          complete stylesheet in your CSS:
         </p>
         <CodeExample
           code="@import '@faith-tools/sensible-ui';"
@@ -846,6 +1166,85 @@ export function Home() {
             </table>
           </div>
         </details>
+      </section>
+
+      <section class="docs-section stack" id="theming">
+        <h2>Theming</h2>
+        <p>
+          Sensible UI uses shadcn/ui-style theme tokens, such as{" "}
+          <code>--background</code>, <code>--primary</code>,{" "}
+          <code>--muted</code>, <code>--border</code>, and{" "}
+          <code>--radius</code>. Colors come in pairs: <code>--primary</code>{" "}
+          colors a surface, and <code>--primary-foreground</code> colors the
+          text on it.
+        </p>
+        <p>
+          Override tokens after the Sensible UI stylesheet. Put dark theme
+          values on <code>.dark</code>.
+        </p>
+        <CodeExample code={themeExample} language="css" showPreview={false} />
+        <p>
+          Find every light and dark token in{" "}
+          <a href="https://github.com/cameronapak/sensible-ui/blob/main/src/css/theme.css">
+            theme.css
+          </a>
+          . To change fonts, override <code>--font-sans</code> and{" "}
+          <code>--font-mono</code>.
+        </p>
+      </section>
+
+      <section class="docs-section stack" id="dark-mode">
+        <h2>Dark mode</h2>
+        <p>
+          Add <code>class="dark"</code> to an ancestor to select the bundled
+          dark theme. Components use the same markup in both themes. System
+          preference behavior is not enabled by the core bundle.
+        </p>
+        <CodeExample code={darkExample} dark />
+      </section>
+
+      <section class="docs-section stack" id="scoped-mode">
+        <h2>Limit styles to part of a page</h2>
+        <p>
+          Use the scoped bundle when adding Sensible UI to an existing
+          application. Semantic defaults apply only inside a neutral{" "}
+          <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
+        </p>
+        <CodeExample
+          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`}
+          showPreview={false}
+        />
+        <CodeExample
+          code={`<section class="sensible-ui">
+  <h2>Account settings</h2>
+  <label for="display-name">Display name</label>
+  <input id="display-name">
+  <button>Save changes</button>
+</section>`}
+          showPreview={false}
+        />
+        <p>
+          If you use a bundler, import the scoped bundle in your CSS instead
+          of using the CDN link:
+        </p>
+        <CodeExample
+          code="@import '@faith-tools/sensible-ui/scoped';"
+          language="css"
+          showPreview={false}
+        />
+        <p>
+          Put the class on a wrapper, not on a card, table, link, or form
+          control. Sensible UI layout and utility classes such as{" "}
+          <code>.stack</code>, <code>.mt-4</code>, and <code>.size-8</code> also
+          belong on descendants, not the scope root. You can combine the scope
+          class with a host-owned wrapper class. Scoped component and utility
+          imports use the same names under <code>/scoped</code>, such as{" "}
+          <code>/scoped/button</code> and <code>/scoped/utilities</code>. Scoped
+          mode requires browser support for <code>@scope</code>.
+        </p>
+        <p>
+          <a href="./scoped/">View the scoped bundle beside host styles</a>.
+        </p>
       </section>
 
       <section class="docs-section stack" id="typography">
@@ -1403,60 +1802,6 @@ export function Home() {
         <CodeExample code={layoutsExample} />
       </section>
 
-      <section class="docs-section stack" id="dark-mode">
-        <h2>Dark mode</h2>
-        <p>
-          Add <code>class="dark"</code> to an ancestor to select the bundled
-          dark theme. Components use the same markup in both themes. System
-          preference behavior is not enabled by the core bundle.
-        </p>
-        <CodeExample code={darkExample} dark />
-      </section>
-
-      <section class="docs-section stack" id="scoped-mode">
-        <h2>Limit styles to part of a page</h2>
-        <p>
-          Use the scoped bundle when adding Sensible UI to an existing
-          application. Semantic defaults apply only inside a neutral{" "}
-          <code>.sensible-ui</code> wrapper, leaving the rest of the page alone.
-        </p>
-        <CodeExample
-          code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/scoped/sensible-ui.min.css">`}
-          showPreview={false}
-        />
-        <CodeExample
-          code={`<section class="sensible-ui">
-  <h2>Account settings</h2>
-  <label for="display-name">Display name</label>
-  <input id="display-name">
-  <button>Save changes</button>
-</section>`}
-          showPreview={false}
-        />
-        <p>
-          If you use a bundler, import the scoped bundle in your CSS instead
-          of using the CDN link:
-        </p>
-        <CodeExample
-          code="@import '@faith-tools/sensible-ui/scoped';"
-          language="css"
-          showPreview={false}
-        />
-        <p>
-          Put the class on a wrapper, not on a card, table, link, or form
-          control. Sensible UI layout and utility classes such as{" "}
-          <code>.stack</code>, <code>.mt-4</code>, and <code>.size-8</code> also
-          belong on descendants, not the scope root. You can combine the scope
-          class with a host-owned wrapper class. Scoped component and utility
-          imports use the same names under <code>/scoped</code>, such as{" "}
-          <code>/scoped/button</code> and <code>/scoped/utilities</code>. Scoped
-          mode requires browser support for <code>@scope</code>.
-        </p>
-        <p>
-          <a href="./scoped/">View the scoped bundle beside host styles</a>.
-        </p>
-      </section>
-
       <section class="docs-section stack" id="utilities">
         <h2>Optional atomic utilities</h2>
         <p class="docs-import">
@@ -1563,7 +1908,14 @@ export function Home() {
         </p>
         <p>
           <a href="https://github.com/cameronapak/sensible-ui">GitHub</a> ·{" "}
-          <a href="https://faith.tools">faith.tools</a>
+          <a href="https://www.npmjs.com/package/@faith-tools/sensible-ui">
+            npm
+          </a>{" "}
+          ·{" "}
+          <a href="https://github.com/cameronapak/sensible-ui/blob/main/LICENSE.md">
+            MIT License
+          </a>{" "}
+          · <a href="https://faith.tools">faith.tools</a>
         </p>
       </footer>
     </main>

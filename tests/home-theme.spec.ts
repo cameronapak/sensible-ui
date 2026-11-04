@@ -10,6 +10,9 @@ test("puts native HTML before class-based components and optional extras", async
 
   const order = [
     "getting-started",
+    "theming",
+    "dark-mode",
+    "scoped-mode",
     "typography",
     "buttons",
     "forms",
@@ -29,8 +32,6 @@ test("puts native HTML before class-based components and optional extras", async
     "navigation",
     "container",
     "layouts",
-    "dark-mode",
-    "scoped-mode",
     "utilities",
     "code",
   ];
@@ -49,6 +50,64 @@ test("puts native HTML before class-based components and optional extras", async
   await expect(page.locator("#container > h2")).toBeInViewport();
   await page.getByRole("link", { name: "Code web component" }).click();
   await expect(page.locator("#code > h2")).toBeInViewport();
+});
+
+test("collapses the docs navigation on narrow screens and closes it after a jump", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  const nav = page.locator("[data-docs-nav]");
+  await expect(nav).not.toHaveAttribute("open");
+  await nav.locator("summary").click();
+  await nav.getByRole("link", { name: "Table", exact: true }).click();
+  await expect(page.locator("#table > h2")).toBeInViewport();
+  await expect(nav).not.toHaveAttribute("open");
+  await expect(nav.locator("summary")).toBeInViewport();
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect(nav).toHaveAttribute("open");
+});
+
+test("names every class used in the landing showcase", async ({ page }) => {
+  await page.goto("/");
+
+  const used = await page
+    .locator(".landing-showcase")
+    .evaluate((showcase) => [
+      ...new Set(
+        Array.from(showcase.querySelectorAll("[class]")).flatMap((element) =>
+          Array.from(element.classList),
+        ),
+      ),
+    ]);
+  const named = await page
+    .locator(".landing-note code")
+    .evaluateAll((codes) => codes.map((code) => code.textContent));
+  expect(used.sort()).toEqual(named.sort());
+});
+
+test("serves the favicon and social image linked from the page head", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+
+  const urls = await page
+    .locator('link[rel="icon"], meta[property="og:image"]')
+    .evaluateAll((elements) =>
+      elements.map((element) =>
+        element instanceof HTMLLinkElement
+          ? element.getAttribute("href")!
+          : new URL(element.getAttribute("content")!).pathname,
+      ),
+    );
+  expect(urls).toHaveLength(3);
+  for (const url of urls) {
+    const response = await request.get(new URL(url, page.url()).href);
+    expect(response.ok(), url).toBe(true);
+  }
 });
 
 test("shows a centered container with a width override and responsive padding", async ({

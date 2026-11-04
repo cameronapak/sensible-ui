@@ -1,7 +1,7 @@
 {
   "name": "@faith-tools/sensible-ui",
   "version": "1.7.0",
-  "description": "Imagining Shadcn UI styles by default via a semantic CSS UI library",
+  "description": "The shadcn/ui look for plain HTML. One stylesheet, no React, Tailwind, or build step.",
   "author": "cameronapak",
   "type": "module",
   "packageManager": "bun@1.4.4",

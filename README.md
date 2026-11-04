@@ -1,6 +1,8 @@
 # Sensible UI CSS
 
-A semantic CSS component library with useful visual defaults for native HTML. Use it without a front-end framework or a build step. Optional web components add behavior where HTML and CSS are not enough.
+The shadcn/ui look for plain HTML. One stylesheet gives native buttons, forms, tables, and dialogs polished defaults, with no React, Tailwind, or build step. Optional web components add behavior where HTML and CSS are not enough.
+
+Inspired by [shadcn/ui](https://ui.shadcn.com). Sensible UI is an independent project and is not affiliated with or endorsed by shadcn/ui.
 
 - Styles native HTML elements by default, like typography elements, buttons, inputs, anchor tags, etc.
 - Want components like cards, items, loading-spinners, etc.? Then we use data attributes, classes, and aria attributes.
