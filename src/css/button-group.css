@@ -116,6 +116,20 @@
     block-size: 1px;
   }
 
+  /* Icon buttons keep their square in a column of icons. */
+  :where(
+    sensible-button-group[orientation="vertical"] > [data-size="icon"],
+    sensible-button-group[orientation="vertical"] > sensible-tooltip > [data-size="icon"]
+  ) {
+    min-inline-size: 2.25rem;
+  }
+
+  /* A tooltip wrapper passes its corners to its control, so in a column it
+     starts round like the other children. */
+  :where(sensible-button-group[orientation="vertical"] > sensible-tooltip) {
+    border-radius: calc(var(--radius) - 2px);
+  }
+
   /* Adjacent children share one border and square their inner corners.
      Hidden children do not count, and a group of nested groups keeps every
      child separate. Children set which corners stay round, and the rules

@@ -135,6 +135,10 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
       <sensible-button-group id="invalid">
         <button data-variant="outline">To</button><input aria-label="Email" aria-invalid="true">
       </sensible-button-group>
+      <sensible-button-group id="icons" orientation="vertical">
+        <sensible-tooltip><button data-variant="outline" data-size="icon" aria-label="Zoom in">+</button><span role="tooltip">Zoom in</span></sensible-tooltip>
+        <button data-variant="outline" data-size="icon" aria-label="Zoom out">-</button>
+      </sensible-button-group>
       <sensible-button-group id="vertical" orientation="vertical">
         <button data-variant="outline" data-size="icon" aria-label="Up">^</button>
         <button data-variant="outline">Longer text</button>
@@ -202,6 +206,13 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     const up = (await page.locator("#vertical > :first-child").boundingBox())!;
     const text = (await page.locator("#vertical > button:last-of-type").boundingBox())!;
     expect(up.width).toBe(text.width);
+    // A column of icons keeps their square, and a wrapped first child keeps
+    // its outer corners.
+    for (const icon of ["Zoom in", "Zoom out"]) {
+      expect((await page.getByRole("button", { name: icon }).boundingBox())!.width).toBe(36);
+    }
+    await expect(page.getByRole("button", { name: "Zoom in" })).toHaveCSS("border-top-left-radius", "8px");
+    await expect(page.getByRole("button", { name: "Zoom in" })).toHaveCSS("border-bottom-left-radius", "0px");
     // A field in a column keeps its own height.
     expect((await page.locator("#vertical > input").boundingBox())!.height).toBe(36);
     expect((await page.locator("#vertical button[aria-label=Add]").boundingBox())!.width).toBe(up.width);

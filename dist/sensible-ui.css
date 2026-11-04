@@ -5618,6 +5618,19 @@
     block-size: 1px;
   }
 
+  :where(
+    sensible-button-group[orientation="vertical"] > [data-size="icon"],
+    sensible-button-group[orientation="vertical"]
+      > sensible-tooltip
+      > [data-size="icon"]
+  ) {
+    min-inline-size: 2.25rem;
+  }
+
+  :where(sensible-button-group[orientation="vertical"] > sensible-tooltip) {
+    border-radius: calc(var(--radius) - 2px);
+  }
+
   :where(sensible-button-group > *) {
     --sensible-button-group-start-radius: calc(var(--radius) - 2px);
     --sensible-button-group-end-radius: calc(var(--radius) - 2px);
