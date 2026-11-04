@@ -1,7 +1,8 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
-    @layer base, typography, components, button, utilities;
     /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
     :root {
       --radius: 0.625rem;
       --font-sans:
@@ -488,8 +489,8 @@
 
       progress:indeterminate {
         background-image: linear-gradient(var(--primary), var(--primary));
-        animation: sensible-progress-indeterminate 1s ease-in-out infinite
-          alternate;
+        animation: 1s ease-in-out infinite alternate
+          sensible-progress-indeterminate;
         background-repeat: no-repeat;
         background-size: 40% 100%;
       }

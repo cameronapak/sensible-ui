@@ -1,7 +1,8 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
-    @layer base, typography, components, button, utilities;
     /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
     :root {
       --radius: 0.625rem;
       --font-sans:
@@ -491,26 +492,7 @@
 
       :is(
         input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"],
-        textarea,
-        select
-      )::placeholder {
-        color: var(--muted-foreground);
-      }
-
-      :is(
-        input:not(
-          :is(
+          :-webkit-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -530,7 +512,7 @@
 
       :is(
         input:not(
-          :is(
+          :-webkit-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -550,7 +532,7 @@
 
       :is(
         input:not(
-          :is(
+          :-webkit-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -567,45 +549,6 @@
         border-color: var(--destructive);
         box-shadow: 0 0 0 3px
           color-mix(in oklab, var(--destructive) 20%, transparent);
-      }
-
-      :is(
-        input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"],
-        textarea,
-        select
-      ):is(.dark *) {
-        background: color-mix(in oklab, var(--input) 30%, transparent);
-      }
-
-      :is(
-          input:not(
-            :is(
-              [type="checkbox"],
-              [type="radio"],
-              [type="range"],
-              [type="hidden"],
-              [type="file"],
-              [type="color"],
-              [role]
-            )
-          ),
-          input[type="file"],
-          textarea,
-          select
-        ):is(.dark *)[aria-invalid="true"] {
-        box-shadow: 0 0 0 3px
-          color-mix(in oklab, var(--destructive) 40%, transparent);
       }
 
       input:not(
@@ -635,26 +578,7 @@
 
       :is(
         input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"],
-        textarea,
-        select
-      )::placeholder {
-        color: var(--muted-foreground);
-      }
-
-      :is(
-        input:not(
-          :is(
+          :-moz-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -674,7 +598,7 @@
 
       :is(
         input:not(
-          :is(
+          :-moz-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -694,7 +618,7 @@
 
       :is(
         input:not(
-          :is(
+          :-moz-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -711,45 +635,6 @@
         border-color: var(--destructive);
         box-shadow: 0 0 0 3px
           color-mix(in oklab, var(--destructive) 20%, transparent);
-      }
-
-      :is(
-        input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"],
-        textarea,
-        select
-      ):is(.dark *) {
-        background: color-mix(in oklab, var(--input) 30%, transparent);
-      }
-
-      :is(
-          input:not(
-            :is(
-              [type="checkbox"],
-              [type="radio"],
-              [type="range"],
-              [type="hidden"],
-              [type="file"],
-              [type="color"],
-              [role]
-            )
-          ),
-          input[type="file"],
-          textarea,
-          select
-        ):is(.dark *)[aria-invalid="true"] {
-        box-shadow: 0 0 0 3px
-          color-mix(in oklab, var(--destructive) 40%, transparent);
       }
 
       input:not(
@@ -918,71 +803,7 @@
 
       :is(
         input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::selection {
-        background: var(--primary);
-        color: var(--primary-foreground);
-      }
-
-      :is(
-        input:not(
           :-webkit-any(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::-webkit-file-upload-button {
-        display: inline-flex;
-        color: var(--foreground);
-        background: none;
-        border: 0;
-        height: 1.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      :is(
-        input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::file-selector-button {
-        display: inline-flex;
-        color: var(--foreground);
-        background: none;
-        border: 0;
-        height: 1.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      :is(
-        input:not(
-          :is(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -1000,7 +821,7 @@
       @media (min-width: 48rem) {
         :is(
           input:not(
-            :is(
+            :-webkit-any(
               [type="checkbox"],
               [type="radio"],
               [type="range"],
@@ -1039,71 +860,7 @@
 
       :is(
         input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::selection {
-        background: var(--primary);
-        color: var(--primary-foreground);
-      }
-
-      :is(
-        input:not(
-          :-webkit-any(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::-webkit-file-upload-button {
-        display: inline-flex;
-        color: var(--foreground);
-        background: none;
-        border: 0;
-        height: 1.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      :is(
-        input:not(
-          :is(
-            [type="checkbox"],
-            [type="radio"],
-            [type="range"],
-            [type="hidden"],
-            [type="file"],
-            [type="color"],
-            [role]
-          )
-        ),
-        input[type="file"]
-      )::file-selector-button {
-        display: inline-flex;
-        color: var(--foreground);
-        background: none;
-        border: 0;
-        height: 1.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      :is(
-        input:not(
-          :is(
+          :-moz-any(
             [type="checkbox"],
             [type="radio"],
             [type="range"],
@@ -1121,7 +878,7 @@
       @media (min-width: 48rem) {
         :is(
           input:not(
-            :is(
+            :-moz-any(
               [type="checkbox"],
               [type="radio"],
               [type="range"],
