@@ -104,7 +104,10 @@
   }
 
   /* A column keeps each field's own height. */
-  :where(sensible-button-group[orientation="vertical"] > *) {
+  :where(
+    sensible-button-group[orientation="vertical"] > *,
+    sensible-button-group[orientation="vertical"] > sensible-tooltip > :first-child
+  ) {
     flex: none;
     inline-size: auto;
   }

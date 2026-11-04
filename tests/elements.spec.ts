@@ -139,6 +139,7 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
         <button data-variant="outline" data-size="icon" aria-label="Up">^</button>
         <button data-variant="outline">Longer text</button>
         <input aria-label="Name">
+        <sensible-tooltip><button data-variant="outline" data-size="icon" aria-label="Add">+</button><span role="tooltip">Add</span></sensible-tooltip>
       </sensible-button-group>
       <div dir="rtl"><div dir="ltr"><div dir="rtl">
         <sensible-button-group id="rtl">
@@ -191,7 +192,8 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     });
     await expect(page.locator("#invalid > input")).toHaveCSS(
       "border-inline-start-color",
-      "oklch(0.577 0.245 27.325)",
+      // WebKit serializes the hue as 27.325001.
+      /oklch\(0\.577 0\.245 27\.325/,
     );
     expect(await radii(page, "#invalid > input")).toMatchObject({
       inlineStart: "1px",
@@ -202,6 +204,7 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     expect(up.width).toBe(text.width);
     // A field in a column keeps its own height.
     expect((await page.locator("#vertical > input").boundingBox())!.height).toBe(36);
+    expect((await page.locator("#vertical button[aria-label=Add]").boundingBox())!.width).toBe(up.width);
 
     // In a right-to-left part of a left-to-right part of a right-to-left page,
     // with no lang, the first child rounds its right corners.
@@ -249,7 +252,8 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
 
     await expect(page.locator("#invalid")).toHaveCSS(
       "border-top-color",
-      "oklch(0.577 0.245 27.325)",
+      // WebKit serializes the hue as 27.325001.
+      /oklch\(0\.577 0\.245 27\.325/,
     );
     await expect(page.locator("#disabled")).toHaveCSS("opacity", "0.5");
     await expect(group).toHaveCSS("cursor", "auto");
@@ -345,7 +349,8 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     await page.getByRole("textbox", { name: "User" }).focus();
     await expect(page.locator("#invalid")).toHaveCSS(
       "border-top-color",
-      "oklch(0.577 0.245 27.325)",
+      // WebKit serializes the hue as 27.325001.
+      /oklch\(0\.577 0\.245 27\.325/,
     );
     await expect(page.getByRole("textbox", { name: "Off" })).toHaveCSS("opacity", "1");
     expect((await page.getByRole("button", { name: "Search all" }).boundingBox())!.height).toBe(24);

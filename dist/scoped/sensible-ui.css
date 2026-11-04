@@ -5714,7 +5714,12 @@
         margin: 0;
       }
 
-      :where(sensible-button-group[orientation="vertical"] > *) {
+      :where(
+        sensible-button-group[orientation="vertical"] > *,
+        sensible-button-group[orientation="vertical"]
+          > sensible-tooltip
+          > :first-child
+      ) {
         flex: none;
         inline-size: auto;
       }
