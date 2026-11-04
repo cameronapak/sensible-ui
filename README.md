@@ -250,6 +250,7 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Accordion        | `@faith-tools/sensible-ui/accordion`        |
 | Badge            | `@faith-tools/sensible-ui/badge`            |
 | Button           | `@faith-tools/sensible-ui/button`           |
+| Button group     | `@faith-tools/sensible-ui/button-group`     |
 | Card             | `@faith-tools/sensible-ui/card`             |
 | Description list | `@faith-tools/sensible-ui/description-list` |
 | Dialog           | `@faith-tools/sensible-ui/dialog`           |

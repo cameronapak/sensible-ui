@@ -47,6 +47,88 @@ const typographyExample = `
   <pre><code>const greeting = "Hello";</code></pre>
 </article>`;
 
+// Lucide icon paths (https://lucide.dev) for copyable examples.
+const lucidePaths = {
+  arrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  arrowUp: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+  bold: '<path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/>',
+  copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  italic: '<line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/>',
+  mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>',
+  minus: '<path d="M5 12h14"/>',
+  plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+  save: '<path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  underline: '<path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+} as const;
+
+function lucide(name: keyof typeof lucidePaths) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${lucidePaths[name]}</svg>`;
+}
+
+const buttonGroupExample = `
+<div class="stack">
+  <sensible-button-group role="group" aria-label="Message actions">
+    <button type="button" data-variant="outline">Archive</button>
+    <button type="button" data-variant="outline">Report</button>
+    <button type="button" data-variant="outline">Snooze</button>
+  </sensible-button-group>
+
+  <sensible-button-group>
+    <sensible-button-group role="group" aria-label="Text style">
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Bold" aria-pressed="true">
+        ${lucide("bold")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Italic" aria-pressed="false">
+        ${lucide("italic")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Underline" aria-pressed="false">
+        ${lucide("underline")}
+      </button>
+    </sensible-button-group>
+    <sensible-button-group role="group" aria-label="Pages">
+      <button type="button" data-variant="outline">${lucide("arrowLeft")} Previous</button>
+      <button type="button" data-variant="outline">Next ${lucide("arrowRight")}</button>
+    </sensible-button-group>
+  </sensible-button-group>
+
+  <div class="cluster">
+    <sensible-button-group orientation="vertical" role="group" aria-label="Zoom">
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Zoom in">
+        ${lucide("plus")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Zoom out">
+        ${lucide("minus")}
+      </button>
+    </sensible-button-group>
+    <sensible-button-group role="group" aria-label="Clipboard">
+      <button type="button" data-variant="secondary">Copy</button>
+      <hr>
+      <button type="button" data-variant="secondary">Paste</button>
+    </sensible-button-group>
+    <sensible-button-group>
+      <button type="button" disabled>Merge</button>
+      <hr>
+      <button type="button" data-size="icon" aria-label="More merge options" disabled>
+        ${lucide("plus")}
+      </button>
+    </sensible-button-group>
+  </div>
+
+  <sensible-button-group>
+    <input type="search" aria-label="Search the docs" placeholder="Search the docs">
+    <button type="button" data-variant="outline">Search</button>
+  </sensible-button-group>
+
+  <sensible-button-group>
+    <span>https://</span>
+    <input aria-label="Website address" placeholder="example.com">
+  </sensible-button-group>
+</div>`;
+
 const buttonExample = `
 <div class="cluster">
   <button type="button">Primary</button>
@@ -444,6 +526,7 @@ export function Home() {
           <a href="#item">Item</a>
           <a href="#spinner">Spinner</a>
           <a href="#progress">Progress</a>
+          <a href="#button-group">Button group</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
           <a href="#dark-mode">Dark mode</a>
@@ -912,6 +995,32 @@ export function Home() {
           the progress bar.
         </p>
         <CodeExample code={progressExample} />
+      </section>
+
+      <section class="docs-section stack" id="button-group">
+        <h2>Button group</h2>
+        <StandaloneImport path="button-group" />
+        <p>
+          Wrap related controls in <code>&lt;sensible-button-group&gt;</code>{" "}
+          to join their borders and corners. It works without JavaScript. Put
+          native buttons, <code>a.button</code> links, inputs, selects, or text
+          in a <code>span</code> directly inside it. Add{" "}
+          <code>orientation="vertical"</code> to stack the controls. Use an{" "}
+          <code>hr</code> to separate buttons that have no border, and nest
+          groups to put space between them.
+        </p>
+        <p>
+          The element only changes how controls look. When the controls act on
+          the same thing, add <code>role="group"</code> and an{" "}
+          <code>aria-label</code> so screen readers announce the group. Every
+          control stays in the tab order. Mark toggles with{" "}
+          <code>aria-pressed</code>, and give icon-only buttons an{" "}
+          <code>aria-label</code>. Do not use <code>role="toolbar"</code>{" "}
+          unless you also add arrow-key navigation; this element does not.
+          Inputs still need an accessible name, because text such as{" "}
+          <code>https://</code> beside an input is not its label.
+        </p>
+        <CodeExample code={buttonGroupExample} />
       </section>
 
       <section class="docs-section stack" id="container">

@@ -5,6 +5,7 @@ const modules = {
   badge: ".badge {",
   base: "scroll-behavior: smooth",
   button: '[data-size="icon"]',
+  "button-group": "sensible-button-group",
   card: ".card {",
   dialog: "dialog {",
   "description-list": "dl > dt:has( + dd)",

@@ -1,0 +1,109 @@
+/* Joining children must override button and input geometry, so the group lives
+   in the utilities layer like the named layouts. :where() keeps consumer
+   utilities able to override it. */
+@layer utilities {
+  sensible-button-group {
+    display: flex;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    align-items: stretch;
+
+    &[orientation="vertical"] {
+      flex-direction: column;
+    }
+
+    &:has(> sensible-button-group) {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    &:has(> :is(input, select, sensible-input-group)) {
+      inline-size: 100%;
+    }
+  }
+
+  :where(sensible-button-group > *) {
+    position: relative;
+  }
+
+  :where(
+    sensible-button-group > :focus-visible,
+    sensible-button-group > :focus-within
+  ) {
+    z-index: 1;
+  }
+
+  :where(sensible-button-group > :is(input, select, sensible-input-group)) {
+    flex: 1 1 auto;
+    inline-size: auto;
+    min-inline-size: 0;
+  }
+
+  :where(sensible-button-group > :is(span, label, output)) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 2px);
+    background: var(--muted);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    white-space: nowrap;
+
+    &:is(.dark *) {
+      border-color: var(--input);
+    }
+  }
+
+  :where(sensible-button-group > hr) {
+    align-self: stretch;
+    inline-size: 1px;
+    block-size: auto;
+    margin: 0;
+    border: 0;
+    background: var(--input);
+  }
+
+  :where(sensible-button-group[orientation="vertical"] > hr) {
+    inline-size: auto;
+    block-size: 1px;
+  }
+
+  /* Adjacent children share one border and square their inner corners. */
+  :where(
+    sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group, hr):not(:first-child)
+  ) {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-inline-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group, hr):not(:last-child)
+  ) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]
+      > :not(sensible-button-group, hr):not(:first-child)
+  ) {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-block-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]
+      > :not(sensible-button-group, hr):not(:last-child)
+  ) {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+}

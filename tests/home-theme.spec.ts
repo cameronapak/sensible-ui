@@ -23,6 +23,7 @@ test("puts native HTML before class-based components and optional extras", async
     "item",
     "spinner",
     "progress",
+    "button-group",
     "container",
     "layouts",
     "dark-mode",
