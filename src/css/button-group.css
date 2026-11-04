@@ -17,7 +17,7 @@
       gap: 0.5rem;
     }
 
-    &:has(> :is(input, select, sensible-input-group)) {
+    &:has(> input, > select, > sensible-input-group) {
       inline-size: 100%;
     }
   }
@@ -33,13 +33,21 @@
     z-index: 1;
   }
 
-  :where(sensible-button-group > :is(input, select, sensible-input-group)) {
+  :where(
+    sensible-button-group > input,
+    sensible-button-group > select,
+    sensible-button-group > sensible-input-group
+  ) {
     flex: 1 1 auto;
     inline-size: auto;
     min-inline-size: 0;
   }
 
-  :where(sensible-button-group > :is(span, label, output)) {
+  :where(
+    sensible-button-group > span,
+    sensible-button-group > label,
+    sensible-button-group > output
+  ) {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -75,7 +83,7 @@
   /* Adjacent children share one border and square their inner corners. */
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group, hr):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ) {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
@@ -84,7 +92,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group, hr):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ) {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
@@ -92,7 +100,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group, hr):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ) {
     border-start-start-radius: 0;
     border-start-end-radius: 0;
@@ -101,7 +109,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group, hr):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ) {
     border-end-start-radius: 0;
     border-end-end-radius: 0;

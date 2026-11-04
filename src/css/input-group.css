@@ -87,7 +87,7 @@
    must override input and button geometry, so they use the utilities layer
    with zero specificity, like the named layouts. */
 @layer utilities {
-  :where(sensible-input-group > :is(input, textarea)) {
+  :where(sensible-input-group > input, sensible-input-group > textarea) {
     flex: 1 1 auto;
     inline-size: auto;
     min-inline-size: 0;
@@ -105,7 +105,7 @@
     padding: 0.5rem 0.75rem;
   }
 
-  :where(sensible-input-group > :is(button, a.button)) {
+  :where(sensible-input-group > button, sensible-input-group > a.button) {
     min-block-size: 1.5rem;
     min-inline-size: 0;
     padding-inline: 0.5rem;
@@ -114,17 +114,26 @@
     font-size: 0.8125rem;
   }
 
-  :where(sensible-input-group > :is(button, a.button)[data-size="icon"]) {
+  :where(
+    sensible-input-group > button[data-size="icon"],
+    sensible-input-group > a.button[data-size="icon"]
+  ) {
     inline-size: 1.5rem;
     padding: 0;
   }
 
   /* Edge actions sit closer to the border than icons and text. */
-  :where(sensible-input-group > :is(button, a.button):first-child) {
+  :where(
+    sensible-input-group > button:first-child,
+    sensible-input-group > a.button:first-child
+  ) {
     margin-inline-start: -0.375rem;
   }
 
-  :where(sensible-input-group > :is(button, a.button):last-child) {
+  :where(
+    sensible-input-group > button:last-child,
+    sensible-input-group > a.button:last-child
+  ) {
     margin-inline-end: -0.375rem;
   }
 }

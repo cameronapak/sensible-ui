@@ -5368,17 +5368,7 @@
     gap: 0.5rem;
   }
 
-  sensible-button-group:has(
-    > :-webkit-any(input, select, sensible-input-group)
-  ) {
-    inline-size: 100%;
-  }
-
-  sensible-button-group:has(> :-moz-any(input, select, sensible-input-group)) {
-    inline-size: 100%;
-  }
-
-  sensible-button-group:has(> :is(input, select, sensible-input-group)) {
+  sensible-button-group:has(> input, > select, > sensible-input-group) {
     inline-size: 100%;
   }
 
@@ -5394,7 +5384,9 @@
   }
 
   :where(
-    sensible-button-group > :-webkit-any(input, select, sensible-input-group)
+    sensible-button-group > input,
+    sensible-button-group > select,
+    sensible-button-group > sensible-input-group
   ) {
     flex: auto;
     inline-size: auto;
@@ -5402,20 +5394,10 @@
   }
 
   :where(
-    sensible-button-group > :-moz-any(input, select, sensible-input-group)
+    sensible-button-group > span,
+    sensible-button-group > label,
+    sensible-button-group > output
   ) {
-    flex: auto;
-    inline-size: auto;
-    min-inline-size: 0;
-  }
-
-  :where(sensible-button-group > :is(input, select, sensible-input-group)) {
-    flex: auto;
-    inline-size: auto;
-    min-inline-size: 0;
-  }
-
-  :where(sensible-button-group > :-webkit-any(span, label, output)) {
     display: flex;
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) - 2px);
@@ -5430,37 +5412,11 @@
     box-shadow: 0 1px 2px #0000000d;
   }
 
-  :where(sensible-button-group > :-moz-any(span, label, output)) {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) - 2px);
-    background: var(--muted);
-    white-space: nowrap;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    box-shadow: 0 1px 2px #0000000d;
-  }
-
-  :where(sensible-button-group > :is(span, label, output)) {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) - 2px);
-    background: var(--muted);
-    white-space: nowrap;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    box-shadow: 0 1px 2px #0000000d;
-  }
-
-  :where(sensible-button-group > :is(span, label, output)):is(.dark *) {
+  :where(
+    sensible-button-group > span,
+    sensible-button-group > label,
+    sensible-button-group > output
+  ):is(.dark *) {
     border-color: var(--input);
   }
 
@@ -5480,28 +5436,14 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ) {
     border-inline-start-width: 0;
   }
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
-  ) {
-    border-inline-start-width: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
-  ) {
-    border-inline-start-width: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :-webkit-any(
       :lang(ae),
@@ -5531,7 +5473,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :-moz-any(
       :lang(ae),
@@ -5561,7 +5503,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :is(
       :lang(ae),
@@ -5591,7 +5533,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):-webkit-any(
     :lang(ae),
     :lang(ar),
@@ -5619,7 +5561,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):-moz-any(
     :lang(ae),
     :lang(ar),
@@ -5647,7 +5589,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):is(
     :lang(ae),
     :lang(ar),
@@ -5675,7 +5617,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :-webkit-any(
       :lang(ae),
@@ -5705,7 +5647,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-moz-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :-moz-any(
       :lang(ae),
@@ -5735,7 +5677,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:is(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :is(
       :lang(ae),
@@ -5765,7 +5707,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):-webkit-any(
     :lang(ae),
     :lang(ar),
@@ -5793,7 +5735,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:-moz-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):-moz-any(
     :lang(ae),
     :lang(ar),
@@ -5821,7 +5763,7 @@
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(:is(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):is(
     :lang(ae),
     :lang(ar),
@@ -5849,28 +5791,14 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ) {
     border-block-start-width: 0;
   }
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
-  ) {
-    border-block-start-width: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
-  ) {
-    border-block-start-width: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :-webkit-any(
       :lang(ae),
@@ -5900,7 +5828,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :-moz-any(
       :lang(ae),
@@ -5930,7 +5858,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):not(
     :is(
       :lang(ae),
@@ -5960,7 +5888,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):-webkit-any(
     :lang(ae),
     :lang(ar),
@@ -5988,7 +5916,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-moz-any(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):-moz-any(
     :lang(ae),
     :lang(ar),
@@ -6016,7 +5944,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:is(sensible-button-group, hr)):not(:first-child)
+      > :not(sensible-button-group):not(hr):not(:first-child)
   ):is(
     :lang(ae),
     :lang(ar),
@@ -6044,7 +5972,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :-webkit-any(
       :lang(ae),
@@ -6074,7 +6002,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-moz-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :-moz-any(
       :lang(ae),
@@ -6104,7 +6032,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:is(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):not(
     :is(
       :lang(ae),
@@ -6134,7 +6062,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-webkit-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):-webkit-any(
     :lang(ae),
     :lang(ar),
@@ -6162,7 +6090,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:-moz-any(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):-moz-any(
     :lang(ae),
     :lang(ar),
@@ -6190,7 +6118,7 @@
 
   :where(
     sensible-button-group[orientation="vertical"]
-      > :not(:is(sensible-button-group, hr)):not(:last-child)
+      > :not(sensible-button-group):not(hr):not(:last-child)
   ):is(
     :lang(ae),
     :lang(ar),
@@ -6332,35 +6260,7 @@
 }
 
 @layer utilities {
-  :where(sensible-input-group > :-webkit-any(input, textarea)) {
-    box-shadow: none;
-    color: var(--foreground);
-    background-color: #0000;
-    border: 0;
-    border-radius: 0;
-    flex: auto;
-    block-size: calc(2.25rem - 2px);
-    inline-size: auto;
-    min-inline-size: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
-  }
-
-  :where(sensible-input-group > :-moz-any(input, textarea)) {
-    box-shadow: none;
-    color: var(--foreground);
-    background-color: #0000;
-    border: 0;
-    border-radius: 0;
-    flex: auto;
-    block-size: calc(2.25rem - 2px);
-    inline-size: auto;
-    min-inline-size: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
-  }
-
-  :where(sensible-input-group > :is(input, textarea)) {
+  :where(sensible-input-group > input, sensible-input-group > textarea) {
     box-shadow: none;
     color: var(--foreground);
     background-color: #0000;
@@ -6379,27 +6279,7 @@
     padding: 0.5rem 0.75rem;
   }
 
-  :where(sensible-input-group > :-webkit-any(button, a.button)) {
-    border-radius: calc(var(--radius) - 4px);
-    box-shadow: none;
-    min-block-size: 1.5rem;
-    min-inline-size: 0;
-    padding-inline-start: 0.5rem;
-    padding-inline-end: 0.5rem;
-    font-size: 0.8125rem;
-  }
-
-  :where(sensible-input-group > :-moz-any(button, a.button)) {
-    border-radius: calc(var(--radius) - 4px);
-    box-shadow: none;
-    min-block-size: 1.5rem;
-    min-inline-size: 0;
-    padding-inline-start: 0.5rem;
-    padding-inline-end: 0.5rem;
-    font-size: 0.8125rem;
-  }
-
-  :where(sensible-input-group > :is(button, a.button)) {
+  :where(sensible-input-group > button, sensible-input-group > a.button) {
     border-radius: calc(var(--radius) - 4px);
     box-shadow: none;
     min-block-size: 1.5rem;
@@ -6410,43 +6290,24 @@
   }
 
   :where(
-    sensible-input-group > :-webkit-any(button, a.button)[data-size="icon"]
+    sensible-input-group > button[data-size="icon"],
+    sensible-input-group > a.button[data-size="icon"]
   ) {
     inline-size: 1.5rem;
     padding: 0;
   }
 
-  :where(sensible-input-group > :-moz-any(button, a.button)[data-size="icon"]) {
-    inline-size: 1.5rem;
-    padding: 0;
-  }
-
-  :where(sensible-input-group > :is(button, a.button)[data-size="icon"]) {
-    inline-size: 1.5rem;
-    padding: 0;
-  }
-
-  :where(sensible-input-group > :-webkit-any(button, a.button):first-child) {
+  :where(
+    sensible-input-group > button:first-child,
+    sensible-input-group > a.button:first-child
+  ) {
     margin-inline-start: -0.375rem;
   }
 
-  :where(sensible-input-group > :-moz-any(button, a.button):first-child) {
-    margin-inline-start: -0.375rem;
-  }
-
-  :where(sensible-input-group > :is(button, a.button):first-child) {
-    margin-inline-start: -0.375rem;
-  }
-
-  :where(sensible-input-group > :-webkit-any(button, a.button):last-child) {
-    margin-inline-end: -0.375rem;
-  }
-
-  :where(sensible-input-group > :-moz-any(button, a.button):last-child) {
-    margin-inline-end: -0.375rem;
-  }
-
-  :where(sensible-input-group > :is(button, a.button):last-child) {
+  :where(
+    sensible-input-group > button:last-child,
+    sensible-input-group > a.button:last-child
+  ) {
     margin-inline-end: -0.375rem;
   }
 }
