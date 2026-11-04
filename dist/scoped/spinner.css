@@ -1,7 +1,8 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
-    @layer base, typography, components, button, utilities;
     /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
     :root {
       --radius: 0.625rem;
       --font-sans:
@@ -481,7 +482,7 @@
         mask-position: center;
         mask-repeat: no-repeat;
         mask-size: contain;
-        animation: sensible-spinner-spin 0.75s linear infinite;
+        animation: 0.75s linear infinite sensible-spinner-spin;
         background-color: currentColor;
         flex-shrink: 0;
         width: 1.5rem;

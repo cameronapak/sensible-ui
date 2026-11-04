@@ -1,0 +1,300 @@
+/* Joining children must override button and input geometry, so the group lives
+   in the utilities layer like the named layouts. :where() keeps consumer
+   utilities able to override it.
+
+   Bun copies :is() into vendor fallbacks that WebKit misreads inside :where(),
+   so these selectors use plain lists and chained :not() instead. */
+@layer utilities {
+  sensible-button-group {
+    display: flex;
+    /* A row too long for its container wraps instead of overflowing. It does
+       not scroll, because a scroll container would clip badges and menus
+       positioned outside it. */
+    flex-wrap: wrap;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    align-items: stretch;
+
+    &[orientation="vertical"] {
+      flex-direction: column;
+    }
+
+    &:has(> sensible-button-group) {
+      gap: 0.5rem;
+    }
+
+    &:has(
+      > input:not([type="checkbox"]):not([type="radio"]):not(
+          [type="range"]
+        ):not([type="hidden"]):not([type="color"]),
+      > select,
+      > sensible-input-group
+    ) {
+      inline-size: 100%;
+    }
+  }
+
+  /* A label longer than the whole row wraps inside its control. */
+  :where(sensible-button-group > *, sensible-button-group > sensible-tooltip > :first-child) {
+    position: relative;
+    max-inline-size: 100%;
+    white-space: normal;
+  }
+
+  /* Scaling a pressed child would open a gap beside its neighbors. */
+  :where(sensible-button-group > *, sensible-button-group > sensible-tooltip > *) {
+    scale: none;
+  }
+
+  :where(
+    sensible-button-group > :focus-visible,
+    sensible-button-group > :focus-within,
+    sensible-button-group > [aria-invalid="true"]
+  ) {
+    z-index: 1;
+  }
+
+  /* Text fields fill the free space but keep enough width to type in. They
+     start from no width, so a row wraps only when the field cannot keep 8rem
+     beside its addons, not because of the field's default width. */
+  :where(
+    sensible-button-group
+      > input:not([type="checkbox"]):not([type="radio"]):not(
+          [type="range"]
+        ):not([type="hidden"]):not([type="color"]),
+    sensible-button-group > select,
+    sensible-button-group > sensible-input-group
+  ) {
+    flex: 1 1 0;
+    inline-size: auto;
+    min-inline-size: min(8rem, 100%);
+  }
+
+  :where(
+    sensible-button-group > span,
+    sensible-button-group > label,
+    sensible-button-group > output
+  ) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 2.25rem;
+    padding: 0 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 2px);
+    background: var(--muted);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+
+    &:is(.dark *) {
+      border-color: var(--input);
+    }
+  }
+
+  :where(sensible-button-group > hr) {
+    align-self: stretch;
+    inline-size: 1px;
+    block-size: auto;
+    margin: 0;
+    border: 0;
+    background: var(--input);
+  }
+
+  /* A column keeps each field's own height. */
+  :where(
+    sensible-button-group[orientation="vertical"] > *,
+    sensible-button-group[orientation="vertical"] > sensible-tooltip > :first-child
+  ) {
+    flex: none;
+    inline-size: auto;
+  }
+
+  :where(sensible-button-group[orientation="vertical"] > hr) {
+    block-size: 1px;
+  }
+
+  /* Icon buttons keep their square in a column of icons. */
+  :where(
+    sensible-button-group[orientation="vertical"] > [data-size="icon"],
+    sensible-button-group[orientation="vertical"] > sensible-tooltip > [data-size="icon"]
+  ) {
+    min-inline-size: 2.25rem;
+  }
+
+  /* A tooltip wrapper passes its corners to its control, so in a column it
+     starts round like the other children. */
+  :where(sensible-button-group[orientation="vertical"] > sensible-tooltip) {
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  /* Adjacent children share one border and square their inner corners.
+     Hidden children do not count, and a group of nested groups keeps every
+     child separate. Children set which corners stay round, and the rules
+     after these pick physical corners from the writing direction. */
+  :where(sensible-button-group > *) {
+    --sensible-button-group-start-radius: calc(var(--radius) - 2px);
+    --sensible-button-group-end-radius: calc(var(--radius) - 2px);
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    --sensible-button-group-start-radius: 0;
+    border-inline-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-last-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    --sensible-button-group-end-radius: 0;
+  }
+
+  /* Bun rewrites logical corner radii and :dir() into guesses from the lang
+     attribute, so these rules read the nearest dir attribute instead, up to
+     three nested dir attributes. dir="auto" and the CSS direction property
+     are not detected. */
+  :where(
+    sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-start-radius);
+    border-bottom-left-radius: var(--sensible-button-group-start-radius);
+    border-top-right-radius: var(--sensible-button-group-end-radius);
+    border-bottom-right-radius: var(--sensible-button-group-end-radius);
+  }
+
+  :where(
+    [dir="rtl"] sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    sensible-button-group[dir="rtl"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-end-radius);
+    border-bottom-left-radius: var(--sensible-button-group-end-radius);
+    border-top-right-radius: var(--sensible-button-group-start-radius);
+    border-bottom-right-radius: var(--sensible-button-group-start-radius);
+  }
+
+  :where(
+    [dir="rtl"] [dir="ltr"] sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    [dir="rtl"] sensible-button-group[dir="ltr"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-start-radius);
+    border-bottom-left-radius: var(--sensible-button-group-start-radius);
+    border-top-right-radius: var(--sensible-button-group-end-radius);
+    border-bottom-right-radius: var(--sensible-button-group-end-radius);
+  }
+
+  :where(
+    [dir="rtl"] [dir="ltr"] [dir="rtl"]
+      sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    [dir="rtl"] [dir="ltr"]
+      sensible-button-group[dir="rtl"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-end-radius);
+    border-bottom-left-radius: var(--sensible-button-group-end-radius);
+    border-top-right-radius: var(--sensible-button-group-start-radius);
+    border-bottom-right-radius: var(--sensible-button-group-start-radius);
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-block-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-last-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* A tooltip wrapper has no box, so its control sits in the row and takes
+     the wrapper's corners and shared border. */
+  :where(sensible-button-group > sensible-tooltip > :first-child) {
+    position: relative;
+    border-radius: inherit;
+  }
+
+  :where(sensible-button-group > sensible-tooltip > :focus-visible) {
+    z-index: 1;
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > sensible-tooltip:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+      > :first-child
+  ) {
+    border-inline-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > sensible-tooltip:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+      > :first-child
+  ) {
+    border-block-start-width: 0;
+  }
+
+  /* An invalid field keeps its whole red border instead of sharing its
+     neighbor's. */
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > [aria-invalid="true"]:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-inline-start-width: 1px;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > [aria-invalid="true"]:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-block-start-width: 1px;
+  }
+}

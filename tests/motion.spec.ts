@@ -37,6 +37,54 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     await page.mouse.up();
   });
 
+  test(`${bundle}: progress fills to its value and indeterminate motion stops for reduced motion`, async ({
+    page,
+  }) => {
+    await page.setContent(`<section class="sensible-ui" style="width: 200px">
+      <progress id="known" max="200" value="50"></progress>
+      <progress id="unknown"></progress>
+    </section>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    const known = page.locator("#known");
+    expect(await known.boundingBox()).toMatchObject({ width: 200, height: 8 });
+    // Sample the rendered bar on both sides of the 25% value boundary.
+    const [filled, track] = await page.evaluate(async (png) => {
+      const image = new Image();
+      image.src = `data:image/png;base64,${png}`;
+      await image.decode();
+      const canvas = document.createElement("canvas");
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const context = canvas.getContext("2d")!;
+      context.drawImage(image, 0, 0);
+      const y = Math.floor(image.height / 2);
+      return [0.2, 0.3].map(
+        (at) => context.getImageData(Math.floor(image.width * at), y, 1, 1).data[0],
+      );
+    }, (await known.screenshot()).toString("base64"));
+    expect(filled).toBeLessThan(40);
+    expect(track).toBeGreaterThan(180);
+
+    const animation = (selector: string) =>
+      page.locator(selector).evaluate((node) => {
+        const style = getComputedStyle(node);
+        return [style.animationName, style.animationDirection];
+      });
+    expect(await animation("#unknown")).toEqual([
+      "sensible-progress-indeterminate",
+      "alternate",
+    ]);
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect(await animation("#unknown")).toEqual(["none", "normal"]);
+    expect(
+      await page
+        .locator("#unknown")
+        .evaluate((node) => getComputedStyle(node).backgroundImage),
+    ).toContain("repeating-linear-gradient");
+  });
+
   test(`${bundle}: switches move toward inline-end and remain usable without motion`, async ({
     page,
   }) => {

@@ -32,7 +32,8 @@ For component, gallery, export, or build work, use the task-to-files map and bui
 - Use native CSS declarations and theme variables (`--primary`, `--foreground`, etc.) from `theme.css`. Do not introduce Tailwind directives or generated `--tw-*` variables.
 - Colors use `oklch()`. Follow the `--name` / `--name-foreground` pairing pattern.
 - Treat strict semantic styling and future changes to the current hybrid as open design directions. Parent-scoped CSS is part of the current public model, not a permanent policy.
-- Use web components when they own meaningful behavior or state, or when their structure is unusually complex. Do not wrap CSS-only presentation in a custom element. Prefer dependency-free, light-DOM progressive enhancement that preserves semantic content without JavaScript.
+- Use native elements and attributes when HTML has the semantics. For a new pattern without a native element, use a light-DOM `sensible-*` custom element instead of a new class, as recorded in `docs/adr/0008-light-dom-custom-elements.md`. Style the tag in core CSS so it works without registration, keep native controls inside it, and leave ARIA roles to authors.
+- Add JavaScript to a custom element only when it owns behavior or state. Keep each script dependency-free and in its own export, and preserve semantic content without JavaScript. Do not migrate existing class APIs without a separate decision.
 
 ## Agent skills
 

@@ -1,7 +1,8 @@
 @layer sensible-ui {
   @scope (.sensible-ui) {
-    @layer base, typography, components, button, utilities;
     /* src/css/theme.css */
+    @layer base, typography, components, button, utilities;
+
     :root {
       --radius: 0.625rem;
       --font-sans:
@@ -492,42 +493,371 @@
       }
 
       @supports (animation-timeline: scroll()) {
-        [data-slot="table-container"]:before,
+        [data-slot="table-container"]:before {
+          content: "";
+          position: sticky;
+          z-index: 1;
+          grid-area: 1 / 1;
+          opacity: 0;
+          pointer-events: none;
+          animation: linear both;
+          animation-timeline: scroll(nearest inline);
+          inline-size: 2rem;
+        }
+
         [data-slot="table-container"]:after {
           content: "";
           position: sticky;
           z-index: 1;
           grid-area: 1 / 1;
-          inline-size: 2rem;
           opacity: 0;
           pointer-events: none;
           animation: linear both;
           animation-timeline: scroll(nearest inline);
+          inline-size: 2rem;
         }
 
         [data-slot="table-container"]:before {
-          inset-inline-start: 0;
-          justify-self: start;
           background: linear-gradient(
             to right,
             var(--table-fade-color),
             transparent
           );
           animation-name: sensible-table-fade-start;
+          justify-self: start;
+        }
+
+        [data-slot="table-container"]:not(
+            :-webkit-any(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):before {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:not(
+            :-moz-any(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):before {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:not(
+            :is(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):before {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:-webkit-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
+          right: 0;
+        }
+
+        [data-slot="table-container"]:-moz-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
+          right: 0;
+        }
+
+        [data-slot="table-container"]:is(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
+          right: 0;
         }
 
         [data-slot="table-container"]:after {
-          inset-inline-end: 0;
-          justify-self: end;
           background: linear-gradient(
             to left,
             var(--table-fade-color),
             transparent
           );
           animation-name: sensible-table-fade-end;
+          justify-self: end;
         }
 
-        [data-slot="table-container"]:dir(rtl):before {
+        [data-slot="table-container"]:not(
+            :-webkit-any(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):after {
+          right: 0;
+        }
+
+        [data-slot="table-container"]:not(
+            :-moz-any(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):after {
+          right: 0;
+        }
+
+        [data-slot="table-container"]:not(
+            :is(
+              :lang(ae),
+              :lang(ar),
+              :lang(arc),
+              :lang(bcc),
+              :lang(bqi),
+              :lang(ckb),
+              :lang(dv),
+              :lang(fa),
+              :lang(glk),
+              :lang(he),
+              :lang(ku),
+              :lang(mzn),
+              :lang(nqo),
+              :lang(pnb),
+              :lang(ps),
+              :lang(sd),
+              :lang(ug),
+              :lang(ur),
+              :lang(yi)
+            )
+          ):after {
+          right: 0;
+        }
+
+        [data-slot="table-container"]:-webkit-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:-moz-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:is(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
+          left: 0;
+        }
+
+        [data-slot="table-container"]:-webkit-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
           background: linear-gradient(
             to left,
             var(--table-fade-color),
@@ -535,7 +865,139 @@
           );
         }
 
-        [data-slot="table-container"]:dir(rtl):after {
+        [data-slot="table-container"]:-moz-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
+          background: linear-gradient(
+            to left,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+
+        [data-slot="table-container"]:is(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):before {
+          background: linear-gradient(
+            to left,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+
+        [data-slot="table-container"]:-webkit-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
+          background: linear-gradient(
+            to right,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+
+        [data-slot="table-container"]:-moz-any(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
+          background: linear-gradient(
+            to right,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+
+        [data-slot="table-container"]:is(
+            :lang(ae),
+            :lang(ar),
+            :lang(arc),
+            :lang(bcc),
+            :lang(bqi),
+            :lang(ckb),
+            :lang(dv),
+            :lang(fa),
+            :lang(glk),
+            :lang(he),
+            :lang(ku),
+            :lang(mzn),
+            :lang(nqo),
+            :lang(pnb),
+            :lang(ps),
+            :lang(sd),
+            :lang(ug),
+            :lang(ur),
+            :lang(yi)
+          ):after {
           background: linear-gradient(
             to right,
             var(--table-fade-color),

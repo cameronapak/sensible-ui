@@ -1,0 +1,97 @@
+@layer components {
+  progress {
+    --progress-track: color-mix(in oklab, var(--primary) 20%, transparent);
+    display: block;
+    inline-size: 100%;
+    /* In a flex row, such as a label around the bar, the bar shrinks to make
+       room for text but stays visible. */
+    min-inline-size: min(4rem, 100%);
+    flex-shrink: 1;
+    block-size: 0.5rem;
+    overflow: hidden;
+    border: 0;
+    border-radius: 9999px;
+    background-color: var(--progress-track);
+    color: var(--primary);
+    appearance: none;
+    /* Printers drop backgrounds by default, which would hide the bar. */
+    print-color-adjust: exact;
+
+    &::-webkit-progress-bar {
+      border-radius: inherit;
+      background: transparent;
+    }
+
+    &::-webkit-progress-value {
+      border-radius: inherit;
+      background-color: var(--primary);
+      print-color-adjust: exact;
+    }
+
+    &::-moz-progress-bar {
+      border-radius: inherit;
+      background-color: var(--primary);
+    }
+
+    /* A segment moving back and forth shows ongoing work without implying a
+       value, and reads the same in both writing directions. */
+    &:indeterminate {
+      background-image: linear-gradient(var(--primary), var(--primary));
+      background-repeat: no-repeat;
+      background-size: 40% 100%;
+      animation: sensible-progress-indeterminate 1s ease-in-out infinite
+        alternate;
+
+      &::-webkit-progress-bar {
+        background: transparent;
+      }
+
+      &::-moz-progress-bar {
+        background: transparent;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      /* Static stripes keep "working" distinct from a 40% determinate value. */
+      &:indeterminate {
+        /* Firefox drops oklab-interpolated hard stops, so interpolate in sRGB. */
+        background-image: repeating-linear-gradient(
+          -45deg in srgb,
+          var(--primary) 0 0.375rem,
+          transparent 0.375rem 0.75rem
+        );
+        background-size: auto;
+        animation: none;
+      }
+    }
+  }
+
+  /* Forced colors remove backgrounds, so the bar draws with system colors
+     inside a visible border. */
+  @media (forced-colors: active) {
+    progress {
+      --primary: Highlight;
+      --progress-track: Canvas;
+      border: 1px solid CanvasText;
+      forced-color-adjust: none;
+    }
+  }
+
+  label + progress {
+    margin-block-start: 0.5rem;
+  }
+
+  /* A visible value stays at the end when a long label wraps. */
+  label:has(+ progress) > [aria-hidden="true"]:last-child {
+    margin-inline-start: auto;
+  }
+
+  @keyframes sensible-progress-indeterminate {
+    from {
+      background-position: 0% 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
+}

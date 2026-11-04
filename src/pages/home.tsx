@@ -47,6 +47,236 @@ const typographyExample = `
   <pre><code>const greeting = "Hello";</code></pre>
 </article>`;
 
+// Lucide icon paths (https://lucide.dev) for copyable examples.
+const lucidePaths = {
+  arrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  arrowUp: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+  bold: '<path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/>',
+  copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  italic: '<line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/>',
+  mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>',
+  minus: '<path d="M5 12h14"/>',
+  plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+  save: '<path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  underline: '<path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+} as const;
+
+function lucide(name: keyof typeof lucidePaths) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${lucidePaths[name]}</svg>`;
+}
+
+const buttonGroupExample = `
+<div class="stack">
+  <sensible-button-group role="group" aria-label="Message actions">
+    <button type="button" data-variant="outline">Archive</button>
+    <button type="button" data-variant="outline">Report</button>
+    <button type="button" data-variant="outline">Snooze</button>
+  </sensible-button-group>
+
+  <sensible-button-group>
+    <sensible-button-group role="group" aria-label="Text style">
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Bold" aria-pressed="true">
+        ${lucide("bold")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Italic" aria-pressed="false">
+        ${lucide("italic")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Underline" aria-pressed="false">
+        ${lucide("underline")}
+      </button>
+    </sensible-button-group>
+    <sensible-button-group role="group" aria-label="Pages">
+      <button type="button" data-variant="outline">${lucide("arrowLeft")} Previous</button>
+      <button type="button" data-variant="outline">Next ${lucide("arrowRight")}</button>
+    </sensible-button-group>
+  </sensible-button-group>
+
+  <div class="cluster">
+    <sensible-button-group orientation="vertical" role="group" aria-label="Zoom">
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Zoom in">
+        ${lucide("plus")}
+      </button>
+      <button type="button" data-variant="outline" data-size="icon" aria-label="Zoom out">
+        ${lucide("minus")}
+      </button>
+    </sensible-button-group>
+    <sensible-button-group role="group" aria-label="Clipboard">
+      <button type="button" data-variant="secondary">Copy</button>
+      <hr>
+      <button type="button" data-variant="secondary">Paste</button>
+    </sensible-button-group>
+    <sensible-button-group>
+      <button type="button" disabled>Merge</button>
+      <hr>
+      <button type="button" data-size="icon" aria-label="More merge options" disabled>
+        ${lucide("plus")}
+      </button>
+    </sensible-button-group>
+  </div>
+
+  <sensible-button-group>
+    <input type="search" aria-label="Search the docs" placeholder="Search the docs">
+    <button type="button" data-variant="outline">Search</button>
+  </sensible-button-group>
+
+  <sensible-button-group>
+    <span>https://</span>
+    <input aria-label="Website address" placeholder="example.com">
+  </sensible-button-group>
+</div>`;
+
+const inputGroupExample = `
+<div class="stack">
+  <sensible-input-group>
+    ${lucide("search")}
+    <input type="search" aria-label="Search the docs" placeholder="Search the docs">
+    <span>12 results</span>
+  </sensible-input-group>
+
+  <div>
+    <label for="group-email">Email</label>
+    <sensible-input-group>
+      ${lucide("mail")}
+      <input id="group-email" type="email" placeholder="name@example.com">
+    </sensible-input-group>
+  </div>
+
+  <sensible-input-group>
+    <span>https://</span>
+    <input aria-label="Website address" placeholder="example">
+    <span>.com</span>
+  </sensible-input-group>
+
+  <sensible-input-group>
+    <input aria-label="Share link" value="https://sensibleui.com/r/8f2k" readonly>
+    <button type="button" data-variant="ghost" data-size="icon" aria-label="Copy link">
+      ${lucide("copy")}
+    </button>
+  </sensible-input-group>
+
+  <div>
+    <label for="group-username">Username</label>
+    <sensible-input-group>
+      <span>@</span>
+      <input id="group-username" value="taken" aria-invalid="true" aria-describedby="group-username-error">
+      <button type="button" data-variant="ghost" data-size="icon" aria-label="Clear username">
+        ${lucide("x")}
+      </button>
+    </sensible-input-group>
+    <small id="group-username-error">That username is taken.</small>
+  </div>
+
+  <sensible-input-group>
+    ${lucide("search")}
+    <input aria-label="Disabled search" placeholder="Search is unavailable" disabled>
+  </sensible-input-group>
+
+  <sensible-input-group>
+    <textarea aria-label="Message" placeholder="Ask a question"></textarea>
+    <div class="split">
+      <span>Shift + Enter for a new line</span>
+      <button type="button" data-size="icon" aria-label="Send message">
+        ${lucide("arrowUp")}
+      </button>
+    </div>
+  </sensible-input-group>
+</div>`;
+
+const headerExample = `
+<header>
+  <sensible-navbar>
+    <strong>Acme</strong>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#navigation" aria-current="page">Overview</a></li>
+        <li><a href="#navigation">Pricing</a></li>
+        <li><a href="#navigation">Docs</a></li>
+      </ul>
+    </nav>
+    <div class="cluster">
+      <a class="button" data-variant="ghost" href="#navigation">Sign in</a>
+      <a class="button" href="#navigation">Get started</a>
+    </div>
+  </sensible-navbar>
+</header>`;
+
+const sidebarExample = `
+<sensible-sidebar-layout>
+  <aside>
+    <sensible-sidebar>
+      <nav aria-label="Documentation">
+        <h2>Getting started</h2>
+        <ul>
+          <li><a href="#navigation">${lucide("info")} Introduction</a></li>
+          <li><a href="#navigation" aria-current="page">${lucide("save")} Installation</a></li>
+        </ul>
+        <h2>Components</h2>
+        <ul>
+          <li><a href="#navigation">Button</a></li>
+          <li>
+            <details open>
+              <summary>Forms</summary>
+              <ul>
+                <li><a href="#navigation">Input</a></li>
+                <li><a href="#navigation">Input group</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </sensible-sidebar>
+  </aside>
+  <article>
+    <h3>Installation</h3>
+    <p>Add one stylesheet, then write semantic HTML.</p>
+  </article>
+</sensible-sidebar-layout>`;
+
+const footerExample = `
+<footer>
+  <sensible-navbar>
+    <small>© 2026 Acme, Inc.</small>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="#navigation">Privacy</a></li>
+        <li><a href="#navigation">Terms</a></li>
+        <li><a href="#navigation">Contact</a></li>
+      </ul>
+    </nav>
+  </sensible-navbar>
+</footer>`;
+
+const tooltipExample = `
+<div class="cluster">
+  <sensible-tooltip>
+    <button type="button" data-variant="outline">Hover or focus</button>
+    <span role="tooltip">Add to library</span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="bottom">
+    <button type="button" data-variant="outline" data-size="icon" aria-label="Save">
+      ${lucide("save")}
+    </button>
+    <span role="tooltip">Save draft <kbd>Ctrl</kbd> <kbd>S</kbd></span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="right">
+    <button type="button" data-variant="outline" data-size="icon" aria-labelledby="bold-tip">
+      ${lucide("bold")}
+    </button>
+    <span role="tooltip" id="bold-tip">Bold</span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="left">
+    <a class="button" data-variant="link" href="#tooltip">Pricing details</a>
+    <span role="tooltip">Prices include tax</span>
+  </sensible-tooltip>
+</div>`;
+
 const buttonExample = `
 <div class="cluster">
   <button type="button">Primary</button>
@@ -223,6 +453,20 @@ const spinnerExample = `
   <div class="card" aria-busy="true" data-variant="overlay">
     <header><h3>Loading report</h3></header>
     <section><p>The current content remains visible while loading.</p></section>
+  </div>
+</div>`;
+
+const progressExample = `
+<div class="stack">
+  <div>
+    <label for="upload-progress" class="split">
+      Uploading report.pdf <span aria-hidden="true">60%</span>
+    </label>
+    <progress id="upload-progress" max="100" value="60">60%</progress>
+  </div>
+  <div>
+    <label for="sync-progress">Syncing your library</label>
+    <progress id="sync-progress">Syncing</progress>
   </div>
 </div>`;
 
@@ -429,6 +673,11 @@ export function Home() {
           <a href="#badges">Badge</a>
           <a href="#item">Item</a>
           <a href="#spinner">Spinner</a>
+          <a href="#progress">Progress</a>
+          <a href="#button-group">Button group</a>
+          <a href="#input-group">Input group</a>
+          <a href="#tooltip">Tooltip</a>
+          <a href="#navigation">Navigation</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
           <a href="#dark-mode">Dark mode</a>
@@ -557,10 +806,23 @@ export function Home() {
                 </tr>
                 <tr>
                   <th scope="row">
-                    <code>/spinner</code>, <code>/table</code>,{" "}
-                    <code>/typography</code>
+                    <code>/progress</code>, <code>/spinner</code>,{" "}
+                    <code>/table</code>, <code>/typography</code>
                   </th>
                   <td>Standalone component modules</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/button-group</code>, <code>/input-group</code>,{" "}
+                    <code>/navigation</code>, <code>/tooltip</code>
+                  </th>
+                  <td>Standalone custom element styles</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/input-group/js</code>, <code>/tooltip/js</code>
+                  </th>
+                  <td>Optional custom element behavior</td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -875,6 +1137,230 @@ export function Home() {
           understandable without relying on motion.
         </p>
         <CodeExample code={spinnerExample} />
+      </section>
+
+      <section class="docs-section stack" id="progress">
+        <h2>Progress</h2>
+        <StandaloneImport path="progress" />
+        <p>
+          Use the native <code>progress</code> element without a class. Set{" "}
+          <code>value</code> and <code>max</code> when you know how much work
+          is done. Leave out the <code>value</code> attribute entirely for
+          indeterminate work, and a segment moves along the track; browsers
+          disagree about an empty <code>value=""</code>. With reduced motion, indeterminate
+          progress shows still stripes instead.
+        </p>
+        <p>
+          Give each bar a visible <code>label</code>. When people need the
+          number, show it as text inside the label with{" "}
+          <code>aria-hidden="true"</code>; screen readers already announce the
+          bar's value.
+          Change the color with <code>--primary</code>, and pick one dark
+          enough to stand out from its lighter track. The bar is a block, so
+          put it after text rather than inside a sentence. In a row with other
+          content, the bar shrinks to make room but keeps at least 4rem. Use{" "}
+          <code>aria-busy="true"</code> on the region that is updating, not on
+          the progress bar.
+        </p>
+        <CodeExample code={progressExample} />
+      </section>
+
+      <section class="docs-section stack" id="button-group">
+        <h2>Button group</h2>
+        <StandaloneImport path="button-group" />
+        <p>
+          Wrap related controls in <code>&lt;sensible-button-group&gt;</code>{" "}
+          to join their borders and corners. It works without JavaScript. Put
+          native buttons, <code>a.button</code> links, inputs, selects, or text
+          in a <code>span</code> directly inside it. Add{" "}
+          <code>orientation="vertical"</code> to stack the controls. Use an{" "}
+          <code>hr</code> to separate buttons that have no border, and nest
+          groups to put space between them.
+        </p>
+        <p>
+          A row that is too long for its container wraps onto more rows, and
+          text inputs keep at least 8rem. Wrapped rows lose the joined look:
+          corners at each break stay square, and a row that starts mid-group
+          has no border on its start edge. When a set may not fit your
+          narrowest screen, split it into nested groups, which wrap as whole
+          groups, or use <code>orientation="vertical"</code>. Corners follow the nearest <code>dir</code>{" "}
+          attribute, up to three nested levels, so set{" "}
+          <code>dir="rtl"</code> on the page or the group rather than relying on{" "}
+          <code>dir="auto"</code> or the CSS <code>direction</code> property. A <code>&lt;sensible-tooltip&gt;</code>{" "}
+          around a control joins like the control itself. Other wrappers break
+          the join, so put a checkbox inside a <code>label</code>, and point a
+          button at a form with its <code>form</code> attribute instead of
+          wrapping it in the <code>form</code>. Use one button size per group.
+        </p>
+        <p>
+          The element only changes how controls look. When the controls act on
+          the same thing, add <code>role="group"</code> and an{" "}
+          <code>aria-label</code> so screen readers announce the group. Every
+          control stays in the tab order. Mark toggles with{" "}
+          <code>aria-pressed</code>, and give icon-only buttons an{" "}
+          <code>aria-label</code>. Do not use <code>role="toolbar"</code>{" "}
+          unless you also add arrow-key navigation; this element does not.
+          Inputs still need an accessible name, because text such as{" "}
+          <code>https://</code> beside an input is not its label.
+        </p>
+        <CodeExample code={buttonGroupExample} />
+      </section>
+
+      <section class="docs-section stack" id="input-group">
+        <h2>Input group</h2>
+        <StandaloneImport path="input-group" />
+        <p>
+          Wrap a text <code>input</code> or <code>textarea</code> in{" "}
+          <code>&lt;sensible-input-group&gt;</code> to put icons, text, and
+          buttons inside the same border. The group shows one focus ring when
+          the field has keyboard focus, and it takes the field's{" "}
+          <code>aria-invalid</code> and <code>disabled</code> states. Put
+          icons, <code>span</code> text, and native buttons directly inside it.
+          With a text area, put rows of text or actions in a <code>div</code>{" "}
+          after it. The text area grows with its content up to 16rem, then
+          scrolls.
+        </p>
+        <p>
+          When space runs out, text after the field shortens with an ellipsis
+          before the field gets narrower than 4rem, and button labels wrap.
+          Prefixes such as a currency, and counts in an <code>output</code>,
+          stay whole until they reach half the group. The group stays on one
+          line, so keep its addons to what fits on your narrowest screen; move
+          a count to help text and secondary actions beside or below the field
+          when they do not fit. Put a long fixed domain in help
+          text below the field instead of a suffix. A <code>select</code>{" "}
+          inside the group is not supported; use a button group for a select
+          beside a field.
+        </p>
+        <p>
+          The examples use inline SVG icons from{" "}
+          <a href="https://lucide.dev">Lucide</a>; any inline SVG works. Hide
+          decorative icons with <code>aria-hidden="true"</code>. An icon or
+          prefix is not a label, so give the field a <code>label</code> or an{" "}
+          <code>aria-label</code>, and give icon-only buttons an{" "}
+          <code>aria-label</code>. Buttons stay separate tab stops after the
+          field.
+        </p>
+        <p>
+          Styles work without JavaScript. The optional script makes a click on
+          an icon, text, or empty space focus the field, as it would on a plain
+          input:
+        </p>
+        <CodeExample
+          code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-input-group.js"></script>`}
+          showPreview={false}
+        />
+        <p>
+          With a bundler, import <code>@faith-tools/sensible-ui/input-group/js</code>{" "}
+          in your browser JavaScript.
+        </p>
+        <CodeExample code={inputGroupExample} />
+      </section>
+
+      <section class="docs-section stack" id="tooltip">
+        <h2>Tooltip</h2>
+        <StandaloneImport path="tooltip" />
+        <p>
+          A tooltip shows a short description when people hover over, focus,
+          or press and hold a control. Wrap the control and a{" "}
+          <code>role="tooltip"</code> element in{" "}
+          <code>&lt;sensible-tooltip&gt;</code>, with the control first. Set{" "}
+          <code>side</code> to <code>top</code> (the default),{" "}
+          <code>bottom</code>, <code>left</code>, or <code>right</code>; other
+          values show it on top. The tooltip flips to the other side when it
+          would leave the screen, and a left or right tooltip moves above or
+          below its control when neither side has room. The wrapper adds no
+          box, so a wrapped field keeps its width and its <code>label</code>{" "}
+          spacing.
+        </p>
+        <p>
+          Showing the tooltip needs the optional script. Load it as a module,
+          or import <code>@faith-tools/sensible-ui/tooltip/js</code> with a
+          bundler:
+        </p>
+        <CodeExample
+          code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-tooltip.js"></script>`}
+          showPreview={false}
+        />
+        <p>
+          The script links the tooltip to the control with{" "}
+          <code>aria-describedby</code>, so screen readers announce it as a
+          description. In browsers that support interest invokers, it adds{" "}
+          <code>interestfor</code> and lets the browser handle hover, focus,
+          long press, and <kbd>Esc</kbd>. Elsewhere, it shows the tooltip after
+          a short hover delay, on keyboard focus, and after a half-second touch
+          hold. People can move the pointer onto the tooltip, and{" "}
+          <kbd>Esc</kbd> closes it. It also closes once its control scrolls
+          out of view, so it never floats away from it. Touch behavior is
+          tested with emulated touch input, not yet on real phones or tablets.
+          If the
+          browser's anchor positioning leaves a tooltip away from its control,
+          as Firefox does in a right-to-left part of a left-to-right page, the
+          script places it beside the control. Only one tooltip shows at a
+          time. <kbd>Esc</kbd> that closes a tooltip has{" "}
+          <code>defaultPrevented</code> set, so check it before your own{" "}
+          <kbd>Esc</kbd> shortcuts act. In both cases, once a tooltip shows, the
+          next tooltip shows without the delay while people move between
+          controls. The delay returns 300ms after the last tooltip closes, or
+          right after <kbd>Esc</kbd>. Without the script, the text stays hidden
+          on screen but remains next to the control for assistive technology.
+        </p>
+        <p>
+          Keep tooltips short and never put links or buttons in them. Do not
+          put essential information only in a tooltip, because many touch users
+          will not find it. The control needs its own accessible name. When the
+          tooltip is the name of an icon button, give the tooltip an{" "}
+          <code>id</code> and point <code>aria-labelledby</code> at it instead.
+          Disabled buttons cannot receive focus or hover, so a tooltip on one
+          never shows; explain why a control is unavailable in visible text.
+        </p>
+        <CodeExample code={tooltipExample} />
+      </section>
+
+      <section class="docs-section stack" id="navigation">
+        <h2>Navigation</h2>
+        <StandaloneImport path="navigation" />
+        <p>
+          Three elements arrange navigation without JavaScript. They do not
+          add landmarks, so keep native <code>header</code>,{" "}
+          <code>footer</code>, <code>aside</code>, and <code>nav</code>{" "}
+          elements around or inside them. Put links in a <code>ul</code> inside
+          the <code>nav</code>, mark the current page with{" "}
+          <code>aria-current="page"</code>, and give each <code>nav</code> an{" "}
+          <code>aria-label</code> when a page has more than one.
+        </p>
+        <h3>Header and footer</h3>
+        <p>
+          <code>&lt;sensible-navbar&gt;</code> spreads its children across one
+          row and lays links out horizontally. On narrow screens its children
+          and links wrap onto more rows. A link placed directly inside it, such
+          as a logo beside a name, shows as the brand without an underline.
+        </p>
+        <CodeExample code={headerExample} />
+        <CodeExample code={footerExample} />
+        <h3>Sidebar</h3>
+        <p>
+          <code>&lt;sensible-sidebar&gt;</code> draws a panel with stacked
+          links. Use headings to name groups and a native{" "}
+          <code>details</code> element for a group that opens and closes.{" "}
+          <code>&lt;sensible-sidebar-layout&gt;</code> puts its first child
+          beside its last child at <code>--sidebar-width</code> (
+          <code>16rem</code> by default), and stacks them when the content
+          would get narrower than 60% of the layout. Add{" "}
+          <code>side="end"</code> and put the sidebar last to place it after
+          the content. Use <code>main</code> for the content on a real page.
+          The sidebar does not collapse into a menu on small screens.
+        </p>
+        <p>
+          Set <code>--sidebar-width</code> to a length or percentage, such as{" "}
+          <code>20rem</code>; other values stack the layout. The layout expects
+          two children, and any others take full rows. Put a link label in one{" "}
+          <code>span</code> when it sits beside an icon or badge or mixes text
+          with other inline elements, so the label wraps as one block. When a long sidebar stacks above the content on
+          small screens, add a skip link to the content before it. A closed
+          group that holds the current page highlights its summary.
+        </p>
+        <CodeExample code={sidebarExample} />
       </section>
 
       <section class="docs-section stack" id="container">

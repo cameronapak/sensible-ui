@@ -25,6 +25,8 @@ await Promise.all([
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),
   Bun.write(`${output}/code.css`, Bun.file('./src/css/code.css')),
   Bun.write(`${output}/code.js`, Bun.file('./dist/sensible-code.js')),
+  Bun.write(`${output}/input-group.js`, Bun.file('./dist/sensible-input-group.js')),
+  Bun.write(`${output}/tooltip.js`, Bun.file('./dist/sensible-tooltip.js')),
   Bun.write(`${output}/scoped.css`, Bun.file('./dist/scoped/sensible-ui.css')),
   Bun.write(`${output}/utilities.css`, Bun.file('./dist/sensible-ui.utilities.css')),
   Bun.write(`${output}/site.css`, Bun.file('./src/site.css')),

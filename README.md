@@ -147,7 +147,7 @@ This enables same-origin navigation with `@view-transition { navigation: auto; }
 
 ## Motion preferences
 
-Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes immediate, accordion state changes happen without transitions, spinners keep their busy indicator without rotating, and the optional page view transitions stay disabled.
+Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes immediate, accordion state changes happen without transitions, spinners keep their busy indicator without rotating, indeterminate progress bars show still stripes, and the optional page view transitions stay disabled.
 
 Future components should put decorative motion behind `prefers-reduced-motion: no-preference` or provide a reduced-motion rule that preserves the visible state change without animation.
 
@@ -250,15 +250,22 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Accordion        | `@faith-tools/sensible-ui/accordion`        |
 | Badge            | `@faith-tools/sensible-ui/badge`            |
 | Button           | `@faith-tools/sensible-ui/button`           |
+| Button group     | `@faith-tools/sensible-ui/button-group`     |
 | Card             | `@faith-tools/sensible-ui/card`             |
 | Description list | `@faith-tools/sensible-ui/description-list` |
 | Dialog           | `@faith-tools/sensible-ui/dialog`           |
 | Image and figure | `@faith-tools/sensible-ui/image`            |
 | Form controls    | `@faith-tools/sensible-ui/input`            |
+| Input group      | `@faith-tools/sensible-ui/input-group`      |
 | Item             | `@faith-tools/sensible-ui/item`             |
 | Loading spinner  | `@faith-tools/sensible-ui/spinner`          |
+| Navigation       | `@faith-tools/sensible-ui/navigation`       |
+| Progress         | `@faith-tools/sensible-ui/progress`         |
 | Table            | `@faith-tools/sensible-ui/table`            |
+| Tooltip          | `@faith-tools/sensible-ui/tooltip`          |
 | Typography       | `@faith-tools/sensible-ui/typography`       |
+
+Button group, input group, navigation, and tooltip are light-DOM custom elements such as `<sensible-button-group>`. The core CSS styles them without JavaScript. Two of them have optional, dependency-free scripts that add behavior: `@faith-tools/sensible-ui/tooltip/js` shows tooltips, and `@faith-tools/sensible-ui/input-group/js` focuses the field when people click an icon or text. On a CDN, load `dist/sensible-tooltip.js` or `dist/sensible-input-group.js` with `<script type="module">`.
 
 Named layouts are available from `@faith-tools/sensible-ui/utils` and are included in the complete bundle. The optional atomic utility stylesheet is available from `@faith-tools/sensible-ui/utilities`.
 

@@ -5,17 +5,60 @@ const modules = {
   badge: ".badge {",
   base: "scroll-behavior: smooth",
   button: '[data-size="icon"]',
+  "button-group": "sensible-button-group",
   card: ".card {",
   dialog: "dialog {",
   "description-list": "dl > dt:has( + dd)",
   image: "figure {",
   input: '[role="switch"]',
+  "input-group": "sensible-input-group",
   item: ".item {",
+  navigation: "sensible-sidebar-layout",
+  progress: "sensible-progress-indeterminate",
   spinner: "sensible-spinner-spin",
   table: "caption-side: bottom",
+  tooltip: "sensible-tooltip",
   typography: "blockquote {",
   utils: ".touch-hitbox",
 } as const
+
+// Bun copies :is() into :-webkit-any() and :-moz-any() fallbacks. Inside a
+// forgiving :where() or :is(), WebKit recovers from the unknown copy by
+// keeping the middle items of its list, so `:where(x > :-moz-any(a, b, c))`
+// styles every `b` on the page. Write those selectors as plain lists instead.
+function assertForgivingSelectorsSurvive(css: string, label: string) {
+  const enclosing: string[] = []
+  for (const match of css.matchAll(/(:[-\w]+)?\(|\)/g)) {
+    if (match[0] === ")") {
+      enclosing.pop()
+      continue
+    }
+    const name = match[1] ?? ""
+    if (
+      /^:-(?:moz|webkit)-any$/.test(name) &&
+      /^:(?:where|is)$/.test(enclosing.at(-1) ?? "")
+    ) {
+      const index = match.index ?? 0
+      throw new Error(
+        `${label} nests a vendor :is() fallback in a forgiving selector: ${css
+          .slice(Math.max(0, index - 60), index + 40)
+          .replace(/\s+/g, " ")}`,
+      )
+    }
+    enclosing.push(name)
+  }
+  // Bun drops invalid items, such as pseudo-elements, from a forgiving list
+  // and can leave it empty, which silently removes the rule.
+  const empty = css.match(/:(?:where|is)\(\s*\)/)
+  if (empty) {
+    const index = empty.index ?? 0
+    throw new Error(
+      `${label} has an empty forgiving selector: ${css
+        .slice(Math.max(0, index - 60), index + 40)
+        .replace(/\s+/g, " ")}`,
+    )
+  }
+}
 
 const layerOrder = "@layer base, typography, components, button, utilities;"
 const theme = await Bun.file("./src/css/theme.css").text()
@@ -46,6 +89,7 @@ for (const [name, moduleMarker] of Object.entries(modules)) {
   }
 
   const css = await result.outputs[0].text()
+  assertForgivingSelectorsSurvive(css, `The ${name} export`)
   for (const marker of [
     "--primary:",
     "scroll-behavior: smooth",
@@ -170,6 +214,12 @@ const expectedScopedFiles = new Set([
 for await (const file of new Bun.Glob("*.css").scan("./dist/scoped")) {
   if (!expectedScopedFiles.has(file)) {
     throw new Error(`Unexpected generated scoped stylesheet ${file}`)
+  }
+}
+
+for (const pattern of ["dist/*.css", "dist/scoped/*.css"]) {
+  for await (const path of new Bun.Glob(pattern).scan(".")) {
+    assertForgivingSelectorsSurvive(await Bun.file(path).text(), path)
   }
 }
 

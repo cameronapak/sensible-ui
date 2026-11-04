@@ -1,0 +1,236 @@
+@layer components {
+  /* The group draws the field so icons, text, and actions sit inside one
+     border with one focus ring. */
+  sensible-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 2.25rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--input);
+    border-radius: calc(var(--radius) - 2px);
+    background: transparent;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    color: var(--muted-foreground);
+    /* Matches the field's text, which is 16px on narrow screens. */
+    font-size: 1rem;
+    line-height: 1.5rem;
+    transition:
+      border-color 150ms,
+      box-shadow 150ms;
+
+    @media (width >= 48rem) {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    &:is(.dark *) {
+      background: color-mix(in oklab, var(--input) 30%, transparent);
+    }
+
+    /* Registered elements focus the field when people click an icon or text. */
+    &:defined {
+      cursor: text;
+    }
+
+    /* Plain lists, not :is(): Bun's :-webkit-any() copy counts as a class
+       and would outrank the invalid rule below. */
+    &:has(> input:focus-visible, > textarea:focus-visible) {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    /* As specific as the focus rule, so a focused invalid field stays red. */
+    &:has(
+      > input[aria-invalid="true"],
+      > textarea[aria-invalid="true"]
+    ) {
+      border-color: var(--destructive);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 20%, transparent);
+    }
+
+    &:is(.dark *):has(
+        > input[aria-invalid="true"],
+        > textarea[aria-invalid="true"]
+      ) {
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--destructive) 40%, transparent);
+    }
+
+    &:has(> input:disabled, > textarea:disabled) {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    > svg {
+      inline-size: 1rem;
+      block-size: 1rem;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    /* Long text yields before the field drops below 4rem. Plaintext bidi
+       keeps a prefix such as https:// readable on right-to-left pages. */
+    > span,
+    > output {
+      min-inline-size: 0;
+      overflow: hidden;
+      flex-shrink: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      unicode-bidi: plaintext;
+    }
+
+    /* A prefix such as a currency or https:// and a count in an output stay
+       whole; text after the field gives way first. Past half the group they
+       shorten too, so the field never leaves the box. */
+    > span:has(+ input),
+    > output {
+      flex-shrink: 0;
+      max-inline-size: 50%;
+    }
+
+    /* Beside a count, a prefix gives way so the count stays whole. */
+    > span:has(+ input):has(~ output) {
+      flex-shrink: 1;
+    }
+
+    @media (forced-colors: active) {
+      &:has(> input:focus-visible, > textarea:focus-visible) {
+        outline: 2px solid Highlight;
+      }
+    }
+
+    /* A text area stacks above rows of text or actions. */
+    &:has(> textarea) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding-inline: 0;
+
+      > :not(textarea) {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+      }
+    }
+  }
+
+  label:has(+ sensible-input-group) {
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Child controls give up their own field styles to the group. These rules
+   must override input and button geometry, so they use the utilities layer
+   with zero specificity, like the named layouts. */
+@layer utilities {
+  :where(sensible-input-group > input, sensible-input-group > textarea) {
+    flex: 1 1 auto;
+    inline-size: auto;
+    min-inline-size: 4rem;
+    block-size: calc(2.25rem - 2px);
+    padding-inline: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--foreground);
+    font-size: inherit;
+    line-height: inherit;
+    /* The group already shows the disabled state. */
+    opacity: 1;
+  }
+
+  /* The field takes the space left after icons, text, and buttons instead of
+     asking for its default width, so short text never truncates. */
+  :where(sensible-input-group > input) {
+    flex-basis: 0;
+  }
+
+  /* Pseudo-elements are invalid inside :where(), so they go after it. */
+  :where(sensible-input-group > input, sensible-input-group > textarea)::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  :where(sensible-input-group > textarea) {
+    block-size: auto;
+    max-block-size: 16rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Text in rows under a text area starts from no width and fills the free
+     space, so it wraps beside an action instead of pushing the action onto
+     its own row. Rows of controls still wrap as a whole. */
+  :where(
+    sensible-input-group:has(> textarea) > :not(textarea) > span,
+    sensible-input-group:has(> textarea) > :not(textarea) > small,
+    sensible-input-group:has(> textarea) > :not(textarea) > p,
+    sensible-input-group:has(> textarea) > :not(textarea) > output
+  ) {
+    flex: 1 1 0;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Text buttons in those rows, and the layout wrappers around them, shrink
+     and wrap their labels rather than push the row past the border. */
+  :where(
+    sensible-input-group:has(> textarea) > :not(textarea) > div,
+    sensible-input-group:has(> textarea) > :not(textarea) button:not([data-size="icon"]),
+    sensible-input-group:has(> textarea) > :not(textarea) a.button:not([data-size="icon"])
+  ) {
+    flex-shrink: 1;
+    white-space: normal;
+  }
+
+  :where(sensible-input-group > button, sensible-input-group > a.button) {
+    min-block-size: 1.5rem;
+    min-inline-size: min-content;
+    padding-block: 0;
+    padding-inline: 0.5rem;
+    border-radius: calc(var(--radius) - 4px);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    /* Only when space runs out, a long label wraps inside its button
+       instead of pushing the button past the border. */
+    flex-shrink: 1;
+    white-space: normal;
+  }
+
+  /* Buttons drop their resting shadow but keep the focus ring. */
+  :where(
+    sensible-input-group > button:not(:focus-visible),
+    sensible-input-group > a.button:not(:focus-visible)
+  ) {
+    box-shadow: none;
+  }
+
+  :where(
+    sensible-input-group > button[data-size="icon"],
+    sensible-input-group > a.button[data-size="icon"]
+  ) {
+    inline-size: 1.5rem;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  /* Edge actions sit closer to the border than icons and text. */
+  :where(
+    sensible-input-group > button:first-child,
+    sensible-input-group > a.button:first-child
+  ) {
+    margin-inline-start: -0.375rem;
+  }
+
+  :where(
+    sensible-input-group > button:last-child,
+    sensible-input-group > a.button:last-child
+  ) {
+    margin-inline-end: -0.375rem;
+  }
+}
