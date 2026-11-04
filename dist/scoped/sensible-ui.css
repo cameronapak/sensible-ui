@@ -2275,15 +2275,24 @@
         line-height: 1;
       }
 
-      label:has(+ :-webkit-any(input, textarea, select)) {
+      label:has(
+        + :-webkit-any(input, textarea, select),
+        + sensible-tooltip > :-webkit-any(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
-      label:has(+ :-moz-any(input, textarea, select)) {
+      label:has(
+        + :-moz-any(input, textarea, select),
+        + sensible-tooltip > :-moz-any(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
-      label:has(+ :is(input, textarea, select)) {
+      label:has(
+        + :is(input, textarea, select),
+        + sensible-tooltip > :is(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
@@ -5804,8 +5813,12 @@
       }
 
       :where(sensible-button-group > sensible-tooltip > :first-child) {
+        position: relative;
         border-radius: inherit;
-        flex-grow: 1;
+      }
+
+      :where(sensible-button-group > sensible-tooltip > :focus-visible) {
+        z-index: 1;
       }
 
       :where(
@@ -6448,7 +6461,7 @@
     /* src/css/tooltip.css */
     @layer components {
       sensible-tooltip {
-        display: inline-flex;
+        display: contents;
         anchor-scope: --sensible-tooltip;
       }
 
@@ -6481,10 +6494,10 @@
           scale 0.15s ease-out,
           overlay 0.15s ease-out allow-discrete,
           display 0.15s ease-out allow-discrete;
-        border: 0;
+        border: 1px solid #0000;
         inline-size: max-content;
         max-inline-size: min(20rem, 100vw - 1rem);
-        margin: 0 0 0.375rem;
+        margin: 0 0.5rem 0.375rem;
         padding: 0.375rem 0.75rem;
         font-size: 0.75rem;
         line-height: 1rem;
@@ -6523,20 +6536,32 @@
 
       sensible-tooltip[side="bottom"] > [role="tooltip"][popover] {
         position-area: bottom;
-        margin: 0.375rem 0 0;
+        margin: 0.375rem 0.5rem 0;
       }
 
       sensible-tooltip[side="left"] > [role="tooltip"][popover] {
         position-area: left;
-        position-try-fallbacks: flip-inline;
+        position-try-fallbacks:
+          flip-inline, --sensible-tooltip-top, --sensible-tooltip-bottom;
         margin: 0 0.375rem 0 0;
       }
 
       sensible-tooltip[side="right"] > [role="tooltip"][popover] {
         position-area: right;
-        position-try-fallbacks: flip-inline;
+        position-try-fallbacks:
+          flip-inline, --sensible-tooltip-top, --sensible-tooltip-bottom;
         margin: 0 0 0 0.375rem;
       }
+    }
+
+    @position-try --sensible-tooltip-top {
+      position-area: top;
+      margin: 0 0.5rem 0.375rem;
+    }
+
+    @position-try --sensible-tooltip-bottom {
+      position-area: bottom;
+      margin: 0.375rem 0.5rem 0;
     }
 
     /* src/css/utils.css */

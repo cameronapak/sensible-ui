@@ -29,6 +29,13 @@ function setWarm(next: boolean) {
   for (const tooltip of tooltips) tooltip.syncDelay();
 }
 
+// The fallback cannot rely on position-visibility everywhere (Firefox ignores
+// it), so a scroll closes its tooltip instead of leaving it floating.
+addEventListener("scroll", () => openTooltip?.hide(), {
+  capture: true,
+  passive: true,
+});
+
 function coolLater() {
   clearTimeout(coolTimer);
   coolTimer = setTimeout(() => {
@@ -110,8 +117,12 @@ class SensibleTooltip extends HTMLElement {
     tip.addEventListener(
       "toggle",
       (event) => {
-        if ((event as ToggleEvent).newState === "open") setWarm(true);
-        else coolLater();
+        if ((event as ToggleEvent).newState !== "open") return coolLater();
+        setWarm(true);
+        // Native and fallback tooltips can both open, so close the others.
+        // toggle fires a task later, so skip it if this one already closed.
+        if (!this.open) return;
+        for (const other of tooltips) if (other !== this) other.hide();
       },
       { signal },
     );
@@ -121,7 +132,6 @@ class SensibleTooltip extends HTMLElement {
       (event) => {
         if (event.key !== "Escape" || !tip.matches(":popover-open")) return;
         event.preventDefault();
-        event.stopPropagation();
         this.hide();
         // Dismissing ends the reading session.
         setWarm(false);

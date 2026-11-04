@@ -85,9 +85,18 @@ for (const path of ["interest invokers", "fallback listeners"]) {
     await page.locator("#before").focus();
     await page.keyboard.press("Tab");
     await expect(tip).toBeVisible();
+    // Other Escape listeners still run, and see the event as handled.
+    await page.evaluate(() => {
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          Object.assign(window, { handledEscape: event.defaultPrevented });
+        }
+      });
+    });
     await page.keyboard.press("Escape");
     await expect(tip).toBeHidden();
     await expect(save).toBeFocused();
+    expect(await page.evaluate(() => (window as unknown as { handledEscape?: boolean }).handledEscape)).toBe(true);
 
     // Only one tooltip shows at a time; bottom tooltips sit below.
     await page.keyboard.press("Tab");
@@ -250,3 +259,56 @@ for (const path of ["interest invokers", "fallback listeners"]) {
     expect(await delay("Gamma")).toBeGreaterThanOrEqual(400);
   });
 }
+
+test("tooltips keep fields full width, avoid covering their control, and show one at a time", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.setContent(`<main class="sensible-ui" style="padding: 16px">
+    <p><sensible-tooltip side="right">
+      <button id="share">Share</button>
+      <span role="tooltip" id="share-tip">Members can view and comment on this document, but only owners can change sharing settings or delete it.</span>
+    </sensible-tooltip></p>
+    <div>
+      <label for="email">Billing email</label>
+      <sensible-tooltip><input id="email"><span role="tooltip" id="email-tip">Used for invoices</span></sensible-tooltip>
+    </div>
+    <div id="scroller" style="height: 80px; overflow: auto">
+      <sensible-tooltip><input id="row" aria-label="Row note"><span role="tooltip" id="row-tip">Saved with the row</span></sensible-tooltip>
+      <div style="height: 400px"></div>
+    </div>
+  </main>`);
+  await page.addStyleTag({ content: await readFile("dist/sensible-ui.css", "utf8") });
+  await page.addScriptTag({
+    content: await readFile("dist/sensible-tooltip.js", "utf8"),
+    type: "module",
+  });
+  await page.waitForFunction(() => customElements.get("sensible-tooltip"));
+
+  expect((await page.locator("#email").boundingBox())!.width).toBe(288);
+  await expect(page.locator('label[for="email"]')).toHaveCSS("padding-bottom", "8px");
+
+  // A side tooltip with no room beside its control moves above or below it.
+  await page.locator("#share-tip").evaluate((tip: HTMLElement) => tip.showPopover());
+  const tip = (await page.locator("#share-tip").boundingBox())!;
+  const share = (await page.locator("#share").boundingBox())!;
+  expect(tip.y + tip.height <= share.y || tip.y >= share.y + share.height).toBe(true);
+  await page.locator("#share-tip").evaluate((tip: HTMLElement) => tip.hidePopover());
+
+  // A keyboard-focused field's tooltip closes when another tooltip opens.
+  await page.locator("#share").focus();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#email")).toBeFocused();
+  await expect(page.locator("#email-tip")).toBeVisible();
+  await page.locator("#share").hover();
+  await expect(page.locator("#share-tip")).toBeVisible();
+  await expect(page.locator("#email-tip")).toBeHidden();
+
+  // Scrolling closes a fallback tooltip instead of leaving it floating.
+  // Fields use the fallback even where buttons use interest invokers.
+  await page.mouse.move(0, 0);
+  await page.locator("#row").focus();
+  await expect(page.locator("#row-tip")).toBeVisible();
+  await page.locator("#scroller").evaluate((node) => node.scrollTo(0, 200));
+  await expect(page.locator("#row-tip")).toBeHidden();
+});

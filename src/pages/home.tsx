@@ -1254,8 +1254,12 @@ export function Home() {
           <code>role="tooltip"</code> element in{" "}
           <code>&lt;sensible-tooltip&gt;</code>, with the control first. Set{" "}
           <code>side</code> to <code>top</code> (the default),{" "}
-          <code>bottom</code>, <code>left</code>, or <code>right</code>. The
-          tooltip flips to the other side when it would leave the screen.
+          <code>bottom</code>, <code>left</code>, or <code>right</code>; other
+          values show it on top. The tooltip flips to the other side when it
+          would leave the screen, and a left or right tooltip moves above or
+          below its control when neither side has room. The wrapper adds no
+          box, so a wrapped field keeps its width and its <code>label</code>{" "}
+          spacing.
         </p>
         <p>
           Showing the tooltip needs the optional script. Load it as a module,
@@ -1274,7 +1278,11 @@ export function Home() {
           long press, and <kbd>Esc</kbd>. Elsewhere, it shows the tooltip after
           a short hover delay, on keyboard focus, and after a half-second touch
           hold. People can move the pointer onto the tooltip, and{" "}
-          <kbd>Esc</kbd> closes it. In both cases, once a tooltip shows, the
+          <kbd>Esc</kbd> closes it. Scrolling also closes it, so it never
+          floats away from a control that scrolled out of view. Only one
+          tooltip shows at a time. <kbd>Esc</kbd> that closes a tooltip has{" "}
+          <code>defaultPrevented</code> set, so check it before your own{" "}
+          <kbd>Esc</kbd> shortcuts act. In both cases, once a tooltip shows, the
           next tooltip shows without the delay while people move between
           controls. The delay returns 300ms after the last tooltip closes, or
           right after <kbd>Esc</kbd>. Without the script, the text stays hidden

@@ -203,11 +203,15 @@
     border-bottom-right-radius: 0;
   }
 
-  /* A tooltip wrapper passes its corners and shared border on to its
-     control. */
+  /* A tooltip wrapper has no box, so its control sits in the row and takes
+     the wrapper's corners and shared border. */
   :where(sensible-button-group > sensible-tooltip > :first-child) {
-    flex-grow: 1;
+    position: relative;
     border-radius: inherit;
+  }
+
+  :where(sensible-button-group > sensible-tooltip > :focus-visible) {
+    z-index: 1;
   }
 
   :where(

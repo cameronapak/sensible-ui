@@ -2770,15 +2770,24 @@
         line-height: 1;
       }
 
-      label:has(+ :-webkit-any(input, textarea, select)) {
+      label:has(
+        + :-webkit-any(input, textarea, select),
+        + sensible-tooltip > :-webkit-any(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
-      label:has(+ :-moz-any(input, textarea, select)) {
+      label:has(
+        + :-moz-any(input, textarea, select),
+        + sensible-tooltip > :-moz-any(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
-      label:has(+ :is(input, textarea, select)) {
+      label:has(
+        + :is(input, textarea, select),
+        + sensible-tooltip > :is(input, textarea, select):first-child
+      ) {
         padding-bottom: 0.5rem;
       }
 
@@ -3372,8 +3381,12 @@
       }
 
       :where(sensible-button-group > sensible-tooltip > :first-child) {
+        position: relative;
         border-radius: inherit;
-        flex-grow: 1;
+      }
+
+      :where(sensible-button-group > sensible-tooltip > :focus-visible) {
+        z-index: 1;
       }
 
       :where(

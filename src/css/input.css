@@ -180,7 +180,10 @@
     overflow-wrap: anywhere;
     user-select: none;
 
-    &:has(+ :is(input, textarea, select)) {
+    &:has(
+      + :is(input, textarea, select),
+      + sensible-tooltip > :is(input, textarea, select):first-child
+    ) {
       padding-bottom: 0.5rem;
     }
     &:has(> *:disabled),

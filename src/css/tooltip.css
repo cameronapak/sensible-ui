@@ -1,6 +1,8 @@
 @layer components {
+  /* The wrapper adds no box, so a wrapped field keeps its full width and
+     form, group, and layout rules still see the control. */
   sensible-tooltip {
-    display: inline-flex;
+    display: contents;
     anchor-scope: --sensible-tooltip;
 
     > :first-child {
@@ -25,12 +27,14 @@
       position-area: top;
       position-try-fallbacks: flip-block;
       inset: auto;
-      margin: 0 0 0.375rem;
+      /* The inline margins keep a shifted tooltip off the viewport edge. */
+      margin: 0 0.5rem 0.375rem;
       inline-size: max-content;
       max-inline-size: min(20rem, calc(100vw - 1rem));
       padding: 0.375rem 0.75rem;
       overflow: visible;
-      border: 0;
+      /* A transparent border outlines the tooltip in forced colors. */
+      border: 1px solid transparent;
       border-radius: calc(var(--radius) - 2px);
       background: var(--foreground);
       color: var(--background);
@@ -73,18 +77,36 @@
 
   sensible-tooltip[side="bottom"] > [role="tooltip"][popover] {
     position-area: bottom;
-    margin: 0.375rem 0 0;
+    margin: 0.375rem 0.5rem 0;
   }
 
+  /* On narrow screens a side tooltip that fits neither side moves above or
+     below its control instead of covering it. */
   sensible-tooltip[side="left"] > [role="tooltip"][popover] {
     position-area: left;
-    position-try-fallbacks: flip-inline;
+    position-try-fallbacks:
+      flip-inline,
+      --sensible-tooltip-top,
+      --sensible-tooltip-bottom;
     margin: 0 0.375rem 0 0;
   }
 
   sensible-tooltip[side="right"] > [role="tooltip"][popover] {
     position-area: right;
-    position-try-fallbacks: flip-inline;
+    position-try-fallbacks:
+      flip-inline,
+      --sensible-tooltip-top,
+      --sensible-tooltip-bottom;
     margin: 0 0 0 0.375rem;
   }
+}
+
+@position-try --sensible-tooltip-top {
+  position-area: top;
+  margin: 0 0.5rem 0.375rem;
+}
+
+@position-try --sensible-tooltip-bottom {
+  position-area: bottom;
+  margin: 0.375rem 0.5rem 0;
 }
