@@ -5353,10 +5353,14 @@
 @layer utilities {
   sensible-button-group {
     display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
     align-items: stretch;
     inline-size: -moz-fit-content;
     inline-size: fit-content;
-    max-inline-size: 100%;
+    max-inline-size: calc(100% + 6px);
+    margin: -3px;
+    padding: 3px;
   }
 
   sensible-button-group[orientation="vertical"] {
@@ -5368,8 +5372,14 @@
     gap: 0.5rem;
   }
 
-  sensible-button-group:has(> input, > select, > sensible-input-group) {
-    inline-size: 100%;
+  sensible-button-group:has(
+    > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
+        [type="hidden"]
+      ):not([type="color"]),
+    > select,
+    > sensible-input-group
+  ) {
+    inline-size: calc(100% + 6px);
   }
 
   :where(sensible-button-group > *) {
@@ -5377,20 +5387,31 @@
   }
 
   :where(
+    sensible-button-group > *,
+    sensible-button-group > sensible-tooltip > *
+  ) {
+    scale: none;
+  }
+
+  :where(
     sensible-button-group > :focus-visible,
-    sensible-button-group > :focus-within
+    sensible-button-group > :focus-within,
+    sensible-button-group > [aria-invalid="true"]
   ) {
     z-index: 1;
   }
 
   :where(
-    sensible-button-group > input,
+    sensible-button-group
+      > input:not([type="checkbox"]):not([type="radio"]):not(
+        [type="range"]
+      ):not([type="hidden"]):not([type="color"]),
     sensible-button-group > select,
     sensible-button-group > sensible-input-group
   ) {
     flex: auto;
     inline-size: auto;
-    min-inline-size: 0;
+    min-inline-size: min(8rem, 100%);
   }
 
   :where(
@@ -5405,6 +5426,7 @@
     white-space: nowrap;
     align-items: center;
     gap: 0.5rem;
+    min-block-size: 2.25rem;
     padding: 0 1rem;
     font-size: 0.875rem;
     font-weight: 500;
@@ -5429,719 +5451,156 @@
     margin: 0;
   }
 
+  :where(sensible-button-group[orientation="vertical"] > *) {
+    inline-size: auto;
+  }
+
   :where(sensible-button-group[orientation="vertical"] > hr) {
     block-size: 1px;
-    inline-size: auto;
+  }
+
+  :where(sensible-button-group > *) {
+    --sensible-button-group-start-radius: calc(var(--radius) - 2px);
+    --sensible-button-group-end-radius: calc(var(--radius) - 2px);
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    --sensible-button-group-start-radius: 0;
+    border-inline-start-width: 0;
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-last-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    --sensible-button-group-end-radius: 0;
   }
 
   :where(
     sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-start-radius);
+    border-bottom-left-radius: var(--sensible-button-group-start-radius);
+    border-top-right-radius: var(--sensible-button-group-end-radius);
+    border-bottom-right-radius: var(--sensible-button-group-end-radius);
+  }
+
+  :where(
+    [dir="rtl"]
+      sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    sensible-button-group[dir="rtl"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-end-radius);
+    border-bottom-left-radius: var(--sensible-button-group-end-radius);
+    border-top-right-radius: var(--sensible-button-group-start-radius);
+    border-bottom-right-radius: var(--sensible-button-group-start-radius);
+  }
+
+  :where(
+    [dir="rtl"]
+      [dir="ltr"]
+      sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    [dir="rtl"]
+      sensible-button-group[dir="ltr"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-start-radius);
+    border-bottom-left-radius: var(--sensible-button-group-start-radius);
+    border-top-right-radius: var(--sensible-button-group-end-radius);
+    border-bottom-right-radius: var(--sensible-button-group-end-radius);
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-block-start-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  :where(
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > :not(sensible-button-group):not(hr):not(
+        :nth-last-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+  ) {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  :where(sensible-button-group > sensible-tooltip > :first-child) {
+    border-radius: inherit;
+    flex-grow: 1;
+  }
+
+  :where(
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > sensible-tooltip:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+      > :first-child
   ) {
     border-inline-start-width: 0;
   }
 
   :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :-webkit-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :-moz-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :is(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):-webkit-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):-moz-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):is(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :-webkit-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :-moz-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :is(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):-webkit-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):-moz-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group:not([orientation="vertical"])
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):is(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > sensible-tooltip:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
+      > :first-child
   ) {
     border-block-start-width: 0;
   }
 
   :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :-webkit-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
+    sensible-button-group:not([orientation="vertical"]):not(
+        :has(> sensible-button-group)
+      )
+      > [aria-invalid="true"]:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
   ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-inline-start-width: 1px;
+    margin-inline-start: -1px;
   }
 
   :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :-moz-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
+    sensible-button-group[orientation="vertical"]:not(
+        :has(> sensible-button-group)
+      )
+      > [aria-invalid="true"]:not(
+        :nth-child(1 of :not([hidden]):not([type="hidden"]))
+      )
   ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):not(
-    :is(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):-webkit-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):-moz-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:first-child)
-  ):is(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :-webkit-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :-moz-any(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):not(
-    :is(
-      :lang(ae),
-      :lang(ar),
-      :lang(arc),
-      :lang(bcc),
-      :lang(bqi),
-      :lang(ckb),
-      :lang(dv),
-      :lang(fa),
-      :lang(glk),
-      :lang(he),
-      :lang(ku),
-      :lang(mzn),
-      :lang(nqo),
-      :lang(pnb),
-      :lang(ps),
-      :lang(sd),
-      :lang(ug),
-      :lang(ur),
-      :lang(yi)
-    )
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):-webkit-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):-moz-any(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  :where(
-    sensible-button-group[orientation="vertical"]
-      > :not(sensible-button-group):not(hr):not(:last-child)
-  ):is(
-    :lang(ae),
-    :lang(ar),
-    :lang(arc),
-    :lang(bcc),
-    :lang(bqi),
-    :lang(ckb),
-    :lang(dv),
-    :lang(fa),
-    :lang(glk),
-    :lang(he),
-    :lang(ku),
-    :lang(mzn),
-    :lang(nqo),
-    :lang(pnb),
-    :lang(ps),
-    :lang(sd),
-    :lang(ug),
-    :lang(ur),
-    :lang(yi)
-  ) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border-block-start-width: 1px;
+    margin-block-start: -1px;
   }
 }
 

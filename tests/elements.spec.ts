@@ -101,6 +101,109 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
 }
 
 for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
+  test(`${bundle}: button groups keep long, hidden, wrapped, and RTL children usable`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.setContent(`<main class="sensible-ui" style="padding: 16px">
+      <sensible-button-group id="long">
+        <button data-variant="outline">Archivieren</button>
+        <button data-variant="outline">Als Spam melden</button>
+        <button data-variant="outline">Aleksandra Wiśniewska-Kowalczyk zuweisen</button>
+      </sensible-button-group>
+      <sensible-button-group id="prefix">
+        <span>https://northwind-industries-holdings.example.com/</span><input aria-label="Path">
+      </sensible-button-group>
+      <sensible-button-group id="check">
+        <input type="checkbox" aria-label="Select all"><button data-variant="outline">More</button>
+      </sensible-button-group>
+      <sensible-button-group id="hidden">
+        <button hidden>Undo</button><button data-variant="outline">Redo</button>
+        <button data-variant="outline">Save</button><input type="hidden" name="draft">
+      </sensible-button-group>
+      <sensible-button-group id="tips">
+        <sensible-tooltip><button data-variant="outline">B</button><span role="tooltip">Bold</span></sensible-tooltip>
+        <sensible-tooltip><button data-variant="outline">I</button><span role="tooltip">Italic</span></sensible-tooltip>
+      </sensible-button-group>
+      <sensible-button-group id="nested">
+        <sensible-button-group><button data-variant="outline">A</button></sensible-button-group>
+        <button data-variant="outline">After</button>
+      </sensible-button-group>
+      <sensible-button-group id="invalid">
+        <button data-variant="outline">To</button><input aria-label="Email" aria-invalid="true">
+      </sensible-button-group>
+      <sensible-button-group id="vertical" orientation="vertical">
+        <button data-variant="outline" data-size="icon" aria-label="Up">^</button>
+        <button data-variant="outline">Longer text</button>
+      </sensible-button-group>
+      <div dir="rtl">
+        <sensible-button-group id="rtl">
+          <button data-variant="outline">One</button><button data-variant="outline">Two</button>
+        </sensible-button-group>
+      </div>
+    </main>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    // A row longer than its container scrolls inside the group.
+    const long = page.locator("#long");
+    expect(
+      await long.evaluate((node) => node.scrollWidth > node.clientWidth),
+    ).toBe(true);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBe(320);
+
+    expect((await page.locator("#prefix > input").boundingBox())!.width).toBe(128);
+    expect((await page.locator("#check > input").boundingBox())!.width).toBeLessThan(20);
+
+    expect(await radii(page, "#hidden > :nth-child(2)")).toMatchObject({
+      startStart: "8px",
+      inlineStart: "1px",
+    });
+    expect(await radii(page, "#hidden > :nth-child(3)")).toMatchObject({
+      endEnd: "8px",
+    });
+    expect((await page.locator("#hidden").boundingBox())!.width).toBeLessThan(200);
+
+    expect(await radii(page, "#tips > :first-child > button")).toMatchObject({
+      startStart: "8px",
+      startEnd: "0px",
+    });
+    expect(await radii(page, "#tips > :last-child > button")).toMatchObject({
+      startStart: "0px",
+      endEnd: "8px",
+      inlineStart: "0px",
+    });
+
+    expect(await radii(page, "#nested > button")).toMatchObject({
+      startStart: "8px",
+      inlineStart: "1px",
+    });
+    await expect(page.locator("#invalid > input")).toHaveCSS(
+      "border-inline-start-color",
+      "oklch(0.577 0.245 27.325)",
+    );
+    expect(await radii(page, "#invalid > input")).toMatchObject({
+      inlineStart: "1px",
+    });
+
+    const up = (await page.locator("#vertical > :first-child").boundingBox())!;
+    const text = (await page.locator("#vertical > :last-child").boundingBox())!;
+    expect(up.width).toBe(text.width);
+
+    // With dir="rtl" and no lang, the first child rounds its right corners.
+    await expect(page.locator("#rtl > :first-child")).toHaveCSS(
+      "border-top-right-radius",
+      "8px",
+    );
+    await expect(page.locator("#rtl > :first-child")).toHaveCSS(
+      "border-top-left-radius",
+      "0px",
+    );
+  });
+}
+
+for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
   test(`${bundle}: input groups draw one field around icons, text, and actions`, async ({
     page,
   }) => {

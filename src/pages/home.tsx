@@ -1174,6 +1174,14 @@ export function Home() {
           groups to put space between them.
         </p>
         <p>
+          A row that is too long for its container scrolls sideways, and text
+          inputs keep at least 8rem. A <code>&lt;sensible-tooltip&gt;</code>{" "}
+          around a control joins like the control itself. Other wrappers break
+          the join, so put a checkbox inside a <code>label</code>, and point a
+          button at a form with its <code>form</code> attribute instead of
+          wrapping it in the <code>form</code>. Use one button size per group.
+        </p>
+        <p>
           The element only changes how controls look. When the controls act on
           the same thing, add <code>role="group"</code> and an{" "}
           <code>aria-label</code> so screen readers announce the group. Every
