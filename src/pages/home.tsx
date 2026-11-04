@@ -1281,8 +1281,10 @@ export function Home() {
           long press, and <kbd>Esc</kbd>. Elsewhere, it shows the tooltip after
           a short hover delay, on keyboard focus, and after a half-second touch
           hold. People can move the pointer onto the tooltip, and{" "}
-          <kbd>Esc</kbd> closes it. Scrolling also closes it, so it never
-          floats away from a control that scrolled out of view. If the
+          <kbd>Esc</kbd> closes it. It also closes once its control scrolls
+          out of view, so it never floats away from it. Touch behavior is
+          tested with emulated touch input, not yet on real phones or tablets.
+          If the
           browser's anchor positioning leaves a tooltip away from its control,
           as Firefox does in a right-to-left part of a left-to-right page, the
           script places it beside the control. Only one tooltip shows at a
