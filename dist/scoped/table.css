@@ -458,6 +458,118 @@
 
     /* src/css/table.css */
     @layer components {
+      [data-slot="table-container"] {
+        --table-fade-color: var(--background);
+        container-type: inline-size;
+        position: relative;
+        display: grid;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        width: 100%;
+      }
+
+      [data-slot="table-container"].card {
+        --table-fade-color: var(--card);
+      }
+
+      [data-slot="table-container"] > table {
+        grid-area: 1 / 1;
+      }
+
+      [data-slot="table-container"] > table > caption {
+        position: sticky;
+        inline-size: 100cqi;
+        left: 0;
+        right: 0;
+      }
+
+      [data-slot="table-container"]:focus-visible {
+        outline: 3px solid color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      [data-slot="table-container"]:focus-visible.card {
+        border-color: var(--ring);
+      }
+
+      @supports (animation-timeline: scroll()) {
+        [data-slot="table-container"]:before,
+        [data-slot="table-container"]:after {
+          content: "";
+          position: sticky;
+          z-index: 1;
+          grid-area: 1 / 1;
+          inline-size: 2rem;
+          opacity: 0;
+          pointer-events: none;
+          animation: linear both;
+          animation-timeline: scroll(nearest inline);
+        }
+
+        [data-slot="table-container"]:before {
+          inset-inline-start: 0;
+          justify-self: start;
+          background: linear-gradient(
+            to right,
+            var(--table-fade-color),
+            transparent
+          );
+          animation-name: sensible-table-fade-start;
+        }
+
+        [data-slot="table-container"]:after {
+          inset-inline-end: 0;
+          justify-self: end;
+          background: linear-gradient(
+            to left,
+            var(--table-fade-color),
+            transparent
+          );
+          animation-name: sensible-table-fade-end;
+        }
+
+        [data-slot="table-container"]:dir(rtl):before {
+          background: linear-gradient(
+            to left,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+
+        [data-slot="table-container"]:dir(rtl):after {
+          background: linear-gradient(
+            to right,
+            var(--table-fade-color),
+            transparent
+          );
+        }
+      }
+
+      @keyframes sensible-table-fade-start {
+        0% {
+          opacity: 0;
+        }
+
+        5%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes sensible-table-fade-end {
+        0%,
+        95% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+
+      :is(table.card, [data-slot="table-container"].card > table) > caption {
+        padding-block-end: 1rem;
+      }
+
       table {
         caption-side: bottom;
         width: 100%;
@@ -496,43 +608,103 @@
           border-color 0.15s;
       }
 
+      table tr:has([aria-expanded="true"]) {
+        background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+      }
+
       @media (hover: hover) {
         table tr:hover {
           background-color: color-mix(in oklab, var(--muted) 50%, transparent);
         }
       }
 
+      table tr[aria-selected="true"] {
+        background-color: var(--muted);
+      }
+
       table th {
-        color: var(--foreground);
-        text-align: left;
         vertical-align: middle;
-        white-space: nowrap;
-        height: 2.5rem;
-        padding-inline-start: 0.5rem;
-        padding-inline-end: 0.5rem;
-        font-weight: 500;
+        padding: 0.5rem;
       }
 
-      table th:has([role="checkbox"]) {
-        padding-right: 0;
+      table
+        th:has(
+          > :-webkit-any(input[type="checkbox"], [role="checkbox"]):only-child
+        ) {
+        padding-inline-end: 0;
       }
 
-      table th > [role="checkbox"] {
-        translate: 0 2px;
+      table
+        th:has(
+          > :-moz-any(input[type="checkbox"], [role="checkbox"]):only-child
+        ) {
+        padding-inline-end: 0;
+      }
+
+      table
+        th:has(> :is(input[type="checkbox"], [role="checkbox"]):only-child) {
+        padding-inline-end: 0;
+      }
+
+      table th > :-webkit-any(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+
+      table th > :-moz-any(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+
+      table th > :is(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
       }
 
       table td {
         vertical-align: middle;
-        white-space: nowrap;
         padding: 0.5rem;
       }
 
-      table td:has([role="checkbox"]) {
-        padding-right: 0;
+      table
+        td:has(
+          > :-webkit-any(input[type="checkbox"], [role="checkbox"]):only-child
+        ) {
+        padding-inline-end: 0;
       }
 
-      table td > [role="checkbox"] {
-        translate: 0 2px;
+      table
+        td:has(
+          > :-moz-any(input[type="checkbox"], [role="checkbox"]):only-child
+        ) {
+        padding-inline-end: 0;
+      }
+
+      table
+        td:has(> :is(input[type="checkbox"], [role="checkbox"]):only-child) {
+        padding-inline-end: 0;
+      }
+
+      table td > :-webkit-any(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+
+      table td > :-moz-any(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+
+      table td > :is(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+
+      table th {
+        color: var(--foreground);
+        text-align: start;
+        font-weight: 500;
+      }
+
+      table thead th {
+        white-space: nowrap;
+        height: 2.5rem;
+        padding-block-start: 0;
+        padding-block-end: 0;
       }
 
       table caption {

@@ -4,6 +4,7 @@ import { jsxRenderer } from 'hono/jsx-renderer'
 import { Home } from './pages/home.tsx'
 import { ScopedDemo } from './pages/scoped.tsx'
 import { CodeBreak } from './pages/code-break.tsx'
+import { TableBreak } from './pages/table-break.tsx'
 
 const app = new Hono()
 
@@ -38,6 +39,11 @@ app.use(
 
 app.get('/', (context) => context.render(<Home />))
 app.get('/code-break', (context) => context.render(<CodeBreak />))
+app.get('/table-break', (context) =>
+  context.render(
+    <TableBreak data={context.req.query('data')} width={context.req.query('width')} />,
+  ),
+)
 app.get('/scoped/', (context) =>
   context.html(html`<!DOCTYPE html>${<ScopedDemo />}`),
 )

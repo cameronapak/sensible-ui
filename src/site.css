@@ -87,7 +87,7 @@
   color-scheme: dark;
 }
 
-.docs-preview > :is(.card, form, figure) {
+.docs-preview > :is(.card:not([data-slot="table-container"]), form, figure) {
   max-width: 40rem;
 }
 
@@ -112,16 +112,6 @@
 
 .docs-page pre code {
   user-select: text;
-}
-
-.docs-table-scroll {
-  min-width: 0;
-  overflow-x: auto;
-  padding: 1px;
-}
-
-.docs-table-scroll .docs-example {
-  min-width: 36rem;
 }
 
 .docs-footer {

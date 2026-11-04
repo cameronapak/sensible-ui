@@ -305,31 +305,33 @@ const descriptionListExample = `
 </dl>`;
 
 const tableExample = `
-<table class="card">
-  <caption>Current project members</caption>
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Role</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Margaret Nguyen</th>
-      <td>Owner</td>
-      <td>Active</td>
-    </tr>
-    <tr>
-      <th scope="row">Hoshi Nakamura</th>
-      <td>Editor</td>
-      <td>Invited</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr><th scope="row" colspan="2">Total</th><td>2</td></tr>
-  </tfoot>
-</table>`;
+<div data-slot="table-container" class="card" role="region" aria-labelledby="members-caption" tabindex="0">
+  <table>
+    <caption id="members-caption">Current project members</caption>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Margaret Nguyen</th>
+        <td>Owner</td>
+        <td>Active</td>
+      </tr>
+      <tr>
+        <th scope="row">Hoshi Nakamura</th>
+        <td>Editor</td>
+        <td>Invited</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><th scope="row" colspan="2">Total</th><td>2</td></tr>
+    </tfoot>
+  </table>
+</div>`;
 
 const layoutsExample = `
 <div class="stack">
@@ -485,12 +487,13 @@ export function Home() {
         <p>
           Standalone component imports include the theme and base styles they
           need. When markup combines components, import each component. For
-          example, <code>&lt;table class="card"&gt;</code> needs both{" "}
+          example, <code>&lt;div data-slot="table-container" class="card"&gt;</code>{" "}
+          needs both{" "}
           <code>/table</code> and <code>/card</code>.
         </p>
         <details>
           <summary>All public stylesheet exports</summary>
-          <div class="docs-table-scroll">
+          <div data-slot="table-container">
             <table>
               <thead>
                 <tr>
@@ -812,13 +815,18 @@ export function Home() {
         <p>
           Use tables for two-dimensional data. Add a caption when the
           surrounding context does not already identify the table, and use
-          <code>scope</code> on row and column headers. Add{" "}
-          <code>class="card"</code> and import the card module for the bordered
-          treatment.
+          <code>scope</code> on row and column headers. Wrap the table in{" "}
+          <code>data-slot="table-container"</code> so wide content scrolls
+          horizontally instead of overflowing the page. Body cells wrap before
+          the table scrolls, the caption stays in view, and a fade marks the
+          edge with more columns. Give the container{" "}
+          <code>role="region"</code>, <code>tabindex="0"</code>, and{" "}
+          <code>aria-labelledby</code> pointing at the caption so keyboard
+          users can scroll it. Add{" "}
+          <code>class="card"</code> to the container and import the card module
+          for the bordered treatment.
         </p>
-        <div class="docs-table-scroll">
-          <CodeExample code={tableExample} />
-        </div>
+        <CodeExample code={tableExample} />
       </section>
 
       <section class="docs-section stack" id="card">

@@ -210,7 +210,7 @@ If you use a bundler, import the matching package subpaths in your CSS:
 ```
 
 Use the root import when you want the complete bundle. Use subpath imports when you only need selected components.
-If markup combines components, such as `<table class="card">`, import both subpaths.
+If markup combines components, such as `<div data-slot="table-container" class="card">`, import both subpaths.
 
 ## Layouts and optional utilities
 

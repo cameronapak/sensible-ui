@@ -1,4 +1,100 @@
 @layer components {
+  [data-slot="table-container"] {
+    --table-fade-color: var(--background);
+
+    container-type: inline-size;
+    position: relative;
+    display: grid;
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+
+    &.card {
+      --table-fade-color: var(--card);
+    }
+
+    > table {
+      grid-area: 1 / 1;
+    }
+
+    /* Keep the caption in the visible area while the columns scroll. */
+    > table > caption {
+      position: sticky;
+      inset-inline: 0;
+      inline-size: 100cqi;
+    }
+
+    &:focus-visible {
+      outline: 3px solid color-mix(in oklab, var(--ring) 50%, transparent);
+
+      &.card {
+        border-color: var(--ring);
+      }
+    }
+
+    /* Fade the edge that hides more columns. Without scroll-driven animations, the edge clips. */
+    @supports (animation-timeline: scroll()) {
+      &::before,
+      &::after {
+        content: "";
+        position: sticky;
+        z-index: 1;
+        grid-area: 1 / 1;
+        inline-size: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        animation: linear both;
+        animation-timeline: scroll(nearest inline);
+      }
+
+      &::before {
+        inset-inline-start: 0;
+        justify-self: start;
+        background: linear-gradient(to right, var(--table-fade-color), transparent);
+        animation-name: sensible-table-fade-start;
+      }
+
+      &::after {
+        inset-inline-end: 0;
+        justify-self: end;
+        background: linear-gradient(to left, var(--table-fade-color), transparent);
+        animation-name: sensible-table-fade-end;
+      }
+
+      &:dir(rtl)::before {
+        background: linear-gradient(to left, var(--table-fade-color), transparent);
+      }
+
+      &:dir(rtl)::after {
+        background: linear-gradient(to right, var(--table-fade-color), transparent);
+      }
+    }
+  }
+
+  @keyframes sensible-table-fade-start {
+    0% {
+      opacity: 0;
+    }
+    5%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes sensible-table-fade-end {
+    0%,
+    95% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  :is(table.card, [data-slot="table-container"].card > table) > caption {
+    padding-block-end: 1rem;
+  }
+
   table {
     width: 100%;
     caption-side: bottom;
@@ -33,41 +129,42 @@
         background-color 150ms,
         border-color 150ms;
 
+      &:has([aria-expanded="true"]) {
+        background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+      }
+
       @media (hover: hover) {
         &:hover {
           background-color: color-mix(in oklab, var(--muted) 50%, transparent);
         }
       }
-    }
-    th {
-      height: 2.5rem;
-      padding-inline: 0.5rem;
-      color: var(--foreground);
-      font-weight: 500;
-      text-align: left;
-      vertical-align: middle;
-      white-space: nowrap;
 
-      &:has([role="checkbox"]) {
-        padding-right: 0;
-      }
-
-      > [role="checkbox"] {
-        translate: 0 2px;
+      &[aria-selected="true"] {
+        background-color: var(--muted);
       }
     }
+    th,
     td {
       padding: 0.5rem;
       vertical-align: middle;
+
+      &:has(> :is(input[type="checkbox"], [role="checkbox"]):only-child) {
+        padding-inline-end: 0;
+      }
+
+      > :is(input[type="checkbox"], [role="checkbox"]) {
+        vertical-align: middle;
+      }
+    }
+    th {
+      color: var(--foreground);
+      font-weight: 500;
+      text-align: start;
+    }
+    thead th {
+      height: 2.5rem;
+      padding-block: 0;
       white-space: nowrap;
-
-      &:has([role="checkbox"]) {
-        padding-right: 0;
-      }
-
-      > [role="checkbox"] {
-        translate: 0 2px;
-      }
     }
     caption {
       margin-top: 1rem;

@@ -480,7 +480,7 @@
         border: 0;
       }
 
-      .card:not(:-webkit-any(table, dl)) {
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"])) {
         container-type: inline-size;
         display: flex;
         overflow-wrap: anywhere;
@@ -493,24 +493,27 @@
         padding-block-end: 0;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > :-webkit-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > :-moz-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :is(header, section, footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :is(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :last-child:not(footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :last-child:not(footer) {
         margin-block-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > header {
         display: grid;
         grid-template-rows: auto auto;
         grid-auto-rows: min-content;
@@ -520,11 +523,14 @@
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header:has([data-slot="card-action"]) {
         grid-template-columns: minmax(0, 1fr) auto;
       }
 
-      .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        [data-slot="card-action"] {
         grid-row: 1 / span 2;
         grid-column: 2;
         min-inline-size: 0;
@@ -535,11 +541,12 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > header.border-b {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header.border-b {
         padding-bottom: 1.5rem;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > header
         :-webkit-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
@@ -550,7 +557,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -559,7 +568,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -568,7 +579,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-webkit-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -577,7 +590,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -586,7 +601,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(p, span) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -595,21 +612,23 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > section {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section {
         padding-inline-start: 1rem;
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > section * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
         overflow-wrap: anywhere;
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > section > :last-child {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > section
+        > :last-child {
         margin-bottom: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > footer {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
         display: grid;
         grid-template-rows: repeat(2, minmax(0, 1fr));
         border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -619,12 +638,12 @@
         padding: 1rem;
       }
 
-      .card:not(:is(table, dl)) > footer > * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
         min-inline-size: 0;
         max-inline-size: 100%;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > footer
         > :-webkit-any(button, a.button) {
         white-space: normal;
@@ -632,19 +651,23 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > footer
+        > :-moz-any(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > footer
+        > :is(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
-      .card:not(:-moz-any(table, dl)) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"])) {
         container-type: inline-size;
         display: flex;
         overflow-wrap: anywhere;
@@ -657,24 +680,27 @@
         padding-block-end: 0;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > :-webkit-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > :-moz-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :is(header, section, footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :is(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :last-child:not(footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :last-child:not(footer) {
         margin-block-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > header {
         display: grid;
         grid-template-rows: auto auto;
         grid-auto-rows: min-content;
@@ -684,11 +710,14 @@
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header:has([data-slot="card-action"]) {
         grid-template-columns: minmax(0, 1fr) auto;
       }
 
-      .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        [data-slot="card-action"] {
         grid-row: 1 / span 2;
         grid-column: 2;
         min-inline-size: 0;
@@ -699,11 +728,12 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > header.border-b {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header.border-b {
         padding-bottom: 1.5rem;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > header
         :-webkit-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
@@ -714,7 +744,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -723,7 +755,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -732,7 +766,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-webkit-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -741,7 +777,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -750,7 +788,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(p, span) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -759,21 +799,23 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > section {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section {
         padding-inline-start: 1rem;
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > section * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
         overflow-wrap: anywhere;
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > section > :last-child {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > section
+        > :last-child {
         margin-bottom: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > footer {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
         display: grid;
         grid-template-rows: repeat(2, minmax(0, 1fr));
         border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -783,12 +825,12 @@
         padding: 1rem;
       }
 
-      .card:not(:is(table, dl)) > footer > * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
         min-inline-size: 0;
         max-inline-size: 100%;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > footer
         > :-webkit-any(button, a.button) {
         white-space: normal;
@@ -796,19 +838,23 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > footer
+        > :-moz-any(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > footer
+        > :is(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) {
+      .card:not(:is(table, dl, [data-slot="table-container"])) {
         container-type: inline-size;
         display: flex;
         overflow-wrap: anywhere;
@@ -821,24 +867,27 @@
         padding-block-end: 0;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > :-webkit-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > :-moz-any(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :is(header, section, footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :is(header, section, footer) {
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > :last-child:not(footer) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > :last-child:not(footer) {
         margin-block-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > header {
         display: grid;
         grid-template-rows: auto auto;
         grid-auto-rows: min-content;
@@ -848,11 +897,14 @@
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header:has([data-slot="card-action"]) {
         grid-template-columns: minmax(0, 1fr) auto;
       }
 
-      .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        [data-slot="card-action"] {
         grid-row: 1 / span 2;
         grid-column: 2;
         min-inline-size: 0;
@@ -863,11 +915,12 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > header.border-b {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header.border-b {
         padding-bottom: 1.5rem;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > header
         :-webkit-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
@@ -878,7 +931,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -887,7 +942,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(h2, h3, h4, h5, h6) {
         overflow-wrap: anywhere;
         font-weight: 600;
         line-height: 1;
@@ -896,7 +953,9 @@
         font-size: 1rem !important;
       }
 
-      .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-webkit-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -905,7 +964,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > header
+        :-moz-any(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -914,7 +975,9 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > header :is(p, span) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > header
+        :is(p, span) {
         color: var(--muted-foreground);
         overflow-wrap: anywhere;
         font-size: 0.875rem;
@@ -923,21 +986,23 @@
         padding: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > section {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section {
         padding-inline-start: 1rem;
         padding-inline-end: 1rem;
       }
 
-      .card:not(:is(table, dl)) > section * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
         overflow-wrap: anywhere;
         min-inline-size: 0;
       }
 
-      .card:not(:is(table, dl)) > section > :last-child {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > section
+        > :last-child {
         margin-bottom: 0 !important;
       }
 
-      .card:not(:is(table, dl)) > footer {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
         display: grid;
         grid-template-rows: repeat(2, minmax(0, 1fr));
         border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -947,12 +1012,12 @@
         padding: 1rem;
       }
 
-      .card:not(:is(table, dl)) > footer > * {
+      .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
         min-inline-size: 0;
         max-inline-size: 100%;
       }
 
-      .card:not(:-webkit-any(table, dl))
+      .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
         > footer
         > :-webkit-any(button, a.button) {
         white-space: normal;
@@ -960,24 +1025,29 @@
         min-height: 2.25rem;
       }
 
-      .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+      .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+        > footer
+        > :-moz-any(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
-      .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+      .card:not(:is(table, dl, [data-slot="table-container"]))
+        > footer
+        > :is(button, a.button) {
         white-space: normal;
         height: auto;
         min-height: 2.25rem;
       }
 
       @container (width < 24rem) {
-        .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+        .card:not(:is(table, dl, [data-slot="table-container"]))
+          > header:has([data-slot="card-action"]) {
           grid-template-columns: minmax(0, 1fr);
         }
 
-        .card:not(:is(table, dl))
+        .card:not(:is(table, dl, [data-slot="table-container"]))
           > header:has([data-slot="card-action"])
           [data-slot="card-action"] {
           grid-row: auto;
@@ -989,11 +1059,12 @@
       }
 
       @container (width < 12rem) {
-        .card:not(:is(table, dl)) > :is(header, section) {
+        .card:not(:is(table, dl, [data-slot="table-container"]))
+          > :is(header, section) {
           padding-inline: 0.5rem;
         }
 
-        .card:not(:is(table, dl)) > footer {
+        .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
           padding: 0.5rem;
         }
       }

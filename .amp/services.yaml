@@ -10,3 +10,5 @@ services:
         title: Scoped demo
       - url: /code-break
         title: Code stress cases
+      - url: /table-break?data=worst
+        title: Table stress cases

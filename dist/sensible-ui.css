@@ -908,7 +908,7 @@
     border: 0;
   }
 
-  .card:not(:-webkit-any(table, dl)) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"])) {
     container-type: inline-size;
     display: flex;
     overflow-wrap: anywhere;
@@ -921,23 +921,27 @@
     padding-block-end: 0;
   }
 
-  .card:not(:-webkit-any(table, dl)) > :-webkit-any(header, section, footer) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > :-webkit-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > :-moz-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :is(header, section, footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :is(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :last-child:not(footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :last-child:not(footer) {
     margin-block-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header {
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -947,11 +951,14 @@
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header:has([data-slot="card-action"]) {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    [data-slot="card-action"] {
     grid-row: 1 / span 2;
     grid-column: 2;
     min-inline-size: 0;
@@ -962,11 +969,13 @@
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > header.border-b {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header.border-b {
     padding-bottom: 1.5rem;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(h2, h3, h4, h5, h6) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -975,7 +984,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -984,7 +995,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -993,7 +1006,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1002,7 +1017,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1011,7 +1028,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(p, span) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1020,21 +1039,23 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > section {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > section * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
     overflow-wrap: anywhere;
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > section > :last-child {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > section
+    > :last-child {
     margin-bottom: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > footer {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
     display: grid;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -1044,30 +1065,36 @@
     padding: 1rem;
   }
 
-  .card:not(:is(table, dl)) > footer > * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
     min-inline-size: 0;
     max-inline-size: 100%;
   }
 
-  .card:not(:-webkit-any(table, dl)) > footer > :-webkit-any(button, a.button) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-webkit-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-moz-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > footer
+    > :is(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:-moz-any(table, dl)) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"])) {
     container-type: inline-size;
     display: flex;
     overflow-wrap: anywhere;
@@ -1080,23 +1107,27 @@
     padding-block-end: 0;
   }
 
-  .card:not(:-webkit-any(table, dl)) > :-webkit-any(header, section, footer) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > :-webkit-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > :-moz-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :is(header, section, footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :is(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :last-child:not(footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :last-child:not(footer) {
     margin-block-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header {
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -1106,11 +1137,14 @@
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header:has([data-slot="card-action"]) {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    [data-slot="card-action"] {
     grid-row: 1 / span 2;
     grid-column: 2;
     min-inline-size: 0;
@@ -1121,11 +1155,13 @@
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > header.border-b {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header.border-b {
     padding-bottom: 1.5rem;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(h2, h3, h4, h5, h6) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1134,7 +1170,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1143,7 +1181,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1152,7 +1192,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1161,7 +1203,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1170,7 +1214,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(p, span) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1179,21 +1225,23 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > section {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > section * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
     overflow-wrap: anywhere;
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > section > :last-child {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > section
+    > :last-child {
     margin-bottom: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > footer {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
     display: grid;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -1203,30 +1251,36 @@
     padding: 1rem;
   }
 
-  .card:not(:is(table, dl)) > footer > * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
     min-inline-size: 0;
     max-inline-size: 100%;
   }
 
-  .card:not(:-webkit-any(table, dl)) > footer > :-webkit-any(button, a.button) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-webkit-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-moz-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > footer
+    > :is(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) {
+  .card:not(:is(table, dl, [data-slot="table-container"])) {
     container-type: inline-size;
     display: flex;
     overflow-wrap: anywhere;
@@ -1239,23 +1293,27 @@
     padding-block-end: 0;
   }
 
-  .card:not(:-webkit-any(table, dl)) > :-webkit-any(header, section, footer) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > :-webkit-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:-moz-any(table, dl)) > :-moz-any(header, section, footer) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > :-moz-any(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :is(header, section, footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :is(header, section, footer) {
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > :last-child:not(footer) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > :last-child:not(footer) {
     margin-block-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header {
     display: grid;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;
@@ -1265,11 +1323,14 @@
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header:has([data-slot="card-action"]) {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .card:not(:is(table, dl)) > header [data-slot="card-action"] {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    [data-slot="card-action"] {
     grid-row: 1 / span 2;
     grid-column: 2;
     min-inline-size: 0;
@@ -1280,11 +1341,13 @@
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > header.border-b {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > header.border-b {
     padding-bottom: 1.5rem;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(h2, h3, h4, h5, h6) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1293,7 +1356,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(h2, h3, h4, h5, h6) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1302,7 +1367,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(h2, h3, h4, h5, h6) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(h2, h3, h4, h5, h6) {
     overflow-wrap: anywhere;
     font-weight: 600;
     line-height: 1;
@@ -1311,7 +1378,9 @@
     font-size: 1rem !important;
   }
 
-  .card:not(:-webkit-any(table, dl)) > header :-webkit-any(p, span) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-webkit-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1320,7 +1389,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:-moz-any(table, dl)) > header :-moz-any(p, span) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > header
+    :-moz-any(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1329,7 +1400,9 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > header :is(p, span) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > header
+    :is(p, span) {
     color: var(--muted-foreground);
     overflow-wrap: anywhere;
     font-size: 0.875rem;
@@ -1338,21 +1411,23 @@
     padding: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > section {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section {
     padding-inline-start: 1rem;
     padding-inline-end: 1rem;
   }
 
-  .card:not(:is(table, dl)) > section * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > section * {
     overflow-wrap: anywhere;
     min-inline-size: 0;
   }
 
-  .card:not(:is(table, dl)) > section > :last-child {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > section
+    > :last-child {
     margin-bottom: 0 !important;
   }
 
-  .card:not(:is(table, dl)) > footer {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
     display: grid;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     border-radius: 0 0 calc(var(--radius) + 4px) calc(var(--radius) + 4px);
@@ -1362,35 +1437,42 @@
     padding: 1rem;
   }
 
-  .card:not(:is(table, dl)) > footer > * {
+  .card:not(:is(table, dl, [data-slot="table-container"])) > footer > * {
     min-inline-size: 0;
     max-inline-size: 100%;
   }
 
-  .card:not(:-webkit-any(table, dl)) > footer > :-webkit-any(button, a.button) {
+  .card:not(:-webkit-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-webkit-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:-moz-any(table, dl)) > footer > :-moz-any(button, a.button) {
+  .card:not(:-moz-any(table, dl, [data-slot="table-container"]))
+    > footer
+    > :-moz-any(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
-  .card:not(:is(table, dl)) > footer > :is(button, a.button) {
+  .card:not(:is(table, dl, [data-slot="table-container"]))
+    > footer
+    > :is(button, a.button) {
     white-space: normal;
     height: auto;
     min-height: 2.25rem;
   }
 
   @container (width < 24rem) {
-    .card:not(:is(table, dl)) > header:has([data-slot="card-action"]) {
+    .card:not(:is(table, dl, [data-slot="table-container"]))
+      > header:has([data-slot="card-action"]) {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .card:not(:is(table, dl))
+    .card:not(:is(table, dl, [data-slot="table-container"]))
       > header:has([data-slot="card-action"])
       [data-slot="card-action"] {
       grid-row: auto;
@@ -1402,11 +1484,12 @@
   }
 
   @container (width < 12rem) {
-    .card:not(:is(table, dl)) > :is(header, section) {
+    .card:not(:is(table, dl, [data-slot="table-container"]))
+      > :is(header, section) {
       padding-inline: 0.5rem;
     }
 
-    .card:not(:is(table, dl)) > footer {
+    .card:not(:is(table, dl, [data-slot="table-container"])) > footer {
       padding: 0.5rem;
     }
   }
@@ -2913,6 +2996,118 @@
 
 /* src/css/table.css */
 @layer components {
+  [data-slot="table-container"] {
+    --table-fade-color: var(--background);
+    container-type: inline-size;
+    position: relative;
+    display: grid;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    width: 100%;
+  }
+
+  [data-slot="table-container"].card {
+    --table-fade-color: var(--card);
+  }
+
+  [data-slot="table-container"] > table {
+    grid-area: 1 / 1;
+  }
+
+  [data-slot="table-container"] > table > caption {
+    position: sticky;
+    inline-size: 100cqi;
+    left: 0;
+    right: 0;
+  }
+
+  [data-slot="table-container"]:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  [data-slot="table-container"]:focus-visible.card {
+    border-color: var(--ring);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    [data-slot="table-container"]:before,
+    [data-slot="table-container"]:after {
+      content: "";
+      position: sticky;
+      z-index: 1;
+      grid-area: 1 / 1;
+      inline-size: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      animation: linear both;
+      animation-timeline: scroll(nearest inline);
+    }
+
+    [data-slot="table-container"]:before {
+      inset-inline-start: 0;
+      justify-self: start;
+      background: linear-gradient(
+        to right,
+        var(--table-fade-color),
+        transparent
+      );
+      animation-name: sensible-table-fade-start;
+    }
+
+    [data-slot="table-container"]:after {
+      inset-inline-end: 0;
+      justify-self: end;
+      background: linear-gradient(
+        to left,
+        var(--table-fade-color),
+        transparent
+      );
+      animation-name: sensible-table-fade-end;
+    }
+
+    [data-slot="table-container"]:dir(rtl):before {
+      background: linear-gradient(
+        to left,
+        var(--table-fade-color),
+        transparent
+      );
+    }
+
+    [data-slot="table-container"]:dir(rtl):after {
+      background: linear-gradient(
+        to right,
+        var(--table-fade-color),
+        transparent
+      );
+    }
+  }
+
+  @keyframes sensible-table-fade-start {
+    0% {
+      opacity: 0;
+    }
+
+    5%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes sensible-table-fade-end {
+    0%,
+    95% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  :is(table.card, [data-slot="table-container"].card > table) > caption {
+    padding-block-end: 1rem;
+  }
+
   table {
     caption-side: bottom;
     width: 100%;
@@ -2951,43 +3146,97 @@
       border-color 0.15s;
   }
 
+  table tr:has([aria-expanded="true"]) {
+    background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+  }
+
   @media (hover: hover) {
     table tr:hover {
       background-color: color-mix(in oklab, var(--muted) 50%, transparent);
     }
   }
 
+  table tr[aria-selected="true"] {
+    background-color: var(--muted);
+  }
+
   table th {
-    color: var(--foreground);
-    text-align: left;
     vertical-align: middle;
-    white-space: nowrap;
-    height: 2.5rem;
-    padding-inline-start: 0.5rem;
-    padding-inline-end: 0.5rem;
-    font-weight: 500;
+    padding: 0.5rem;
   }
 
-  table th:has([role="checkbox"]) {
-    padding-right: 0;
+  table
+    th:has(
+      > :-webkit-any(input[type="checkbox"], [role="checkbox"]):only-child
+    ) {
+    padding-inline-end: 0;
   }
 
-  table th > [role="checkbox"] {
-    translate: 0 2px;
+  table
+    th:has(> :-moz-any(input[type="checkbox"], [role="checkbox"]):only-child) {
+    padding-inline-end: 0;
+  }
+
+  table th:has(> :is(input[type="checkbox"], [role="checkbox"]):only-child) {
+    padding-inline-end: 0;
+  }
+
+  table th > :-webkit-any(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
+  }
+
+  table th > :-moz-any(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
+  }
+
+  table th > :is(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
   }
 
   table td {
     vertical-align: middle;
-    white-space: nowrap;
     padding: 0.5rem;
   }
 
-  table td:has([role="checkbox"]) {
-    padding-right: 0;
+  table
+    td:has(
+      > :-webkit-any(input[type="checkbox"], [role="checkbox"]):only-child
+    ) {
+    padding-inline-end: 0;
   }
 
-  table td > [role="checkbox"] {
-    translate: 0 2px;
+  table
+    td:has(> :-moz-any(input[type="checkbox"], [role="checkbox"]):only-child) {
+    padding-inline-end: 0;
+  }
+
+  table td:has(> :is(input[type="checkbox"], [role="checkbox"]):only-child) {
+    padding-inline-end: 0;
+  }
+
+  table td > :-webkit-any(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
+  }
+
+  table td > :-moz-any(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
+  }
+
+  table td > :is(input[type="checkbox"], [role="checkbox"]) {
+    vertical-align: middle;
+  }
+
+  table th {
+    color: var(--foreground);
+    text-align: start;
+    font-weight: 500;
+  }
+
+  table thead th {
+    white-space: nowrap;
+    height: 2.5rem;
+    padding-block-start: 0;
+    padding-block-end: 0;
   }
 
   table caption {
