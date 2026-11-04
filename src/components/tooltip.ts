@@ -55,11 +55,10 @@ const visibility = new IntersectionObserver((entries) => {
 });
 
 // A tooltip the script placed itself does not follow its control, so place it
-// again as the page scrolls.
-addEventListener("scroll", () => openTooltip?.placeIfMisplaced(), {
-  capture: true,
-  passive: true,
-});
+// again as the page scrolls or the window resizes.
+const replace = () => openTooltip?.placeIfMisplaced();
+addEventListener("scroll", replace, { capture: true, passive: true });
+addEventListener("resize", replace, { passive: true });
 
 function coolLater() {
   clearTimeout(coolTimer);
@@ -122,24 +121,28 @@ class SensibleTooltip extends HTMLElement {
     if (!tip?.matches(":popover-open")) return;
     for (const property of placedProperties) tip.style.removeProperty(property);
     const anchor = this.firstElementChild!.getBoundingClientRect();
-    const box = tip.getBoundingClientRect();
+    // Unscaled size around the measured center, since the opening transition
+    // scales the tooltip from its center.
+    const width = tip.offsetWidth;
+    const height = tip.offsetHeight;
+    const scaled = tip.getBoundingClientRect();
+    const left = scaled.left + scaled.width / 2 - width / 2;
+    const top = scaled.top + scaled.height / 2 - height / 2;
+    const box = { left, top, right: left + width, bottom: top + height };
     const near = 12;
+    const gap = 6;
+    const edge = 8;
     const acrossX = box.left < anchor.right && box.right > anchor.left;
     const acrossY = box.top < anchor.bottom && box.bottom > anchor.top;
     const above = box.bottom <= anchor.top + 1 && box.bottom >= anchor.top - near;
     const below = box.top >= anchor.bottom - 1 && box.top <= anchor.bottom + near;
     const before = box.right <= anchor.left + 1 && box.right >= anchor.left - near;
     const after = box.left >= anchor.right - 1 && box.left <= anchor.right + near;
-    const onScreen = box.left >= 0 && box.right <= innerWidth;
+    const onScreen = box.left >= edge - 1 && box.right <= innerWidth - edge + 1;
     if (onScreen && ((acrossX && (above || below)) || (acrossY && (before || after)))) {
       return;
     }
 
-    // Unscaled size, since the opening transition scales the tooltip.
-    const width = tip.offsetWidth;
-    const height = tip.offsetHeight;
-    const gap = 6;
-    const edge = 8;
     const centerX = anchor.left + anchor.width / 2 - width / 2;
     const centerY = anchor.top + anchor.height / 2 - height / 2;
     const spots = {
