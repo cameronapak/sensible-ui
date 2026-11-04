@@ -1,5 +1,11 @@
 # Sensible UI
 
+## 1.8.1
+
+### Patch Changes
+
+- bde3648: Prevent double-tap zoom on links with href, buttons, button-like inputs, checkboxes, radios, selects, and disclosure summaries with touch-action: manipulation. Scrolling and pinch zoom remain allowed. Text fields and page containers keep their default touch behavior. The shared base styles cover global, scoped, and standalone imports.
+
 ## 1.8.0
 
 ### Minor Changes
