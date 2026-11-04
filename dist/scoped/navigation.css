@@ -628,19 +628,31 @@
         line-height: 1.25rem;
       }
 
-      sensible-navbar > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
+      sensible-navbar > * {
+        flex-shrink: 1;
         min-inline-size: 0;
+      }
+
+      sensible-navbar > :-webkit-any(h1, h2, h3, h4, h5, h6, p) {
         margin: 0;
       }
 
       sensible-navbar > :-moz-any(h1, h2, h3, h4, h5, h6, p) {
-        min-inline-size: 0;
         margin: 0;
       }
 
       sensible-navbar > :is(h1, h2, h3, h4, h5, h6, p) {
-        min-inline-size: 0;
         margin: 0;
+      }
+
+      sensible-navbar > a {
+        display: inline-flex;
+        color: inherit;
+        text-decoration-line: none;
+        overflow-wrap: anywhere;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
       }
 
       sensible-sidebar {
@@ -695,6 +707,30 @@
         margin-block-start: 1rem;
       }
 
+      sensible-sidebar > :-webkit-any(h2, h3, h4, h5, h6) + ul {
+        margin-block-start: -1rem;
+      }
+
+      sensible-sidebar > :-moz-any(h2, h3, h4, h5, h6) + ul {
+        margin-block-start: -1rem;
+      }
+
+      sensible-sidebar > :is(h2, h3, h4, h5, h6) + ul {
+        margin-block-start: -1rem;
+      }
+
+      sensible-sidebar > ul + :-webkit-any(h2, h3, h4, h5, h6) {
+        margin-block-start: 0;
+      }
+
+      sensible-sidebar > ul + :-moz-any(h2, h3, h4, h5, h6) {
+        margin-block-start: 0;
+      }
+
+      sensible-sidebar > ul + :is(h2, h3, h4, h5, h6) {
+        margin-block-start: 0;
+      }
+
       sensible-navbar ul,
       sensible-sidebar ul {
         display: flex;
@@ -704,6 +740,7 @@
       }
 
       :is(sensible-navbar ul, sensible-sidebar ul) > li {
+        flex-shrink: 1;
         min-inline-size: 0;
         margin: 0;
       }
@@ -727,7 +764,8 @@
         outline: none;
         color: inherit;
         text-decoration-line: none;
-        align-items: center;
+        overflow-wrap: anywhere;
+        align-items: flex-start;
         gap: 0.5rem;
         min-block-size: 2rem;
         padding: 0.375rem 0.75rem;
@@ -747,6 +785,28 @@
         flex-shrink: 0;
         block-size: 1rem;
         inline-size: 1rem;
+        margin-block-start: 0.125rem;
+        margin-block-end: 0.125rem;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > :not(svg) {
+        flex-shrink: 1;
+        min-inline-size: 0;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > .badge {
+        flex-shrink: 0;
+        margin-inline-start: auto;
       }
 
       :is(
@@ -754,6 +814,7 @@
         sensible-sidebar li > a,
         sensible-sidebar details > summary
       ):focus-visible {
+        outline: 2px solid #0000;
         box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
@@ -764,6 +825,20 @@
           sensible-sidebar details > summary
         ) {
           transition-duration: 0s;
+        }
+      }
+
+      sensible-navbar li > a[aria-current]:not([aria-current="false"]),
+      sensible-sidebar li > a[aria-current]:not([aria-current="false"]) {
+        font-weight: 600;
+      }
+
+      @media (forced-colors: active) {
+        :is(
+          sensible-navbar li > a[aria-current]:not([aria-current="false"]),
+          sensible-sidebar li > a[aria-current]:not([aria-current="false"])
+        ) {
+          text-decoration-line: underline;
         }
       }
 
@@ -814,12 +889,48 @@
       }
 
       sensible-sidebar details > summary {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
         cursor: pointer;
         font-size: inherit !important;
         line-height: inherit !important;
         font-weight: 500 !important;
+      }
+
+      sensible-sidebar
+        details
+        > summary
+        > :-webkit-any(h2, h3, h4, h5, h6, p, span) {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        font-weight: inherit !important;
+      }
+
+      sensible-sidebar
+        details
+        > summary
+        > :-moz-any(h2, h3, h4, h5, h6, p, span) {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        font-weight: inherit !important;
+      }
+
+      sensible-sidebar details > summary > :is(h2, h3, h4, h5, h6, p, span) {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        font-weight: inherit !important;
+      }
+
+      sensible-sidebar details > summary:after {
+        margin-block-start: 0.1875rem;
+        margin-block-end: 0.1875rem;
+        margin-inline-start: auto;
+      }
+
+      sensible-sidebar
+        details:not([open]):has(a[aria-current]:not([aria-current="false"]))
+        > summary {
+        background: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
+        font-weight: 600 !important;
       }
 
       sensible-sidebar details > :not(summary) {
@@ -827,7 +938,7 @@
       }
 
       sensible-sidebar details::details-content {
-        transition-property: opacity, height, visibility;
+        transition-property: opacity, height;
       }
 
       sensible-sidebar details:not([open])::details-content {
@@ -846,6 +957,11 @@
         align-items: flex-start;
         gap: var(--layout-gap, 1.5rem);
         flex-wrap: wrap;
+      }
+
+      sensible-sidebar-layout > * {
+        flex: 100%;
+        min-inline-size: 0;
       }
 
       sensible-sidebar-layout > :first-child {

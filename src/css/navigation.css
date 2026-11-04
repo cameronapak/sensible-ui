@@ -10,9 +10,26 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
 
+    /* Base styles stop flex items from shrinking, which would keep every
+       child on one row. */
+    > * {
+      min-inline-size: 0;
+      flex-shrink: 1;
+    }
+
     > :is(h1, h2, h3, h4, h5, h6, p) {
       margin: 0;
-      min-inline-size: 0;
+    }
+
+    /* A brand link, often a logo beside a name. */
+    > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: inherit;
+      font-weight: 600;
+      text-decoration-line: none;
+      overflow-wrap: anywhere;
     }
   }
 
@@ -41,6 +58,16 @@
     ul + :is(h2, h3, h4, h5, h6) {
       margin-block-start: 1rem;
     }
+
+    /* Headings and lists placed directly in the panel get the same spacing
+       as inside a nav, despite the panel's gap. */
+    > :is(h2, h3, h4, h5, h6) + ul {
+      margin-block-start: -1rem;
+    }
+
+    > ul + :is(h2, h3, h4, h5, h6) {
+      margin-block-start: 0;
+    }
   }
 
   /* Plain selector lists, not :is(), keep these overrides at a predictable
@@ -55,6 +82,7 @@
     > li {
       margin: 0;
       min-inline-size: 0;
+      flex-shrink: 1;
     }
   }
 
@@ -73,7 +101,8 @@
   sensible-sidebar li > a,
   sensible-sidebar details > summary {
     display: flex;
-    align-items: center;
+    /* Icons line up with the first line of a label that wraps. */
+    align-items: flex-start;
     gap: 0.5rem;
     min-block-size: 2rem;
     padding: 0.375rem 0.75rem;
@@ -82,6 +111,7 @@
     color: inherit;
     font-weight: 500;
     text-decoration-line: none;
+    overflow-wrap: anywhere;
     translate: none;
     transition:
       background-color 150ms ease-out,
@@ -90,15 +120,40 @@
     & svg {
       inline-size: 1rem;
       block-size: 1rem;
+      margin-block: 0.125rem;
+      flex-shrink: 0;
+    }
+
+    /* Labels shrink and wrap instead of overflowing the panel. */
+    > :not(svg) {
+      min-inline-size: 0;
+      flex-shrink: 1;
+    }
+
+    > .badge {
+      margin-inline-start: auto;
       flex-shrink: 0;
     }
 
     &:focus-visible {
+      /* A transparent outline shows in forced colors, where shadows do not. */
+      outline: 2px solid transparent;
       box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
     }
 
     @media (prefers-reduced-motion: reduce) {
       transition-duration: 0s;
+    }
+  }
+
+  /* The current page also gets a heavier weight, so it differs from hover
+     without relying on color. */
+  sensible-navbar li > a[aria-current]:not([aria-current="false"]),
+  sensible-sidebar li > a[aria-current]:not([aria-current="false"]) {
+    font-weight: 600;
+
+    @media (forced-colors: active) {
+      text-decoration-line: underline;
     }
   }
 
@@ -150,12 +205,31 @@
     }
 
     > summary {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
       cursor: pointer;
       font-size: inherit !important;
       line-height: inherit !important;
       font-weight: 500 !important;
+
+      /* The accordion sizes text in its summary; the sidebar matches links.
+         The same :is() list keeps this ahead of the accordion's rule after
+         Bun adds :-webkit-any() copies, which count as a class. */
+      > :is(h2, h3, h4, h5, h6, p, span) {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        font-weight: inherit !important;
+      }
+
+      &::after {
+        margin-block: 0.1875rem;
+        margin-inline-start: auto;
+      }
+    }
+
+    /* A closed group that holds the current page shows it on its summary. */
+    &:not([open]):has(a[aria-current]:not([aria-current="false"])) > summary {
+      background: var(--sidebar-accent);
+      color: var(--sidebar-accent-foreground);
+      font-weight: 600 !important;
     }
 
     > :not(summary) {
@@ -163,9 +237,11 @@
     }
 
     /* The accordion keeps closed content rendered so it can animate, which
-       leaves its links in the tab order. Hiding it removes them. */
+       leaves its links in the tab order. Hiding it removes them. Visibility
+       changes at once, so links leave the tab order as soon as the group
+       closes. */
     &::details-content {
-      transition-property: opacity, height, visibility;
+      transition-property: opacity, height;
     }
 
     &:not([open])::details-content {
@@ -182,12 +258,18 @@
 
   /* Puts a sidebar beside the content and stacks them when the content would
      drop below 60% of the width. The first child is the sidebar, or the last
-     child with side="end", so reading order matches the layout. */
+     child with side="end", so reading order matches the layout. Any other
+     children take full rows. */
   sensible-sidebar-layout {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: var(--layout-gap, 1.5rem);
+
+    > * {
+      flex: 1 1 100%;
+      min-inline-size: 0;
+    }
 
     > :first-child {
       flex: 1 1 var(--sidebar-width);

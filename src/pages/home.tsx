@@ -1304,7 +1304,8 @@ export function Home() {
         <p>
           <code>&lt;sensible-navbar&gt;</code> spreads its children across one
           row and lays links out horizontally. On narrow screens its children
-          and links wrap onto more rows.
+          and links wrap onto more rows. A link placed directly inside it, such
+          as a logo beside a name, shows as the brand without an underline.
         </p>
         <CodeExample code={headerExample} />
         <CodeExample code={footerExample} />
@@ -1320,6 +1321,15 @@ export function Home() {
           <code>side="end"</code> and put the sidebar last to place it after
           the content. Use <code>main</code> for the content on a real page.
           The sidebar does not collapse into a menu on small screens.
+        </p>
+        <p>
+          Set <code>--sidebar-width</code> to a length or percentage, such as{" "}
+          <code>20rem</code>; other values stack the layout. The layout expects
+          two children, and any others take full rows. Put a link label in one
+          element when it mixes text with other inline elements, so the label
+          wraps as one block. When a long sidebar stacks above the content on
+          small screens, add a skip link to the content before it. A closed
+          group that holds the current page highlights its summary.
         </p>
         <CodeExample code={sidebarExample} />
       </section>

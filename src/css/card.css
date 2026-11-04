@@ -13,6 +13,14 @@
     }
   }
 
+  /* Zero specificity lets components inside a section keep their own
+     minimum sizes, such as the sidebar layout's content width. */
+  :where(
+    .card:not(table):not(dl):not([data-slot="table-container"]) > section *
+  ) {
+    min-inline-size: 0;
+  }
+
   .card:not(:is(table, dl, [data-slot="table-container"])) {
     container-type: inline-size;
     display: flex;
@@ -83,7 +91,6 @@
       padding-inline: 1rem;
 
       & * {
-        min-inline-size: 0;
         overflow-wrap: anywhere;
       }
 

@@ -420,3 +420,78 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     expect(stackedContent.y).toBeGreaterThan(stackedAside.y + stackedAside.height);
   });
 }
+
+for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
+  test(`${bundle}: navigation wraps long links and stays inside narrow screens and cards`, async ({
+    page,
+  }) => {
+    const icon = `<svg aria-hidden="true" viewBox="0 0 24 24"></svg>`;
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.setContent(`<main class="sensible-ui" style="padding: 16px">
+      <header><sensible-navbar id="bar">
+        <a href="#" id="brand"><img width="32" height="32" alt=""> Acme Studio</a>
+        <nav aria-label="Main"><ul>
+          <li><a href="#a" aria-current="page">Overview</a></li><li><a href="#b">Pricing</a></li>
+          <li><a href="#c">Docs</a></li><li><a href="#d">Blog</a></li><li><a href="#e">Support</a></li>
+          <li><a href="#f">partnersupport@northwindholdings.example.com</a></li>
+        </ul></nav>
+      </sensible-navbar></header>
+      <sensible-sidebar id="side"><nav aria-label="Sections">
+        <h2>Guides</h2>
+        <ul>
+          <li><a href="#g">${icon}<span>bartholomew.fitzgerald@northwind-industries-holdings.example.com</span></a></li>
+          <li><a href="#h">${icon}<span>Ausstehende Einladungen</span><span class="badge">1,284</span></a></li>
+          <li><details><summary id="forms">${icon} Forms</summary>
+            <ul><li><a href="#i" aria-current="page">Input</a></li></ul></details></li>
+          <li><details open><summary id="auth"><span>Authentication</span></summary>
+            <ul><li><a href="#j">Login</a></li></ul></details></li>
+        </ul>
+      </nav></sensible-sidebar>
+      <div class="card"><section>
+        <sensible-sidebar-layout id="card-layout"><aside>Side</aside><div>Content</div></sensible-sidebar-layout>
+      </section></div>
+      <sensible-sidebar-layout id="three"><aside>Nav</aside><div>Main</div><aside>On this page</aside></sensible-sidebar-layout>
+    </main>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    const outside = await page.evaluate(() =>
+      ["#bar", "#side"].flatMap((selector) => {
+        const container = document.querySelector(selector)!.getBoundingClientRect();
+        return Array.from(document.querySelectorAll(`${selector} *`))
+          .filter((node) => node.getBoundingClientRect().right > container.right + 0.5)
+          .map((node) => `${selector} ${node.tagName.toLowerCase()}`);
+      }),
+    );
+    expect(outside).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320);
+
+    await expect(page.locator("#brand")).toHaveCSS("text-decoration-line", "none");
+    await expect(page.locator('a[href="#a"]')).toHaveCSS("font-weight", "600");
+    // A summary with an icon keeps its chevron on the same row.
+    expect((await page.locator("#forms").boundingBox())!.height).toBe(32);
+    // A closed group that holds the current page marks its summary.
+    await expect(page.locator("#forms")).toHaveCSS("font-weight", "600");
+    await expect(page.locator("#auth > span")).toHaveCSS("font-size", "14px");
+
+    // Inside a card section, the layout still stacks instead of squeezing.
+    const side = (await page.locator("#card-layout > aside").boundingBox())!;
+    const content = (await page.locator("#card-layout > div").boundingBox())!;
+    expect(content.y).toBeGreaterThan(side.y);
+    expect(content.width).toBe(side.width);
+
+    // Extra children take full rows instead of overflowing.
+    const main = (await page.locator("#three > div").boundingBox())!;
+    expect(main.x + main.width).toBeLessThanOrEqual(304);
+
+    // Closing a group removes its links from the tab order at once.
+    await page.locator("#auth").focus();
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Tab");
+    await expect(page.locator('a[href="#j"]')).not.toBeFocused();
+
+    // Forced colors drop shadows, so focus also needs an outline.
+    await page.emulateMedia({ forcedColors: "active" });
+    await page.locator('a[href="#b"]').focus();
+    await expect(page.locator('a[href="#b"]')).toHaveCSS("outline-style", "solid");
+  });
+}
