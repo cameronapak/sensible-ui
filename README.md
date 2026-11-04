@@ -259,6 +259,7 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Input group      | `@faith-tools/sensible-ui/input-group`      |
 | Item             | `@faith-tools/sensible-ui/item`             |
 | Loading spinner  | `@faith-tools/sensible-ui/spinner`          |
+| Navigation       | `@faith-tools/sensible-ui/navigation`       |
 | Progress         | `@faith-tools/sensible-ui/progress`         |
 | Table            | `@faith-tools/sensible-ui/table`            |
 | Typography       | `@faith-tools/sensible-ui/typography`       |

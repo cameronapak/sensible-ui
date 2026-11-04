@@ -13,6 +13,7 @@ const modules = {
   input: '[role="switch"]',
   "input-group": "sensible-input-group",
   item: ".item {",
+  navigation: "sensible-sidebar-layout",
   progress: "sensible-progress-indeterminate",
   spinner: "sensible-spinner-spin",
   table: "caption-side: bottom",

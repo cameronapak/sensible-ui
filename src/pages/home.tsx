@@ -186,6 +186,70 @@ const inputGroupExample = `
   </sensible-input-group>
 </div>`;
 
+const headerExample = `
+<header>
+  <sensible-navbar>
+    <strong>Acme</strong>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#navigation" aria-current="page">Overview</a></li>
+        <li><a href="#navigation">Pricing</a></li>
+        <li><a href="#navigation">Docs</a></li>
+      </ul>
+    </nav>
+    <div class="cluster">
+      <a class="button" data-variant="ghost" href="#navigation">Sign in</a>
+      <a class="button" href="#navigation">Get started</a>
+    </div>
+  </sensible-navbar>
+</header>`;
+
+const sidebarExample = `
+<sensible-sidebar-layout>
+  <aside>
+    <sensible-sidebar>
+      <nav aria-label="Documentation">
+        <h2>Getting started</h2>
+        <ul>
+          <li><a href="#navigation">${lucide("info")} Introduction</a></li>
+          <li><a href="#navigation" aria-current="page">${lucide("save")} Installation</a></li>
+        </ul>
+        <h2>Components</h2>
+        <ul>
+          <li><a href="#navigation">Button</a></li>
+          <li>
+            <details open>
+              <summary>Forms</summary>
+              <ul>
+                <li><a href="#navigation">Input</a></li>
+                <li><a href="#navigation">Input group</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </sensible-sidebar>
+  </aside>
+  <article>
+    <h3>Installation</h3>
+    <p>Add one stylesheet, then write semantic HTML.</p>
+  </article>
+</sensible-sidebar-layout>`;
+
+const footerExample = `
+<footer>
+  <sensible-navbar>
+    <small>© 2026 Acme, Inc.</small>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="#navigation">Privacy</a></li>
+        <li><a href="#navigation">Terms</a></li>
+        <li><a href="#navigation">Contact</a></li>
+      </ul>
+    </nav>
+  </sensible-navbar>
+</footer>`;
+
 const buttonExample = `
 <div class="cluster">
   <button type="button">Primary</button>
@@ -585,6 +649,7 @@ export function Home() {
           <a href="#progress">Progress</a>
           <a href="#button-group">Button group</a>
           <a href="#input-group">Input group</a>
+          <a href="#navigation">Navigation</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
           <a href="#dark-mode">Dark mode</a>
@@ -1117,6 +1182,42 @@ export function Home() {
           in your browser JavaScript.
         </p>
         <CodeExample code={inputGroupExample} />
+      </section>
+
+      <section class="docs-section stack" id="navigation">
+        <h2>Navigation</h2>
+        <StandaloneImport path="navigation" />
+        <p>
+          Three elements arrange navigation without JavaScript. They do not
+          add landmarks, so keep native <code>header</code>,{" "}
+          <code>footer</code>, <code>aside</code>, and <code>nav</code>{" "}
+          elements around or inside them. Put links in a <code>ul</code> inside
+          the <code>nav</code>, mark the current page with{" "}
+          <code>aria-current="page"</code>, and give each <code>nav</code> an{" "}
+          <code>aria-label</code> when a page has more than one.
+        </p>
+        <h3>Header and footer</h3>
+        <p>
+          <code>&lt;sensible-navbar&gt;</code> spreads its children across one
+          row and lays links out horizontally. On narrow screens its children
+          and links wrap onto more rows.
+        </p>
+        <CodeExample code={headerExample} />
+        <CodeExample code={footerExample} />
+        <h3>Sidebar</h3>
+        <p>
+          <code>&lt;sensible-sidebar&gt;</code> draws a panel with stacked
+          links. Use headings to name groups and a native{" "}
+          <code>details</code> element for a group that opens and closes.{" "}
+          <code>&lt;sensible-sidebar-layout&gt;</code> puts its first child
+          beside its last child at <code>--sidebar-width</code> (
+          <code>16rem</code> by default), and stacks them when the content
+          would get narrower than 60% of the layout. Add{" "}
+          <code>side="end"</code> and put the sidebar last to place it after
+          the content. Use <code>main</code> for the content on a real page.
+          The sidebar does not collapse into a menu on small screens.
+        </p>
+        <CodeExample code={sidebarExample} />
       </section>
 
       <section class="docs-section stack" id="container">

@@ -172,3 +172,86 @@ test("the optional input group script focuses the field from icons and text", as
   await page.getByRole("button", { name: "Clear" }).click();
   await expect(page.getByRole("button", { name: "Clear" })).toBeFocused();
 });
+
+for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
+  test(`${bundle}: navigation elements lay out links and sidebars without JavaScript`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1000, height: 800 });
+    await page.setContent(`<section class="sensible-ui">
+      <header><sensible-navbar>
+        <strong>Acme</strong>
+        <nav aria-label="Main"><ul>
+          <li><a href="#a" aria-current="page">Home</a></li><li><a href="#b">Docs</a></li>
+        </ul></nav>
+      </sensible-navbar></header>
+      <sensible-sidebar-layout id="layout">
+        <aside><sensible-sidebar><nav aria-label="Sections">
+          <h2>Guides</h2>
+          <ul><li><a href="#c">One</a></li><li><a href="#d" aria-current="page">Two</a></li></ul>
+          <ul><li><details open><summary>More</summary><ul><li><a href="#e">Three</a></li></ul></details></li></ul>
+        </nav></sensible-sidebar></aside>
+        <main><p>Content</p></main>
+      </sensible-sidebar-layout>
+      <sensible-sidebar-layout id="end" side="end">
+        <main><p>Content</p></main>
+        <aside><p>Sidebar</p></aside>
+      </sensible-sidebar-layout>
+    </section>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    const box = async (locator: import("@playwright/test").Locator) =>
+      (await locator.boundingBox())!;
+    const main = page.getByRole("navigation", { name: "Main" });
+    const home = await box(main.getByRole("link", { name: "Home" }));
+    const docs = await box(main.getByRole("link", { name: "Docs" }));
+    expect(docs.y).toBe(home.y);
+    expect(docs.x).toBeGreaterThan(home.x + home.width);
+
+    const sections = page.getByRole("navigation", { name: "Sections" });
+    const one = await box(sections.getByRole("link", { name: "One" }));
+    const two = await box(sections.getByRole("link", { name: "Two" }));
+    expect(two.x).toBe(one.x);
+    expect(two.y).toBeGreaterThan(one.y);
+    const current = sections.getByRole("link", { name: "Two" });
+    await expect(current).toHaveCSS("background-color", "oklch(0.97 0 0)");
+    await expect(sections.getByRole("link", { name: "One" })).toHaveCSS(
+      "background-color",
+      "rgba(0, 0, 0, 0)",
+    );
+    await expect(sections.getByRole("link", { name: "One" })).toHaveCSS(
+      "text-decoration-line",
+      "none",
+    );
+    await expect(page.locator("details")).toHaveCSS("border-top-width", "0px");
+    await expect(page.getByText("More")).toHaveCSS("font-size", "14px");
+    await page.getByText("More").click();
+    await expect(sections.getByRole("link", { name: "Three" })).toBeHidden();
+    // Closed groups leave the tab order.
+    await sections.getByRole("link", { name: "Two" }).focus();
+    await page.keyboard.press("Tab");
+    await expect(page.getByText("More")).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.locator('a[href="#e"]')).not.toBeFocused();
+
+    const aside = await box(page.locator("#layout > aside"));
+    const content = await box(page.locator("#layout > main"));
+    // The sidebar keeps about --sidebar-width; it takes 1/1000 of spare space.
+    expect(aside.width).toBeGreaterThanOrEqual(256);
+    expect(aside.width).toBeLessThan(258);
+    expect(content.x).toBeGreaterThan(aside.x + aside.width);
+    expect(content.y).toBe(aside.y);
+    const endMain = await box(page.locator("#end > main"));
+    const endAside = await box(page.locator("#end > aside"));
+    expect(endAside.width).toBeGreaterThanOrEqual(256);
+    expect(endAside.width).toBeLessThan(258);
+    expect(endAside.x).toBeGreaterThan(endMain.x + endMain.width);
+
+    await page.setViewportSize({ width: 375, height: 800 });
+    const stackedAside = await box(page.locator("#layout > aside"));
+    const stackedContent = await box(page.locator("#layout > main"));
+    expect(stackedContent.x).toBe(stackedAside.x);
+    expect(stackedContent.width).toBe(stackedAside.width);
+    expect(stackedContent.y).toBeGreaterThan(stackedAside.y + stackedAside.height);
+  });
+}
