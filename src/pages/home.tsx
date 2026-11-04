@@ -858,16 +858,50 @@ const navGroups = [
   },
 ];
 
+const reasons = [
+  [
+    "Native elements look right",
+    <>
+      Buttons, inputs, selects, checkboxes, switches, tables, dialogs, and
+      accordions are styled without classes.
+    </>,
+  ],
+  [
+    "A few readable classes",
+    <>
+      Add <code>card</code>, <code>badge</code>, or <code>item</code> when HTML
+      has no element for a pattern. Choose a style with{" "}
+      <code>data-variant</code>.
+    </>,
+  ],
+  [
+    "Familiar theme tokens",
+    <>
+      Change <code>--primary</code>, <code>--radius</code>, and other
+      shadcn/ui-style variables. Light and dark themes are included.
+    </>,
+  ],
+  [
+    "Fits your project",
+    <>
+      Use a CDN link or a bundler. The scoped stylesheet styles one part of an
+      existing app, and an optional web component adds highlighted code.
+    </>,
+  ],
+] as const;
+
 export function Home() {
   return (
-    <main class="container docs-page">
-      <header class="site-header">
-        <div class="split">
-          <div class="cluster site-brand">
-            <strong>Sensible UI</strong>
+    <div class="container docs-page">
+      <header>
+        <sensible-navbar>
+          <a href="./">
+            Sensible UI
             <code>v{version}</code>
-            <span class="badge" data-variant="secondary">beta</span>
-          </div>
+            <span class="badge" data-variant="secondary">
+              beta
+            </span>
+          </a>
           <div class="cluster">
             <a
               class="button"
@@ -890,115 +924,106 @@ export function Home() {
               Dark mode
             </button>
           </div>
-        </div>
+        </sensible-navbar>
       </header>
 
-      <section class="landing-hero stack" aria-labelledby="landing-title">
-        <h1 id="landing-title">The shadcn/ui look. Just write HTML.</h1>
-        <p class="landing-lead">
-          Add one stylesheet, and your buttons, forms, tables, and dialogs look
-          polished right away. Add a few readable classes for cards and badges,
-          and theme everything with CSS variables. No React, Tailwind, or build
-          step.
-        </p>
-        <div class="cluster landing-actions">
-          <a class="button" data-size="lg" href="#getting-started">
-            Get started
-          </a>
-          <a
-            class="button"
-            data-size="lg"
-            data-variant="outline"
-            href="#typography"
-          >
-            Browse components
-          </a>
-        </div>
-        <p class="landing-attribution">
-          Inspired by <a href="https://ui.shadcn.com">shadcn/ui</a>. Sensible UI
-          is an independent project and is not affiliated with or endorsed by
-          shadcn/ui.
-        </p>
-      </section>
+      <main>
+        <section
+          class="landing-hero stack items-center text-center"
+          aria-labelledby="landing-title"
+        >
+          <h1 id="landing-title">The shadcn/ui look. Just write HTML.</h1>
+          <p class="landing-lead text-muted-foreground max-w-xl">
+            Add one stylesheet, and your buttons, forms, tables, and dialogs
+            look polished right away. Add a few readable classes for cards and
+            badges, and theme everything with CSS variables. No React,
+            Tailwind, or build step.
+          </p>
+          <div class="cluster justify-center">
+            <a class="button" data-size="lg" href="#getting-started">
+              Get started
+            </a>
+            <a
+              class="button"
+              data-size="lg"
+              data-variant="outline"
+              href="#typography"
+            >
+              Browse components
+            </a>
+          </div>
+          <p class="text-muted-foreground max-w-xl">
+            <small>
+              Inspired by <a href="https://ui.shadcn.com">shadcn/ui</a>.
+              Sensible UI is an independent project and is not affiliated with
+              or endorsed by shadcn/ui.
+            </small>
+          </p>
+        </section>
 
-      <section class="landing-section stack" aria-label="Showcase">
-        <div
-          class="landing-showcase"
-          dangerouslySetInnerHTML={{ __html: showcaseHtml.trim() }}
-        />
-        <p class="landing-note">
-          Everything above is plain HTML styled by Sensible UI. Its only classes
-          are <code>card</code>, <code>badge</code>, <code>item</code>, and{" "}
-          <code>stack</code>.
-        </p>
-      </section>
+        <section class="stack pb-12" aria-label="Showcase">
+          <div
+            class="landing-showcase"
+            dangerouslySetInnerHTML={{ __html: showcaseHtml.trim() }}
+          />
+          <p class="landing-note text-center text-muted-foreground">
+            <small>
+              Everything above is plain HTML styled by Sensible UI. Its only
+              classes are <code>card</code>, <code>badge</code>,{" "}
+              <code>item</code>, and <code>stack</code>.
+            </small>
+          </p>
+        </section>
 
-      <section class="landing-section stack" aria-labelledby="just-html-title">
-        <h2 id="just-html-title">Write the HTML you already know</h2>
-        <p>
-          This sign-in card uses one class, <code>card</code>, and one
-          attribute, <code>data-variant="outline"</code>. The headings, labels,
-          inputs, and buttons get their styles because they are HTML.
-        </p>
-        <CodeExample code={justHtmlExample} />
-      </section>
+        <section class="stack pb-12" aria-labelledby="just-html-title">
+          <h2 id="just-html-title">Write the HTML you already know</h2>
+          <p>
+            This sign-in card uses one class, <code>card</code>, and one
+            attribute, <code>data-variant="outline"</code>. The headings,
+            labels, inputs, and buttons get their styles because they are HTML.
+          </p>
+          <CodeExample code={justHtmlExample} />
+        </section>
 
-      <section class="landing-section stack" aria-labelledby="why-title">
-        <h2 id="why-title">Why Sensible UI</h2>
-        <div class="landing-points">
-          <article>
-            <h3>Native elements look right</h3>
-            <p>
-              Buttons, inputs, selects, checkboxes, switches, tables, dialogs,
-              and accordions are styled without classes.
-            </p>
-          </article>
-          <article>
-            <h3>A few readable classes</h3>
-            <p>
-              Add <code>card</code>, <code>badge</code>, or <code>item</code>{" "}
-              when HTML has no element for a pattern. Choose a style with{" "}
-              <code>data-variant</code>.
-            </p>
-          </article>
-          <article>
-            <h3>Familiar theme tokens</h3>
-            <p>
-              Change <code>--primary</code>, <code>--radius</code>, and other
-              shadcn/ui-style variables. Light and dark themes are included.
-            </p>
-          </article>
-          <article>
-            <h3>Fits your project</h3>
-            <p>
-              Use a CDN link or a bundler. The scoped stylesheet styles one part
-              of an existing app, and an optional web component adds highlighted
-              code.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <nav class="docs-nav" aria-label="Documentation">
-        <details data-docs-nav>
-          <summary>Browse the docs</summary>
-          <div class="docs-nav-groups">
-            {navGroups.map((group, index) => (
-              <div class="docs-nav-group">
-                <p id={`docs-nav-group-${index}`}>{group.title}</p>
-                <ul aria-labelledby={`docs-nav-group-${index}`}>
-                  {group.links.map(([id, label]) => (
-                    <li>
-                      <a href={`#${id}`}>{label}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <section class="stack pb-12" aria-labelledby="why-title">
+          <h2 id="why-title">Why Sensible UI</h2>
+          <div class="auto-grid" style="--min-item-size: 15rem">
+            {reasons.map(([title, body]) => (
+              <article>
+                <h3>{title}</h3>
+                <p class="text-muted-foreground">{body}</p>
+              </article>
             ))}
           </div>
-        </details>
-      </nav>
+        </section>
 
+        <sensible-sidebar-layout class="border-t">
+          <nav
+            class="docs-nav sticky top-0 z-10 max-h-screen overflow-y-auto"
+            aria-label="Documentation"
+          >
+            <sensible-sidebar>
+              <details data-docs-nav>
+                <summary>Browse the docs</summary>
+                <div>
+                  {navGroups.map((group) => (
+                    <>
+                      <h2>{group.title}</h2>
+                      <ul>
+                        {group.links.map(([id, label]) => (
+                          <li>
+                            <a href={`#${id}`}>{label}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ))}
+                </div>
+              </details>
+            </sensible-sidebar>
+          </nav>
+
+          <div>
       <section class="docs-section stack" id="getting-started">
         <h2>Getting started</h2>
         <p>
@@ -1899,25 +1924,39 @@ export function Home() {
         </sensible-code>
       </section>
 
-      <footer class="docs-footer stack">
-        <h2>Sensible UI</h2>
-        <p>
-          Sensible UI is a semantic-first fork of{" "}
-          <a href="https://basecoatui.com">Basecoat</a>, influenced by shadcn/ui
-          and Oat CSS.
-        </p>
-        <p>
-          <a href="https://github.com/cameronapak/sensible-ui">GitHub</a> ·{" "}
-          <a href="https://www.npmjs.com/package/@faith-tools/sensible-ui">
-            npm
-          </a>{" "}
-          ·{" "}
-          <a href="https://github.com/cameronapak/sensible-ui/blob/main/LICENSE.md">
-            MIT License
-          </a>{" "}
-          · <a href="https://faith.tools">faith.tools</a>
-        </p>
+          </div>
+        </sensible-sidebar-layout>
+      </main>
+
+      <footer class="border-t py-8">
+        <sensible-navbar>
+          <p>
+            Sensible UI is a semantic-first fork of{" "}
+            <a href="https://basecoatui.com">Basecoat</a>, influenced by
+            shadcn/ui and Oat CSS.
+          </p>
+          <nav aria-label="Project">
+            <ul>
+              <li>
+                <a href="https://github.com/cameronapak/sensible-ui">GitHub</a>
+              </li>
+              <li>
+                <a href="https://www.npmjs.com/package/@faith-tools/sensible-ui">
+                  npm
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/cameronapak/sensible-ui/blob/main/LICENSE.md">
+                  MIT License
+                </a>
+              </li>
+              <li>
+                <a href="https://faith.tools">faith.tools</a>
+              </li>
+            </ul>
+          </nav>
+        </sensible-navbar>
       </footer>
-    </main>
+    </div>
   );
 }

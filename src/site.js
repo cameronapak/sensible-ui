@@ -5,17 +5,24 @@ document
     event.currentTarget.textContent = dark ? "Light mode" : "Dark mode";
   });
 
-// Keep the docs navigation open as a sidebar on wide screens and collapsed
-// behind its summary on narrow screens.
+// Show the docs navigation as an open sidebar while it sits beside the
+// content. When sensible-sidebar-layout stacks it above the content, collapse
+// it behind its summary and close it after a jump.
 const docsNav = document.querySelector("[data-docs-nav]");
-if (docsNav) {
-  const wide = matchMedia("(width >= 64rem)");
-  const sync = () => {
-    docsNav.open = wide.matches;
-  };
-  sync();
-  wide.addEventListener("change", sync);
+const layout = docsNav?.closest("sensible-sidebar-layout");
+if (docsNav && layout) {
+  const summary = docsNav.querySelector(":scope > summary");
+  const stacked = () =>
+    layout.firstElementChild.offsetLeft === layout.lastElementChild.offsetLeft;
+  let wasStacked;
+  new ResizeObserver(() => {
+    const isStacked = stacked();
+    if (isStacked === wasStacked) return;
+    wasStacked = isStacked;
+    summary.hidden = !isStacked;
+    docsNav.open = !isStacked;
+  }).observe(layout);
   docsNav.addEventListener("click", (event) => {
-    if (!wide.matches && event.target.closest("a")) docsNav.open = false;
+    if (wasStacked && event.target.closest("a")) docsNav.open = false;
   });
 }

@@ -1,22 +1,7 @@
+/* Site-only styles for the gallery. Everything else comes from Sensible UI. */
+
 .docs-page {
   --container-width: 76rem;
-}
-
-.site-header {
-  padding-block: 0.5rem 0;
-}
-
-.site-brand {
-  --layout-gap: 0.5rem;
-}
-
-.site-brand strong {
-  font-size: 1.125rem;
-  font-weight: 600;
-}
-
-.site-brand code {
-  font-size: 0.75rem;
 }
 
 .docs-github-icon {
@@ -27,44 +12,24 @@
   color: white;
 }
 
+/* Landing: a display-size headline and a masonry showcase, which the
+   library's typography and grid layouts do not provide. */
 .landing-hero {
-  align-items: center;
   padding-block: clamp(2rem, 6vw, 4rem) 1.5rem;
-  text-align: center;
   --layout-gap: 1.25rem;
 }
 
 .landing-hero h1 {
   max-width: 16ch;
+  margin: 0;
   font-size: clamp(2.25rem, 6vw, 3.5rem);
   line-height: 1.05;
   letter-spacing: -0.035em;
-  text-wrap: balance;
 }
 
 .landing-lead {
-  max-width: 40rem;
-  color: var(--muted-foreground);
   font-size: 1.125rem;
   text-wrap: pretty;
-}
-
-.landing-actions {
-  justify-content: center;
-}
-
-.landing-attribution {
-  max-width: 40rem;
-  color: var(--muted-foreground);
-  font-size: 0.875rem;
-}
-
-.landing-section {
-  padding-block: 1rem 3rem;
-}
-
-.landing-section > p {
-  max-width: 72ch;
 }
 
 .landing-showcase {
@@ -77,32 +42,11 @@
   margin-block-end: 1rem;
 }
 
-.landing-note {
-  align-self: center;
-  color: var(--muted-foreground);
-  font-size: 0.875rem;
-  text-align: center;
-}
-
-.landing-points {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: 1.5rem 2rem;
-}
-
-.landing-points h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-}
-
-.landing-points p {
-  margin: 0;
-  color: var(--muted-foreground);
-}
-
-.docs-nav details {
+/* The docs sidebar sits on the page background so content scrolls under
+   it cleanly while it sticks to the top of the viewport. */
+.docs-nav {
+  padding-block: 0.75rem;
   background: var(--background);
-  translate: none;
 }
 
 /* Collapse instantly so an in-page jump measures its target after the
@@ -111,69 +55,28 @@
   transition: none;
 }
 
-.docs-nav details:hover {
-  background: var(--background);
-  cursor: auto;
-}
-
-.docs-nav summary {
-  cursor: pointer;
-}
-
-.docs-nav-groups {
-  display: grid;
-  gap: 1rem;
-}
-
-.docs-nav-group p {
-  color: var(--muted-foreground);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.docs-nav-group ul {
-  margin: 0.25rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.docs-nav-group a {
-  display: block;
-  border-radius: calc(var(--radius) - 4px);
-  padding: 0.25rem 0.5rem;
-  margin-inline: -0.5rem;
-  color: var(--foreground);
-  font-size: 0.875rem;
-  text-decoration: none !important;
-}
-
-.docs-nav-group a:hover {
-  background: var(--accent);
-}
-
-.docs-section h2,
-.docs-subsection h3,
-.docs-footer h2,
-.landing-hero h1,
-.landing-section h2 {
-  margin: 0;
-}
-
-.docs-section > h3 {
-  margin: 1rem 0 0;
-}
-
 .docs-section {
-  border-top: 1px solid var(--border);
   padding-block: 3rem;
+  /* Clears the sticky docs navigation when the layout stacks. */
   scroll-margin-top: 4.5rem;
+}
+
+.docs-section + .docs-section {
+  border-top: 1px solid var(--border);
 }
 
 .docs-section > p,
 .docs-subsection > p {
   max-width: 72ch;
+}
+
+.docs-section h2,
+.docs-subsection h3 {
+  margin: 0;
+}
+
+.docs-section > h3 {
+  margin: 1rem 0 0;
 }
 
 .docs-subsection {
@@ -189,6 +92,7 @@
   font-size: 0.875rem;
 }
 
+/* Gallery examples: a rendered preview above its highlighted source. */
 .docs-example {
   min-width: 0;
   overflow: hidden;
@@ -235,85 +139,15 @@
   user-select: text;
 }
 
-.docs-footer {
-  border-top: 1px solid var(--border);
-  padding-block: 3rem;
-}
-
-@media (width >= 64rem) {
-  /* Landing sections span the page; the docs nav becomes a sidebar column
-     beside the gallery sections, which stay direct children of the page. */
-  .docs-page {
-    display: grid;
-    grid-template-columns: 13rem minmax(0, 1fr);
-    column-gap: 3rem;
-  }
-
-  .docs-page > * {
-    grid-column: 1 / -1;
-    min-width: 0;
-  }
-
-  .docs-page > .docs-section {
-    grid-column: 2;
-  }
-
-  .docs-page > .docs-nav {
-    grid-column: 1;
-    grid-row: span 99;
-    position: sticky;
-    top: 0;
-    align-self: start;
-    max-height: 100dvh;
-    overflow-y: auto;
-    padding-block: 3rem;
-  }
-
-  .docs-nav details[open] > summary {
-    display: none;
-  }
-
-  .docs-nav details[open] > .docs-nav-groups {
-    margin-block-start: 1rem;
-  }
-
-  .docs-section {
-    scroll-margin-top: 0;
-  }
-}
-
-@media (width < 64rem) {
-  .docs-nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    margin-inline: -1rem;
-    padding: 0.75rem 1rem;
-    background: var(--background);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .docs-nav-groups {
-    max-height: min(60dvh, 32rem);
-    overflow-y: auto;
-  }
-}
-
-@media (40rem <= width < 64rem) {
-  .docs-nav {
-    margin-inline: -1.5rem;
-    padding-inline: 1.5rem;
-  }
-}
-
 @media (width < 40rem) {
   .docs-section {
     padding-block: 2rem;
   }
 }
 
+/* Keeps the brand and actions on one header row on phones. */
 @media (width < 30rem) {
-  .site-brand code {
+  header sensible-navbar > a > code {
     display: none;
   }
 }

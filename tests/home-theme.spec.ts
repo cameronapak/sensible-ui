@@ -37,7 +37,7 @@ test("puts native HTML before class-based components and optional extras", async
   ];
   expect(
     await page
-      .locator(".docs-page > .docs-section")
+      .locator(".docs-section")
       .evaluateAll((sections) => sections.map((section) => section.id)),
   ).toEqual(order);
   expect(
