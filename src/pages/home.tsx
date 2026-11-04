@@ -1282,8 +1282,11 @@ export function Home() {
           a short hover delay, on keyboard focus, and after a half-second touch
           hold. People can move the pointer onto the tooltip, and{" "}
           <kbd>Esc</kbd> closes it. Scrolling also closes it, so it never
-          floats away from a control that scrolled out of view. Only one
-          tooltip shows at a time. <kbd>Esc</kbd> that closes a tooltip has{" "}
+          floats away from a control that scrolled out of view. If the
+          browser's anchor positioning leaves a tooltip away from its control,
+          as Firefox does in a right-to-left part of a left-to-right page, the
+          script places it beside the control. Only one tooltip shows at a
+          time. <kbd>Esc</kbd> that closes a tooltip has{" "}
           <code>defaultPrevented</code> set, so check it before your own{" "}
           <kbd>Esc</kbd> shortcuts act. In both cases, once a tooltip shows, the
           next tooltip shows without the delay while people move between

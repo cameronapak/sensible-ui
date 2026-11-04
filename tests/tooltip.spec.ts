@@ -210,12 +210,14 @@ for (const path of ["interest invokers", "fallback listeners"]) {
     const delay = async (id: string) => {
       const handle = await page.waitForFunction((id) => {
         const entry = (window as unknown as { tooltipLog: Record<string, { entered?: number; opened?: number }> }).tooltipLog[id];
+        // Wrap the delay: an instant switch measures 0ms, which is falsy and
+        // would keep waitForFunction polling.
         return entry?.opened !== undefined && entry.entered !== undefined
-          ? entry.opened - entry.entered
+          ? { delay: entry.opened - entry.entered }
           : false;
       }, id);
       await expect(tip(id)).toBeVisible();
-      return (await handle.jsonValue()) as number;
+      return ((await handle.jsonValue()) as { delay: number }).delay;
     };
     const moveTo = async (id: string) => {
       const point = await center(id);
@@ -311,4 +313,37 @@ test("tooltips keep fields full width, avoid covering their control, and show on
   await expect(page.locator("#row-tip")).toBeVisible();
   await page.locator("#scroller").evaluate((node) => node.scrollTo(0, 200));
   await expect(page.locator("#row-tip")).toBeHidden();
+});
+
+test("the script places a tooltip that CSS left away from its control", async ({
+  page,
+}) => {
+  // Firefox misplaces anchored tooltips inside a right-to-left part of a
+  // left-to-right page. A margin stands in for that bug in Chromium.
+  await page.setContent(`<main class="sensible-ui" style="padding: 80px">
+    <style>#lost-tip { margin-inline-start: -2000px; }</style>
+    <sensible-tooltip><input id="lost" aria-label="Lost"><span role="tooltip" id="lost-tip">Lost tip</span></sensible-tooltip>
+    <sensible-tooltip><input id="found" aria-label="Found"><span role="tooltip" id="found-tip">Found tip</span></sensible-tooltip>
+  </main>`);
+  await page.addStyleTag({ content: await readFile("dist/sensible-ui.css", "utf8") });
+  await page.addScriptTag({
+    content: await readFile("dist/sensible-tooltip.js", "utf8"),
+    type: "module",
+  });
+  await page.waitForFunction(() => customElements.get("sensible-tooltip"));
+
+  for (const id of ["lost", "found"]) {
+    await page.keyboard.press("Tab");
+    await expect(page.locator(`#${id}`)).toBeFocused();
+    await expect(page.locator(`#${id}-tip`)).toBeVisible();
+    const tip = (await page.locator(`#${id}-tip`).boundingBox())!;
+    const field = (await page.locator(`#${id}`).boundingBox())!;
+    expect(tip.x).toBeGreaterThanOrEqual(0);
+    expect(tip.x).toBeLessThan(field.x + field.width);
+    expect(tip.x + tip.width).toBeGreaterThan(field.x);
+    expect(tip.y + tip.height).toBeLessThanOrEqual(field.y);
+    expect(tip.y + tip.height).toBeGreaterThan(field.y - 12);
+  }
+  // A tooltip that CSS placed correctly keeps CSS positioning.
+  await expect(page.locator("#found-tip")).not.toHaveAttribute("style");
 });

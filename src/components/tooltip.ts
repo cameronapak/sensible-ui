@@ -13,6 +13,16 @@ const touchLinger = 1500;
 // people can cross the gap between neighboring triggers.
 const warmGrace = 300;
 
+// Inline properties set when the script places a tooltip itself.
+const placedProperties = [
+  "position-area",
+  "position-try-fallbacks",
+  "inset",
+  "margin",
+  "left",
+  "top",
+];
+
 let count = 0;
 let openTooltip: SensibleTooltip | undefined;
 const tooltips = new Set<SensibleTooltip>();
@@ -84,6 +94,68 @@ class SensibleTooltip extends HTMLElement {
     if (openTooltip !== this) openTooltip?.hide();
     openTooltip = this;
     this.#tip.showPopover();
+    this.#placeIfMisplaced();
+  }
+
+  // CSS anchor positioning can still put a tooltip in the wrong place, as
+  // Firefox does inside a right-to-left part of a left-to-right page. When
+  // the tooltip does not sit next to its control, place it from the
+  // control's box instead.
+  #placeIfMisplaced() {
+    const tip = this.#tip!;
+    for (const property of placedProperties) tip.style.removeProperty(property);
+    const anchor = this.firstElementChild!.getBoundingClientRect();
+    const box = tip.getBoundingClientRect();
+    const near = 12;
+    const acrossX = box.left < anchor.right && box.right > anchor.left;
+    const acrossY = box.top < anchor.bottom && box.bottom > anchor.top;
+    const above = box.bottom <= anchor.top + 1 && box.bottom >= anchor.top - near;
+    const below = box.top >= anchor.bottom - 1 && box.top <= anchor.bottom + near;
+    const before = box.right <= anchor.left + 1 && box.right >= anchor.left - near;
+    const after = box.left >= anchor.right - 1 && box.left <= anchor.right + near;
+    const onScreen = box.left >= 0 && box.right <= innerWidth;
+    if (onScreen && ((acrossX && (above || below)) || (acrossY && (before || after)))) {
+      return;
+    }
+
+    // Unscaled size, since the opening transition scales the tooltip.
+    const width = tip.offsetWidth;
+    const height = tip.offsetHeight;
+    const gap = 6;
+    const edge = 8;
+    const centerX = anchor.left + anchor.width / 2 - width / 2;
+    const centerY = anchor.top + anchor.height / 2 - height / 2;
+    const spots = {
+      top: [centerX, anchor.top - gap - height],
+      bottom: [centerX, anchor.bottom + gap],
+      left: [anchor.left - gap - width, centerY],
+      right: [anchor.right + gap, centerY],
+    } as const;
+    const side = this.getAttribute("side");
+    const order: Array<keyof typeof spots> =
+      side === "bottom"
+        ? ["bottom", "top"]
+        : side === "left"
+          ? ["left", "right", "top", "bottom"]
+          : side === "right"
+            ? ["right", "left", "top", "bottom"]
+            : ["top", "bottom"];
+    // A side fits when the tooltip has room on that side; the other axis is
+    // clamped to the viewport below.
+    const fits = (name: keyof typeof spots) => {
+      const [x, y] = spots[name];
+      return name === "top" || name === "bottom"
+        ? y >= edge && y + height <= innerHeight - edge
+        : x >= edge && x + width <= innerWidth - edge;
+    };
+    const [x, y] = spots[order.find(fits) ?? order[0]];
+    const clamp = (value: number, max: number) => Math.min(Math.max(value, edge), Math.max(edge, max - edge));
+    tip.style.setProperty("position-area", "none");
+    tip.style.setProperty("position-try-fallbacks", "none");
+    tip.style.setProperty("inset", "auto");
+    tip.style.setProperty("margin", "0");
+    tip.style.setProperty("left", `${clamp(x, innerWidth - width)}px`);
+    tip.style.setProperty("top", `${clamp(y, innerHeight - height)}px`);
   }
 
   hide() {
