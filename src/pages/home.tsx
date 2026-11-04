@@ -1254,7 +1254,10 @@ export function Home() {
           long press, and <kbd>Esc</kbd>. Elsewhere, it shows the tooltip after
           a short hover delay, on keyboard focus, and after a half-second touch
           hold. People can move the pointer onto the tooltip, and{" "}
-          <kbd>Esc</kbd> closes it. Without the script, the text stays hidden
+          <kbd>Esc</kbd> closes it. In both cases, once a tooltip shows, the
+          next tooltip shows without the delay while people move between
+          controls. The delay returns 300ms after the last tooltip closes, or
+          right after <kbd>Esc</kbd>. Without the script, the text stays hidden
           on screen but remains next to the control for assistive technology.
         </p>
         <p>

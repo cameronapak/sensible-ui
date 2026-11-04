@@ -9,15 +9,51 @@ const showDelay = 500;
 const hideDelay = 250;
 const touchHold = 500;
 const touchLinger = 1500;
+// After a tooltip closes, the next one skips the show delay for this long, so
+// people can cross the gap between neighboring triggers.
+const warmGrace = 300;
 
 let count = 0;
 let openTooltip: SensibleTooltip | undefined;
+const tooltips = new Set<SensibleTooltip>();
+
+// Once one tooltip is showing, people are reading tooltips, so neighbors show
+// without the initial delay until no tooltip has been open for warmGrace.
+let warm = false;
+let coolTimer: ReturnType<typeof setTimeout> | undefined;
+
+function setWarm(next: boolean) {
+  clearTimeout(coolTimer);
+  if (warm === next) return;
+  warm = next;
+  for (const tooltip of tooltips) tooltip.syncDelay();
+}
+
+function coolLater() {
+  clearTimeout(coolTimer);
+  coolTimer = setTimeout(() => {
+    if (![...tooltips].some((tooltip) => tooltip.open)) setWarm(false);
+  }, warmGrace);
+}
 
 class SensibleTooltip extends HTMLElement {
   #controller?: AbortController;
   #observer?: MutationObserver;
   #timer?: ReturnType<typeof setTimeout>;
   #tip?: HTMLElement;
+  #nativeTrigger?: HTMLElement;
+
+  get open() {
+    return !!this.#tip?.matches(":popover-open");
+  }
+
+  // Native interest invokers read their show delay from CSS.
+  syncDelay() {
+    this.#nativeTrigger?.style.setProperty(
+      "interest-delay-start",
+      warm ? "0s" : "",
+    );
+  }
 
   connectedCallback() {
     if (!this.#wire()) {
@@ -32,6 +68,7 @@ class SensibleTooltip extends HTMLElement {
     this.#observer?.disconnect();
     this.#controller?.abort();
     this.hide();
+    tooltips.delete(this);
   }
 
   show() {
@@ -69,6 +106,15 @@ class SensibleTooltip extends HTMLElement {
     }
 
     const signal = this.#controller.signal;
+    tooltips.add(this);
+    tip.addEventListener(
+      "toggle",
+      (event) => {
+        if ((event as ToggleEvent).newState === "open") setWarm(true);
+        else coolLater();
+      },
+      { signal },
+    );
     // Capture Escape so the tooltip closes before an enclosing dialog.
     document.addEventListener(
       "keydown",
@@ -77,6 +123,8 @@ class SensibleTooltip extends HTMLElement {
         event.preventDefault();
         event.stopPropagation();
         this.hide();
+        // Dismissing ends the reading session.
+        setWarm(false);
       },
       { signal, capture: true },
     );
@@ -84,6 +132,8 @@ class SensibleTooltip extends HTMLElement {
     if (nativeInterest && trigger.matches("button, a[href]")) {
       tip.popover = "hint";
       trigger.setAttribute("interestfor", tip.id);
+      this.#nativeTrigger = trigger;
+      this.syncDelay();
       return true;
     }
 
@@ -97,7 +147,7 @@ class SensibleTooltip extends HTMLElement {
     for (const target of [trigger, tip]) {
       listen(target, "pointerenter", (event) => {
         if ((event as PointerEvent).pointerType === "touch") return;
-        if (target === tip || tip.matches(":popover-open")) this.show();
+        if (warm || target === tip || tip.matches(":popover-open")) this.show();
         else this.#later(() => this.show(), showDelay);
       });
       listen(target, "pointerleave", (event) => {

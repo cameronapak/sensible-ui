@@ -144,3 +144,109 @@ test("reduced motion shows tooltips without scaling", async ({ page }) => {
   await expect(tip).toHaveCSS("transition-duration", /^0s/);
   await expect(tip).toHaveCSS("scale", "none");
 });
+
+const row = `<section class="sensible-ui" style="display: flex; gap: 48px; padding: 80px">
+  ${["Alpha", "Beta", "Gamma"]
+    .map(
+      (name) =>
+        `<sensible-tooltip><button id="${name}">${name}</button><span role="tooltip">${name} tip</span></sensible-tooltip>`,
+    )
+    .join("")}
+</section>`;
+
+for (const path of ["interest invokers", "fallback listeners"]) {
+  test(`with ${path}, a visible tooltip lets neighbors skip the show delay until people stop reading`, async ({
+    page,
+  }) => {
+    await page.setContent(row);
+    await page.addStyleTag({
+      content: await readFile("dist/sensible-ui.css", "utf8"),
+    });
+    if (path === "fallback listeners") {
+      await page.evaluate(() => {
+        delete (HTMLButtonElement.prototype as { interestForElement?: unknown })
+          .interestForElement;
+      });
+    }
+    await page.addScriptTag({
+      content: await readFile("dist/sensible-tooltip.js", "utf8"),
+      type: "module",
+    });
+    await page.waitForFunction(() => customElements.get("sensible-tooltip"));
+    const interestFor = await page.locator("#Alpha").getAttribute("interestfor");
+    expect(interestFor !== null).toBe(path === "interest invokers");
+
+    // Record when the pointer enters each trigger and when its tooltip opens.
+    await page.evaluate(() => {
+      const log: Record<string, { entered?: number; opened?: number }> = {};
+      Object.assign(window, { tooltipLog: log });
+      for (const tooltip of Array.from(document.querySelectorAll("sensible-tooltip"))) {
+        const trigger = tooltip.firstElementChild!;
+        trigger.addEventListener("pointerenter", () => {
+          log[trigger.id] = { entered: performance.now() };
+        });
+        tooltip.querySelector("[role=tooltip]")!.addEventListener("toggle", (event) => {
+          if ((event as ToggleEvent).newState === "open") {
+            log[trigger.id].opened = performance.now();
+          }
+        });
+      }
+    });
+    const center = async (id: string) => {
+      const box = (await page.locator(`#${id}`).boundingBox())!;
+      return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+    };
+    const tip = (id: string) => page.getByRole("tooltip", { name: `${id} tip` });
+    // toggle fires in a later task than :popover-open, so wait for the log.
+    const delay = async (id: string) => {
+      const handle = await page.waitForFunction((id) => {
+        const entry = (window as unknown as { tooltipLog: Record<string, { entered?: number; opened?: number }> }).tooltipLog[id];
+        return entry?.opened !== undefined && entry.entered !== undefined
+          ? entry.opened - entry.entered
+          : false;
+      }, id);
+      await expect(tip(id)).toBeVisible();
+      return (await handle.jsonValue()) as number;
+    };
+    const moveTo = async (id: string) => {
+      const point = await center(id);
+      await page.mouse.move(point.x, point.y, { steps: 4 });
+    };
+
+    // The first tooltip waits for the show delay.
+    await page.mouse.move(0, 0);
+    await moveTo("Alpha");
+    expect(await delay("Alpha")).toBeGreaterThanOrEqual(400);
+
+    // Moving to a neighbor while one shows switches immediately.
+    await moveTo("Beta");
+    expect(await delay("Beta")).toBeLessThan(150);
+    await expect(tip("Alpha")).toBeHidden();
+
+    // After the tooltip closes, a short grace period still skips the delay.
+    const beta = await center("Beta");
+    await page.mouse.move(beta.x, beta.y + 60);
+    await page.waitForFunction(
+      () => !document.querySelector("#Beta + [role=tooltip]")!.matches(":popover-open"),
+      undefined,
+      { polling: "raf" },
+    );
+    await moveTo("Gamma");
+    expect(await delay("Gamma")).toBeLessThan(150);
+
+    // After people stop reading tooltips, the delay returns.
+    await page.mouse.move(0, 0);
+    await expect(tip("Gamma")).toBeHidden();
+    await page.waitForTimeout(800);
+    await moveTo("Alpha");
+    expect(await delay("Alpha")).toBeGreaterThanOrEqual(400);
+
+    // Escape ends the reading session immediately.
+    await moveTo("Beta");
+    expect(await delay("Beta")).toBeLessThan(150);
+    await page.keyboard.press("Escape");
+    await expect(tip("Beta")).toBeHidden();
+    await moveTo("Gamma");
+    expect(await delay("Gamma")).toBeGreaterThanOrEqual(400);
+  });
+}
