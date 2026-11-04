@@ -4154,6 +4154,16 @@
           a.button
         ):not(form[method="dialog"]:not(dialog form) > *):not(
           [data-variant]
+        ):focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :-webkit-any(
+          button:not([role]),
+          input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *):not(
+          [data-variant]
         )[aria-pressed="true"] {
         background: color-mix(in oklab, var(--primary) 90%, transparent);
       }
@@ -4180,6 +4190,16 @@
         background: var(--primary);
         color: var(--primary-foreground);
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      :-webkit-any(
+          button:not([role]),
+          input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="primary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :-webkit-any(
@@ -4222,6 +4242,16 @@
           a.button
         ):not(
           form[method="dialog"]:not(dialog form) > *
+        )[data-variant="secondary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :-webkit-any(
+          button:not([role]),
+          input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
         )[data-variant="secondary"][aria-pressed="true"] {
         background: color-mix(in oklab, var(--secondary) 80%, transparent);
       }
@@ -4248,6 +4278,17 @@
         border: 1px solid var(--border);
         background: var(--background);
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      :-webkit-any(
+          button:not([role]),
+          input:-webkit-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="outline"]:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :-webkit-any(
@@ -4581,6 +4622,16 @@
           a.button
         ):not(form[method="dialog"]:not(dialog form) > *):not(
           [data-variant]
+        ):focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :-moz-any(
+          button:not([role]),
+          input:-moz-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *):not(
+          [data-variant]
         )[aria-pressed="true"] {
         background: color-mix(in oklab, var(--primary) 90%, transparent);
       }
@@ -4607,6 +4658,16 @@
         background: var(--primary);
         color: var(--primary-foreground);
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      :-moz-any(
+          button:not([role]),
+          input:-moz-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="primary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :-moz-any(
@@ -4649,6 +4710,16 @@
           a.button
         ):not(
           form[method="dialog"]:not(dialog form) > *
+        )[data-variant="secondary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :-moz-any(
+          button:not([role]),
+          input:-moz-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
         )[data-variant="secondary"][aria-pressed="true"] {
         background: color-mix(in oklab, var(--secondary) 80%, transparent);
       }
@@ -4675,6 +4746,17 @@
         border: 1px solid var(--border);
         background: var(--background);
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      :-moz-any(
+          button:not([role]),
+          input:-moz-any([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="outline"]:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :-moz-any(
@@ -5144,6 +5226,16 @@
           a.button
         ):not(form[method="dialog"]:not(dialog form) > *):not(
           [data-variant]
+        ):focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(form[method="dialog"]:not(dialog form) > *):not(
+          [data-variant]
         )[aria-pressed="true"] {
         background: color-mix(in oklab, var(--primary) 90%, transparent);
       }
@@ -5178,6 +5270,16 @@
           a.button
         ):not(
           form[method="dialog"]:not(dialog form) > *
+        )[data-variant="primary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
         )[data-variant="primary"][aria-pressed="true"] {
         background: color-mix(in oklab, var(--primary) 90%, transparent);
       }
@@ -5204,6 +5306,16 @@
         background: var(--secondary);
         color: var(--secondary-foreground);
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="secondary"]:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :is(
@@ -5249,6 +5361,17 @@
         )[data-variant="outline"]:is(.dark *) {
         border-color: var(--input);
         background: color-mix(in oklab, var(--input) 30%, transparent);
+      }
+
+      :is(
+          button:not([role]),
+          input:is([type="submit"], [type="reset"], [type="button"]),
+          a.button
+        ):not(
+          form[method="dialog"]:not(dialog form) > *
+        )[data-variant="outline"]:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
       :is(

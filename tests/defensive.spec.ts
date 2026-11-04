@@ -69,6 +69,24 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     expect(touchPressed).toBe(mousePressed);
   });
 
+  test(`${bundle}: keyboard focus shows a ring on every button variant`, async ({
+    page,
+  }) => {
+    await page.setContent(`<section class="sensible-ui">
+      <button>Default</button>
+      <button data-variant="primary">Primary</button>
+      <button data-variant="secondary">Secondary</button>
+      <button data-variant="outline">Outline</button>
+      <button data-variant="ghost">Ghost</button>
+    </section>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+    for (const button of await page.getByRole("button").all()) {
+      await page.keyboard.press("Tab");
+      await expect(button).toBeFocused();
+      await expect(button).toHaveCSS("box-shadow", /0px 0px 0px 3px/);
+    }
+  });
+
   test(`${bundle}: narrow screens get 16px form text and short buttons keep a minimum width`, async ({
     page,
   }) => {
