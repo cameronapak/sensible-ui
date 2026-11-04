@@ -11,7 +11,8 @@ The published core is CSS-only. It does not require Tailwind, a JavaScript frame
 The current release is a semantic-first hybrid:
 
 - Native elements such as headings, buttons, inputs, tables, and `details` receive default styles.
-- Named classes cover components or layout concepts that HTML cannot identify precisely, including `.card`, `.badge`, `.item`, `.button`, `.x-stack`, and `.y-stack`.
+- Named classes cover the existing components and layout concepts that HTML cannot identify precisely, including `.card`, `.badge`, `.item`, `.button`, `.x-stack`, and `.y-stack`.
+- New patterns without a native element use light-DOM `sensible-*` custom elements, such as `<sensible-button-group>`, as recorded in [ADR-0008](docs/adr/0008-light-dom-custom-elements.md). Core CSS styles them without JavaScript. Elements that own behavior ship an optional, dependency-free script under `./<name>/js`.
 - The core bundle includes named layout recipes. Atomic layout utilities are an opt-in companion stylesheet.
 - Native state and ARIA attributes express state. `data-*` attributes express visual variants, sizes, or slots.
 - CSS custom properties are the theming API. A `.dark` ancestor selects the bundled dark theme.
@@ -43,6 +44,7 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 | --- | --- | --- |
 | Add or change a CSS component | `src/css/<name>.css`; `src/css/index.css` composes the core | `src/css/entries/<name>.css` supplies standalone dependencies; `package.json` exports; `build-scoped-css.ts` lists scoped entries; `check-css-exports.ts` validates exports |
 | Change theme tokens or native defaults | `src/css/theme.css`, `src/css/base.css` | `tests/scoped.spec.ts` checks scope-root defaults and host isolation; scoped behavior follows [ADR-0003](docs/adr/0003-parent-scoped-css.md) |
+| Add or change a custom element | `src/css/<name>.css` styles the tag; `src/components/<name>.ts` holds optional behavior | [ADR-0008](docs/adr/0008-light-dom-custom-elements.md); `./<name>/js` export, `package.json` `files`, build scripts, `check-generated.ts`, `index.tsx` and `build-site.tsx` gallery assets |
 | Change highlighted code | `src/components/code.ts`, `src/css/code.css` | `tests/code.spec.ts`; `src/pages/code-break.tsx` at `/code-break`; separate CSS and JS exports follow [ADR-0004](docs/adr/0004-optional-code-component.md) |
 | Change gallery examples or import guidance | `src/pages/home.tsx`, `README.md` | `tests/home-theme.spec.ts` checks documentation, highlighting, and theme behavior; `tests/dialog.spec.ts` exercises native dialog examples |
 | Change gallery-only appearance or behavior | `src/site.css`, `src/site.js` | These files are not published library styles or component behavior. Check them when the gallery differs from standalone usage. |
@@ -62,7 +64,8 @@ In an orb, run `amp orb services ensure` for the gallery, scoped demo, and code 
 ## Vocabulary
 
 - **Semantic default**: Styling applied directly to a native HTML element without an opt-in class.
-- **Component**: A reusable visual pattern that may use semantic elements, a named class, attributes, or a combination of them.
+- **Component**: A reusable visual pattern that may use semantic elements, a named class, a custom element, attributes, or a combination of them.
+- **Custom element**: A light-DOM `sensible-*` tag that names a pattern HTML lacks. Core CSS styles it without registration; an optional script adds behavior.
 - **Variant**: A visual alternative selected with `data-variant` or another documented `data-*` attribute.
 - **State**: Meaning carried by native state or ARIA, such as `disabled`, `open`, `aria-busy`, or `aria-invalid`.
 - **Theme token**: A public CSS custom property, such as `--primary` or `--border`, that consumers can override.
@@ -74,8 +77,8 @@ In an orb, run `amp orb services ensure` for the gallery, scoped demo, and code 
 
 ## Direction under exploration
 
-Additional interactive features and layout APIs such as `x-stack` and `y-stack` may be explored as web components. [Ilha](https://ilha.build/guide/ui/custom-elements) and Datastar Rocket are possible implementation references, not dependencies of the shipped `<sensible-code>` component.
+Whether existing class APIs such as `x-stack` and `y-stack` should move to custom elements remains open; ADR-0008 covers new patterns only. [Ilha](https://ilha.build/guide/ui/custom-elements) and Datastar Rocket are possible implementation references, not dependencies of the shipped `<sensible-code>` component.
 
-ADR-0004 records the optional native code component, not a general runtime choice. Record a decision before adding a web-component runtime or changing the package's CSS-only core. The Rocket prototype and runtime decision remain separate roadmap work.
+ADR-0004 records the optional code component and ADR-0008 records vanilla light-DOM elements; neither chooses a shared runtime. Record a decision before adding a web-component runtime or changing the package's CSS-only core. The Rocket prototype and runtime decision remain separate roadmap work.
 
 Design references are [Oat CSS](https://oat.ink/), [Basecoat](https://basecoatui.com/), [Web Awesome](https://webawesome.com/docs/components/), shadcn/ui, [Ilha](https://ilha.build/guide/ui/custom-elements), and [Datastar Rocket](https://data-star.dev/reference/rocket). Treat them as inspiration, not specifications.
