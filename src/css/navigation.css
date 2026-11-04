@@ -139,12 +139,14 @@
     }
 
     /* Labels shrink and wrap instead of overflowing the panel. */
-    > :not(svg):not(img):not(.badge) {
+    > :not(svg):not(img):not(i):not(.badge):not(kbd) {
       min-inline-size: 0;
       flex-shrink: 1;
     }
 
-    > .badge {
+    /* Badges and shortcut hints keep their size at the end of the row. */
+    > .badge,
+    > kbd {
       margin-inline-start: auto;
       flex-shrink: 0;
     }

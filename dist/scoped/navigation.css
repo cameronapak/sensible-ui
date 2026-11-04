@@ -875,7 +875,7 @@
           sensible-sidebar li > a,
           sensible-sidebar details > summary
         )
-        > :not(svg):not(img):not(.badge) {
+        > :not(svg):not(img):not(i):not(.badge):not(kbd) {
         flex-shrink: 1;
         min-inline-size: 0;
       }
@@ -886,6 +886,16 @@
           sensible-sidebar details > summary
         )
         > .badge {
+        flex-shrink: 0;
+        margin-inline-start: auto;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > kbd {
         flex-shrink: 0;
         margin-inline-start: auto;
       }

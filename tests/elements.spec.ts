@@ -114,6 +114,9 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
       <sensible-button-group id="prefix">
         <span>https://northwind-industries-holdings.example.com/</span><input aria-label="Path">
       </sensible-button-group>
+      <sensible-button-group id="search">
+        <input type="search" aria-label="Search the docs"><button data-variant="outline">Search</button>
+      </sensible-button-group>
       <sensible-button-group id="check">
         <input type="checkbox" aria-label="Select all"><button data-variant="outline">More</button>
       </sensible-button-group>
@@ -156,6 +159,10 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     await expect(page.locator("#long")).toHaveCSS("overflow-x", "visible");
 
     expect((await page.locator("#prefix > input").boundingBox())!.width).toBeGreaterThanOrEqual(128);
+    // A field and its action share one row when the field can keep 8rem.
+    const field = (await page.locator("#search > input").boundingBox())!;
+    const action = (await page.locator("#search > button").boundingBox())!;
+    expect(action.y).toBe(field.y);
     expect((await page.locator("#check > input").boundingBox())!.width).toBeLessThan(20);
 
     expect(await radii(page, "#hidden > :nth-child(2)")).toMatchObject({
@@ -257,6 +264,9 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
         <span>.northwind-industries-holdings.example.com</span>
       </sensible-input-group>
       <sensible-input-group id="prefix"><span>https://</span><input aria-label="Site"></sensible-input-group>
+      <sensible-input-group id="long-prefix">
+        <span>https://northwind-industries-holdings.example.com/</span><input aria-label="Path">
+      </sensible-input-group>
       <sensible-input-group id="money">
         <span>CHF</span><input aria-label="Amount" placeholder="0.00">
         <span>pro Monat inklusive Mehrwertsteuer</span>
@@ -482,6 +492,7 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
             <ul><li><a href="#j">Login</a></li></ul></details></li>
           <li><a href="#k"><strong>New:</strong> Sidebar layout with collapsible groups</a></li>
           <li><a href="#n"><code>useSidebarLayoutBreakpointObserver</code></a></li>
+          <li><a href="#o">${icon}<span>Suchen in allen Arbeitsbereichen und Projekten</span><kbd>⌘K</kbd></a></li>
           <li><details><summary id="billing"><h3>Billing, invoices, and payment methods</h3></summary>
             <ul><li><a href="#l">Invoices</a></li></ul></details></li>
         </ul>
@@ -516,6 +527,10 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
       await page.locator("#billing").evaluate(
         (node) => getComputedStyle(node.firstElementChild!).color === getComputedStyle(node).color,
       ),
+    ).toBe(true);
+    // A shortcut hint keeps its size beside a wrapping label.
+    expect(
+      await page.locator('a[href="#o"] > kbd').evaluate((node) => node.scrollHeight <= node.clientHeight),
     ).toBe(true);
     // A leading inline element flows with the label, so it keeps its word.
     expect(

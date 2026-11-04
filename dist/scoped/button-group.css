@@ -3240,7 +3240,7 @@
         sensible-button-group > select,
         sensible-button-group > sensible-input-group
       ) {
-        flex: auto;
+        flex: 1 1 0;
         inline-size: auto;
         min-inline-size: min(8rem, 100%);
       }

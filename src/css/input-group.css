@@ -84,11 +84,13 @@
       unicode-bidi: plaintext;
     }
 
-    /* A prefix such as a currency or https:// stays whole; text after the
-       field gives way first. A count in an output never truncates. */
+    /* A prefix such as a currency or https:// and a count in an output stay
+       whole; text after the field gives way first. Past half the group they
+       shorten too, so the field never leaves the box. */
     > span:has(+ input, + textarea),
     > output {
       flex-shrink: 0;
+      max-inline-size: 50%;
     }
 
     @media (forced-colors: active) {

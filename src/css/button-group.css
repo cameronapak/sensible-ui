@@ -54,7 +54,9 @@
     z-index: 1;
   }
 
-  /* Text fields fill the free space but keep enough width to type in. */
+  /* Text fields fill the free space but keep enough width to type in. They
+     start from no width, so a row wraps only when the field cannot keep 8rem
+     beside its addons, not because of the field's default width. */
   :where(
     sensible-button-group
       > input:not([type="checkbox"]):not([type="radio"]):not(
@@ -63,7 +65,7 @@
     sensible-button-group > select,
     sensible-button-group > sensible-input-group
   ) {
-    flex: 1 1 auto;
+    flex: 1 1 0;
     inline-size: auto;
     min-inline-size: min(8rem, 100%);
   }

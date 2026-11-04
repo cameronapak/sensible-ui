@@ -5672,7 +5672,7 @@
         sensible-button-group > select,
         sensible-button-group > sensible-input-group
       ) {
-        flex: auto;
+        flex: 1 1 0;
         inline-size: auto;
         min-inline-size: min(8rem, 100%);
       }
@@ -5981,10 +5981,12 @@
 
       sensible-input-group > span:has(+ input, + textarea) {
         flex-shrink: 0;
+        max-inline-size: 50%;
       }
 
       sensible-input-group > output {
         flex-shrink: 0;
+        max-inline-size: 50%;
       }
 
       @media (forced-colors: active) {
@@ -6379,7 +6381,7 @@
           sensible-sidebar li > a,
           sensible-sidebar details > summary
         )
-        > :not(svg):not(img):not(.badge) {
+        > :not(svg):not(img):not(i):not(.badge):not(kbd) {
         flex-shrink: 1;
         min-inline-size: 0;
       }
@@ -6390,6 +6392,16 @@
           sensible-sidebar details > summary
         )
         > .badge {
+        flex-shrink: 0;
+        margin-inline-start: auto;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > kbd {
         flex-shrink: 0;
         margin-inline-start: auto;
       }
