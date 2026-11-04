@@ -262,7 +262,10 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Navigation       | `@faith-tools/sensible-ui/navigation`       |
 | Progress         | `@faith-tools/sensible-ui/progress`         |
 | Table            | `@faith-tools/sensible-ui/table`            |
+| Tooltip          | `@faith-tools/sensible-ui/tooltip`          |
 | Typography       | `@faith-tools/sensible-ui/typography`       |
+
+Button group, input group, navigation, and tooltip are light-DOM custom elements such as `<sensible-button-group>`. The core CSS styles them without JavaScript. Two of them have optional, dependency-free scripts that add behavior: `@faith-tools/sensible-ui/tooltip/js` shows tooltips, and `@faith-tools/sensible-ui/input-group/js` focuses the field when people click an icon or text. On a CDN, load `dist/sensible-tooltip.js` or `dist/sensible-input-group.js` with `<script type="module">`.
 
 Named layouts are available from `@faith-tools/sensible-ui/utils` and are included in the complete bundle. The optional atomic utility stylesheet is available from `@faith-tools/sensible-ui/utilities`.
 

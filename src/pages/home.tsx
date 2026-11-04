@@ -250,6 +250,33 @@ const footerExample = `
   </sensible-navbar>
 </footer>`;
 
+const tooltipExample = `
+<div class="cluster">
+  <sensible-tooltip>
+    <button type="button" data-variant="outline">Hover or focus</button>
+    <span role="tooltip">Add to library</span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="bottom">
+    <button type="button" data-variant="outline" data-size="icon" aria-label="Save">
+      ${lucide("save")}
+    </button>
+    <span role="tooltip">Save draft <kbd>Ctrl</kbd> <kbd>S</kbd></span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="right">
+    <button type="button" data-variant="outline" data-size="icon" aria-labelledby="bold-tip">
+      ${lucide("bold")}
+    </button>
+    <span role="tooltip" id="bold-tip">Bold</span>
+  </sensible-tooltip>
+
+  <sensible-tooltip side="left">
+    <a class="button" data-variant="link" href="#tooltip">Pricing details</a>
+    <span role="tooltip">Prices include tax</span>
+  </sensible-tooltip>
+</div>`;
+
 const buttonExample = `
 <div class="cluster">
   <button type="button">Primary</button>
@@ -649,6 +676,7 @@ export function Home() {
           <a href="#progress">Progress</a>
           <a href="#button-group">Button group</a>
           <a href="#input-group">Input group</a>
+          <a href="#tooltip">Tooltip</a>
           <a href="#navigation">Navigation</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
@@ -782,6 +810,19 @@ export function Home() {
                     <code>/table</code>, <code>/typography</code>
                   </th>
                   <td>Standalone component modules</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/button-group</code>, <code>/input-group</code>,{" "}
+                    <code>/navigation</code>, <code>/tooltip</code>
+                  </th>
+                  <td>Standalone custom element styles</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <code>/input-group/js</code>, <code>/tooltip/js</code>
+                  </th>
+                  <td>Optional custom element behavior</td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -1182,6 +1223,50 @@ export function Home() {
           in your browser JavaScript.
         </p>
         <CodeExample code={inputGroupExample} />
+      </section>
+
+      <section class="docs-section stack" id="tooltip">
+        <h2>Tooltip</h2>
+        <StandaloneImport path="tooltip" />
+        <p>
+          A tooltip shows a short description when people hover over, focus,
+          or press and hold a control. Wrap the control and a{" "}
+          <code>role="tooltip"</code> element in{" "}
+          <code>&lt;sensible-tooltip&gt;</code>, with the control first. Set{" "}
+          <code>side</code> to <code>top</code> (the default),{" "}
+          <code>bottom</code>, <code>left</code>, or <code>right</code>. The
+          tooltip flips to the other side when it would leave the screen.
+        </p>
+        <p>
+          Showing the tooltip needs the optional script. Load it as a module,
+          or import <code>@faith-tools/sensible-ui/tooltip/js</code> with a
+          bundler:
+        </p>
+        <CodeExample
+          code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-tooltip.js"></script>`}
+          showPreview={false}
+        />
+        <p>
+          The script links the tooltip to the control with{" "}
+          <code>aria-describedby</code>, so screen readers announce it as a
+          description. In browsers that support interest invokers, it adds{" "}
+          <code>interestfor</code> and lets the browser handle hover, focus,
+          long press, and <kbd>Esc</kbd>. Elsewhere, it shows the tooltip after
+          a short hover delay, on keyboard focus, and after a half-second touch
+          hold. People can move the pointer onto the tooltip, and{" "}
+          <kbd>Esc</kbd> closes it. Without the script, the text stays hidden
+          on screen but remains next to the control for assistive technology.
+        </p>
+        <p>
+          Keep tooltips short and never put links or buttons in them. Do not
+          put essential information only in a tooltip, because many touch users
+          will not find it. The control needs its own accessible name. When the
+          tooltip is the name of an icon button, give the tooltip an{" "}
+          <code>id</code> and point <code>aria-labelledby</code> at it instead.
+          Disabled buttons cannot receive focus or hover, so a tooltip on one
+          never shows; explain why a control is unavailable in visible text.
+        </p>
+        <CodeExample code={tooltipExample} />
       </section>
 
       <section class="docs-section stack" id="navigation">

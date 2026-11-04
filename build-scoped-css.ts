@@ -23,6 +23,7 @@ export const scopedEntries = {
   spinner: './src/css/entries/spinner.css',
   table: './src/css/entries/table.css',
   theme: './src/css/theme.css',
+  tooltip: './src/css/entries/tooltip.css',
   typography: './src/css/entries/typography.css',
   utilities: './src/css/entries/utilities.css',
   utils: './src/css/entries/utils.css',

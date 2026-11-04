@@ -7135,6 +7135,100 @@
   }
 }
 
+/* src/css/tooltip.css */
+@layer components {
+  sensible-tooltip {
+    display: inline-flex;
+    anchor-scope: --sensible-tooltip;
+  }
+
+  sensible-tooltip > :first-child {
+    anchor-name: --sensible-tooltip;
+  }
+
+  sensible-tooltip > [role="tooltip"]:not([popover]) {
+    position: absolute;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    block-size: 1px;
+    inline-size: 1px;
+  }
+
+  sensible-tooltip > [role="tooltip"][popover] {
+    position-anchor: --sensible-tooltip;
+    position-area: top;
+    position-try-fallbacks: flip-block;
+    overflow: visible;
+    border-radius: calc(var(--radius) - 2px);
+    background: var(--foreground);
+    color: var(--background);
+    text-wrap: balance;
+    pointer-events: auto;
+    opacity: 0;
+    transition:
+      opacity 0.15s ease-out,
+      scale 0.15s ease-out,
+      overlay 0.15s ease-out allow-discrete,
+      display 0.15s ease-out allow-discrete;
+    border: 0;
+    inline-size: max-content;
+    max-inline-size: min(20rem, 100vw - 1rem);
+    margin: 0 0 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    inset: auto;
+    scale: 0.95;
+  }
+
+  sensible-tooltip > [role="tooltip"][popover]:popover-open {
+    opacity: 1;
+    scale: 1;
+  }
+
+  @starting-style {
+    sensible-tooltip > [role="tooltip"][popover]:popover-open {
+      opacity: 0;
+      scale: 0.95;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    sensible-tooltip > [role="tooltip"][popover] {
+      transition-duration: 0s;
+      scale: none;
+    }
+
+    sensible-tooltip > [role="tooltip"][popover]:popover-open {
+      transition-duration: 0s;
+      scale: none;
+    }
+  }
+
+  sensible-tooltip > [role="tooltip"] kbd {
+    background: color-mix(in oklab, var(--background) 20%, transparent);
+    color: inherit;
+  }
+
+  sensible-tooltip[side="bottom"] > [role="tooltip"][popover] {
+    position-area: bottom;
+    margin: 0.375rem 0 0;
+  }
+
+  sensible-tooltip[side="left"] > [role="tooltip"][popover] {
+    position-area: left;
+    position-try-fallbacks: flip-inline;
+    margin: 0 0.375rem 0 0;
+  }
+
+  sensible-tooltip[side="right"] > [role="tooltip"][popover] {
+    position-area: right;
+    position-try-fallbacks: flip-inline;
+    margin: 0 0 0 0.375rem;
+  }
+}
+
 /* src/css/utils.css */
 @layer utilities {
   :root {

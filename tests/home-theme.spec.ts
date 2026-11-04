@@ -25,6 +25,7 @@ test("puts native HTML before class-based components and optional extras", async
     "progress",
     "button-group",
     "input-group",
+    "tooltip",
     "navigation",
     "container",
     "layouts",

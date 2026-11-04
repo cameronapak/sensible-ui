@@ -17,6 +17,7 @@ const modules = {
   progress: "sensible-progress-indeterminate",
   spinner: "sensible-spinner-spin",
   table: "caption-side: bottom",
+  tooltip: "sensible-tooltip",
   typography: "blockquote {",
   utils: ".touch-hitbox",
 } as const
