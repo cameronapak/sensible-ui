@@ -136,24 +136,26 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
         <button data-variant="outline" data-size="icon" aria-label="Up">^</button>
         <button data-variant="outline">Longer text</button>
       </sensible-button-group>
-      <div dir="rtl">
+      <div dir="rtl"><div dir="ltr"><div dir="rtl">
         <sensible-button-group id="rtl">
           <button data-variant="outline">One</button><button data-variant="outline">Two</button>
         </sensible-button-group>
-      </div>
+      </div></div></div>
     </main>`);
     await page.addStyleTag({ content: await readFile(bundle, "utf8") });
 
-    // A row longer than its container scrolls inside the group.
-    const long = page.locator("#long");
-    expect(
-      await long.evaluate((node) => node.scrollWidth > node.clientWidth),
-    ).toBe(true);
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth),
-    ).toBe(320);
+    // A row longer than its container wraps, and nothing leaves the main
+    // element. The group does not clip, so positioned badges and menus show.
+    const outside = await page.evaluate(() => {
+      const edge = document.querySelector("main")!.getBoundingClientRect().right - 16;
+      return Array.from(document.querySelectorAll("sensible-button-group *"))
+        .filter((node) => node.getBoundingClientRect().right > edge + 0.5)
+        .map((node) => node.textContent);
+    });
+    expect(outside).toEqual([]);
+    await expect(page.locator("#long")).toHaveCSS("overflow-x", "visible");
 
-    expect((await page.locator("#prefix > input").boundingBox())!.width).toBe(128);
+    expect((await page.locator("#prefix > input").boundingBox())!.width).toBeGreaterThanOrEqual(128);
     expect((await page.locator("#check > input").boundingBox())!.width).toBeLessThan(20);
 
     expect(await radii(page, "#hidden > :nth-child(2)")).toMatchObject({
@@ -191,7 +193,8 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     const text = (await page.locator("#vertical > :last-child").boundingBox())!;
     expect(up.width).toBe(text.width);
 
-    // With dir="rtl" and no lang, the first child rounds its right corners.
+    // In a right-to-left part of a left-to-right part of a right-to-left page,
+    // with no lang, the first child rounds its right corners.
     await expect(page.locator("#rtl > :first-child")).toHaveCSS(
       "border-top-right-radius",
       "8px",
@@ -254,6 +257,14 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
         <span>.northwind-industries-holdings.example.com</span>
       </sensible-input-group>
       <sensible-input-group id="prefix"><span>https://</span><input aria-label="Site"></sensible-input-group>
+      <sensible-input-group id="money">
+        <span>CHF</span><input aria-label="Amount" placeholder="0.00">
+        <span>pro Monat inklusive Mehrwertsteuer</span>
+      </sensible-input-group>
+      <sensible-input-group id="password">
+        <input type="password" aria-label="Password"><button data-size="sm">Anzeigen</button>
+        <button data-variant="outline" data-size="sm">Generate strong password</button>
+      </sensible-input-group>
       <sensible-input-group id="message">
         <textarea aria-label="Message"></textarea>
         <div class="split">
@@ -280,10 +291,17 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     );
     expect(overflowing).toEqual([]);
     expect((await page.locator("#domain > input").boundingBox())!.width).toBe(64);
-    // A short prefix keeps its full text when it fits.
+    // Prefixes stay whole; text after the field gives way first.
+    for (const prefix of ["#prefix > span", "#money > span:first-child"]) {
+      expect(
+        await page.locator(prefix).evaluate((node) => node.scrollWidth <= node.clientWidth),
+      ).toBe(true);
+    }
     expect(
-      await page.locator("#prefix > span").evaluate((node) => node.scrollWidth <= node.clientWidth),
-    ).toBe(true);
+      await page
+        .getByRole("textbox", { name: "Amount" })
+        .evaluate((node) => getComputedStyle(node, "::placeholder").color),
+    ).toBe("oklch(0.556 0 0)");
     const footer = (await page.locator("#message span").boundingBox())!;
     const send = (await page.getByRole("button", { name: "Send" }).boundingBox())!;
     expect(send.x).toBeGreaterThan(footer.x + footer.width);
@@ -445,6 +463,9 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
             <ul><li><a href="#i" aria-current="page">Input</a></li></ul></details></li>
           <li><details open><summary id="auth"><span>Authentication</span></summary>
             <ul><li><a href="#j">Login</a></li></ul></details></li>
+          <li><a href="#k"><strong>New:</strong> Sidebar layout with collapsible groups</a></li>
+          <li><details><summary id="billing"><h3>Billing</h3></summary>
+            <ul><li><a href="#l">Invoices</a></li></ul></details></li>
         </ul>
       </nav></sensible-sidebar>
       <div class="card"><section>
@@ -472,6 +493,14 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     // A closed group that holds the current page marks its summary.
     await expect(page.locator("#forms")).toHaveCSS("font-weight", "600");
     await expect(page.locator("#auth > span")).toHaveCSS("font-size", "14px");
+    // Headings in a summary read as the toggle, not as a group heading.
+    expect(
+      await page.locator("#billing").evaluate(
+        (node) => getComputedStyle(node.firstElementChild!).color === getComputedStyle(node).color,
+      ),
+    ).toBe(true);
+    // Only the label shrinks, so a leading inline element keeps its words.
+    expect((await page.locator('a[href="#k"] > strong').boundingBox())!.height).toBe(20);
 
     // Inside a card section, the layout still stacks instead of squeezing.
     const side = (await page.locator("#card-layout > aside").boundingBox())!;

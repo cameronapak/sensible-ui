@@ -26,7 +26,7 @@ const modules = {
 // forgiving :where() or :is(), WebKit recovers from the unknown copy by
 // keeping the middle items of its list, so `:where(x > :-moz-any(a, b, c))`
 // styles every `b` on the page. Write those selectors as plain lists instead.
-function assertNoForgivingVendorAny(css: string, label: string) {
+function assertForgivingSelectorsSurvive(css: string, label: string) {
   const enclosing: string[] = []
   for (const match of css.matchAll(/(:[-\w]+)?\(|\)/g)) {
     if (match[0] === ")") {
@@ -46,6 +46,17 @@ function assertNoForgivingVendorAny(css: string, label: string) {
       )
     }
     enclosing.push(name)
+  }
+  // Bun drops invalid items, such as pseudo-elements, from a forgiving list
+  // and can leave it empty, which silently removes the rule.
+  const empty = css.match(/:(?:where|is)\(\s*\)/)
+  if (empty) {
+    const index = empty.index ?? 0
+    throw new Error(
+      `${label} has an empty forgiving selector: ${css
+        .slice(Math.max(0, index - 60), index + 40)
+        .replace(/\s+/g, " ")}`,
+    )
   }
 }
 
@@ -78,7 +89,7 @@ for (const [name, moduleMarker] of Object.entries(modules)) {
   }
 
   const css = await result.outputs[0].text()
-  assertNoForgivingVendorAny(css, `The ${name} export`)
+  assertForgivingSelectorsSurvive(css, `The ${name} export`)
   for (const marker of [
     "--primary:",
     "scroll-behavior: smooth",
@@ -208,7 +219,7 @@ for await (const file of new Bun.Glob("*.css").scan("./dist/scoped")) {
 
 for (const pattern of ["dist/*.css", "dist/scoped/*.css"]) {
   for await (const path of new Bun.Glob(pattern).scan(".")) {
-    assertNoForgivingVendorAny(await Bun.file(path).text(), path)
+    assertForgivingSelectorsSurvive(await Bun.file(path).text(), path)
   }
 }
 

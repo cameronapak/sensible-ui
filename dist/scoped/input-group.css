@@ -3263,6 +3263,11 @@
         min-inline-size: 0;
       }
 
+      sensible-input-group
+        > :-webkit-any(span, output):has(+ input, + textarea) {
+        flex-shrink: 0;
+      }
+
       sensible-input-group > :-moz-any(span, output) {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -3272,6 +3277,10 @@
         min-inline-size: 0;
       }
 
+      sensible-input-group > :-moz-any(span, output):has(+ input, + textarea) {
+        flex-shrink: 0;
+      }
+
       sensible-input-group > :is(span, output) {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -3279,6 +3288,10 @@
         unicode-bidi: plaintext;
         flex-shrink: 1;
         min-inline-size: 0;
+      }
+
+      sensible-input-group > :is(span, output):has(+ input, + textarea) {
+        flex-shrink: 0;
       }
 
       @media (forced-colors: active) {
@@ -3332,7 +3345,10 @@
         flex-basis: 0;
       }
 
-      :where() {
+      :where(
+        sensible-input-group > input,
+        sensible-input-group > textarea
+      )::placeholder {
         color: var(--muted-foreground);
       }
 
@@ -3342,24 +3358,23 @@
         padding: 0.5rem 0.75rem;
       }
 
-      sensible-input-group:has(> textarea) > :not(textarea):not([hidden]) {
-        flex-wrap: nowrap;
-      }
-
       :where(
-        sensible-input-group:has(> textarea)
-          > :not(textarea)
-          > :not(button):not(a.button)
+        sensible-input-group:has(> textarea) > :not(textarea) > span,
+        sensible-input-group:has(> textarea) > :not(textarea) > small,
+        sensible-input-group:has(> textarea) > :not(textarea) > p,
+        sensible-input-group:has(> textarea) > :not(textarea) > output
       ) {
         overflow-wrap: anywhere;
-        flex-shrink: 1;
+        flex: 1 1 0;
         min-inline-size: 0;
       }
 
       :where(sensible-input-group > button, sensible-input-group > a.button) {
         border-radius: calc(var(--radius) - 4px);
+        white-space: normal;
+        flex-shrink: 1;
         min-block-size: 1.5rem;
-        min-inline-size: 0;
+        min-inline-size: min-content;
         padding-block-start: 0;
         padding-block-end: 0;
         padding-inline-start: 0.5rem;

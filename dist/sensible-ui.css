@@ -5505,14 +5505,11 @@
 @layer utilities {
   sensible-button-group {
     display: flex;
-    overflow-x: auto;
-    scrollbar-width: thin;
+    flex-wrap: wrap;
     align-items: stretch;
     inline-size: -moz-fit-content;
     inline-size: fit-content;
-    max-inline-size: calc(100% + 6px);
-    margin: -3px;
-    padding: 3px;
+    max-inline-size: 100%;
   }
 
   sensible-button-group[orientation="vertical"] {
@@ -5520,7 +5517,6 @@
   }
 
   sensible-button-group:has(> sensible-button-group) {
-    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
@@ -5531,11 +5527,13 @@
     > select,
     > sensible-input-group
   ) {
-    inline-size: calc(100% + 6px);
+    inline-size: 100%;
   }
 
   :where(sensible-button-group > *) {
     position: relative;
+    white-space: normal;
+    max-inline-size: 100%;
   }
 
   :where(
@@ -5575,7 +5573,7 @@
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) - 2px);
     background: var(--muted);
-    white-space: nowrap;
+    overflow-wrap: anywhere;
     align-items: center;
     gap: 0.5rem;
     min-block-size: 2.25rem;
@@ -5678,6 +5676,23 @@
   }
 
   :where(
+    [dir="rtl"]
+      [dir="ltr"]
+      [dir="rtl"]
+      sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    [dir="rtl"]
+      [dir="ltr"]
+      sensible-button-group[dir="rtl"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-end-radius);
+    border-bottom-left-radius: var(--sensible-button-group-end-radius);
+    border-top-right-radius: var(--sensible-button-group-start-radius);
+    border-bottom-right-radius: var(--sensible-button-group-start-radius);
+  }
+
+  :where(
     sensible-button-group[orientation="vertical"]:not(
         :has(> sensible-button-group)
       )
@@ -5744,7 +5759,6 @@
       )
   ) {
     border-inline-start-width: 1px;
-    margin-inline-start: -1px;
   }
 
   :where(
@@ -5756,7 +5770,6 @@
       )
   ) {
     border-block-start-width: 1px;
-    margin-block-start: -1px;
   }
 }
 
@@ -5841,6 +5854,10 @@
     min-inline-size: 0;
   }
 
+  sensible-input-group > :-webkit-any(span, output):has(+ input, + textarea) {
+    flex-shrink: 0;
+  }
+
   sensible-input-group > :-moz-any(span, output) {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5850,6 +5867,10 @@
     min-inline-size: 0;
   }
 
+  sensible-input-group > :-moz-any(span, output):has(+ input, + textarea) {
+    flex-shrink: 0;
+  }
+
   sensible-input-group > :is(span, output) {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5857,6 +5878,10 @@
     unicode-bidi: plaintext;
     flex-shrink: 1;
     min-inline-size: 0;
+  }
+
+  sensible-input-group > :is(span, output):has(+ input, + textarea) {
+    flex-shrink: 0;
   }
 
   @media (forced-colors: active) {
@@ -5907,7 +5932,10 @@
     flex-basis: 0;
   }
 
-  :where() {
+  :where(
+    sensible-input-group > input,
+    sensible-input-group > textarea
+  )::placeholder {
     color: var(--muted-foreground);
   }
 
@@ -5917,24 +5945,23 @@
     padding: 0.5rem 0.75rem;
   }
 
-  sensible-input-group:has(> textarea) > :not(textarea):not([hidden]) {
-    flex-wrap: nowrap;
-  }
-
   :where(
-    sensible-input-group:has(> textarea)
-      > :not(textarea)
-      > :not(button):not(a.button)
+    sensible-input-group:has(> textarea) > :not(textarea) > span,
+    sensible-input-group:has(> textarea) > :not(textarea) > small,
+    sensible-input-group:has(> textarea) > :not(textarea) > p,
+    sensible-input-group:has(> textarea) > :not(textarea) > output
   ) {
     overflow-wrap: anywhere;
-    flex-shrink: 1;
+    flex: 1 1 0;
     min-inline-size: 0;
   }
 
   :where(sensible-input-group > button, sensible-input-group > a.button) {
     border-radius: calc(var(--radius) - 4px);
+    white-space: normal;
+    flex-shrink: 1;
     min-block-size: 1.5rem;
-    min-inline-size: 0;
+    min-inline-size: min-content;
     padding-block-start: 0;
     padding-block-end: 0;
     padding-inline-start: 0.5rem;
@@ -6151,7 +6178,7 @@
       sensible-sidebar li > a,
       sensible-sidebar details > summary
     )
-    > :not(svg) {
+    > span:not(.badge) {
     flex-shrink: 1;
     min-inline-size: 0;
   }
@@ -6256,18 +6283,21 @@
     details
     > summary
     > :-webkit-any(h2, h3, h4, h5, h6, p, span) {
+    color: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
     font-weight: inherit !important;
   }
 
   sensible-sidebar details > summary > :-moz-any(h2, h3, h4, h5, h6, p, span) {
+    color: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
     font-weight: inherit !important;
   }
 
   sensible-sidebar details > summary > :is(h2, h3, h4, h5, h6, p, span) {
+    color: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
     font-weight: inherit !important;

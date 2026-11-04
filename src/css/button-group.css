@@ -7,23 +7,19 @@
 @layer utilities {
   sensible-button-group {
     display: flex;
+    /* A row too long for its container wraps instead of overflowing. It does
+       not scroll, because a scroll container would clip badges and menus
+       positioned outside it. */
+    flex-wrap: wrap;
     inline-size: fit-content;
-    /* A row too long for its container scrolls instead of overflowing. The
-       padding keeps focus rings inside the scroll area, and the negative
-       margin keeps the controls where they would be without it. */
-    max-inline-size: calc(100% + 6px);
-    margin: -3px;
-    padding: 3px;
-    overflow-x: auto;
+    max-inline-size: 100%;
     align-items: stretch;
-    scrollbar-width: thin;
 
     &[orientation="vertical"] {
       flex-direction: column;
     }
 
     &:has(> sensible-button-group) {
-      flex-wrap: wrap;
       gap: 0.5rem;
     }
 
@@ -34,12 +30,15 @@
       > select,
       > sensible-input-group
     ) {
-      inline-size: calc(100% + 6px);
+      inline-size: 100%;
     }
   }
 
+  /* A label longer than the whole row wraps inside its control. */
   :where(sensible-button-group > *) {
     position: relative;
+    max-inline-size: 100%;
+    white-space: normal;
   }
 
   /* Scaling a pressed child would open a gap beside its neighbors. */
@@ -86,7 +85,7 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 500;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 
     &:is(.dark *) {
       border-color: var(--input);
@@ -143,7 +142,9 @@
   }
 
   /* Bun rewrites logical corner radii and :dir() into guesses from the lang
-     attribute, so these rules read the nearest dir attribute instead. */
+     attribute, so these rules read the nearest dir attribute instead, up to
+     three nested dir attributes. dir="auto" and the CSS direction property
+     are not detected. */
   :where(
     sensible-button-group:not([orientation="vertical"])
       > :not(sensible-button-group)
@@ -176,6 +177,20 @@
     border-bottom-left-radius: var(--sensible-button-group-start-radius);
     border-top-right-radius: var(--sensible-button-group-end-radius);
     border-bottom-right-radius: var(--sensible-button-group-end-radius);
+  }
+
+  :where(
+    [dir="rtl"] [dir="ltr"] [dir="rtl"]
+      sensible-button-group:not([orientation="vertical"])
+      > :not(sensible-button-group),
+    [dir="rtl"] [dir="ltr"]
+      sensible-button-group[dir="rtl"]:not([orientation="vertical"])
+      > :not(sensible-button-group)
+  ) {
+    border-top-left-radius: var(--sensible-button-group-end-radius);
+    border-bottom-left-radius: var(--sensible-button-group-end-radius);
+    border-top-right-radius: var(--sensible-button-group-start-radius);
+    border-bottom-right-radius: var(--sensible-button-group-start-radius);
   }
 
   :where(
@@ -238,8 +253,8 @@
     border-block-start-width: 0;
   }
 
-  /* An invalid field keeps its whole red border by overlapping its
-     neighbor's border instead of dropping its own. */
+  /* An invalid field keeps its whole red border instead of sharing its
+     neighbor's. */
   :where(
     sensible-button-group:not([orientation="vertical"]):not(
         :has(> sensible-button-group)
@@ -248,7 +263,6 @@
         :nth-child(1 of :not([hidden]):not([type="hidden"]))
       )
   ) {
-    margin-inline-start: -1px;
     border-inline-start-width: 1px;
   }
 
@@ -260,7 +274,6 @@
         :nth-child(1 of :not([hidden]):not([type="hidden"]))
       )
   ) {
-    margin-block-start: -1px;
     border-block-start-width: 1px;
   }
 }

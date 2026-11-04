@@ -1178,8 +1178,11 @@ export function Home() {
           groups to put space between them.
         </p>
         <p>
-          A row that is too long for its container scrolls sideways, and text
-          inputs keep at least 8rem. A <code>&lt;sensible-tooltip&gt;</code>{" "}
+          A row that is too long for its container wraps onto more rows, where
+          the corners at each break stay square, and text inputs keep at least
+          8rem. Corners follow the nearest <code>dir</code> attribute, so set{" "}
+          <code>dir="rtl"</code> on the page or the group rather than relying on{" "}
+          <code>dir="auto"</code> or the CSS <code>direction</code> property. A <code>&lt;sensible-tooltip&gt;</code>{" "}
           around a control joins like the control itself. Other wrappers break
           the join, so put a checkbox inside a <code>label</code>, and point a
           button at a form with its <code>form</code> attribute instead of
@@ -1337,9 +1340,9 @@ export function Home() {
         <p>
           Set <code>--sidebar-width</code> to a length or percentage, such as{" "}
           <code>20rem</code>; other values stack the layout. The layout expects
-          two children, and any others take full rows. Put a link label in one
-          element when it mixes text with other inline elements, so the label
-          wraps as one block. When a long sidebar stacks above the content on
+          two children, and any others take full rows. Put a link label in one{" "}
+          <code>span</code> when it sits beside an icon or badge or mixes text
+          with other inline elements, so the label wraps as one block. When a long sidebar stacks above the content on
           small screens, add a skip link to the content before it. A closed
           group that holds the current page highlights its summary.
         </p>

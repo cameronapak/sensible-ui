@@ -124,8 +124,10 @@
       flex-shrink: 0;
     }
 
-    /* Labels shrink and wrap instead of overflowing the panel. */
-    > :not(svg) {
+    /* A label in a span shrinks and wraps instead of overflowing the panel.
+       Inline elements such as strong keep their words, since they usually
+       sit beside more text. */
+    > span:not(.badge) {
       min-inline-size: 0;
       flex-shrink: 1;
     }
@@ -214,6 +216,7 @@
          The same :is() list keeps this ahead of the accordion's rule after
          Bun adds :-webkit-any() copies, which count as a class. */
       > :is(h2, h3, h4, h5, h6, p, span) {
+        color: inherit !important;
         font-size: inherit !important;
         line-height: inherit !important;
         font-weight: inherit !important;

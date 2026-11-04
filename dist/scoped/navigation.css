@@ -794,7 +794,7 @@
           sensible-sidebar li > a,
           sensible-sidebar details > summary
         )
-        > :not(svg) {
+        > span:not(.badge) {
         flex-shrink: 1;
         min-inline-size: 0;
       }
@@ -899,6 +899,7 @@
         details
         > summary
         > :-webkit-any(h2, h3, h4, h5, h6, p, span) {
+        color: inherit !important;
         font-size: inherit !important;
         line-height: inherit !important;
         font-weight: inherit !important;
@@ -908,12 +909,14 @@
         details
         > summary
         > :-moz-any(h2, h3, h4, h5, h6, p, span) {
+        color: inherit !important;
         font-size: inherit !important;
         line-height: inherit !important;
         font-weight: inherit !important;
       }
 
       sensible-sidebar details > summary > :is(h2, h3, h4, h5, h6, p, span) {
+        color: inherit !important;
         font-size: inherit !important;
         line-height: inherit !important;
         font-weight: inherit !important;

@@ -81,6 +81,12 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       unicode-bidi: plaintext;
+
+      /* A prefix such as a currency or https:// stays whole; text after the
+         field gives way first. */
+      &:has(+ input, + textarea) {
+        flex-shrink: 0;
+      }
     }
 
     @media (forced-colors: active) {
@@ -137,10 +143,8 @@
     flex-basis: 0;
   }
 
-  :where(
-    sensible-input-group > input::placeholder,
-    sensible-input-group > textarea::placeholder
-  ) {
+  /* Pseudo-elements are invalid inside :where(), so they go after it. */
+  :where(sensible-input-group > input, sensible-input-group > textarea)::placeholder {
     color: var(--muted-foreground);
   }
 
@@ -150,31 +154,32 @@
     padding: 0.5rem 0.75rem;
   }
 
-  /* Rows under a text area keep their action beside the text, and the text
-     wraps instead of overflowing. */
-  /* The attribute test makes this outrank layout classes such as .split. */
-  sensible-input-group:has(> textarea) > :not(textarea):not([hidden]) {
-    flex-wrap: nowrap;
-  }
-
+  /* Text in rows under a text area starts from no width and fills the free
+     space, so it wraps beside an action instead of pushing the action onto
+     its own row. Rows of controls still wrap as a whole. */
   :where(
-    sensible-input-group:has(> textarea)
-      > :not(textarea)
-      > :not(button):not(a.button)
+    sensible-input-group:has(> textarea) > :not(textarea) > span,
+    sensible-input-group:has(> textarea) > :not(textarea) > small,
+    sensible-input-group:has(> textarea) > :not(textarea) > p,
+    sensible-input-group:has(> textarea) > :not(textarea) > output
   ) {
+    flex: 1 1 0;
     min-inline-size: 0;
-    flex-shrink: 1;
     overflow-wrap: anywhere;
   }
 
   :where(sensible-input-group > button, sensible-input-group > a.button) {
     min-block-size: 1.5rem;
-    min-inline-size: 0;
+    min-inline-size: min-content;
     padding-block: 0;
     padding-inline: 0.5rem;
     border-radius: calc(var(--radius) - 4px);
     font-size: 0.8125rem;
     line-height: 1.25rem;
+    /* Only when space runs out, a long label wraps inside its button
+       instead of pushing the button past the border. */
+    flex-shrink: 1;
+    white-space: normal;
   }
 
   /* Buttons drop their resting shadow but keep the focus ring. */
