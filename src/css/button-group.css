@@ -103,7 +103,9 @@
     background: var(--input);
   }
 
+  /* A column keeps each field's own height. */
   :where(sensible-button-group[orientation="vertical"] > *) {
+    flex: none;
     inline-size: auto;
   }
 

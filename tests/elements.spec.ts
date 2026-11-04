@@ -138,6 +138,7 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
       <sensible-button-group id="vertical" orientation="vertical">
         <button data-variant="outline" data-size="icon" aria-label="Up">^</button>
         <button data-variant="outline">Longer text</button>
+        <input aria-label="Name">
       </sensible-button-group>
       <div dir="rtl"><div dir="ltr"><div dir="rtl">
         <sensible-button-group id="rtl">
@@ -197,8 +198,10 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     });
 
     const up = (await page.locator("#vertical > :first-child").boundingBox())!;
-    const text = (await page.locator("#vertical > :last-child").boundingBox())!;
+    const text = (await page.locator("#vertical > button:last-of-type").boundingBox())!;
     expect(up.width).toBe(text.width);
+    // A field in a column keeps its own height.
+    expect((await page.locator("#vertical > input").boundingBox())!.height).toBe(36);
 
     // In a right-to-left part of a left-to-right part of a right-to-left page,
     // with no lang, the first child rounds its right corners.

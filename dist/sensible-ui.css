@@ -5605,6 +5605,7 @@
   }
 
   :where(sensible-button-group[orientation="vertical"] > *) {
+    flex: none;
     inline-size: auto;
   }
 
