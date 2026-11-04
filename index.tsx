@@ -11,6 +11,9 @@ const server = Bun.serve({
     '/utilities.css': Bun.file('./dist/sensible-ui.utilities.css'),
     '/site.css': Bun.file('./src/site.css'),
     '/site.js': Bun.file('./src/site.js'),
+    '/favicon.ico': Bun.file('./src/favicon.ico'),
+    '/favicon.svg': Bun.file('./src/favicon.svg'),
+    '/og-image.png': Bun.file('./src/og-image.png'),
   },
   fetch: app.fetch,
 })

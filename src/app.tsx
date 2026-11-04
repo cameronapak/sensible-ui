@@ -6,6 +6,13 @@ import { ScopedDemo } from './pages/scoped.tsx'
 import { CodeBreak } from './pages/code-break.tsx'
 import { TableBreak } from './pages/table-break.tsx'
 
+const siteUrl = 'https://sensibleui.com/'
+const title = 'Sensible UI: the shadcn/ui look for plain HTML'
+const description =
+  'The shadcn/ui look for plain HTML. One stylesheet styles native buttons, forms, tables, and dialogs. No React, Tailwind, or build step.'
+const imageAlt =
+  'The shadcn/ui look. Just write HTML. Sign-up, notification, and question cards styled by Sensible UI.'
+
 const app = new Hono()
 
 app.use(
@@ -14,11 +21,25 @@ app.use(
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sensible UI: shadcn/ui-inspired components for plain HTML</title>
-        <meta
-          name="description"
-          content="Build shadcn/ui-inspired components with plain HTML and one stylesheet. Customize with CSS variables. No Tailwind, JavaScript framework, or build step required."
-        />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={siteUrl} />
+        <link rel="icon" href="./favicon.ico" sizes="32x32" />
+        <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Sensible UI" />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={`${siteUrl}og-image.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={imageAlt} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`${siteUrl}og-image.png`} />
+        <meta name="twitter:image:alt" content={imageAlt} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link

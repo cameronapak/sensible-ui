@@ -31,4 +31,7 @@ await Promise.all([
   Bun.write(`${output}/utilities.css`, Bun.file('./dist/sensible-ui.utilities.css')),
   Bun.write(`${output}/site.css`, Bun.file('./src/site.css')),
   Bun.write(`${output}/site.js`, Bun.file('./src/site.js')),
+  Bun.write(`${output}/favicon.ico`, Bun.file('./src/favicon.ico')),
+  Bun.write(`${output}/favicon.svg`, Bun.file('./src/favicon.svg')),
+  Bun.write(`${output}/og-image.png`, Bun.file('./src/og-image.png')),
 ])

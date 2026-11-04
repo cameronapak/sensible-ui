@@ -1,9 +1,22 @@
 .docs-page {
-  --container-width: 72rem;
+  --container-width: 76rem;
 }
 
-.docs-hero {
-  padding-block: 2rem;
+.site-header {
+  padding-block: 0.5rem 0;
+}
+
+.site-brand {
+  --layout-gap: 0.5rem;
+}
+
+.site-brand strong {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.site-brand code {
+  font-size: 0.75rem;
 }
 
 .docs-github-icon {
@@ -14,40 +27,148 @@
   color: white;
 }
 
-.docs-hero h1,
-.docs-section h2,
-.docs-subsection h3,
-.docs-footer h2 {
-  margin: 0;
+.landing-hero {
+  align-items: center;
+  padding-block: clamp(2rem, 6vw, 4rem) 1.5rem;
+  text-align: center;
+  --layout-gap: 1.25rem;
 }
 
-.docs-hero > p {
-  max-width: 44rem;
+.landing-hero h1 {
+  max-width: 16ch;
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.landing-lead {
+  max-width: 40rem;
   color: var(--muted-foreground);
   font-size: 1.125rem;
+  text-wrap: pretty;
 }
 
-.docs-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.landing-actions {
+  justify-content: center;
 }
 
-.docs-nav a {
-  border: 1px solid var(--border);
-  border-radius: 9999px;
-  padding: 0.25rem 0.75rem;
+.landing-attribution {
+  max-width: 40rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.landing-section {
+  padding-block: 1rem 3rem;
+}
+
+.landing-section > p {
+  max-width: 72ch;
+}
+
+.landing-showcase {
+  columns: 3 18rem;
+  column-gap: 1rem;
+}
+
+.landing-showcase > * {
+  break-inside: avoid;
+  margin-block-end: 1rem;
+}
+
+.landing-note {
+  align-self: center;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.landing-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.landing-points h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.landing-points p {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.docs-nav details {
+  background: var(--background);
+  translate: none;
+}
+
+/* Collapse instantly so an in-page jump measures its target after the
+   panel closes, not partway through the accordion height transition. */
+.docs-nav details::details-content {
+  transition: none;
+}
+
+.docs-nav details:hover {
+  background: var(--background);
+  cursor: auto;
+}
+
+.docs-nav summary {
+  cursor: pointer;
+}
+
+.docs-nav-groups {
+  display: grid;
+  gap: 1rem;
+}
+
+.docs-nav-group p {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docs-nav-group ul {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.docs-nav-group a {
+  display: block;
+  border-radius: calc(var(--radius) - 4px);
+  padding: 0.25rem 0.5rem;
+  margin-inline: -0.5rem;
+  color: var(--foreground);
   font-size: 0.875rem;
   text-decoration: none !important;
 }
 
-.docs-nav a:hover {
+.docs-nav-group a:hover {
   background: var(--accent);
+}
+
+.docs-section h2,
+.docs-subsection h3,
+.docs-footer h2,
+.landing-hero h1,
+.landing-section h2 {
+  margin: 0;
+}
+
+.docs-section > h3 {
+  margin: 1rem 0 0;
 }
 
 .docs-section {
   border-top: 1px solid var(--border);
   padding-block: 3rem;
+  scroll-margin-top: 4.5rem;
 }
 
 .docs-section > p,
@@ -119,12 +240,80 @@
   padding-block: 3rem;
 }
 
+@media (width >= 64rem) {
+  /* Landing sections span the page; the docs nav becomes a sidebar column
+     beside the gallery sections, which stay direct children of the page. */
+  .docs-page {
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr);
+    column-gap: 3rem;
+  }
+
+  .docs-page > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .docs-page > .docs-section {
+    grid-column: 2;
+  }
+
+  .docs-page > .docs-nav {
+    grid-column: 1;
+    grid-row: span 99;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100dvh;
+    overflow-y: auto;
+    padding-block: 3rem;
+  }
+
+  .docs-nav details[open] > summary {
+    display: none;
+  }
+
+  .docs-nav details[open] > .docs-nav-groups {
+    margin-block-start: 1rem;
+  }
+
+  .docs-section {
+    scroll-margin-top: 0;
+  }
+}
+
+@media (width < 64rem) {
+  .docs-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin-inline: -1rem;
+    padding: 0.75rem 1rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .docs-nav-groups {
+    max-height: min(60dvh, 32rem);
+    overflow-y: auto;
+  }
+}
+
+@media (40rem <= width < 64rem) {
+  .docs-nav {
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+  }
+}
+
 @media (width < 40rem) {
   .docs-section {
     padding-block: 2rem;
   }
+}
 
-  .docs-nav {
-    align-items: flex-start;
+@media (width < 30rem) {
+  .site-brand code {
+    display: none;
   }
 }
