@@ -52,6 +52,23 @@
     text-decoration: inherit;
   }
 
+  /* Prevent double-tap zoom on tap controls, keeping panning and pinch zoom. */
+  :is(
+    a[href],
+    button,
+    input:is(
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      [type="checkbox"],
+      [type="radio"]
+    ),
+    select,
+    summary
+  ) {
+    touch-action: manipulation;
+  }
+
   :is(ul, ol) {
     list-style: none;
   }

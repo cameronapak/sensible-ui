@@ -136,6 +136,54 @@
     text-decoration: inherit;
   }
 
+  :-webkit-any(
+    a[href],
+    button,
+    input:-webkit-any(
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      [type="checkbox"],
+      [type="radio"]
+    ),
+    select,
+    summary
+  ) {
+    touch-action: manipulation;
+  }
+
+  :-moz-any(
+    a[href],
+    button,
+    input:-moz-any(
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      [type="checkbox"],
+      [type="radio"]
+    ),
+    select,
+    summary
+  ) {
+    touch-action: manipulation;
+  }
+
+  :is(
+    a[href],
+    button,
+    input:is(
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      [type="checkbox"],
+      [type="radio"]
+    ),
+    select,
+    summary
+  ) {
+    touch-action: manipulation;
+  }
+
   :-webkit-any(ul, ol) {
     list-style: none;
   }

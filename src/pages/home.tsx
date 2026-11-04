@@ -1328,6 +1328,13 @@ export function Home() {
           buttons an accessible name. Enabled buttons scale down slightly while
           pressed; reduced-motion preferences disable this movement.
         </p>
+        <p>
+          Buttons use <code>touch-action: manipulation</code> to prevent
+          double-tap zoom while allowing scrolling and pinch zoom. The same
+          default applies to links with <code>href</code>, button-like inputs,
+          checkboxes, radios, selects, and disclosure summaries. Text fields and
+          page containers keep their default touch behavior.
+        </p>
         <CodeExample code={buttonExample} />
       </section>
 

@@ -153,6 +153,12 @@ Sensible UI respects `prefers-reduced-motion: reduce`. Smooth scrolling becomes 
 
 Future components should put decorative motion behind `prefers-reduced-motion: no-preference` or provide a reduced-motion rule that preserves the visible state change without animation.
 
+## Touch gestures
+
+The shared base styles apply `touch-action: manipulation` to links with `href`, buttons (including those with ARIA roles), button-like inputs, checkboxes, radios, selects, and disclosure summaries. This disables double-tap zoom on those controls while allowing scrolling and pinch zoom. It works in the complete bundle and standalone modules; scoped imports limit it to descendants of `.sensible-ui`.
+
+Text fields, text areas, editable content, and page containers keep their default touch behavior. Sensible UI doesn't add JavaScript gesture handlers or restrict viewport zoom. Your application's ancestor styles and viewport settings can still restrict gestures.
+
 ## Fonts
 
 Sensible UI prefers Geist and Geist Mono, then falls back to your system fonts. The core stylesheet does not download fonts for you.
