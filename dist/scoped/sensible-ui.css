@@ -5855,9 +5855,16 @@
         transition:
           border-color 0.15s,
           box-shadow 0.15s;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
         box-shadow: 0 1px 2px #0000000d;
+      }
+
+      @media (min-width: 48rem) {
+        sensible-input-group {
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+        }
       }
 
       sensible-input-group:is(.dark *) {
@@ -5868,43 +5875,32 @@
         cursor: text;
       }
 
-      sensible-input-group:has(> :-webkit-any(input, textarea):focus-visible) {
+      sensible-input-group:has(
+        > input:focus-visible,
+        > textarea:focus-visible
+      ) {
         border-color: var(--ring);
         box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
       }
 
-      sensible-input-group:has(> :-moz-any(input, textarea):focus-visible) {
-        border-color: var(--ring);
-        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-      }
-
-      sensible-input-group:has(> :is(input, textarea):focus-visible) {
-        border-color: var(--ring);
-        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-      }
-
-      sensible-input-group:has(> [aria-invalid="true"]) {
+      sensible-input-group:has(
+        > input[aria-invalid="true"],
+        > textarea[aria-invalid="true"]
+      ) {
         border-color: var(--destructive);
         box-shadow: 0 0 0 3px
           color-mix(in oklab, var(--destructive) 20%, transparent);
       }
 
-      sensible-input-group:is(.dark *):has(> [aria-invalid="true"]) {
+      sensible-input-group:is(.dark *):has(
+          > input[aria-invalid="true"],
+          > textarea[aria-invalid="true"]
+        ) {
         box-shadow: 0 0 0 3px
           color-mix(in oklab, var(--destructive) 40%, transparent);
       }
 
-      sensible-input-group:has(> :-webkit-any(input, textarea):disabled) {
-        cursor: not-allowed;
-        opacity: 0.5;
-      }
-
-      sensible-input-group:has(> :-moz-any(input, textarea):disabled) {
-        cursor: not-allowed;
-        opacity: 0.5;
-      }
-
-      sensible-input-group:has(> :is(input, textarea):disabled) {
+      sensible-input-group:has(> input:disabled, > textarea:disabled) {
         cursor: not-allowed;
         opacity: 0.5;
       }
@@ -5917,18 +5913,39 @@
       }
 
       sensible-input-group > :-webkit-any(span, output) {
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
-        flex-shrink: 0;
+        unicode-bidi: plaintext;
+        flex-shrink: 1;
+        min-inline-size: 0;
       }
 
       sensible-input-group > :-moz-any(span, output) {
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
-        flex-shrink: 0;
+        unicode-bidi: plaintext;
+        flex-shrink: 1;
+        min-inline-size: 0;
       }
 
       sensible-input-group > :is(span, output) {
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
-        flex-shrink: 0;
+        unicode-bidi: plaintext;
+        flex-shrink: 1;
+        min-inline-size: 0;
+      }
+
+      @media (forced-colors: active) {
+        sensible-input-group:has(
+          > input:focus-visible,
+          > textarea:focus-visible
+        ) {
+          outline: 2px solid highlight;
+        }
       }
 
       sensible-input-group:has(> textarea) {
@@ -5955,30 +5972,65 @@
       :where(sensible-input-group > input, sensible-input-group > textarea) {
         box-shadow: none;
         color: var(--foreground);
+        font-size: inherit;
+        line-height: inherit;
+        opacity: 1;
         background-color: #0000;
         border: 0;
         border-radius: 0;
         flex: auto;
         block-size: calc(2.25rem - 2px);
         inline-size: auto;
-        min-inline-size: 0;
+        min-inline-size: 4rem;
         padding-inline-start: 0;
         padding-inline-end: 0;
       }
 
+      :where(sensible-input-group > input) {
+        flex-basis: 0;
+      }
+
+      :where() {
+        color: var(--muted-foreground);
+      }
+
       :where(sensible-input-group > textarea) {
         block-size: auto;
+        max-block-size: 16rem;
         padding: 0.5rem 0.75rem;
+      }
+
+      sensible-input-group:has(> textarea) > :not(textarea):not([hidden]) {
+        flex-wrap: nowrap;
+      }
+
+      :where(
+        sensible-input-group:has(> textarea)
+          > :not(textarea)
+          > :not(button):not(a.button)
+      ) {
+        overflow-wrap: anywhere;
+        flex-shrink: 1;
+        min-inline-size: 0;
       }
 
       :where(sensible-input-group > button, sensible-input-group > a.button) {
         border-radius: calc(var(--radius) - 4px);
-        box-shadow: none;
         min-block-size: 1.5rem;
         min-inline-size: 0;
+        padding-block-start: 0;
+        padding-block-end: 0;
         padding-inline-start: 0.5rem;
         padding-inline-end: 0.5rem;
         font-size: 0.8125rem;
+        line-height: 1.25rem;
+      }
+
+      :where(
+        sensible-input-group > button:not(:focus-visible),
+        sensible-input-group > a.button:not(:focus-visible)
+      ) {
+        box-shadow: none;
       }
 
       :where(

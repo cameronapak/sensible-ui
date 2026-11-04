@@ -9,9 +9,11 @@ class SensibleInputGroup extends HTMLElement {
       "click",
       (event) => {
         const target = event.target as Element;
-        if (target.closest("input, textarea, select, button, a, label, [tabindex]")) {
-          return;
-        }
+        const control = target.closest(
+          "input, textarea, select, button, a, label, [tabindex]",
+        );
+        // A focusable ancestor outside the group does not count.
+        if (control && control !== this && this.contains(control)) return;
         this.querySelector<HTMLElement>(
           ":scope > :is(input, textarea):not(:disabled)",
         )?.focus();

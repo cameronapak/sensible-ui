@@ -1206,7 +1206,15 @@ export function Home() {
           <code>aria-invalid</code> and <code>disabled</code> states. Put
           icons, <code>span</code> text, and native buttons directly inside it.
           With a text area, put rows of text or actions in a <code>div</code>{" "}
-          after it.
+          after it. The text area grows with its content up to 16rem, then
+          scrolls.
+        </p>
+        <p>
+          When space runs out, text such as a prefix shortens with an ellipsis
+          before the field gets narrower than 4rem, and buttons keep their
+          size. Put a long fixed domain in help text below the field instead
+          of a suffix. A <code>select</code> inside the group is not
+          supported; use a button group for a select beside a field.
         </p>
         <p>
           The examples use inline SVG icons from{" "}

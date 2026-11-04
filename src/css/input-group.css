@@ -14,11 +14,17 @@
     background: transparent;
     box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
     color: var(--muted-foreground);
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    /* Matches the field's text, which is 16px on narrow screens. */
+    font-size: 1rem;
+    line-height: 1.5rem;
     transition:
       border-color 150ms,
       box-shadow 150ms;
+
+    @media (width >= 48rem) {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
 
     &:is(.dark *) {
       background: color-mix(in oklab, var(--input) 30%, transparent);
@@ -29,23 +35,32 @@
       cursor: text;
     }
 
-    &:has(> :is(input, textarea):focus-visible) {
+    /* Plain lists, not :is(): Bun's :-webkit-any() copy counts as a class
+       and would outrank the invalid rule below. */
+    &:has(> input:focus-visible, > textarea:focus-visible) {
       border-color: var(--ring);
       box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
     }
 
-    &:has(> [aria-invalid="true"]) {
+    /* As specific as the focus rule, so a focused invalid field stays red. */
+    &:has(
+      > input[aria-invalid="true"],
+      > textarea[aria-invalid="true"]
+    ) {
       border-color: var(--destructive);
       box-shadow: 0 0 0 3px
         color-mix(in oklab, var(--destructive) 20%, transparent);
     }
 
-    &:is(.dark *):has(> [aria-invalid="true"]) {
+    &:is(.dark *):has(
+        > input[aria-invalid="true"],
+        > textarea[aria-invalid="true"]
+      ) {
       box-shadow: 0 0 0 3px
         color-mix(in oklab, var(--destructive) 40%, transparent);
     }
 
-    &:has(> :is(input, textarea):disabled) {
+    &:has(> input:disabled, > textarea:disabled) {
       cursor: not-allowed;
       opacity: 0.5;
     }
@@ -57,9 +72,21 @@
       pointer-events: none;
     }
 
+    /* Long text yields before the field drops below 4rem. Plaintext bidi
+       keeps a prefix such as https:// readable on right-to-left pages. */
     > :is(span, output) {
-      flex-shrink: 0;
+      min-inline-size: 0;
+      overflow: hidden;
+      flex-shrink: 1;
+      text-overflow: ellipsis;
       white-space: nowrap;
+      unicode-bidi: plaintext;
+    }
+
+    @media (forced-colors: active) {
+      &:has(> input:focus-visible, > textarea:focus-visible) {
+        outline: 2px solid Highlight;
+      }
     }
 
     /* A text area stacks above rows of text or actions. */
@@ -90,7 +117,7 @@
   :where(sensible-input-group > input, sensible-input-group > textarea) {
     flex: 1 1 auto;
     inline-size: auto;
-    min-inline-size: 0;
+    min-inline-size: 4rem;
     block-size: calc(2.25rem - 2px);
     padding-inline: 0;
     border: 0;
@@ -98,20 +125,64 @@
     background-color: transparent;
     box-shadow: none;
     color: var(--foreground);
+    font-size: inherit;
+    line-height: inherit;
+    /* The group already shows the disabled state. */
+    opacity: 1;
+  }
+
+  /* The field takes the space left after icons, text, and buttons instead of
+     asking for its default width, so short text never truncates. */
+  :where(sensible-input-group > input) {
+    flex-basis: 0;
+  }
+
+  :where(
+    sensible-input-group > input::placeholder,
+    sensible-input-group > textarea::placeholder
+  ) {
+    color: var(--muted-foreground);
   }
 
   :where(sensible-input-group > textarea) {
     block-size: auto;
+    max-block-size: 16rem;
     padding: 0.5rem 0.75rem;
+  }
+
+  /* Rows under a text area keep their action beside the text, and the text
+     wraps instead of overflowing. */
+  /* The attribute test makes this outrank layout classes such as .split. */
+  sensible-input-group:has(> textarea) > :not(textarea):not([hidden]) {
+    flex-wrap: nowrap;
+  }
+
+  :where(
+    sensible-input-group:has(> textarea)
+      > :not(textarea)
+      > :not(button):not(a.button)
+  ) {
+    min-inline-size: 0;
+    flex-shrink: 1;
+    overflow-wrap: anywhere;
   }
 
   :where(sensible-input-group > button, sensible-input-group > a.button) {
     min-block-size: 1.5rem;
     min-inline-size: 0;
+    padding-block: 0;
     padding-inline: 0.5rem;
     border-radius: calc(var(--radius) - 4px);
-    box-shadow: none;
     font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  /* Buttons drop their resting shadow but keep the focus ring. */
+  :where(
+    sensible-input-group > button:not(:focus-visible),
+    sensible-input-group > a.button:not(:focus-visible)
+  ) {
+    box-shadow: none;
   }
 
   :where(

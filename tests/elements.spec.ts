@@ -243,16 +243,78 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
   });
 }
 
+for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
+  test(`${bundle}: input groups fit long addons and keep focus, invalid, and disabled states`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.setContent(`<main class="sensible-ui" style="padding: 16px">
+      <sensible-input-group id="domain">
+        <span>https://</span><input aria-label="Subdomain" value="aleksandra">
+        <span>.northwind-industries-holdings.example.com</span>
+      </sensible-input-group>
+      <sensible-input-group id="prefix"><span>https://</span><input aria-label="Site"></sensible-input-group>
+      <sensible-input-group id="message">
+        <textarea aria-label="Message"></textarea>
+        <div class="split">
+          <span>Replying to bartholomew.fitzgerald@northwind-industries-holdings.example.com</span>
+          <button data-size="icon" aria-label="Send">^</button>
+        </div>
+      </sensible-input-group>
+      <sensible-input-group id="invalid"><span>@</span><input aria-label="User" aria-invalid="true"></sensible-input-group>
+      <sensible-input-group id="disabled"><input aria-label="Off" disabled></sensible-input-group>
+      <sensible-input-group id="actions">
+        <input aria-label="Query"><button data-variant="outline">Search all</button>
+        <button data-variant="ghost" data-size="icon" aria-label="Copy">c</button>
+      </sensible-input-group>
+    </main>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    const overflowing = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("sensible-input-group")).flatMap((group) => {
+        const edge = group.getBoundingClientRect().right;
+        return Array.from(group.querySelectorAll("*"))
+          .filter((node) => node.getBoundingClientRect().right > edge + 0.5)
+          .map((node) => `${group.id} ${node.tagName.toLowerCase()}`);
+      }),
+    );
+    expect(overflowing).toEqual([]);
+    expect((await page.locator("#domain > input").boundingBox())!.width).toBe(64);
+    // A short prefix keeps its full text when it fits.
+    expect(
+      await page.locator("#prefix > span").evaluate((node) => node.scrollWidth <= node.clientWidth),
+    ).toBe(true);
+    const footer = (await page.locator("#message span").boundingBox())!;
+    const send = (await page.getByRole("button", { name: "Send" }).boundingBox())!;
+    expect(send.x).toBeGreaterThan(footer.x + footer.width);
+
+    await page.getByRole("textbox", { name: "User" }).focus();
+    await expect(page.locator("#invalid")).toHaveCSS(
+      "border-top-color",
+      "oklch(0.577 0.245 27.325)",
+    );
+    await expect(page.getByRole("textbox", { name: "Off" })).toHaveCSS("opacity", "1");
+    expect((await page.getByRole("button", { name: "Search all" }).boundingBox())!.height).toBe(24);
+    await page.getByRole("button", { name: "Search all" }).focus();
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("button", { name: "Copy" })).toHaveCSS(
+      "box-shadow",
+      /0px 0px 0px 3px/,
+    );
+  });
+}
+
 test("the optional input group script focuses the field from icons and text", async ({
   page,
 }) => {
-  await page.setContent(`
+  // A focusable ancestor must not stop the group from focusing its field.
+  await page.setContent(`<main tabindex="-1">
     <sensible-input-group>
       <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
       <input aria-label="Search">
       <span>12 results</span>
       <button type="button" aria-label="Clear">x</button>
-    </sensible-input-group>`);
+    </sensible-input-group></main>`);
   await page.addStyleTag({
     content: await readFile("dist/sensible-ui.css", "utf8"),
   });
