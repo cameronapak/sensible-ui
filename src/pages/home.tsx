@@ -1145,8 +1145,9 @@ export function Home() {
         <p>
           Use the native <code>progress</code> element without a class. Set{" "}
           <code>value</code> and <code>max</code> when you know how much work
-          is done. Leave out <code>value</code> for indeterminate work, and a
-          segment moves along the track. With reduced motion, indeterminate
+          is done. Leave out the <code>value</code> attribute entirely for
+          indeterminate work, and a segment moves along the track; browsers
+          disagree about an empty <code>value=""</code>. With reduced motion, indeterminate
           progress shows still stripes instead.
         </p>
         <p>
@@ -1154,7 +1155,10 @@ export function Home() {
           number, show it as text inside the label with{" "}
           <code>aria-hidden="true"</code>; screen readers already announce the
           bar's value.
-          Change the color with <code>--primary</code>. Use{" "}
+          Change the color with <code>--primary</code>, and pick one dark
+          enough to stand out from its lighter track. The bar is a block, so
+          put it after text rather than inside a sentence. In a row with other
+          content, the bar shrinks to make room but keeps at least 4rem. Use{" "}
           <code>aria-busy="true"</code> on the region that is updating, not on
           the progress bar.
         </p>

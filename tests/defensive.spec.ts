@@ -69,6 +69,30 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     expect(touchPressed).toBe(mousePressed);
   });
 
+  test(`${bundle}: progress bars shrink in rows and stay visible in forced colors and print`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.setContent(`<main class="sensible-ui" style="padding: 16px">
+      <label id="around">Uploading Q3-2026-Konzernabschluss-final-v12.pdf <progress max="100" value="72"></progress></label>
+      <div class="x-stack"><span style="flex-shrink: 1">Syncing your library</span><progress id="row" max="100" value="30"></progress><button>Cancel</button></div>
+    </main>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    expect((await page.locator("#around").boundingBox())!.height).toBeLessThan(60);
+    expect(
+      (await page.locator("#around progress").boundingBox())!.width,
+    ).toBeGreaterThanOrEqual(64);
+    expect((await page.locator("#row").boundingBox())!.width).toBeGreaterThanOrEqual(64);
+    expect(
+      (await page.getByRole("button", { name: "Cancel" }).boundingBox())!.x,
+    ).toBeLessThan(304);
+
+    await expect(page.locator("#row")).toHaveCSS("print-color-adjust", "exact");
+    await page.emulateMedia({ forcedColors: "active" });
+    await expect(page.locator("#row")).toHaveCSS("border-top-style", "solid");
+  });
+
   test(`${bundle}: keyboard focus shows a ring on every button variant`, async ({
     page,
   }) => {

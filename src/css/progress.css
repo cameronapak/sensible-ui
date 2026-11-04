@@ -3,6 +3,10 @@
     --progress-track: color-mix(in oklab, var(--primary) 20%, transparent);
     display: block;
     inline-size: 100%;
+    /* In a flex row, such as a label around the bar, the bar shrinks to make
+       room for text but stays visible. */
+    min-inline-size: min(4rem, 100%);
+    flex-shrink: 1;
     block-size: 0.5rem;
     overflow: hidden;
     border: 0;
@@ -10,6 +14,8 @@
     background-color: var(--progress-track);
     color: var(--primary);
     appearance: none;
+    /* Printers drop backgrounds by default, which would hide the bar. */
+    print-color-adjust: exact;
 
     &::-webkit-progress-bar {
       border-radius: inherit;
@@ -19,6 +25,7 @@
     &::-webkit-progress-value {
       border-radius: inherit;
       background-color: var(--primary);
+      print-color-adjust: exact;
     }
 
     &::-moz-progress-bar {
@@ -59,8 +66,24 @@
     }
   }
 
+  /* Forced colors remove backgrounds, so the bar draws with system colors
+     inside a visible border. */
+  @media (forced-colors: active) {
+    progress {
+      --primary: Highlight;
+      --progress-track: Canvas;
+      border: 1px solid CanvasText;
+      forced-color-adjust: none;
+    }
+  }
+
   label + progress {
     margin-block-start: 0.5rem;
+  }
+
+  /* A visible value stays at the end when a long label wraps. */
+  label:has(+ progress) > [aria-hidden="true"]:last-child {
+    margin-inline-start: auto;
   }
 
   @keyframes sensible-progress-indeterminate {

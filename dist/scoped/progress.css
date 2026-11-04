@@ -466,10 +466,13 @@
         background-color: var(--progress-track);
         color: var(--primary);
         appearance: none;
+        print-color-adjust: exact;
         border: 0;
         border-radius: 9999px;
+        flex-shrink: 1;
         block-size: 0.5rem;
         inline-size: 100%;
+        min-inline-size: min(4rem, 100%);
       }
 
       progress::-webkit-progress-bar {
@@ -480,6 +483,7 @@
       progress::-webkit-progress-value {
         border-radius: inherit;
         background-color: var(--primary);
+        print-color-adjust: exact;
       }
 
       progress::-moz-progress-bar {
@@ -515,8 +519,21 @@
         }
       }
 
+      @media (forced-colors: active) {
+        progress {
+          --primary: Highlight;
+          --progress-track: Canvas;
+          forced-color-adjust: none;
+          border: 1px solid canvastext;
+        }
+      }
+
       label + progress {
         margin-block-start: 0.5rem;
+      }
+
+      label:has(+ progress) > [aria-hidden="true"]:last-child {
+        margin-inline-start: auto;
       }
 
       @keyframes sensible-progress-indeterminate {
