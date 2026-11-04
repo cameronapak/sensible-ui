@@ -11,6 +11,7 @@ const modules = {
   "description-list": "dl > dt:has( + dd)",
   image: "figure {",
   input: '[role="switch"]',
+  "input-group": "sensible-input-group",
   item: ".item {",
   progress: "sensible-progress-indeterminate",
   spinner: "sensible-spinner-spin",

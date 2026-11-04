@@ -129,6 +129,63 @@ const buttonGroupExample = `
   </sensible-button-group>
 </div>`;
 
+const inputGroupExample = `
+<div class="stack">
+  <sensible-input-group>
+    ${lucide("search")}
+    <input type="search" aria-label="Search the docs" placeholder="Search the docs">
+    <span>12 results</span>
+  </sensible-input-group>
+
+  <div>
+    <label for="group-email">Email</label>
+    <sensible-input-group>
+      ${lucide("mail")}
+      <input id="group-email" type="email" placeholder="name@example.com">
+    </sensible-input-group>
+  </div>
+
+  <sensible-input-group>
+    <span>https://</span>
+    <input aria-label="Website address" placeholder="example">
+    <span>.com</span>
+  </sensible-input-group>
+
+  <sensible-input-group>
+    <input aria-label="Share link" value="https://sensibleui.com/r/8f2k" readonly>
+    <button type="button" data-variant="ghost" data-size="icon" aria-label="Copy link">
+      ${lucide("copy")}
+    </button>
+  </sensible-input-group>
+
+  <div>
+    <label for="group-username">Username</label>
+    <sensible-input-group>
+      <span>@</span>
+      <input id="group-username" value="taken" aria-invalid="true" aria-describedby="group-username-error">
+      <button type="button" data-variant="ghost" data-size="icon" aria-label="Clear username">
+        ${lucide("x")}
+      </button>
+    </sensible-input-group>
+    <small id="group-username-error">That username is taken.</small>
+  </div>
+
+  <sensible-input-group>
+    ${lucide("search")}
+    <input aria-label="Disabled search" placeholder="Search is unavailable" disabled>
+  </sensible-input-group>
+
+  <sensible-input-group>
+    <textarea aria-label="Message" placeholder="Ask a question"></textarea>
+    <div class="split">
+      <span>Shift + Enter for a new line</span>
+      <button type="button" data-size="icon" aria-label="Send message">
+        ${lucide("arrowUp")}
+      </button>
+    </div>
+  </sensible-input-group>
+</div>`;
+
 const buttonExample = `
 <div class="cluster">
   <button type="button">Primary</button>
@@ -527,6 +584,7 @@ export function Home() {
           <a href="#spinner">Spinner</a>
           <a href="#progress">Progress</a>
           <a href="#button-group">Button group</a>
+          <a href="#input-group">Input group</a>
           <a href="#container">Container</a>
           <a href="#layouts">Layouts</a>
           <a href="#dark-mode">Dark mode</a>
@@ -1021,6 +1079,44 @@ export function Home() {
           <code>https://</code> beside an input is not its label.
         </p>
         <CodeExample code={buttonGroupExample} />
+      </section>
+
+      <section class="docs-section stack" id="input-group">
+        <h2>Input group</h2>
+        <StandaloneImport path="input-group" />
+        <p>
+          Wrap a text <code>input</code> or <code>textarea</code> in{" "}
+          <code>&lt;sensible-input-group&gt;</code> to put icons, text, and
+          buttons inside the same border. The group shows one focus ring when
+          the field has keyboard focus, and it takes the field's{" "}
+          <code>aria-invalid</code> and <code>disabled</code> states. Put
+          icons, <code>span</code> text, and native buttons directly inside it.
+          With a text area, put rows of text or actions in a <code>div</code>{" "}
+          after it.
+        </p>
+        <p>
+          The examples use inline SVG icons from{" "}
+          <a href="https://lucide.dev">Lucide</a>; any inline SVG works. Hide
+          decorative icons with <code>aria-hidden="true"</code>. An icon or
+          prefix is not a label, so give the field a <code>label</code> or an{" "}
+          <code>aria-label</code>, and give icon-only buttons an{" "}
+          <code>aria-label</code>. Buttons stay separate tab stops after the
+          field.
+        </p>
+        <p>
+          Styles work without JavaScript. The optional script makes a click on
+          an icon, text, or empty space focus the field, as it would on a plain
+          input:
+        </p>
+        <CodeExample
+          code={`<script type="module" src="https://cdn.jsdelivr.net/npm/@faith-tools/sensible-ui@${version}/dist/sensible-input-group.js"></script>`}
+          showPreview={false}
+        />
+        <p>
+          With a bundler, import <code>@faith-tools/sensible-ui/input-group/js</code>{" "}
+          in your browser JavaScript.
+        </p>
+        <CodeExample code={inputGroupExample} />
       </section>
 
       <section class="docs-section stack" id="container">

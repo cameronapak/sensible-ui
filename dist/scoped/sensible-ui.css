@@ -6761,6 +6761,244 @@
       }
     }
 
+    /* src/css/input-group.css */
+    @layer components {
+      sensible-input-group {
+        display: flex;
+        border: 1px solid var(--input);
+        border-radius: calc(var(--radius) - 2px);
+        color: var(--muted-foreground);
+        background: none;
+        align-items: center;
+        gap: 0.5rem;
+        min-block-size: 2.25rem;
+        inline-size: 100%;
+        min-inline-size: 0;
+        padding-inline-start: 0.75rem;
+        padding-inline-end: 0.75rem;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        box-shadow: 0 1px 2px #0000000d;
+      }
+
+      sensible-input-group:is(.dark *) {
+        background: color-mix(in oklab, var(--input) 30%, transparent);
+      }
+
+      sensible-input-group:defined {
+        cursor: text;
+      }
+
+      sensible-input-group:has(> :-webkit-any(input, textarea):focus-visible) {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      sensible-input-group:has(> :-moz-any(input, textarea):focus-visible) {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      sensible-input-group:has(> :is(input, textarea):focus-visible) {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      }
+
+      sensible-input-group:has(> [aria-invalid="true"]) {
+        border-color: var(--destructive);
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--destructive) 20%, transparent);
+      }
+
+      sensible-input-group:is(.dark *):has(> [aria-invalid="true"]) {
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--destructive) 40%, transparent);
+      }
+
+      sensible-input-group:has(> :-webkit-any(input, textarea):disabled) {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      sensible-input-group:has(> :-moz-any(input, textarea):disabled) {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      sensible-input-group:has(> :is(input, textarea):disabled) {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      sensible-input-group > svg {
+        pointer-events: none;
+        flex-shrink: 0;
+        block-size: 1rem;
+        inline-size: 1rem;
+      }
+
+      sensible-input-group > :-webkit-any(span, output) {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      sensible-input-group > :-moz-any(span, output) {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      sensible-input-group > :is(span, output) {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      sensible-input-group:has(> textarea) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+      }
+
+      sensible-input-group:has(> textarea) > :not(textarea) {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+      }
+
+      label:has(+ sensible-input-group) {
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    @layer utilities {
+      :where(sensible-input-group > :-webkit-any(input, textarea)) {
+        box-shadow: none;
+        color: var(--foreground);
+        background-color: #0000;
+        border: 0;
+        border-radius: 0;
+        flex: auto;
+        block-size: calc(2.25rem - 2px);
+        inline-size: auto;
+        min-inline-size: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+      }
+
+      :where(sensible-input-group > :-moz-any(input, textarea)) {
+        box-shadow: none;
+        color: var(--foreground);
+        background-color: #0000;
+        border: 0;
+        border-radius: 0;
+        flex: auto;
+        block-size: calc(2.25rem - 2px);
+        inline-size: auto;
+        min-inline-size: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+      }
+
+      :where(sensible-input-group > :is(input, textarea)) {
+        box-shadow: none;
+        color: var(--foreground);
+        background-color: #0000;
+        border: 0;
+        border-radius: 0;
+        flex: auto;
+        block-size: calc(2.25rem - 2px);
+        inline-size: auto;
+        min-inline-size: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+      }
+
+      :where(sensible-input-group > textarea) {
+        block-size: auto;
+        padding: 0.5rem 0.75rem;
+      }
+
+      :where(sensible-input-group > :-webkit-any(button, a.button)) {
+        border-radius: calc(var(--radius) - 4px);
+        box-shadow: none;
+        min-block-size: 1.5rem;
+        min-inline-size: 0;
+        padding-inline-start: 0.5rem;
+        padding-inline-end: 0.5rem;
+        font-size: 0.8125rem;
+      }
+
+      :where(sensible-input-group > :-moz-any(button, a.button)) {
+        border-radius: calc(var(--radius) - 4px);
+        box-shadow: none;
+        min-block-size: 1.5rem;
+        min-inline-size: 0;
+        padding-inline-start: 0.5rem;
+        padding-inline-end: 0.5rem;
+        font-size: 0.8125rem;
+      }
+
+      :where(sensible-input-group > :is(button, a.button)) {
+        border-radius: calc(var(--radius) - 4px);
+        box-shadow: none;
+        min-block-size: 1.5rem;
+        min-inline-size: 0;
+        padding-inline-start: 0.5rem;
+        padding-inline-end: 0.5rem;
+        font-size: 0.8125rem;
+      }
+
+      :where(
+        sensible-input-group > :-webkit-any(button, a.button)[data-size="icon"]
+      ) {
+        inline-size: 1.5rem;
+        padding: 0;
+      }
+
+      :where(
+        sensible-input-group > :-moz-any(button, a.button)[data-size="icon"]
+      ) {
+        inline-size: 1.5rem;
+        padding: 0;
+      }
+
+      :where(sensible-input-group > :is(button, a.button)[data-size="icon"]) {
+        inline-size: 1.5rem;
+        padding: 0;
+      }
+
+      :where(
+        sensible-input-group > :-webkit-any(button, a.button):first-child
+      ) {
+        margin-inline-start: -0.375rem;
+      }
+
+      :where(sensible-input-group > :-moz-any(button, a.button):first-child) {
+        margin-inline-start: -0.375rem;
+      }
+
+      :where(sensible-input-group > :is(button, a.button):first-child) {
+        margin-inline-start: -0.375rem;
+      }
+
+      :where(sensible-input-group > :-webkit-any(button, a.button):last-child) {
+        margin-inline-end: -0.375rem;
+      }
+
+      :where(sensible-input-group > :-moz-any(button, a.button):last-child) {
+        margin-inline-end: -0.375rem;
+      }
+
+      :where(sensible-input-group > :is(button, a.button):last-child) {
+        margin-inline-end: -0.375rem;
+      }
+    }
+
     /* src/css/utils.css */
     @layer utilities {
       :root {

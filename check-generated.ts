@@ -15,6 +15,7 @@ const paths = [
   'dist/sensible-ui.utilities.css',
   'dist/sensible-ui.utilities.min.css',
   'dist/sensible-code.js',
+  'dist/sensible-input-group.js',
   'dist/scoped',
 ]
 const result = Bun.spawnSync([

@@ -5,6 +5,7 @@ const server = Bun.serve({
     '/index.css': Bun.file('./dist/sensible-ui.css'),
     '/code.css': Bun.file('./src/css/code.css'),
     '/code.js': Bun.file('./dist/sensible-code.js'),
+    '/input-group.js': Bun.file('./dist/sensible-input-group.js'),
     '/scoped.css': Bun.file('./dist/scoped/sensible-ui.css'),
     '/utilities.css': Bun.file('./dist/sensible-ui.utilities.css'),
     '/site.css': Bun.file('./src/site.css'),

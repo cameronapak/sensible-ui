@@ -256,6 +256,7 @@ The [main gallery](https://sensibleui.com) documents each component's markup, va
 | Dialog           | `@faith-tools/sensible-ui/dialog`           |
 | Image and figure | `@faith-tools/sensible-ui/image`            |
 | Form controls    | `@faith-tools/sensible-ui/input`            |
+| Input group      | `@faith-tools/sensible-ui/input-group`      |
 | Item             | `@faith-tools/sensible-ui/item`             |
 | Loading spinner  | `@faith-tools/sensible-ui/spinner`          |
 | Progress         | `@faith-tools/sensible-ui/progress`         |

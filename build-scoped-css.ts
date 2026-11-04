@@ -16,6 +16,7 @@ export const scopedEntries = {
   'description-list': './src/css/entries/description-list.css',
   image: './src/css/entries/image.css',
   input: './src/css/entries/input.css',
+  'input-group': './src/css/entries/input-group.css',
   item: './src/css/entries/item.css',
   progress: './src/css/entries/progress.css',
   spinner: './src/css/entries/spinner.css',

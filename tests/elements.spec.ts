@@ -99,3 +99,76 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     await expect(page.locator("#row > :first-child")).toHaveCSS("z-index", "auto");
   });
 }
+
+for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
+  test(`${bundle}: input groups draw one field around icons, text, and actions`, async ({
+    page,
+  }) => {
+    await page.setContent(`<section class="sensible-ui" style="width: 320px">
+      <sensible-input-group id="search">
+        <svg aria-hidden="true" viewBox="0 0 24 24"></svg>
+        <input aria-label="Search">
+        <button data-variant="ghost" data-size="icon" aria-label="Clear">x</button>
+      </sensible-input-group>
+      <sensible-input-group id="invalid"><input aria-label="Name" aria-invalid="true"></sensible-input-group>
+      <sensible-input-group id="disabled"><input aria-label="Off" disabled></sensible-input-group>
+    </section>`);
+    await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+    const group = page.locator("#search");
+    const input = page.getByRole("textbox", { name: "Search" });
+    await expect(group).toHaveCSS("height", "36px");
+    await expect(input).toHaveCSS("border-top-width", "0px");
+    await expect(input).toHaveCSS("box-shadow", "none");
+    const field = (await group.boundingBox())!;
+    const clear = (await page.getByRole("button", { name: "Clear" }).boundingBox())!;
+    expect(clear.height).toBe(24);
+    expect(clear.x + clear.width).toBeLessThan(field.x + field.width);
+
+    await expect(group).toHaveCSS("box-shadow", /0px 1px 2px/);
+    await page.keyboard.press("Tab");
+    await expect(input).toBeFocused();
+    await expect(group).toHaveCSS("box-shadow", /0px 0px 0px 3px/);
+    await expect(input).toHaveCSS("box-shadow", "none");
+
+    await expect(page.locator("#invalid")).toHaveCSS(
+      "border-top-color",
+      "oklch(0.577 0.245 27.325)",
+    );
+    await expect(page.locator("#disabled")).toHaveCSS("opacity", "0.5");
+    await expect(group).toHaveCSS("cursor", "auto");
+  });
+}
+
+test("the optional input group script focuses the field from icons and text", async ({
+  page,
+}) => {
+  await page.setContent(`
+    <sensible-input-group>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+      <input aria-label="Search">
+      <span>12 results</span>
+      <button type="button" aria-label="Clear">x</button>
+    </sensible-input-group>`);
+  await page.addStyleTag({
+    content: await readFile("dist/sensible-ui.css", "utf8"),
+  });
+  const input = page.getByRole("textbox", { name: "Search" });
+  const results = page.getByText("12 results");
+
+  await results.click();
+  await expect(input).not.toBeFocused();
+
+  const script = await readFile("dist/sensible-input-group.js", "utf8");
+  await page.addScriptTag({ content: script, type: "module" });
+  await page.addScriptTag({ content: script, type: "module" });
+  await expect(page.locator("sensible-input-group")).toHaveCSS("cursor", "text");
+
+  await results.click();
+  await expect(input).toBeFocused();
+  await page.locator("svg").click({ force: true });
+  await expect(input).toBeFocused();
+
+  await page.getByRole("button", { name: "Clear" }).click();
+  await expect(page.getByRole("button", { name: "Clear" })).toBeFocused();
+});

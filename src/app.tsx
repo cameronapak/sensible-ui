@@ -31,6 +31,7 @@ app.use(
         <link rel="stylesheet" href="./site.css" />
         <script src="./site.js" defer></script>
         <script src="./code.js" type="module"></script>
+        <script src="./input-group.js" type="module"></script>
       </head>
       <body>{children}</body>
     </html>
