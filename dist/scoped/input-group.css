@@ -3272,7 +3272,7 @@
         min-inline-size: 0;
       }
 
-      sensible-input-group > span:has(+ input, + textarea) {
+      sensible-input-group > span:has(+ input) {
         flex-shrink: 0;
         max-inline-size: 50%;
       }
@@ -3280,6 +3280,10 @@
       sensible-input-group > output {
         flex-shrink: 0;
         max-inline-size: 50%;
+      }
+
+      sensible-input-group > span:has(+ input):has(~ output) {
+        flex-shrink: 1;
       }
 
       @media (forced-colors: active) {

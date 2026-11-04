@@ -87,10 +87,15 @@
     /* A prefix such as a currency or https:// and a count in an output stay
        whole; text after the field gives way first. Past half the group they
        shorten too, so the field never leaves the box. */
-    > span:has(+ input, + textarea),
+    > span:has(+ input),
     > output {
       flex-shrink: 0;
       max-inline-size: 50%;
+    }
+
+    /* Beside a count, a prefix gives way so the count stays whole. */
+    > span:has(+ input):has(~ output) {
+      flex-shrink: 1;
     }
 
     @media (forced-colors: active) {

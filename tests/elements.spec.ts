@@ -267,6 +267,10 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
       <sensible-input-group id="long-prefix">
         <span>https://northwind-industries-holdings.example.com/</span><input aria-label="Path">
       </sensible-input-group>
+      <sensible-input-group id="prefix-count">
+        <span>https://northwind-industries-holdings.example.com/</span><input aria-label="Page">
+        <output>1,284 results</output>
+      </sensible-input-group>
       <sensible-input-group id="money">
         <span>CHF</span><input aria-label="Amount" placeholder="0.00">
         <span>pro Monat inklusive Mehrwertsteuer</span>
@@ -326,10 +330,13 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     const footer = (await page.locator("#message span").boundingBox())!;
     const send = (await page.getByRole("button", { name: "Send" }).boundingBox())!;
     expect(send.x).toBeGreaterThan(footer.x + footer.width);
-    // Counts never truncate, and icon buttons keep their square.
-    expect(
-      await page.locator("#count > output").evaluate((node) => node.scrollWidth <= node.clientWidth),
-    ).toBe(true);
+    // Counts stay whole, even beside a long prefix, and icon buttons keep
+    // their square.
+    for (const count of ["#count > output", "#prefix-count > output"]) {
+      expect(
+        await page.locator(count).evaluate((node) => node.scrollWidth <= node.clientWidth),
+      ).toBe(true);
+    }
     expect((await page.getByRole("button", { name: "Clear" }).boundingBox())!.width).toBe(24);
 
     await page.getByRole("textbox", { name: "User" }).focus();
