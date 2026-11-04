@@ -1,6 +1,72 @@
 import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 
+test.describe("tap control gestures", () => {
+  test.use({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 390, height: 844 },
+  });
+
+  for (const bundle of [
+    "dist/sensible-ui.css",
+    "dist/sensible-ui.min.css",
+    "dist/scoped/sensible-ui.css",
+    "dist/scoped/sensible-ui.min.css",
+    "dist/scoped/base.css",
+  ]) {
+    test(`${bundle}: limits double-tap prevention to tap controls`, async ({
+      page,
+    }) => {
+      await page.setContent(`<meta name="viewport" content="width=device-width, initial-scale=1">
+        <button id="outside">Host action</button>
+        <section class="sensible-ui">
+          <button id="action" onclick="this.textContent = Number(this.textContent) + 1">0</button>
+          <button role="switch" aria-checked="false">Switch</button>
+          <a href="#target">Link</a><a class="button" href="#target">Button link</a>
+          <input type="button" value="Action"><input type="reset"><input type="submit">
+          <input type="checkbox" aria-label="Choice"><input type="radio" aria-label="Option">
+          <input type="checkbox" role="switch" aria-label="Toggle">
+          <select aria-label="Select"><option>One</option></select>
+          <details><summary>More</summary><p id="target">Details</p></details>
+          <div id="content"><p>Ordinary content</p><a>Anchor without href</a>
+            <input aria-label="Text"><input type="search" aria-label="Search">
+            <input type="number" aria-label="Number"><input type="range" aria-label="Range">
+            <textarea aria-label="Message"></textarea><div contenteditable>Editable</div>
+          </div>
+        </section>`);
+      await page.addStyleTag({ content: await readFile(bundle, "utf8") });
+
+      const controls = page.locator(
+        "section > button, section > a, section > input, select, summary",
+      );
+      for (const control of await controls.all()) {
+        await expect(control).toHaveCSS("touch-action", "manipulation");
+      }
+      // A blanket rule, or a rule on a container, would also restrict these gestures.
+      for (const untouched of await page
+        .locator("html, body, section, #content, #content *")
+        .all()) {
+        await expect(untouched).toHaveCSS("touch-action", "auto");
+      }
+      await expect(page.locator("#outside")).toHaveCSS(
+        "touch-action",
+        bundle.includes("scoped/") ? "auto" : "manipulation",
+      );
+
+      await page.locator("#action").tap();
+      await page.locator("#action").tap();
+      await expect(page.locator("#action")).toHaveText("2");
+      await page.getByRole("checkbox", { name: "Choice" }).tap();
+      await expect(
+        page.getByRole("checkbox", { name: "Choice" }),
+      ).toBeChecked();
+      await page.locator("summary").tap();
+      await expect(page.locator("#target")).toBeVisible();
+    });
+  }
+});
+
 const radii = (
   page: import("@playwright/test").Page,
   selector: string,
