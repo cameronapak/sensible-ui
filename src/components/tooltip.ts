@@ -40,8 +40,23 @@ function setWarm(next: boolean) {
 }
 
 // The fallback cannot rely on position-visibility everywhere (Firefox ignores
-// it), so a scroll closes its tooltip instead of leaving it floating.
-addEventListener("scroll", () => openTooltip?.hide(), {
+// it), so its tooltip closes when the control scrolls out of view, including
+// out of a scrolling container. Other scrolling leaves it open.
+// A control counts as leaving only after it was seen, since keyboard focus
+// may still be smooth-scrolling it into view when the tooltip opens.
+const seen = new WeakSet<Element>();
+const visibility = new IntersectionObserver((entries) => {
+  for (const { isIntersecting, target } of entries) {
+    if (isIntersecting) seen.add(target);
+    else if (seen.has(target) && openTooltip?.firstElementChild === target) {
+      openTooltip.hide();
+    }
+  }
+});
+
+// A tooltip the script placed itself does not follow its control, so place it
+// again as the page scrolls.
+addEventListener("scroll", () => openTooltip?.placeIfMisplaced(), {
   capture: true,
   passive: true,
 });
@@ -94,15 +109,17 @@ class SensibleTooltip extends HTMLElement {
     if (openTooltip !== this) openTooltip?.hide();
     openTooltip = this;
     this.#tip.showPopover();
-    this.#placeIfMisplaced();
+    this.placeIfMisplaced();
+    visibility.observe(this.firstElementChild!);
   }
 
   // CSS anchor positioning can still put a tooltip in the wrong place, as
   // Firefox does inside a right-to-left part of a left-to-right page. When
   // the tooltip does not sit next to its control, place it from the
   // control's box instead.
-  #placeIfMisplaced() {
-    const tip = this.#tip!;
+  placeIfMisplaced() {
+    const tip = this.#tip;
+    if (!tip?.matches(":popover-open")) return;
     for (const property of placedProperties) tip.style.removeProperty(property);
     const anchor = this.firstElementChild!.getBoundingClientRect();
     const box = tip.getBoundingClientRect();
@@ -160,6 +177,10 @@ class SensibleTooltip extends HTMLElement {
 
   hide() {
     clearTimeout(this.#timer);
+    if (this.firstElementChild) {
+      visibility.unobserve(this.firstElementChild);
+      seen.delete(this.firstElementChild);
+    }
     if (openTooltip === this) openTooltip = undefined;
     if (this.#tip?.matches(":popover-open")) this.#tip.hidePopover();
   }

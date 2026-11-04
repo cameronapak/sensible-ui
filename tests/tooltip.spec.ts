@@ -279,6 +279,9 @@ test("tooltips keep fields full width, avoid covering their control, and show on
       <sensible-tooltip><input id="row" aria-label="Row note"><span role="tooltip" id="row-tip">Saved with the row</span></sensible-tooltip>
       <div style="height: 400px"></div>
     </div>
+    <div id="other" style="height: 40px; overflow: auto"><div style="height: 400px"></div></div>
+    <div style="height: 1200px"></div>
+    <sensible-tooltip><input id="below" aria-label="Below the fold"><span role="tooltip" id="below-tip">Far down</span></sensible-tooltip>
   </main>`);
   await page.addStyleTag({ content: await readFile("dist/sensible-ui.css", "utf8") });
   await page.addScriptTag({
@@ -311,8 +314,17 @@ test("tooltips keep fields full width, avoid covering their control, and show on
   await page.mouse.move(0, 0);
   await page.locator("#row").focus();
   await expect(page.locator("#row-tip")).toBeVisible();
+  // Unrelated scrolling leaves it open.
+  await page.locator("#other").evaluate((node) => node.scrollTo(0, 200));
+  await page.waitForTimeout(200);
+  await expect(page.locator("#row-tip")).toBeVisible();
   await page.locator("#scroller").evaluate((node) => node.scrollTo(0, 200));
   await expect(page.locator("#row-tip")).toBeHidden();
+
+  // Keyboard focus that scrolls the page to a field keeps its tooltip open.
+  await page.locator("#below").focus();
+  await page.waitForTimeout(200);
+  await expect(page.locator("#below-tip")).toBeVisible();
 });
 
 test("the script places a tooltip that CSS left away from its control", async ({
