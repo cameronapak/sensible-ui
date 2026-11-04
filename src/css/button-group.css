@@ -35,7 +35,7 @@
   }
 
   /* A label longer than the whole row wraps inside its control. */
-  :where(sensible-button-group > *) {
+  :where(sensible-button-group > *, sensible-button-group > sensible-tooltip > :first-child) {
     position: relative;
     max-inline-size: 100%;
     white-space: normal;

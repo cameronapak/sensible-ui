@@ -272,6 +272,17 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
           <button data-size="icon" aria-label="Send">^</button>
         </div>
       </sensible-input-group>
+      <sensible-input-group id="compose">
+        <textarea aria-label="Prompt"></textarea>
+        <div class="split">
+          <div class="x-stack"><button data-variant="ghost" data-size="sm">Claude Opus 5.5 (Extended thinking)</button></div>
+          <button data-size="icon" aria-label="Submit">^</button>
+        </div>
+      </sensible-input-group>
+      <sensible-input-group id="count">
+        <input aria-label="Find" value="sidebar"><output>1,284 results</output>
+        <button data-variant="ghost" data-size="icon" aria-label="Clear">x</button>
+      </sensible-input-group>
       <sensible-input-group id="invalid"><span>@</span><input aria-label="User" aria-invalid="true"></sensible-input-group>
       <sensible-input-group id="disabled"><input aria-label="Off" disabled></sensible-input-group>
       <sensible-input-group id="actions">
@@ -305,6 +316,11 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
     const footer = (await page.locator("#message span").boundingBox())!;
     const send = (await page.getByRole("button", { name: "Send" }).boundingBox())!;
     expect(send.x).toBeGreaterThan(footer.x + footer.width);
+    // Counts never truncate, and icon buttons keep their square.
+    expect(
+      await page.locator("#count > output").evaluate((node) => node.scrollWidth <= node.clientWidth),
+    ).toBe(true);
+    expect((await page.getByRole("button", { name: "Clear" }).boundingBox())!.width).toBe(24);
 
     await page.getByRole("textbox", { name: "User" }).focus();
     await expect(page.locator("#invalid")).toHaveCSS(
@@ -452,6 +468,7 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
           <li><a href="#a" aria-current="page">Overview</a></li><li><a href="#b">Pricing</a></li>
           <li><a href="#c">Docs</a></li><li><a href="#d">Blog</a></li><li><a href="#e">Support</a></li>
           <li><a href="#f">partnersupport@northwindholdings.example.com</a></li>
+          <li><a href="#m">Neu: <strong>Dokumentation und API-Referenz für Partner</strong></a></li>
         </ul></nav>
       </sensible-navbar></header>
       <sensible-sidebar id="side"><nav aria-label="Sections">
@@ -464,7 +481,8 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
           <li><details open><summary id="auth"><span>Authentication</span></summary>
             <ul><li><a href="#j">Login</a></li></ul></details></li>
           <li><a href="#k"><strong>New:</strong> Sidebar layout with collapsible groups</a></li>
-          <li><details><summary id="billing"><h3>Billing</h3></summary>
+          <li><a href="#n"><code>useSidebarLayoutBreakpointObserver</code></a></li>
+          <li><details><summary id="billing"><h3>Billing, invoices, and payment methods</h3></summary>
             <ul><li><a href="#l">Invoices</a></li></ul></details></li>
         </ul>
       </nav></sensible-sidebar>
@@ -499,8 +517,14 @@ for (const bundle of ["dist/sensible-ui.css", "dist/scoped/sensible-ui.css"]) {
         (node) => getComputedStyle(node.firstElementChild!).color === getComputedStyle(node).color,
       ),
     ).toBe(true);
-    // Only the label shrinks, so a leading inline element keeps its words.
-    expect((await page.locator('a[href="#k"] > strong').boundingBox())!.height).toBe(20);
+    // A leading inline element flows with the label, so it keeps its word.
+    expect(
+      await page.locator('a[href="#k"] > strong').evaluate((node) => {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        return range.getClientRects().length;
+      }),
+    ).toBe(1);
 
     // Inside a card section, the layout still stacks instead of squeezing.
     const side = (await page.locator("#card-layout > aside").boundingBox())!;

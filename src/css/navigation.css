@@ -124,10 +124,22 @@
       flex-shrink: 0;
     }
 
-    /* A label in a span shrinks and wraps instead of overflowing the panel.
-       Inline elements such as strong keep their words, since they usually
-       sit beside more text. */
-    > span:not(.badge) {
+    /* Emphasis adds no box, so it flows with the text beside it as one label
+       instead of becoming a column of its own. */
+    > b,
+    > i,
+    > em,
+    > strong,
+    > small,
+    > abbr,
+    > cite,
+    > q,
+    > time {
+      display: contents;
+    }
+
+    /* Labels shrink and wrap instead of overflowing the panel. */
+    > :not(svg):not(img):not(.badge) {
       min-inline-size: 0;
       flex-shrink: 1;
     }

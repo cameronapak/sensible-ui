@@ -1178,9 +1178,12 @@ export function Home() {
           groups to put space between them.
         </p>
         <p>
-          A row that is too long for its container wraps onto more rows, where
-          the corners at each break stay square, and text inputs keep at least
-          8rem. Corners follow the nearest <code>dir</code> attribute, so set{" "}
+          A row that is too long for its container wraps onto more rows, and
+          text inputs keep at least 8rem. Wrapped rows lose the joined look:
+          corners at each break stay square, and a row that starts mid-group
+          has no border on its start edge. Keep a group short enough to fit
+          your narrowest screen. Corners follow the nearest <code>dir</code>{" "}
+          attribute, up to three nested levels, so set{" "}
           <code>dir="rtl"</code> on the page or the group rather than relying on{" "}
           <code>dir="auto"</code> or the CSS <code>direction</code> property. A <code>&lt;sensible-tooltip&gt;</code>{" "}
           around a control joins like the control itself. Other wrappers break
@@ -1217,11 +1220,14 @@ export function Home() {
           scrolls.
         </p>
         <p>
-          When space runs out, text such as a prefix shortens with an ellipsis
-          before the field gets narrower than 4rem, and buttons keep their
-          size. Put a long fixed domain in help text below the field instead
-          of a suffix. A <code>select</code> inside the group is not
-          supported; use a button group for a select beside a field.
+          When space runs out, text after the field shortens with an ellipsis
+          before the field gets narrower than 4rem, and button labels wrap.
+          Prefixes such as a currency, and counts in an <code>output</code>,
+          never shorten. The group stays on one line, so keep its addons to
+          what fits on your narrowest screen. Put a long fixed domain in help
+          text below the field instead of a suffix. A <code>select</code>{" "}
+          inside the group is not supported; use a button group for a select
+          beside a field.
         </p>
         <p>
           The examples use inline SVG icons from{" "}

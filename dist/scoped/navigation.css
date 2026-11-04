@@ -794,7 +794,88 @@
           sensible-sidebar li > a,
           sensible-sidebar details > summary
         )
-        > span:not(.badge) {
+        > b {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > i {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > em {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > strong {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > small {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > abbr {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > cite {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > q {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > time {
+        display: contents;
+      }
+
+      :is(
+          sensible-navbar li > a,
+          sensible-sidebar li > a,
+          sensible-sidebar details > summary
+        )
+        > :not(svg):not(img):not(.badge) {
         flex-shrink: 1;
         min-inline-size: 0;
       }

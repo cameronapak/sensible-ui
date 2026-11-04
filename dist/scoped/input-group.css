@@ -3254,7 +3254,7 @@
         inline-size: 1rem;
       }
 
-      sensible-input-group > :-webkit-any(span, output) {
+      sensible-input-group > span {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -3263,34 +3263,20 @@
         min-inline-size: 0;
       }
 
-      sensible-input-group
-        > :-webkit-any(span, output):has(+ input, + textarea) {
+      sensible-input-group > output {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        unicode-bidi: plaintext;
+        flex-shrink: 1;
+        min-inline-size: 0;
+      }
+
+      sensible-input-group > span:has(+ input, + textarea) {
         flex-shrink: 0;
       }
 
-      sensible-input-group > :-moz-any(span, output) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        unicode-bidi: plaintext;
-        flex-shrink: 1;
-        min-inline-size: 0;
-      }
-
-      sensible-input-group > :-moz-any(span, output):has(+ input, + textarea) {
-        flex-shrink: 0;
-      }
-
-      sensible-input-group > :is(span, output) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        unicode-bidi: plaintext;
-        flex-shrink: 1;
-        min-inline-size: 0;
-      }
-
-      sensible-input-group > :is(span, output):has(+ input, + textarea) {
+      sensible-input-group > output {
         flex-shrink: 0;
       }
 
@@ -3369,6 +3355,19 @@
         min-inline-size: 0;
       }
 
+      :where(
+        sensible-input-group:has(> textarea) > :not(textarea) > div,
+        sensible-input-group:has(> textarea)
+          > :not(textarea)
+          button:not([data-size="icon"]),
+        sensible-input-group:has(> textarea)
+          > :not(textarea)
+          a.button:not([data-size="icon"])
+      ) {
+        white-space: normal;
+        flex-shrink: 1;
+      }
+
       :where(sensible-input-group > button, sensible-input-group > a.button) {
         border-radius: calc(var(--radius) - 4px);
         white-space: normal;
@@ -3394,6 +3393,7 @@
         sensible-input-group > button[data-size="icon"],
         sensible-input-group > a.button[data-size="icon"]
       ) {
+        flex-shrink: 0;
         inline-size: 1.5rem;
         padding: 0;
       }

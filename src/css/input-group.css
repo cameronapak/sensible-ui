@@ -74,19 +74,21 @@
 
     /* Long text yields before the field drops below 4rem. Plaintext bidi
        keeps a prefix such as https:// readable on right-to-left pages. */
-    > :is(span, output) {
+    > span,
+    > output {
       min-inline-size: 0;
       overflow: hidden;
       flex-shrink: 1;
       text-overflow: ellipsis;
       white-space: nowrap;
       unicode-bidi: plaintext;
+    }
 
-      /* A prefix such as a currency or https:// stays whole; text after the
-         field gives way first. */
-      &:has(+ input, + textarea) {
-        flex-shrink: 0;
-      }
+    /* A prefix such as a currency or https:// stays whole; text after the
+       field gives way first. A count in an output never truncates. */
+    > span:has(+ input, + textarea),
+    > output {
+      flex-shrink: 0;
     }
 
     @media (forced-colors: active) {
@@ -168,6 +170,17 @@
     overflow-wrap: anywhere;
   }
 
+  /* Text buttons in those rows, and the layout wrappers around them, shrink
+     and wrap their labels rather than push the row past the border. */
+  :where(
+    sensible-input-group:has(> textarea) > :not(textarea) > div,
+    sensible-input-group:has(> textarea) > :not(textarea) button:not([data-size="icon"]),
+    sensible-input-group:has(> textarea) > :not(textarea) a.button:not([data-size="icon"])
+  ) {
+    flex-shrink: 1;
+    white-space: normal;
+  }
+
   :where(sensible-input-group > button, sensible-input-group > a.button) {
     min-block-size: 1.5rem;
     min-inline-size: min-content;
@@ -196,6 +209,7 @@
   ) {
     inline-size: 1.5rem;
     padding: 0;
+    flex-shrink: 0;
   }
 
   /* Edge actions sit closer to the border than icons and text. */

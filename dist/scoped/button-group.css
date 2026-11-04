@@ -3208,7 +3208,10 @@
         inline-size: 100%;
       }
 
-      :where(sensible-button-group > *) {
+      :where(
+        sensible-button-group > *,
+        sensible-button-group > sensible-tooltip > :first-child
+      ) {
         position: relative;
         white-space: normal;
         max-inline-size: 100%;
