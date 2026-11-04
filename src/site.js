@@ -2,7 +2,7 @@ document
   .querySelector("[data-theme-toggle]")
   ?.addEventListener("click", (event) => {
     const dark = document.documentElement.classList.toggle("dark");
-    event.currentTarget.textContent = dark ? "Light mode" : "Dark mode";
+    event.currentTarget.setAttribute("aria-pressed", String(dark));
   });
 
 // Show the docs navigation as an open sidebar while it sits beside the
