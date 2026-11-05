@@ -950,12 +950,11 @@ export function Home() {
           class="landing-hero stack items-center text-center"
           aria-labelledby="landing-title"
         >
-          <h1 id="landing-title">The shadcn/ui look. Just write HTML.</h1>
+          <h1 id="landing-title">Bring the beauty of shadcn/ui to plain HTML</h1>
           <p class="landing-lead text-muted-foreground max-w-xl">
-            Add one stylesheet, and your buttons, forms, tables, and dialogs
-            look polished right away. Add a few readable classes for cards and
-            badges, and theme everything with CSS variables. No React,
-            Tailwind, or build step.
+            Sensible UI styles native HTML with readable CSS and theme
+            variables. Use the whole stylesheet, import one component, or limit
+            it to one section of an existing app.
           </p>
           <div class="cluster justify-center">
             <a class="button" data-size="lg" href="#getting-started">

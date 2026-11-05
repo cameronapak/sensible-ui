@@ -7,11 +7,11 @@ import { CodeBreak } from './pages/code-break.tsx'
 import { TableBreak } from './pages/table-break.tsx'
 
 const siteUrl = 'https://sensibleui.com/'
-const title = 'Sensible UI: the shadcn/ui look for plain HTML'
+const title = 'Sensible UI: Bring the beauty of shadcn/ui to plain HTML'
 const description =
-  'The shadcn/ui look for plain HTML. One stylesheet styles native buttons, forms, tables, and dialogs. No React, Tailwind, or build step.'
+  'Sensible UI styles native HTML with readable CSS and theme variables. Use the whole stylesheet, import one component, or limit it to one section of an existing app.'
 const imageAlt =
-  'The shadcn/ui look. Just write HTML. Sign-up, notification, and question cards styled by Sensible UI.'
+  'Bring the beauty of shadcn/ui to plain HTML. Sign-up, notification, and question cards styled by Sensible UI.'
 
 const app = new Hono()
 

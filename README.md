@@ -1,6 +1,8 @@
 # Sensible UI CSS
 
-The shadcn/ui look for plain HTML. One stylesheet gives native buttons, forms, tables, and dialogs polished defaults, with no React, Tailwind, or build step. Optional web components add behavior where HTML and CSS are not enough.
+Bring the beauty of shadcn/ui to plain HTML.
+
+Sensible UI styles native HTML with readable CSS and theme variables. Use the whole stylesheet, import one component, or limit it to one section of an existing app. It works without React, Tailwind, or a build step. Optional web components add behavior where HTML and CSS are not enough.
 
 Inspired by [shadcn/ui](https://ui.shadcn.com). Sensible UI is an independent project and is not affiliated with or endorsed by shadcn/ui.
 
