@@ -1,6 +1,6 @@
 {
   "name": "@faith-tools/sensible-ui",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Bring the beauty of shadcn/ui to plain HTML with readable CSS and theme variables. No React, Tailwind, or build step.",
   "author": "cameronapak",
   "type": "module",
