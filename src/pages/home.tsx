@@ -38,6 +38,10 @@ function StandaloneImport({ path }: { path: string }) {
   );
 }
 
+const agentPrompt = `Use Sensible UI (@faith-tools/sensible-ui) for this interface. Read https://sensibleui.com/llms.txt and follow its skill and relevant references before writing code. If the package is installed, prefer node_modules/@faith-tools/sensible-ui/skills/using-sensible-ui/SKILL.md and its version-matched references.
+
+Preserve this project's DESIGN.md, theme variables, fonts, and dark-mode choices. Use documented semantic HTML and imports, choose scoped CSS when integrating with existing styles, and don't add React or Tailwind just for Sensible UI. Verify the result at narrow widths and in affected light/dark states.`;
+
 const typographyExample = `
 <article>
   <h1>A clear heading</h1>
@@ -807,6 +811,29 @@ const themeExample = `
   --primary-foreground: oklch(0.145 0 0);
 }`;
 
+// The agent reference uses the gallery's actual HTML, not a second set of examples.
+export const agentExamples = [
+  ["Typography", "typography", typographyExample, "Use semantic headings, paragraphs, lists, quotations, and code."],
+  ["Buttons", "button", buttonExample, "Use native buttons for actions and a.button for navigation. Variants: primary (default), secondary, outline, ghost, link, destructive. Sizes: default, sm, lg, icon. Name icon-only controls; use native disabled and ARIA pressed/busy/invalid state."],
+  ["Form controls", "input", [textInputExample, textareaExample, selectExample, checkboxExample, radioExample, switchExample, rangeExample, dateExample, colorExample, fileExample].join("\n\n"), "Keep labels connected by for/id, group radio controls by name, and associate error descriptions with aria-describedby. A switch is a native checkbox with role=switch, not a separate component. Validation and state transitions remain application-owned."],
+  ["Image and figure", "image", imageExample, "Use meaningful alt text, or empty alt for decorative images. A figure can include a figcaption."],
+  ["Accordion", "accordion", accordionExample, "Native details/summary supplies keyboard and disclosure behavior without a script. Use open for initial state and a shared name for exclusive disclosure groups where supported."],
+  ["Dialog", "dialog", [dialogExample, lightDismissDialogExample, longDialogExample, nonModalDialogExample].join("\n\n"), "The app calls showModal() for modal dialogs or show() for non-modal ones. Supply aria-labelledby and an explicit close control. form method=dialog closes without submitting application data; closedby=any opts into light dismissal where supported. No dialog/js export exists."],
+  ["Description list", "description-list", descriptionListExample, "Use dl with dt/dd; related terms/details may be grouped in div elements."],
+  ["Table", "table", tableExample, "Keep table, caption, th, and td semantics. Import card too when using class=card on the table container. Label keyboard-focusable overflow regions; sorting and pagination are not supplied."],
+  ["Card", "card", cardExample, "Use class=card with direct header, section, and footer regions. data-slot=card-action marks a header action. Native controls inside need their own standalone imports when not using the complete bundle."],
+  ["Badge", "badge", badgeExample, "Use class=badge. Variants: primary (default), secondary, outline, destructive. aria-invalid=true styles invalid state; only linked badges navigate."],
+  ["Item", "item", itemExample, "Use class=item for a compact row. Do not nest interactive controls inside a linked item."],
+  ["Loading spinner", "spinner", spinnerExample, "aria-busy=true styles a busy region or control; data-variant=overlay dims existing content. Retain loading text or an accessible name. Import button/card too if using those standalone components."],
+  ["Progress", "progress", progressExample, "Use native progress with a visible label. Set value/max for known progress; omit value entirely for indeterminate work. Put aria-busy on the updating region. Customize --primary with sufficient track contrast."],
+  ["Button group", "button-group", buttonGroupExample, "sensible-button-group groups native controls; orientation=vertical stacks them. Authors supply role=group and a label when appropriate. No script or selection management is supplied; import button too for standalone composition."],
+  ["Input group", "input-group", inputGroupExample, "sensible-input-group wraps native input/textarea, text, icons, and buttons. Keep the native field's label. Optional input-group/js focuses the field when its surrounding text/icon is clicked; CSS and native controls work without it. Import input and button too as needed for standalone composition."],
+  ["Tooltip", "tooltip", tooltipExample, "sensible-tooltip contains its trigger first and a role=tooltip child. side accepts top (default), bottom, left, right. Load tooltip/js for visual interaction. Give icon-only triggers an independent accessible name and connect aria-describedby explicitly for no-JavaScript descriptions. Do not put essential or interactive content only in a tooltip; import button too for standalone buttons."],
+  ["Navigation", "navigation", [headerExample, sidebarExample, footerExample].join("\n\n"), "sensible-navbar, sensible-sidebar, and sensible-sidebar-layout provide CSS layout, not application menus. Keep labelled nav, lists, and links; aria-current=page marks the current destination. The layout accepts side=end. No navigation script exists. Combined buttons, badges, or details need their CSS imports when using standalone modules."],
+  ["Named layouts", "utils", layoutsExample, "Use stack/y-stack, x-stack, cluster, split, auto-grid, and container. Tune --layout-gap and --min-item-size. The complete core includes these; standalone compositions also need their component styles."],
+  ["Atomic utilities", "utilities", utilitiesExample, "Optional companion CSS, not part of core and not the full Tailwind API. No breakpoint-prefixed variants. Override --space-* after importing it. This example also uses card and named layouts."],
+] as const;
+
 const navGroups = [
   {
     title: "Get started",
@@ -968,6 +995,9 @@ export function Home() {
             >
               Browse components
             </a>
+            <a class="button" data-size="lg" data-variant="ghost" href="#use-with-agent">
+              Use with your agent
+            </a>
           </div>
           <p class="text-muted-foreground max-w-xl">
             <small>
@@ -976,6 +1006,25 @@ export function Home() {
               or endorsed by shadcn/ui.
             </small>
           </p>
+        </section>
+
+        <section class="landing-agent card" id="use-with-agent" aria-labelledby="agent-title">
+          <header>
+            <h2 id="agent-title">Build with your agent</h2>
+            <p class="text-muted-foreground">
+              Copy this prompt into your coding agent, then tell it what you want
+              to build. Your theme stays yours.
+            </p>
+          </header>
+          <section>
+            <sensible-code language="plaintext" data-wrap="true">
+              <textarea readonly aria-label="Sensible UI agent prompt">{agentPrompt}</textarea>
+            </sensible-code>
+          </section>
+          <footer class="cluster">
+            <a href="/agents.md">Skill setup and agent docs</a>
+            <a href="/DESIGN.md">Design and theming guidance</a>
+          </footer>
         </section>
 
         <section class="stack pb-12" aria-label="Showcase">

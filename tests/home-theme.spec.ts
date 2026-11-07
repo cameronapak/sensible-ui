@@ -3,6 +3,74 @@ import packageJson from "../package.json" with { type: "json" };
 
 const { version } = packageJson;
 
+test("offers a copyable agent prompt before the showcase and preserves a no-script fallback", async ({
+  page,
+  context,
+  browser,
+  request,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/");
+  await page
+    .getByRole("link", { name: "Use with your agent", exact: true })
+    .click();
+  const onboarding = page.getByRole("region", {
+    name: "Build with your agent",
+  });
+  await expect(onboarding).toBeInViewport();
+  const prompt = onboarding.locator("pre > code");
+  await expect(prompt).toContainText("https://sensibleui.com/llms.txt");
+  await expect(prompt).toContainText(
+    "node_modules/@faith-tools/sensible-ui/skills/using-sensible-ui/SKILL.md",
+  );
+  await expect(prompt).toContainText(
+    "Preserve this project's DESIGN.md, theme variables, fonts, and dark-mode choices.",
+  );
+  const source = await prompt.textContent();
+  await onboarding.getByRole("button", { name: "Copy code" }).click();
+  await expect(
+    onboarding.getByRole("button", { name: "Copy code" }),
+  ).toHaveText("Copied");
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+    source,
+  );
+  for (const href of ["/agents.md", "/DESIGN.md", "/llms.txt"]) {
+    expect((await request.get(href)).ok()).toBe(true);
+  }
+  expect(
+    await onboarding.evaluate(
+      (element) =>
+        !!(
+          element.compareDocumentPosition(
+            document.querySelector('[aria-label="Showcase"]')!,
+          ) & Node.DOCUMENT_POSITION_FOLLOWING
+        ),
+    ),
+  ).toBe(true);
+
+  await page.locator("[data-theme-toggle]").click();
+  await expect(prompt).toHaveText(source!, { useInnerText: false });
+  await page.setViewportSize({ width: 360, height: 800 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+
+  const noScript = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const fallback = await noScript.newPage();
+    await fallback.goto("/");
+    const textarea = fallback.getByRole("textbox", {
+      name: "Sensible UI agent prompt",
+    });
+    await expect(textarea).toHaveValue(source!);
+    await expect(textarea).toBeEditable({ editable: false });
+  } finally {
+    await noScript.close();
+  }
+});
+
 test("puts native HTML before class-based components and optional extras", async ({
   page,
 }) => {

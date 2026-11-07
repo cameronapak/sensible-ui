@@ -5,6 +5,7 @@ import { Home } from './pages/home.tsx'
 import { ScopedDemo } from './pages/scoped.tsx'
 import { CodeBreak } from './pages/code-break.tsx'
 import { TableBreak } from './pages/table-break.tsx'
+import { agentDocuments } from './agent-docs.ts'
 
 const siteUrl = 'https://sensibleui.com/'
 const title = 'Sensible UI: Bring the beauty of shadcn/ui to plain HTML'
@@ -15,6 +16,19 @@ const imageAlt =
 
 const app = new Hono()
 
+for (const [url, path] of Object.entries(agentDocuments)) {
+  app.get(
+    url,
+    () =>
+      new Response(Bun.file(path), {
+        headers: {
+          'Content-Type': `${url.endsWith('.txt') ? 'text/plain' : 'text/markdown'}; charset=utf-8`,
+          Link: '</llms.txt>; rel="describedby"',
+        },
+      }),
+  )
+}
+
 app.use(
   jsxRenderer(({ children }) => (
     <html lang="en">
@@ -24,6 +38,7 @@ app.use(
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={siteUrl} />
+        <link rel="describedby" href="/llms.txt" />
         <link rel="icon" href="./favicon.ico" sizes="32x32" />
         <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
         <meta property="og:type" content="website" />

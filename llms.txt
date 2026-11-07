@@ -1,0 +1,18 @@
+# Sensible UI
+
+> Semantic-first, customizable CSS for plain HTML, with optional light-DOM custom elements. Published as @faith-tools/sensible-ui. No React or Tailwind dependency.
+
+Preserve the consuming project's CSS variable overrides, fonts, and design choices. Shared shadcn token names do not imply complete theme-export or component compatibility. Website references describe the current release; prefer documents shipped inside the installed or CDN-pinned package version.
+
+## Start here
+
+- [Agent guidance](https://sensibleui.com/agents.md): Use the bundled references without a separate skill install; optional registration, discovery, and versioning.
+- [Using Sensible UI skill](https://sensibleui.com/skills/using-sensible-ui/SKILL.md): Integration workflow and task-to-reference routing.
+- [Usage](https://sensibleui.com/skills/using-sensible-ui/references/usage.md): Imports, scope boundaries, layouts, and optional behavior.
+- [Components](https://sensibleui.com/skills/using-sensible-ui/references/components.md): Versioned gallery examples, imports, states, and accessibility requirements.
+- [Design guidance](https://sensibleui.com/DESIGN.md): Token roles, consumer theming, and verified shadcn compatibility limits.
+
+## Optional
+
+- [Gallery](https://sensibleui.com/): Rendered examples and human documentation.
+- [Source and changelog](https://github.com/cameronapak/sensible-ui): Implementation and release history; contributor instructions are separate from consumer guidance.

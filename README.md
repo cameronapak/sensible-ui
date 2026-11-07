@@ -279,6 +279,20 @@ Button group, input group, navigation, and tooltip are light-DOM custom elements
 
 Named layouts are available from `@faith-tools/sensible-ui/utils` and are included in the complete bundle. The optional atomic utility stylesheet is available from `@faith-tools/sensible-ui/utilities`.
 
+## Use with an agent
+
+Sensible UI ships the `using-sensible-ui` skill and its references inside the npm package. It teaches agents the documented HTML API, scoped imports, and optional behavior while preserving your theme variables, fonts, and DESIGN.md.
+
+**No separate skill installation is needed.** Copy the prompt on the [homepage](https://sensibleui.com/#use-with-agent), or paste this into your agent when the package is installed:
+
+```text
+When using Sensible UI, read node_modules/@faith-tools/sensible-ui/skills/using-sensible-ui/SKILL.md and its referenced files. Preserve our existing theme overrides and DESIGN.md.
+```
+
+For future tasks, save that instruction in the project configuration your agent reads, such as AGENTS.md or CLAUDE.md. This points directly to your installed version; it does not rely on automatic discovery inside `node_modules`. See [agent guidance](https://sensibleui.com/agents.md) for versioning and optional skill registration if you want native discovery.
+
+For web access, start at [llms.txt](https://sensibleui.com/llms.txt). [Design guidance](DESIGN.md) explains semantic token roles and the limits of shared shadcn theme variables; the bundled defaults are not mandatory colors. Website documents describe the current release; prefer references shipped with your installed or CDN-pinned version.
+
 ## Development
 
 ```bash

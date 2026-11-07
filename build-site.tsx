@@ -1,5 +1,6 @@
 import { mkdir } from 'node:fs/promises'
 import app from './src/app.tsx'
+import { agentDocuments } from './src/agent-docs.ts'
 
 const output = './dist/static'
 await mkdir(output, { recursive: true })
@@ -20,6 +21,9 @@ if (!scopedHtml.startsWith('<!DOCTYPE html>')) {
 }
 
 await Promise.all([
+  ...Object.entries(agentDocuments).map(([url, path]) =>
+    Bun.write(`${output}${url}`, Bun.file(path)),
+  ),
   Bun.write(`${output}/index.html`, await response.text()),
   Bun.write(`${output}/scoped/index.html`, scopedHtml),
   Bun.write(`${output}/index.css`, Bun.file('./dist/sensible-ui.css')),

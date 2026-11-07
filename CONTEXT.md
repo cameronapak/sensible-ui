@@ -51,6 +51,7 @@ Do not preserve an awkward API only because it has shipped, but do not break it 
 | Change layouts or atomic utilities | `src/css/utils.css` owns named layouts; `generate-utilities.ts` owns atomic families | `src/css/entries/utils.css`, `src/css/entries/utilities.css`; [ADR-0002](docs/adr/0002-optional-css-utilities.md) records the split |
 | Change scoped output | `build-scoped-css.ts`, `src/pages/scoped.tsx` | `build-scoped-css.test.ts`, `tests/scoped.spec.ts`, `check-css-exports.ts`; read [ADR-0003](docs/adr/0003-parent-scoped-css.md) first |
 | Change site routing or asset delivery | `src/app.tsx` owns the shared document and routes; `index.tsx` serves assets | `build-site.tsx` renders the same app and copies static assets; `/code-break` is a development stress page, not a static-site output |
+| Change consumer agent guidance | `skills/using-sensible-ui/SKILL.md`, its `references/usage.md`, `DESIGN.md`, `llms.txt`, `docs/agents.md` | `build-agent-docs.ts` generates component examples from `src/pages/home.tsx` and the bundled design copy; `src/agent-docs.ts` maps development/static delivery; `check-agent-docs.ts` checks distribution; `docs/agents/consumer-evaluation.md` describes fresh-agent evaluation |
 | Diagnose build or test setup | `package.json` scripts and `packageManager`, `check-generated.ts`, `playwright.config.ts` | `.agents/setup` prepares orbs; `.github/workflows/check.yml` runs the full check in CI |
 
 ### Build and preview gotchas

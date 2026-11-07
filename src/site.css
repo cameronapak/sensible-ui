@@ -32,6 +32,12 @@
   text-wrap: pretty;
 }
 
+.landing-agent {
+  max-width: 60rem;
+  margin: 0 auto 3rem;
+  scroll-margin-top: 1rem;
+}
+
 .landing-showcase {
   columns: 3 18rem;
   column-gap: 1rem;
